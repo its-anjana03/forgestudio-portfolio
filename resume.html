@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume — Thinura Anjana / FORGE Studio</title>
+<meta name="description" content="Resume of Thinura Anjana — Designer & MIS student at SLIIT University, Sri Lanka. Six years of cinematic design practice. Available for internships from June 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,200..900,0..100,0..1;1,9..144,200..900,0..100,0..1&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="logo-icon.svg">
+<style>
+/* ============================================
+   FORGE — Resume Page
+   Inherits from the index.html system exactly.
+   ============================================ */
+
+:root {
+  --bg:           #0B0907;
+  --bg-deep:      #060503;
+  --surface:      #161310;
+  --surface-2:    #1F1B17;
+  --text:         #F0E8DA;
+  --text-dim:     #A89F8F;
+  --text-mute:    #6B6358;
+  --copper:       #C77B3D;
+  --flame:        #E2603A;
+  --gold:         #D4A04A;
+  --gold-soft:    #B8893E;
+  --border:       #2A2722;
+  --border-bold:  #3D3934;
+
+  --f-display: 'Fraunces', 'Times New Roman', serif;
+  --f-italic:  'Instrument Serif', Georgia, serif;
+  --f-body:    'Manrope', system-ui, sans-serif;
+  --f-mono:    'JetBrains Mono', 'SF Mono', monospace;
+
+  --pad-x:   clamp(20px, 4vw, 64px);
+  --max-w:   1200px;
+
+  --ease:    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--f-body);
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Film grain + vignette — same as index.html */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 1000;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 999;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%);
+}
+::selection { background: var(--copper); color: var(--bg); }
+
+/* TYPOGRAPHY UTILITIES */
+.eyebrow {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--copper);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px; height: 1px;
+  background: var(--copper);
+}
+.mono { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.05em; }
+
+/* NAV — same as index.html */
+nav.top {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px var(--pad-x);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to bottom, rgba(11,9,7,0.85) 0%, rgba(11,9,7,0) 100%);
+  backdrop-filter: blur(8px);
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.logo-icon { width: 30px; height: 30px; display: block; }
+.logo-text {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: color 0.3s var(--ease);
+  position: relative;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--copper);
+  transition: width 0.4s var(--ease);
+}
+.nav-links a:hover::after { width: 100%; }
+.nav-links a.active { color: var(--text); }
+.nav-links a.active::after { width: 100%; }
+
+.cta-download {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--copper);
+  padding: 10px 18px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s var(--ease);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.cta-download:hover {
+  background: var(--flame);
+  transform: translateY(-1px);
+}
+.cta-download::after { content: '↓'; font-size: 13px; }
+
+/* ============================================
+   RESUME HERO BANNER
+   ============================================ */
+.resume-hero {
+  padding: 140px var(--pad-x) 60px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.resume-hero .name {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1;
+  font-size: clamp(56px, 10vw, 144px);
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  color: var(--text);
+  margin: 24px 0 16px;
+}
+.resume-hero .name .em {
+  font-family: var(--f-italic);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold);
+  font-variation-settings: normal;
+}
+
+.resume-hero .role-line {
+  font-family: var(--f-italic);
+  font-style: italic;
+  font-size: clamp(18px, 1.8vw, 26px);
+  color: var(--text-dim);
+  line-height: 1.4;
+  max-width: 50ch;
+  margin-bottom: 32px;
+}
+.resume-hero .role-line .em {
+  color: var(--text);
+  font-style: normal;
+  font-family: var(--f-display);
+}
+
+.resume-hero .meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px 56px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  margin-top: 16px;
+}
+.resume-hero .meta-row .item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.resume-hero .meta-row .lbl {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+.resume-hero .meta-row .val {
+  font-family: var(--f-display);
+  font-size: 16px;
+  color: var(--text);
+}
+.resume-hero .meta-row a.val {
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s var(--ease);
+}
+.resume-hero .meta-row a.val:hover { border-color: var(--gold); }
+
+/* ============================================
+   RESUME BODY — TWO COLUMN
+   ============================================ */
+.resume-body {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 80px var(--pad-x);
+  display: grid;
+  grid-template-columns: 1fr 2.2fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.resume-body aside.rail {
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.rail .block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.rail h3 {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  margin-bottom: 4px;
+  font-weight: 400;
+}
+.rail .item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 8px;
+}
+.rail .item .v {
+  font-size: 14px;
+  color: var(--text);
+  font-weight: 500;
+  line-height: 1.4;
+}
+.rail .item .v a {
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border-bold);
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+.rail .item .v a:hover { color: var(--copper); border-color: var(--copper); }
+.rail .item .s {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+.lang-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--border);
+}
+.lang-row:last-child { border-bottom: none; }
+.lang-row .l {
+  font-size: 14px;
+  color: var(--text);
+}
+.lang-row .lvl {
+  font-family: var(--f-italic);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--gold);
+}
+
+/* MAIN COLUMN */
+.resume-main { display: flex; flex-direction: column; gap: 64px; }
+
+.resume-main section h2 {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+  font-size: clamp(28px, 3.5vw, 44px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+}
+.resume-main section h2 .em {
+  font-family: var(--f-italic);
+  font-style: italic;
+  color: var(--gold);
+  font-weight: 400;
+}
+.resume-main section h2 .num {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--copper);
+  align-self: flex-start;
+  margin-top: 12px;
+  font-weight: 400;
+  text-transform: none;
+}
+
+/* Profile prose */
+.profile p {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text-dim);
+  max-width: 60ch;
+  margin-bottom: 14px;
+}
+.profile p .em {
+  color: var(--text);
+  font-family: var(--f-italic);
+  font-style: italic;
+}
+
+/* Recognition cards */
+.rec-stack {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.rec-card {
+  padding: 28px 26px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s var(--ease), transform 0.4s var(--ease);
+}
+.rec-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-3px);
+}
+.rec-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 32px; height: 1px;
+  background: var(--gold);
+  transition: width 0.5s var(--ease);
+}
+.rec-card:hover::before { width: 100%; }
+
+.rec-card .yr {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.rec-card .ttl {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-variation-settings: "opsz" 144;
+  font-size: 22px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.rec-card .ttl .em {
+  font-family: var(--f-italic);
+  font-style: italic;
+  color: var(--gold);
+}
+.rec-card .desc {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.55;
+}
+
+/* Skills */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px 56px;
+}
+.skill-group h3 {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 18px;
+  font-weight: 400;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.skill-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 10px 0;
+  gap: 16px;
+}
+.skill-row .name {
+  font-family: var(--f-display);
+  font-size: 17px;
+  color: var(--text);
+  font-weight: 400;
+}
+.skill-row .level {
+  font-family: var(--f-italic);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+.skill-row.adv .level { color: var(--gold); }
+.skill-row.int .level { color: var(--copper); }
+.skill-row.beg .level { color: var(--text-mute); }
+.skill-note {
+  font-family: var(--f-italic);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--text-mute);
+  margin-top: 12px;
+  line-height: 1.5;
+}
+
+/* Education */
+.edu-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 32px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--border);
+}
+.edu-row:last-child { border-bottom: none; }
+.edu-row .yr {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--copper);
+  padding-top: 4px;
+}
+.edu-row .body .institution {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: 19px;
+  letter-spacing: -0.015em;
+  color: var(--text);
+  line-height: 1.3;
+}
+.edu-row .body .institution .em {
+  font-family: var(--f-italic);
+  font-style: italic;
+  color: var(--gold);
+  font-weight: 400;
+}
+.edu-row .body .program {
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+.edu-row .body .results {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--text-mute);
+  margin-top: 10px;
+  line-height: 1.7;
+}
+.edu-row .body .results .grade {
+  color: var(--gold);
+}
+
+/* Certifications */
+.cert-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 32px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+.cert-row:last-child { border-bottom: none; }
+.cert-row .yr {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--copper);
+  padding-top: 4px;
+}
+.cert-row .name {
+  font-family: var(--f-display);
+  font-size: 17px;
+  color: var(--text);
+  line-height: 1.4;
+}
+.cert-row .name .iss {
+  display: block;
+  font-family: var(--f-body);
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+/* CTA at bottom */
+.resume-cta {
+  max-width: var(--max-w);
+  margin: 40px auto 0;
+  padding: 60px var(--pad-x) 100px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+.resume-cta .text {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-variation-settings: "opsz" 144;
+  font-size: clamp(24px, 3vw, 36px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  max-width: 24ch;
+}
+.resume-cta .text .em {
+  font-family: var(--f-italic);
+  font-style: italic;
+  color: var(--gold);
+}
+.resume-cta .actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.btn-primary, .btn-secondary {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 18px 30px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s var(--ease);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border: none;
+}
+.btn-primary {
+  color: var(--bg);
+  background: var(--copper);
+}
+.btn-primary:hover { background: var(--flame); transform: translateY(-2px); }
+.btn-primary::after { content: '↓'; font-size: 14px; }
+.btn-secondary {
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--border-bold);
+}
+.btn-secondary:hover { border-color: var(--copper); color: var(--copper); }
+
+/* FOOTER — same as index.html */
+footer {
+  padding: 60px var(--pad-x) 40px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  border-top: 1px solid var(--border);
+}
+.footer-bottom {
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  color: var(--text-mute);
+  letter-spacing: 0.1em;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* Entrance animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reveal { opacity: 0; animation: fadeUp 1.2s var(--ease) forwards; }
+.reveal.d1 { animation-delay: 0.1s; }
+.reveal.d2 { animation-delay: 0.25s; }
+.reveal.d3 { animation-delay: 0.4s; }
+.reveal.d4 { animation-delay: 0.55s; }
+.in-view { opacity: 0; transform: translateY(32px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+.in-view.visible { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .resume-body { grid-template-columns: 1fr; gap: 48px; }
+  .resume-body aside.rail { position: static; }
+  .skills-grid { grid-template-columns: 1fr; gap: 32px; }
+  .rec-stack { grid-template-columns: 1fr; }
+  .resume-cta { flex-direction: column; align-items: flex-start; }
+  .nav-links { display: none; }
+}
+@media (max-width: 600px) {
+  :root { --pad-x: 20px; }
+  .resume-hero .name { font-size: 56px; }
+  .edu-row, .cert-row { grid-template-columns: 1fr; gap: 8px; }
+  .edu-row .yr, .cert-row .yr { padding-top: 0; }
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+footer {
+  padding: 60px var(--pad-x) 40px;
+  border-top: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+  padding-bottom: 60px;
+}
+.footer-brand {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "WONK" 1;
+  font-size: clamp(56px, 8vw, 120px);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+}
+.footer-brand .em { color: var(--copper); }
+.footer-col h4 {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  margin-bottom: 16px;
+}
+.footer-col a {
+  display: block;
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 13px;
+  padding: 4px 0;
+  transition: color 0.3s var(--ease);
+}
+.footer-col a:hover { color: var(--copper); }
+.footer-bottom {
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  color: var(--text-mute);
+  letter-spacing: 0.1em;
+}
+</style>
+</head>
+<body>
+
+<!-- ================ NAV ================ -->
+<nav class="top">
+  <a href="index.html" class="nav-logo">
+    <img src="logo-icon.svg" alt="Forge Studio Logo" class="logo-icon">
+    <span class="logo-text">FORGE STUDIO</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="index.html#capabilities">Capabilities</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="resume.html" class="active">Resume</a></li>
+  </ul>
+  <a href="files/Thinura-Anjana-Resume-2026.pdf" download class="cta-download">Download PDF</a>
+</nav>
+
+<!-- ================ HERO BANNER ================ -->
+<section class="resume-hero">
+  <div class="eyebrow reveal d1">Curriculum Vitae / 2026</div>
+  <h1 class="name reveal d2">Thinura<br>Anjana<span class="em">.</span></h1>
+<p class="role-line reveal d3">
+  <span class="em">Creative Designer</span> · MIS Undergraduate · UI/UX &amp; Front-End Learner. 
+  Six years of visual design practice across cinematic posters, brand identity, photo composition, and UI/UX redesign.
+</p>
+  <div class="meta-row reveal d4">
+    <div class="item">
+      <span class="lbl">Location</span>
+      <span class="val">Moratuwa, Sri Lanka</span>
+    </div>
+    <div class="item">
+      <span class="lbl">Email</span>
+      <a class="val" href="mailto:anjanathinura07@gmail.com">anjanathinura07@gmail.com</a>
+    </div>
+    <div class="item">
+      <span class="lbl">Phone</span>
+      <a class="val" href="tel:+94707771405">+94 70 777 1405</a>
+    </div>
+    <div class="item">
+      <span class="lbl">Status</span>
+      <span class="val">Available June 2026</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================ BODY ================ -->
+<div class="resume-body">
+
+  <!-- LEFT RAIL -->
+  <aside class="rail">
+
+    <div class="block">
+      <h3>Contact</h3>
+      <div class="item">
+        <span class="s">Address</span>
+        <span class="v">Moratuwa, Sri Lanka</span>      </div>
+      <div class="item">
+        <span class="s">Email</span>
+        <span class="v"><a href="mailto:anjanathinura07@gmail.com">anjanathinura07@gmail.com</a></span>
+      </div>
+      <div class="item">
+        <span class="s">Phone</span>
+        <span class="v"><a href="tel:+94707771405">+94 70 777 1405</a></span>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3>Languages</h3>
+      <div class="lang-row"><span class="l">Sinhala</span><span class="lvl">Native</span></div>
+      <div class="lang-row"><span class="l">English</span><span class="lvl">Intermediate</span></div>
+      <div class="lang-row"><span class="l">Tamil</span><span class="lvl">Understanding</span></div>
+    </div>
+
+    <div class="block">
+      <h3>Online</h3>
+      <div class="item">
+        <span class="s">Portfolio</span>
+        <span class="v"><a href="index.html">forgestudio.lk</a></span>
+      </div>
+      <div class="item">
+        <span class="s">Featured work</span>
+        <span class="v"><a href="https://x.com/i/status/1598569927367348224" target="_blank" rel="noopener">X &mdash; Vijayism post</a></span>
+      </div>
+      <div class="item">
+        <span class="s">Joey case study</span>
+        <span class="v"><a href="https://www.figma.com/community/file/1633711188390540196" target="_blank" rel="noopener">Figma Community</a></span>
+      </div>
+    </div>
+
+
+  </aside>
+
+
+  <!-- MAIN COLUMN -->
+  <main class="resume-main">
+
+    <!-- PROFILE -->
+    <section class="profile in-view">
+      <h2><span class="num">01 /</span>Profile<span class="em">.</span></h2>
+     <p> Creative Designer and MIS undergraduate with <em class="em">six years</em> of visual design practice across cinematic poster design, brand identity, photo composition, and UI/UX redesign.
+    </p>
+    <p> Recognized for a television-featured tribute artwork and a first-place design competition. Currently developing front-end and database skills through HTML, CSS, JavaScript, and MySQL, with interest in design, digital products, UI/UX, and hybrid design + technology internship roles.
+    </p>
+    </section>
+
+    <!-- RECOGNITION -->
+    <section class="recognition in-view">
+      <h2><span class="num">02 /</span>Selected <span class="em">recognition.</span></h2>
+      <div class="rec-stack">
+        <div class="rec-card">
+          <div class="yr">★ 2022 &middot; Featured</div>
+          <div class="ttl">Featured on Indian <span class="em">Television.</span></div>
+          <p class="desc">&ldquo;30 Years of Vijayism&rdquo; tribute portrait was picked up by Indian TV coverage as part of the actor&rsquo;s thirtieth-anniversary feature.</p>
+        </div>
+        <div class="rec-card">
+          <div class="yr">★ 2022 &middot; 1st Place / 200</div>
+          <div class="ttl">Best Watch <span class="em">Design.</span></div>
+          <p class="desc">First place out of two hundred entries in the Best Watch Design competition at the Academy of Graphics &mdash; a Rolex Day-Date 40 study.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="skills in-view">
+      <h2><span class="num">03 /</span>Skills<span class="em">.</span></h2>
+      <div class="skills-grid">
+
+        <div class="skill-group">
+          <h3>Design</h3>
+          <div class="skill-row adv">
+            <span class="name">Adobe Photoshop</span>
+            <span class="level">Advanced</span>
+          </div>
+          <div class="skill-row int">
+            <span class="name">Figma</span>
+            <span class="level">Intermediate</span>
+          </div>
+          <div class="skill-row beg">
+            <span class="name">Adobe Illustrator</span>
+            <span class="level">Intermediate</span>
+          </div>
+          <p class="skill-note">Specialism: cinematic poster design, photo composition, brand identity, mobile UI/UX redesign and prototyping.</p>
+        </div>
+
+        <div class="skill-group">
+          <h3>Code &amp; Data</h3>
+          <div class="skill-row beg">
+            <span class="name">HTML &amp; CSS</span>
+            <span class="level">Beginner &mdash; learning</span>
+          </div>
+          <div class="skill-row beg">
+            <span class="name">JavaScript</span>
+            <span class="level">Beginner &mdash; learning</span>
+          </div>
+          <div class="skill-row beg">
+            <span class="name">MySQL</span>
+            <span class="level">Beginner &mdash; learning</span>
+          </div>
+          <p class="skill-note">Honest framing: I&rsquo;m a designer first, learning to ship the designs I draw. This portfolio is my own VS Code build.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+<section class="projects in-view">
+  <h2><span class="num">04 /</span>Projects<span class="em">.</span></h2>
+
+  <div class="edu-row">
+    <div class="yr">2026</div>
+    <div class="body">
+      <div class="institution">University Front-End Website Project</div>
+      <div class="program">HTML · CSS · JavaScript</div>
+      <div class="results">
+        Created a front-end university project website using structured HTML, CSS styling, and beginner JavaScript. Built page layout, navigation structure, and basic interactive behavior for an academic website presentation.
+      </div>
+    </div>
+  </div>
+
+  <div class="edu-row">
+    <div class="yr">2026</div>
+    <div class="body">
+      <div class="institution">University UI/UX Prototype Project</div>
+      <div class="program">Figma · Prototype · User Flow</div>
+      <div class="results">
+        Designed an academic interface prototype with connected screens, page flow, and consistent visual structure. Prepared prototype interactions to demonstrate the user journey clearly.
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- EDUCATION -->
+    <section class="education in-view">
+    <h2><span class="num">05 /</span>Education<span class="em">.</span></h2>
+      <div class="edu-row">
+        <div class="yr">2024 &mdash;<br>2027</div>
+        <div class="body">
+          <div class="institution">SLIIT University &mdash; <span class="em">BSc (Hons) IT.</span></div>
+          <div class="program">Specialising in Management Information Systems &middot; 2nd Year, 2nd Semester &middot; In progress.</div>
+        </div>
+      </div>
+
+      <div class="edu-row">
+        <div class="yr">2022<br><span style="color: var(--text-mute); font-size: 9px;">SAT 2023</span></div>
+        <div class="body">
+          <div class="institution">G.C.E. Advanced Level &mdash; <span class="em">Commerce.</span></div>
+          <div class="program">Index No. 2285550 &middot; Prince of Wales College, Moratuwa.</div>
+          <div class="results">
+            <span class="grade">B</span> Economics &nbsp;&middot;&nbsp; <span class="grade">C</span> Accounting &nbsp;&middot;&nbsp; <span class="grade">C</span> Business Studies
+          </div>
+        </div>
+      </div>
+
+      <div class="edu-row">
+        <div class="yr">2019</div>
+        <div class="body">
+          <div class="institution">G.C.E. Ordinary Level.</div>
+          <div class="program">Index No. 90428544 &middot; De/Soysa College &amp; Prince of Wales College.</div>
+          <div class="results">
+            <span class="grade">A</span> Mathematics &nbsp;&middot;&nbsp; <span class="grade">A</span> Commerce &nbsp;&middot;&nbsp; <span class="grade">B</span> Science &nbsp;&middot;&nbsp; <span class="grade">B</span> History &nbsp;&middot;&nbsp; <span class="grade">B</span> Buddhism &nbsp;&middot;&nbsp; <span class="grade">C</span> Sinhala &nbsp;&middot;&nbsp; <span class="grade">C</span> Health &nbsp;&middot;&nbsp; <span class="grade">C</span> Music &nbsp;&middot;&nbsp; <span class="grade">S</span> English
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section class="certifications in-view">
+      <h2><span class="num">06 /</span>Certifications<span class="em">.</span></h2>
+      <div class="cert-row">
+        <div class="yr">2022</div>
+        <div class="name">
+          Photoshop &amp; Illustrator Advanced Course
+          <span class="iss">Academy of Graphics &middot; Certificate ID 1610</span>
+        </div>
+      </div>
+
+      <div class="cert-row">
+        <div class="yr">2023</div>
+        <div class="name">
+          Advanced Photoshop Course
+          <span class="iss">Mastor.lk</span>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+</div>
+
+<!-- ================ CTA ================ -->
+<section class="resume-cta">
+  <div class="text">
+    Want this on <span class="em">paper?</span><br>The PDF is print-ready.
+  </div>
+  <div class="actions">
+    <a href="files/Thinura-Anjana-Resume-2026.pdf" download class="btn-primary">Download PDF</a>
+    <a href="mailto:anjanathinura07@gmail.com" class="btn-secondary">Get in touch</a>
+  </div>
+</section>
+
+<!-- ================ FOOTER ================ -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">FORGE Studio</div>
+    <div class="footer-col">
+      <h4>Studio</h4>
+      <a href="index.html#about">About</a>
+      <a href="index.html#work">Selected work</a>
+      <a href="index.html#capabilities">Capabilities</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Elsewhere</h4>
+      <a href="#">Behance</a>
+      <a href="#">Instagram</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">Dribbble</a>
+    </div>
+    <div class="footer-col">
+      <h4>Get in touch</h4>
+      <a href="mailto:anjanathinura07@gmail.com">anjanathinura07@gmail.com</a>
+      <a href="#">+94 70 777 1405</a>
+      <a href="#">Moratuwa, Sri Lanka</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 FORGE STUDIO — THINURA ANJANA</span>
+    <span>BUILT IN SRI LANKA</span>
+  </div>
+</footer>
+
+<script>
+// Scroll-triggered reveals (same pattern as index.html)
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.in-view').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

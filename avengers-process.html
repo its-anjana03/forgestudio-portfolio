@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avengers: Doomsday — Process Study / FORGE Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,200..900,0..100,0..1;1,9..144,200..900,0..100,0..1&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="logo-icon.svg">
+<style>
+/* ============================================
+   FORGE — Avengers: Doomsday Process Page
+   Palette, typography, nav, and footer aligned
+   with the main FORGE Studio site.
+   ============================================ */
+
+:root {
+  /* Palette — molten, theatrical, cinematic */
+  --bg:           #0B0907;
+  --bg-deep:      #060503;
+  --surface:      #161310;
+  --surface-2:    #1F1B17;
+  --text:         #F0E8DA;
+  --text-dim:     #A89F8F;
+  --text-mute:    #6B6358;
+  --copper:       #C77B3D;
+  --flame:        #E2603A;
+  --gold:         #D4A04A;
+  --gold-soft:    #B8893E;
+  --border:       #2A2722;
+  --border-bold:  #3D3934;
+
+  /* Typography */
+  --f-display: 'Fraunces', 'Times New Roman', serif;
+  --f-italic:  'Instrument Serif', Georgia, serif;
+  --f-body:    'Manrope', system-ui, sans-serif;
+  --f-mono:    'JetBrains Mono', 'SF Mono', monospace;
+
+  /* Layout */
+  --pad-x:   clamp(20px, 4vw, 64px);
+  --max-w:   1440px;
+
+  /* Motion */
+  --ease:    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--f-body);
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Film grain overlay — subtle texture across entire site */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Vignette for depth */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%);
+}
+
+::selection { background: var(--copper); color: var(--bg); }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+
+/* ============================================
+   TYPOGRAPHY UTILITIES
+   ============================================ */
+.eyebrow {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--copper);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--copper);
+}
+
+.display {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 0;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  color: var(--text);
+}
+
+.italic-mark {
+  font-family: var(--f-italic);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold);
+}
+
+.mono { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.05em; }
+
+/* ============================================
+   NAVIGATION — kept consistent with main page
+   ============================================ */
+nav.top {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px var(--pad-x);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to bottom, rgba(11,9,7,0.85) 0%, rgba(11,9,7,0) 100%);
+  backdrop-filter: blur(8px);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo-icon {
+  width: 30px;
+  height: 30px;
+  display: block;
+  margin-right: 0;
+}
+
+.logo-text {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  text-decoration: none;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: color 0.3s var(--ease);
+  position: relative;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--copper);
+  transition: width 0.4s var(--ease);
+}
+.nav-links a:hover::after { width: 100%; }
+
+.cta-resume {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--copper);
+  padding: 10px 18px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s var(--ease);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.cta-resume:hover {
+  background: var(--flame);
+  transform: translateY(-1px);
+}
+.cta-resume::after { content: '↓'; font-size: 13px; }
+
+.hamburger {
+  display: none;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--border-bold);
+  background: rgba(11, 9, 7, 0.65);
+  cursor: pointer;
+  position: relative;
+  z-index: 120;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 7px;
+}
+.hamburger span {
+  width: 20px;
+  height: 1px;
+  background: var(--text);
+  display: block;
+  transition: transform 0.35s var(--ease), opacity 0.35s var(--ease);
+}
+.hamburger.open span:first-child { transform: translateY(4px) rotate(45deg); }
+.hamburger.open span:last-child  { transform: translateY(-4px) rotate(-45deg); }
+
+/* ============================================
+   PAGE-SPECIFIC SECTIONS
+   ============================================ */
+.av-hero {
+  min-height: 100vh;
+  padding: 140px var(--pad-x) 90px;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.78fr);
+  align-items: center;
+  gap: clamp(36px, 6vw, 96px);
+  overflow: hidden;
+  isolation: isolate;
+}
+.av-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(11,9,7,0.92) 0%, rgba(11,9,7,0.62) 45%, rgba(11,9,7,0.78) 100%),
+    radial-gradient(circle at 75% 42%, rgba(67, 150, 72, 0.22), transparent 34%),
+    radial-gradient(circle at 78% 64%, rgba(203, 58, 177, 0.16), transparent 28%),
+    url("images/avengers-doomsday/avengers-doomsday-v2.jpg");
+  background-size: cover;
+  background-position: center;
+  filter: saturate(1.04) contrast(1.05);
+  z-index: -2;
+}
+.av-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, transparent 28%, rgba(0,0,0,0.54) 100%),
+    linear-gradient(to bottom, rgba(6,5,3,0.12), var(--bg) 96%);
+  z-index: -1;
+}
+
+.hero-kicker {
+  margin-bottom: 28px;
+}
+.av-hero h1 {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "SOFT" 48, "WONK" 1;
+  font-size: clamp(54px, 8vw, 126px);
+  line-height: 0.88;
+  letter-spacing: -0.055em;
+  max-width: 9.5ch;
+}
+.av-hero h1 .em {
+  font-family: var(--f-italic);
+  font-style: italic;
+  color: var(--gold);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+.av-hero .lede {
+  margin-top: 32px;
+  font-family: var(--f-italic);
+  font-style: italic;
+  font-size: clamp(17px, 1.45vw, 22px);
+  line-height: 1.55;
+  color: var(--text-dim);
+  max-width: 48ch;
+}
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 34px;
+}
+.tag {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 6px 12px;
+  border: 1px solid var(--border-bold);
+  border-radius: 999px;
+  background: rgba(11,9,7,0.22);
+}
+.hero-credits {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+  margin-top: 48px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(240,232,218,0.16);
+  max-width: 620px;
+}
+.credit-item { display: flex; flex-direction: column; gap: 4px; }
+.credit-item .label {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+.credit-item .val {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: 17px;
+  color: var(--text);
+}
+.hero-poster-wrap {
+  position: relative;
+  max-width: 460px;
+  justify-self: center;
+  perspective: 900px;
+}
+.hero-poster-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 8% -12% 7%;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(73, 177, 89, 0.36), transparent 55%),
+    radial-gradient(circle at 55% 70%, rgba(226, 96, 58, 0.22), transparent 62%);
+  filter: blur(34px);
+  z-index: -1;
+}
+.hero-poster {
+  position: relative;
+  border: 1px solid rgba(212,160,74,0.36);
+  background: var(--surface);
+  transform: rotateY(-5deg) rotateX(2deg);
+  transition: transform 0.8s var(--ease), border-color 0.4s var(--ease);
+  box-shadow: 0 36px 90px rgba(0,0,0,0.54);
+  overflow: hidden;
+  cursor: zoom-in;
+}
+.hero-poster:hover { transform: rotateY(0deg) rotateX(0deg) translateY(-8px); border-color: var(--gold); }
+.hero-poster img { width: 100%; filter: contrast(1.04) saturate(1.04); }
+.poster-caption {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(240,232,218,0.76);
+  z-index: 2;
+}
+.poster-caption::before {
+  content: '';
+  position: absolute;
+  inset: -54px -18px -18px;
+  background: linear-gradient(to top, rgba(6,5,3,0.9), transparent);
+  z-index: -1;
+}
+.scroll-cue {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--text-mute);
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: pulse 2.5s var(--ease) infinite;
+}
+.scroll-cue::after {
+  content: '';
+  width: 1px;
+  height: 32px;
+  background: linear-gradient(to bottom, var(--copper), transparent);
+}
+@keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+
+.section-shell {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 110px var(--pad-x);
+  border-top: 1px solid var(--border);
+  position: relative;
+}
+.section-title-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  align-items: flex-end;
+  margin-bottom: 54px;
+}
+.section-title-row h2 {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "WONK" 1;
+  font-size: clamp(44px, 6vw, 90px);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  max-width: 11ch;
+}
+.section-title-row h2 .em {
+  font-family: var(--f-italic);
+  font-style: italic;
+  color: var(--gold);
+  font-weight: 400;
+}
+.section-title-row .section-note {
+  color: var(--text-mute);
+  max-width: 34ch;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.quick-card {
+  padding: 30px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(199,123,61,0.1), transparent 38%),
+    var(--surface);
+  border: 1px solid var(--border);
+  min-height: 240px;
+  transition: transform 0.45s var(--ease), border-color 0.45s var(--ease), background 0.45s var(--ease);
+}
+.quick-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--copper);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(226,96,58,0.16), transparent 42%),
+    var(--surface-2);
+}
+.quick-card .num {
+  font-family: var(--f-mono);
+  color: var(--copper);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 42px;
+  display: block;
+}
+.quick-card h3 {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-size: 30px;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin-bottom: 16px;
+}
+.quick-card p {
+  color: var(--text-dim);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.process-pair,
+.result-grid,
+.compare-copy-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+}
+.media-panel {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.media-panel::before {
+  content: attr(data-label);
+  position: absolute;
+  top: 22px;
+  left: 22px;
+  z-index: 2;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text);
+  background: rgba(11,9,7,0.7);
+  border: 1px solid rgba(240,232,218,0.12);
+  padding: 7px 10px;
+  backdrop-filter: blur(10px);
+}
+.media-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s var(--ease), filter 0.7s var(--ease);
+  filter: brightness(0.9) contrast(1.05) saturate(0.95);
+  cursor: zoom-in;
+}
+.media-panel:hover img {
+  transform: scale(1.035);
+  filter: brightness(1) contrast(1.08) saturate(1.08);
+}
+.media-panel.tall { aspect-ratio: 2 / 2.95; }
+.media-panel.sketch { aspect-ratio: 2 / 2.75; background: #0f0d0a; }
+.media-panel.sketch img { object-fit: contain; background: #f4f1ea; filter: contrast(1.05); }
+.media-panel.wide { aspect-ratio: 16 / 10; }
+
+.copy-block .eyebrow { margin-bottom: 22px; }
+.copy-block h3 {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "SOFT" 25;
+  font-size: clamp(34px, 4.5vw, 64px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: 24px;
+}
+.copy-block h3 .em {
+  font-family: var(--f-italic);
+  font-style: italic;
+  color: var(--gold);
+  font-weight: 400;
+}
+.copy-block p {
+  color: var(--text-dim);
+  font-size: 15px;
+  line-height: 1.75;
+  max-width: 58ch;
+  margin-bottom: 18px;
+}
+.copy-block strong { color: var(--text); font-weight: 600; }
+.quote-line {
+  margin-top: 34px;
+  padding: 24px 0 0 28px;
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--copper);
+  font-family: var(--f-italic);
+  font-size: clamp(22px, 2vw, 30px);
+  line-height: 1.25;
+  color: var(--text);
+  max-width: 30ch;
+}
+.quote-line span { color: var(--gold); }
+
+.result-grid { align-items: start; }
+.result-poster { grid-row: span 2; }
+.detail-stack {
+  display: grid;
+  gap: 16px;
+}
+.detail-card {
+  padding: 24px;
+  border: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(31,27,23,0.88), rgba(11,9,7,0.72));
+}
+.detail-card .detail-title {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 12px;
+}
+.detail-card p {
+  color: var(--text-dim);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.compare-stage {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+}
+.compare-slider {
+  --pos: 50%;
+  position: relative;
+  aspect-ratio: 2 / 3;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: 0 28px 80px rgba(0,0,0,0.35);
+}
+.compare-slider img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.compare-slider .after {
+  clip-path: polygon(0 0, var(--pos) 0, var(--pos) 100%, 0 100%);
+}
+.compare-slider::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--pos);
+  width: 1px;
+  background: var(--gold);
+  z-index: 4;
+  box-shadow: 0 0 22px rgba(212,160,74,0.7);
+}
+.compare-label {
+  position: absolute;
+  top: 18px;
+  z-index: 5;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text);
+  padding: 7px 10px;
+  background: rgba(11,9,7,0.68);
+  border: 1px solid rgba(240,232,218,0.14);
+  backdrop-filter: blur(10px);
+}
+.compare-label.left { left: 18px; }
+.compare-label.right { right: 18px; }
+.compare-range {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+  z-index: 8;
+  width: calc(100% - 36px);
+  accent-color: var(--copper);
+}
+.compare-copy-grid { align-items: stretch; }
+.compare-note {
+  padding: 28px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.compare-note h3 {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-size: 36px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+.compare-note h3 .em {
+  font-family: var(--f-italic);
+  color: var(--gold);
+  font-style: italic;
+  font-weight: 400;
+}
+.compare-note p {
+  color: var(--text-dim);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.compare-note strong { color: var(--text); }
+.compare-summary {
+  margin-top: 26px;
+  padding-top: 26px;
+  border-top: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 15px;
+  line-height: 1.7;
+}
+.compare-summary strong { color: var(--text); }
+
+.lesson-section {
+  padding: 130px var(--pad-x);
+  max-width: var(--max-w);
+  margin: 0 auto;
+  border-top: 1px solid var(--border);
+}
+.lesson-panel {
+  position: relative;
+  padding: clamp(34px, 6vw, 76px);
+  border: 1px solid var(--border-bold);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(76, 168, 84, 0.14), transparent 32%),
+    radial-gradient(circle at 78% 70%, rgba(226, 96, 58, 0.12), transparent 36%),
+    linear-gradient(135deg, rgba(31,27,23,0.94), rgba(11,9,7,0.88));
+}
+.lesson-panel::before {
+  content: '';
+  position: absolute;
+  inset: 22px;
+  border: 1px solid rgba(212,160,74,0.16);
+  pointer-events: none;
+}
+.lesson-head {
+  max-width: 860px;
+  position: relative;
+  z-index: 1;
+}
+.lesson-head h2 {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "SOFT" 44, "WONK" 1;
+  font-size: clamp(48px, 7vw, 112px);
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+  margin: 22px 0 26px;
+}
+.lesson-head h2 .em {
+  font-family: var(--f-italic);
+  font-style: italic;
+  color: var(--gold);
+  font-weight: 400;
+}
+.lesson-head p {
+  color: var(--text-dim);
+  font-size: clamp(16px, 1.3vw, 19px);
+  line-height: 1.7;
+  max-width: 58ch;
+}
+.lesson-grid {
+  margin-top: 58px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  position: relative;
+  z-index: 1;
+}
+.lesson-card {
+  padding: 24px;
+  background: rgba(11,9,7,0.48);
+  border: 1px solid rgba(240,232,218,0.1);
+  min-height: 220px;
+}
+.lesson-card span {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+.lesson-card h3 {
+  margin-top: 36px;
+  margin-bottom: 14px;
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+.lesson-card p {
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.next-work {
+  padding: 80px var(--pad-x) 120px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+.next-work h2 {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-size: clamp(40px, 5vw, 76px);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+.project-link {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--copper);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--copper);
+  transition: gap 0.4s var(--ease);
+}
+.project-link:hover { gap: 20px; }
+.project-link::after { content: '→'; }
+
+/* ============================================
+   LIGHTBOX
+   ============================================ */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(6,5,3,0.94);
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s var(--ease);
+}
+.lightbox.open { opacity: 1; pointer-events: auto; }
+.lightbox img {
+  max-width: min(92vw, 1180px);
+  max-height: 88vh;
+  object-fit: contain;
+  border: 1px solid var(--border-bold);
+  box-shadow: 0 32px 90px rgba(0,0,0,0.65);
+}
+.lightbox button {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border-bold);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* ============================================
+   FOOTER — kept consistent with main page
+   ============================================ */
+footer {
+  padding: 60px var(--pad-x) 40px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  border-top: 1px solid var(--border);
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+  padding-bottom: 60px;
+}
+.footer-brand {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "WONK" 1;
+  font-size: clamp(56px, 8vw, 120px);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  color: var(--text);
+}
+.footer-brand .em {
+  font-family: var(--f-italic);
+  font-style: italic;
+  color: var(--copper);
+  font-weight: 400;
+}
+.footer-col h4 {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  margin-bottom: 16px;
+}
+.footer-col a {
+  display: block;
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 13px;
+  padding: 4px 0;
+  transition: color 0.3s var(--ease);
+}
+.footer-col a:hover { color: var(--copper); }
+.footer-bottom {
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  color: var(--text-mute);
+  letter-spacing: 0.1em;
+}
+
+/* ============================================
+   ENTRANCE + RESPONSIVE
+   ============================================ */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+.reveal { opacity: 0; animation: fadeUp 1.2s var(--ease) forwards; }
+.reveal.d1 { animation-delay: 0.1s; }
+.reveal.d2 { animation-delay: 0.25s; }
+.reveal.d3 { animation-delay: 0.4s; }
+.reveal.d4 { animation-delay: 0.55s; }
+.in-view { opacity: 0; transform: translateY(32px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+.in-view.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 1100px) {
+  .av-hero { grid-template-columns: 1fr; padding-top: 120px; }
+  .hero-poster-wrap { max-width: min(440px, 78vw); }
+  .quick-grid, .lesson-grid { grid-template-columns: repeat(2, 1fr); }
+  .compare-stage { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 960px) {
+  .section-title-row { flex-direction: column; align-items: flex-start; }
+  .process-pair, .result-grid, .compare-copy-grid { grid-template-columns: 1fr; }
+  .result-poster { grid-row: auto; }
+  .next-work { flex-direction: column; align-items: flex-start; }
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(82vw, 360px);
+    height: 100vh;
+    padding: 110px 32px 40px;
+    background:
+      radial-gradient(circle at 80% 20%, rgba(199, 123, 61, 0.14), transparent 45%),
+      rgba(11, 9, 7, 0.96);
+    backdrop-filter: blur(18px);
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 26px;
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.45s var(--ease), opacity 0.45s var(--ease);
+    z-index: 110;
+  }
+  .nav-links.open {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .nav-links a {
+    font-family: var(--f-display);
+    font-size: 34px;
+    line-height: 1;
+    color: var(--text);
+  }
+  .nav-links a::after { bottom: -8px; }
+  .hamburger { display: flex; }
+  .cta-resume { display: none; }
+}
+
+@media (max-width: 650px) {
+  :root { --pad-x: 20px; }
+  .av-hero { padding-bottom: 72px; }
+  .av-hero h1 { font-size: clamp(54px, 18vw, 78px); }
+  .hero-credits, .quick-grid, .lesson-grid { grid-template-columns: 1fr; }
+  .section-shell, .lesson-section { padding-top: 86px; padding-bottom: 86px; }
+  .lesson-panel { padding: 30px 22px; }
+  .lesson-panel::before { display: none; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ================ NAV ================ -->
+<nav class="top">
+  <a href="index.html" class="nav-logo">
+    <img src="logo-icon.svg" alt="Forge Studio Logo" class="logo-icon">
+    <span class="logo-text">FORGE STUDIO</span>
+  </a>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="index.html#capabilities">Capabilities</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="resume.html">Resume</a></li>
+  </ul>
+
+  <a href="files/Thinura-Anjana-Resume-2026.pdf" class="cta-resume" download="Thinura-Anjana-Resume-2026.pdf">Resume</a>
+
+  <button class="hamburger" id="navToggle" type="button" aria-label="Open navigation menu" aria-expanded="false">
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<!-- ================ HERO ================ -->
+<header class="av-hero" id="top">
+  <div class="hero-copy">
+    <div class="eyebrow hero-kicker reveal d1">Case Study / Cinematic Composition / 2025</div>
+    <h1 class="reveal d2">Avengers:<br><span class="em">Doomsday.</span></h1>
+    <p class="lede reveal d3">Two versions, one lesson. A self-directed poster study that began with an overcrowded all-green composition and ended with a more controlled, cinematic hierarchy.</p>
+
+    <div class="hero-tags reveal d4">
+      <span class="tag">Photo-Composite</span>
+      <span class="tag">Cinematic Poster</span>
+      <span class="tag">Process Study</span>
+      <span class="tag">Personal Project</span>
+    </div>
+
+    <div class="hero-credits reveal d4">
+      <div class="credit-item">
+        <span class="label">Project</span>
+        <span class="val">Poster Process</span>
+      </div>
+      <div class="credit-item">
+        <span class="label">Focus</span>
+        <span class="val">Hierarchy</span>
+      </div>
+      <div class="credit-item">
+        <span class="label">Lesson</span>
+        <span class="val">Less, but stronger</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-poster-wrap reveal d3">
+    <figure class="hero-poster" data-lightbox="images/avengers-doomsday/avengers-doomsday-v2.jpg">
+      <img src="images/avengers-doomsday/avengers-doomsday-v2.jpg" alt="Avengers Doomsday final poster version two">
+      <figcaption class="poster-caption"><span>Version 02</span><span>Final Direction</span></figcaption>
+    </figure>
+  </div>
+
+  <div class="scroll-cue">Scroll</div>
+</header>
+
+<!-- ================ OVERVIEW ================ -->
+<section class="section-shell">
+  <div class="section-title-row">
+    <div>
+      <div class="eyebrow">01 — The short story</div>
+      <h2>From crowded scale to <span class="em">controlled clarity.</span></h2>
+    </div>
+    <p class="section-note">This page separates the actual visual assets from the explanation, so the viewer can understand the thinking behind the poster without feeling like they are reading a social post.</p>
+  </div>
+
+  <div class="quick-grid">
+    <article class="quick-card">
+      <span class="num">Step 01</span>
+      <h3>Sketch the ambition.</h3>
+      <p>The first direction tried to build an Avengers-level scale with a huge cast, dramatic energy fractures, and a tall pyramid composition.</p>
+    </article>
+    <article class="quick-card">
+      <span class="num">Step 02</span>
+      <h3>Find the failure.</h3>
+      <p>The all-green palette created unity, but it also flattened depth. Too many characters started fighting for the same visual weight.</p>
+    </article>
+    <article class="quick-card">
+      <span class="num">Step 03</span>
+      <h3>Rebuild the threat.</h3>
+      <p>The final version reduced the roster, sharpened Doom&rsquo;s presence, and used green, purple, and warm light to create stronger rhythm.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ================ PROCESS PART I ================ -->
+<section class="section-shell">
+  <div class="process-pair">
+    <figure class="media-panel sketch in-view" data-label="Initial Sketch" data-lightbox="images/avengers-doomsday/avengers-doomsday-sketch.jpg">
+      <img src="images/avengers-doomsday/avengers-doomsday-sketch.jpg" alt="Initial sketch for Avengers Doomsday poster">
+    </figure>
+
+    <div class="copy-block in-view">
+      <div class="eyebrow">02 — Process / Part I</div>
+      <h3>The first layout had <span class="em">too much weight.</span></h3>
+      <p>It started as a <strong>27-character layout</strong>. The intention was big and cinematic, but the hierarchy was wrong and the frame became overcrowded.</p>
+      <p>The color plan also collapsed. The <strong>all-green palette</strong> buried the depth, and the character weight did not fully match the story tone.</p>
+      <p>So the design was scrapped, the structure was studied again, and the poster was rebuilt from zero instead of trying to force a weak direction to work.</p>
+      <div class="quote-line">Sometimes the first attempt fails only to show you the <span>right direction.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================ VERSION ONE ================ -->
+<section class="section-shell">
+  <div class="process-pair">
+    <div class="copy-block in-view">
+      <div class="eyebrow">03 — Version 01</div>
+      <h3>The green version built the <span class="em">world.</span></h3>
+      <p>Version 1 carries a strong, unified green identity. It established the original visual language of the project: cosmic, ominous, and Doom-centric.</p>
+      <p>The composition was ambitious, and the scale matched the tone of an Avengers-level threat. But the single-tone palette limited depth, and the character count pushed the layout close to saturation.</p>
+    </div>
+
+    <figure class="media-panel tall in-view" data-label="Version 01 / Green Identity" data-lightbox="images/avengers-doomsday/avengers-doomsday-v1.jpg">
+      <img src="images/avengers-doomsday/avengers-doomsday-v1.jpg" alt="Avengers Doomsday poster version one all green direction">
+    </figure>
+  </div>
+</section>
+
+<!-- ================ PROCESS PART II ================ -->
+<section class="section-shell">
+  <div class="section-title-row">
+    <div>
+      <div class="eyebrow">04 — Process / Part II</div>
+      <h2>The rebuild made the frame <span class="em">breathe.</span></h2>
+    </div>
+    <p class="section-note">Instead of adding more, the final direction works by removing noise, balancing color temperature, and giving each major character a clearer role inside the composition.</p>
+  </div>
+
+  <div class="result-grid">
+    <figure class="media-panel tall result-poster in-view" data-label="Final Result / Version 02" data-lightbox="images/avengers-doomsday/avengers-doomsday-v2.jpg">
+      <img src="images/avengers-doomsday/avengers-doomsday-v2.jpg" alt="Avengers Doomsday final poster version two">
+    </figure>
+
+    <div class="copy-block in-view">
+      <h3>This is the poster I saw <span class="em">in my head.</span></h3>
+      <p>The final result reduced the cast to the core characters and fixed the character hierarchy from top to bottom.</p>
+      <p>It balanced <strong>green, purple, and cosmic yellow</strong> for a stronger Doomsday palette, then introduced energy fractures and multiverse elements without overwhelming the frame.</p>
+    </div>
+
+    <div class="detail-stack in-view">
+      <article class="detail-card">
+        <div class="detail-title">Dual Doom Threat</div>
+        <p>Doom appears with and without the mask, giving the poster a layered villain presence instead of a single background face.</p>
+      </article>
+      <article class="detail-card">
+        <div class="detail-title">Color Balance</div>
+        <p>Purple and warm highlights break the green dominance and guide the viewer through the main cast more naturally.</p>
+      </article>
+      <article class="detail-card">
+        <div class="detail-title">World-Building</div>
+        <p>The FF vehicle, lens work, cracks, and cosmic textures add scale while staying secondary to the main hierarchy.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================ COMPARISON ================ -->
+<section class="section-shell" id="comparison">
+  <div class="section-title-row">
+    <div>
+      <div class="eyebrow">05 — Version comparison</div>
+      <h2>Scale versus <span class="em">clarity.</span></h2>
+    </div>
+    <p class="section-note">Move the slider to compare both poster directions. Version 1 explores scale. Version 2 refines the same idea into a cleaner cinematic system.</p>
+  </div>
+
+  <div class="compare-stage">
+    <div class="compare-slider in-view" id="compareSlider">
+      <img src="images/avengers-doomsday/avengers-doomsday-v1.jpg" alt="Avengers Doomsday version one poster">
+      <img class="after" src="images/avengers-doomsday/avengers-doomsday-v2.jpg" alt="Avengers Doomsday version two poster">
+      <span class="compare-label left">V2 clarity</span>
+      <span class="compare-label right">V1 scale</span>
+      <input class="compare-range" id="compareRange" type="range" min="0" max="100" value="50" aria-label="Compare Version 1 and Version 2">
+    </div>
+
+    <div class="compare-copy-grid">
+      <article class="compare-note in-view">
+        <h3>Version 1 — <span class="em">Scale</span></h3>
+        <p><strong>What worked:</strong> a strong green identity, an ominous cosmic mood, and a Doom-centric direction that felt large enough for an Avengers threat.</p>
+        <p><strong>What struggled:</strong> the single-tone palette reduced depth, and the amount of characters pushed the design close to saturation.</p>
+      </article>
+
+      <article class="compare-note in-view">
+        <h3>Version 2 — <span class="em">Clarity</span></h3>
+        <p><strong>What improved:</strong> reducing the roster created stronger hierarchy, cleaner silhouettes, and clearer storytelling.</p>
+        <p><strong>What refined it:</strong> the blend of green, purple, warm highlights, dual Doom masks, FF vehicle, lens work, and updated logo structure gave the poster a polished studio feel.</p>
+      </article>
+    </div>
+  </div>
+
+  <p class="compare-summary in-view">Both versions reflect different creative phases: one exploring scale, the other refining clarity. Together, they show progression, decision-making, and a better understanding of cinematic composition. <strong>There is always more to learn.</strong></p>
+</section>
+
+<!-- ================ LESSON ================ -->
+<section class="lesson-section">
+  <div class="lesson-panel in-view">
+    <div class="lesson-head">
+      <div class="eyebrow">06 — One lesson</div>
+      <h2>More characters do not always mean <span class="em">more cinema.</span></h2>
+      <p>The biggest lesson from this poster was restraint. A strong cinematic frame needs clear hierarchy first. Scale matters, but the viewer should know where to look, what to feel, and why each element exists.</p>
+    </div>
+
+    <div class="lesson-grid">
+      <article class="lesson-card">
+        <span>N° 01</span>
+        <h3>Hierarchy first.</h3>
+        <p>The viewer should read the main threat, heroes, and supporting elements in a controlled order.</p>
+      </article>
+      <article class="lesson-card">
+        <span>N° 02</span>
+        <h3>Color needs depth.</h3>
+        <p>A single color can create identity, but contrast and temperature create depth and movement.</p>
+      </article>
+      <article class="lesson-card">
+        <span>N° 03</span>
+        <h3>Remove noise.</h3>
+        <p>Reducing the cast made the final design feel more premium, not less epic.</p>
+      </article>
+      <article class="lesson-card">
+        <span>N° 04</span>
+        <h3>Build the world softly.</h3>
+        <p>Details like vehicles, fractures, and textures should support the story, not compete with it.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================ NEXT ================ -->
+<section class="next-work">
+    <a href="index.html#work" class="project-link back">Back to selected work</a>
+  <a href="vijayism-piece.html" class="project-link">30 Years of Vijayism.</a>
+</section>
+
+<!-- ================ FOOTER ================ -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">FORGE Studio</div>
+    <div class="footer-col">
+      <h4>Studio</h4>
+      <a href="index.html#about">About</a>
+      <a href="index.html#work">Selected work</a>
+      <a href="index.html#capabilities">Capabilities</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Elsewhere</h4>
+      <a href="#">Behance</a>
+      <a href="#">Instagram</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">Dribbble</a>
+    </div>
+    <div class="footer-col">
+      <h4>Get in touch</h4>
+      <a href="mailto:anjanathinura07@gmail.com">anjanathinura07@gmail.com</a>
+      <a href="#">+94 70 777 1405</a>
+      <a href="#">Moratuwa, Sri Lanka</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 FORGE STUDIO — THINURA ANJANA</span>
+    <span>BUILT IN SRI LANKA</span>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button type="button" id="lightboxClose" aria-label="Close image preview">×</button>
+  <img src="" alt="Expanded poster preview" id="lightboxImg">
+</div>
+
+<script>
+// Mobile navigation
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+
+if (navToggle && navLinks) {
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.classList.toggle('open', isOpen);
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
+
+// Scroll reveal animation
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.in-view, .quick-card, .detail-card, .lesson-card')
+  .forEach(el => { el.classList.add('in-view'); io.observe(el); });
+
+// Hero poster depth movement
+const hero = document.querySelector('.av-hero');
+const heroPoster = document.querySelector('.hero-poster');
+
+if (hero && heroPoster) {
+  hero.addEventListener('mousemove', (event) => {
+    const rect = hero.getBoundingClientRect();
+    const nx = (event.clientX - rect.left) / rect.width - 0.5;
+    const ny = (event.clientY - rect.top) / rect.height - 0.5;
+    heroPoster.style.transform = `rotateY(${nx * -8}deg) rotateX(${ny * 5}deg) translateY(-4px)`;
+  });
+
+  hero.addEventListener('mouseleave', () => {
+    heroPoster.style.transform = 'rotateY(-5deg) rotateX(2deg)';
+  });
+}
+
+// Poster comparison slider
+const compareSlider = document.getElementById('compareSlider');
+const compareRange = document.getElementById('compareRange');
+
+if (compareSlider && compareRange) {
+  compareRange.addEventListener('input', (event) => {
+    compareSlider.style.setProperty('--pos', event.target.value + '%');
+  });
+}
+
+// Lightbox for poster images
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxClose = document.getElementById('lightboxClose');
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  lightbox.setAttribute('aria-hidden', 'true');
+  lightboxImg.src = '';
+}
+
+document.querySelectorAll('[data-lightbox]').forEach(item => {
+  item.addEventListener('click', () => {
+    lightboxImg.src = item.getAttribute('data-lightbox');
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+  });
+});
+
+if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+if (lightbox) {
+  lightbox.addEventListener('click', (event) => {
+    if (event.target === lightbox) closeLightbox();
+  });
+}
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') closeLightbox();
+});
+</script>
+</body>
+</html>

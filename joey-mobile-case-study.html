@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joey Clothing Mobile Redesign — FORGE Studio Portfolio</title>
+<meta name="description" content="Joey Clothing mobile e-commerce redesign case study: current site audit, redesign strategy, high-fidelity mobile screens, checkout flow, order tracking, and chatbot support.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,200..900,0..100,0..1;1,9..144,200..900,0..100,0..1&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="logo-icon.svg">
+<style>
+/* ============================================
+   JOEY CLOTHING — Mobile E-commerce Case Study
+   Same portfolio mood: fixed nav, footer, hover image zoom, and scroll-up reveal.
+   Image slots are responsive, using phone-screen and 16:10 audit frames.
+   ============================================ */
+
+:root {
+  --bg:           #0B0907;
+  --bg-deep:      #050403;
+  --surface:      #15110F;
+  --surface-2:    #211B16;
+  --cream:        #F6EFE2;
+  --paper:        #FAF8F1;
+  --text:         #F0E8DA;
+  --text-dim:     #A89F8F;
+  --text-mute:    #6B6358;
+  --warm:         #C77B3D;
+  --gold:         #D4A04A;
+  --sand:         #E8CFA8;
+  --rose:         #A35C45;
+  --red:          #E3292E;
+  --border:       #2A2722;
+  --border-bold:  #3D3934;
+
+  --f-display: 'Fraunces', 'Times New Roman', serif;
+  --f-italic:  'Instrument Serif', Georgia, serif;
+  --f-body:    'Manrope', system-ui, sans-serif;
+  --f-mono:    'JetBrains Mono', 'SF Mono', monospace;
+
+  --pad-x:   clamp(20px, 4vw, 64px);
+  --max-w:   1440px;
+  --ease:    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--f-body);
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  position: relative;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.055;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  background: radial-gradient(ellipse at center, transparent 38%, rgba(0,0,0,0.36) 100%);
+}
+::selection { background: var(--warm); color: var(--bg); }
+img { max-width: 100%; }
+
+/* ============================================
+   NAVIGATION — same structure as FORGE page
+   ============================================ */
+nav.top {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px var(--pad-x);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to bottom, rgba(11,9,7,0.9), rgba(11,9,7,0.18) 74%, rgba(11,9,7,0));
+  backdrop-filter: blur(8px);
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.logo-icon {
+  width: 34px;
+  height: 28px;
+  display: block;
+  object-fit: contain;
+}
+.logo-text {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: color 0.3s var(--ease);
+  position: relative;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--warm);
+  transition: width 0.4s var(--ease);
+}
+.nav-links a:hover::after { width: 100%; }
+.cta-resume,
+.cta-link {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--warm);
+  padding: 10px 18px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s var(--ease);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.cta-resume:hover,
+.cta-link:hover { background: var(--gold); transform: translateY(-1px); }
+.cta-resume::after { content: '↓'; font-size: 13px; }
+.cta-link::after { content: '↗'; font-size: 12px; }
+.hamburger {
+  display: none;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--border-bold);
+  background: rgba(11, 9, 7, 0.65);
+  cursor: pointer;
+  position: relative;
+  z-index: 120;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 7px;
+}
+.hamburger span {
+  width: 20px;
+  height: 1px;
+  background: var(--text);
+  display: block;
+  transition: transform 0.35s var(--ease), opacity 0.35s var(--ease);
+}
+.hamburger.open span:first-child { transform: translateY(4px) rotate(45deg); }
+.hamburger.open span:last-child { transform: translateY(-4px) rotate(-45deg); }
+
+/* ============================================
+   TYPOGRAPHY + BASE
+   ============================================ */
+.eyebrow {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--warm);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--warm);
+}
+.em {
+  font-family: var(--f-italic);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold);
+}
+.case-page {
+  position: relative;
+  z-index: 1;
+}
+.case-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(212,160,74,0.15), transparent);
+  opacity: 0.42;
+  pointer-events: none;
+}
+.case-section {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 110px var(--pad-x);
+  border-bottom: 1px solid var(--border);
+}
+.case-section.compact { padding-top: 78px; padding-bottom: 78px; }
+.section-copy h2 {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+  font-size: clamp(42px, 5vw, 76px);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  margin-top: 26px;
+  color: var(--text);
+}
+.section-copy p {
+  color: var(--text-dim);
+  font-size: 16px;
+  line-height: 1.75;
+  max-width: 64ch;
+  margin-top: 22px;
+}
+.section-copy strong { color: var(--text); font-weight: 650; }
+.two-col {
+  display: grid;
+  grid-template-columns: 0.82fr 1.18fr;
+  gap: clamp(42px, 5.6vw, 88px);
+  align-items: start;
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+.case-hero {
+  min-height: 94vh;
+  padding: 150px var(--pad-x) 80px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 70px;
+  align-items: end;
+  border-bottom: 1px solid var(--border);
+}
+.hero-logo-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 34px;
+  padding: 16px 18px;
+  border: 1px solid rgba(240,232,218,0.12);
+  background: rgba(255,255,255,0.04);
+}
+.hero-joey-logo {
+  width: 152px;
+  height: auto;
+  display: block;
+}
+.case-title {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1;
+  font-size: clamp(56px, 8.2vw, 132px);
+  line-height: 0.88;
+  letter-spacing: -0.055em;
+  color: var(--text);
+  margin-top: 30px;
+}
+.case-lede {
+  font-family: var(--f-italic);
+  font-style: italic;
+  font-size: clamp(18px, 1.5vw, 24px);
+  line-height: 1.45;
+  color: var(--text-dim);
+  max-width: 52ch;
+  margin-top: 32px;
+}
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 34px;
+}
+.case-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 28px;
+  margin-top: 42px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+.case-meta .item { display: flex; flex-direction: column; gap: 4px; }
+.case-meta .lbl {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+.case-meta .val {
+  font-family: var(--f-display);
+  font-size: 18px;
+  color: var(--text);
+}
+.hero-visual {
+  position: relative;
+  min-height: 650px;
+  border: 1px solid var(--border-bold);
+  background:
+    radial-gradient(circle at 12% 16%, rgba(212,160,74,0.20), transparent 30%),
+    radial-gradient(circle at 86% 82%, rgba(163,92,69,0.18), transparent 35%),
+    linear-gradient(135deg, #1A1410, #050403 86%);
+  overflow: hidden;
+  isolation: isolate;
+}
+.hero-visual::before {
+  content: '';
+  position: absolute;
+  inset: 22px;
+  border: 1px solid rgba(240,232,218,0.10);
+  z-index: 2;
+  pointer-events: none;
+}
+.hero-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, transparent 48%, rgba(5,4,3,0.72));
+  pointer-events: none;
+}
+.phone-stage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 54px;
+  z-index: 1;
+}
+.phone-stack {
+  position: relative;
+  width: min(86%, 720px);
+  height: 550px;
+}
+.phone-card {
+  position: absolute;
+  width: 210px;
+  aspect-ratio: 390 / 844;
+  border-radius: 28px;
+  padding: 9px;
+  background: #0C0B0A;
+  border: 1px solid rgba(255,255,255,0.16);
+  box-shadow: 0 30px 90px rgba(0,0,0,0.52);
+  overflow: hidden;
+  transition: transform 0.9s var(--ease), filter 0.9s var(--ease);
+}
+.phone-card img {
+  width: 100%; height: 100%;
+  border-radius: 21px;
+  object-fit: cover;
+  display: block;
+}
+.phone-card.one { left: 5%; top: 54px; transform: rotate(-8deg); }
+.phone-card.two { left: 36%; top: 0; width: 235px; transform: rotate(1deg); z-index: 2; }
+.phone-card.three { right: 3%; top: 74px; transform: rotate(8deg); }
+.hero-visual:hover .phone-card.one { transform: rotate(-11deg) translateY(-10px); }
+.hero-visual:hover .phone-card.two { transform: rotate(0deg) translateY(-18px) scale(1.03); }
+.hero-visual:hover .phone-card.three { transform: rotate(11deg) translateY(-10px); }
+.hero-caption {
+  position: absolute;
+  left: 28px;
+  bottom: 24px;
+  z-index: 3;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(240,232,218,0.72);
+}
+
+/* ============================================
+   CARDS + IMAGES
+   ============================================ */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.info-card,
+.issue-card,
+.decision-card,
+.flow-step {
+  padding: 28px;
+  border: 1px solid var(--border);
+  background: rgba(21,17,15,0.72);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.45s var(--ease), border-color 0.45s var(--ease), background 0.45s var(--ease);
+}
+.info-card::before,
+.issue-card::before,
+.decision-card::before,
+.flow-step::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 36px; height: 1px;
+  background: var(--gold);
+}
+.info-card:hover,
+.issue-card:hover,
+.decision-card:hover,
+.flow-step:hover {
+  transform: translateY(-6px);
+  border-color: rgba(212,160,74,0.45);
+  background: rgba(31,27,23,0.9);
+}
+.num {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--warm);
+  margin-bottom: 22px;
+}
+.info-card h3,
+.issue-card h3,
+.decision-card h3,
+.flow-step h3 {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+.info-card p,
+.issue-card p,
+.decision-card p,
+.flow-step p {
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.image-frame {
+  position: relative;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  overflow: hidden;
+  isolation: isolate;
+}
+.image-frame img {
+  width: 100%;
+  display: block;
+  transition: transform 0.95s var(--ease), filter 0.95s var(--ease);
+}
+.image-frame:hover img { transform: scale(1.025); filter: brightness(1.04) contrast(1.03); }
+.image-frame.light { background: var(--paper); }
+.image-frame.dark {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(212,160,74,0.16), transparent 32%),
+    radial-gradient(circle at 85% 80%, rgba(163,92,69,0.13), transparent 36%),
+    var(--bg-deep);
+}
+.image-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 0 0;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+.image-caption span:first-child { color: var(--warm); }
+
+/* ============================================
+   AUDIT SECTION
+   ============================================ */
+.audit-layout {
+  display: grid;
+  grid-template-columns: 0.72fr 1.28fr;
+  gap: clamp(42px, 5vw, 82px);
+  align-items: start;
+}
+.issue-list {
+  display: grid;
+  gap: 14px;
+}
+.issue-card {
+  display: grid;
+  grid-template-columns: 0.74fr 1fr;
+  gap: 18px;
+  align-items: center;
+  padding: 16px;
+}
+.issue-thumb {
+  border: 1px solid rgba(240,232,218,0.11);
+  background: var(--paper);
+  overflow: hidden;
+}
+.issue-thumb img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.7s var(--ease);
+}
+.issue-card:hover .issue-thumb img { transform: scale(1.05); }
+.issue-card h3 { font-size: 24px; margin-bottom: 8px; }
+.issue-tag {
+  display: inline-flex;
+  margin-bottom: 10px;
+  font-family: var(--f-mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.audit-collage {
+  margin-top: 46px;
+}
+.audit-collage img { aspect-ratio: 16 / 10; object-fit: cover; }
+
+/* ============================================
+   FLOW + SCREEN SHOWCASE
+   ============================================ */
+.flow-line {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 44px;
+}
+.flow-step { min-height: 188px; }
+.flow-step h3 { font-size: 26px; }
+.screen-flow-frame {
+  margin-top: 44px;
+  background: #080705;
+}
+.screen-flow-frame img {
+  aspect-ratio: 1500 / 515;
+  object-fit: cover;
+}
+.screen-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 46px;
+}
+.screen-card {
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(circle at 50% 18%, rgba(212,160,74,0.14), transparent 32%),
+    var(--surface);
+  padding: 18px;
+  transition: transform 0.45s var(--ease), border-color 0.45s var(--ease), background 0.45s var(--ease);
+}
+.screen-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(212,160,74,0.44);
+  background:
+    radial-gradient(circle at 50% 18%, rgba(212,160,74,0.20), transparent 36%),
+    var(--surface-2);
+}
+.phone-shot {
+  border-radius: 28px;
+  padding: 8px;
+  background: #0B0B0B;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.32);
+  overflow: hidden;
+}
+.phone-shot img {
+  width: 100%;
+  aspect-ratio: 390 / 844;
+  object-fit: cover;
+  border-radius: 20px;
+  display: block;
+  transition: transform 0.8s var(--ease), filter 0.8s var(--ease);
+}
+.screen-card:hover .phone-shot img { transform: scale(1.025); filter: brightness(1.04) contrast(1.02); }
+.screen-card h3 {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-size: 26px;
+  letter-spacing: -0.03em;
+  margin: 18px 0 6px;
+}
+.screen-card p {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* ============================================
+   SOLUTION BOARD + FULL VIEW
+   ============================================ */
+.solution-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 46px;
+}
+.decision-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 34px;
+}
+.full-board {
+  margin-top: 46px;
+  padding: clamp(14px, 2vw, 24px);
+  background:
+    linear-gradient(135deg, rgba(31,27,23,0.76), rgba(5,4,3,0.96)),
+    var(--surface);
+  border: 1px solid var(--border-bold);
+}
+.full-board img {
+  width: 100%;
+  max-height: 860px;
+  object-fit: contain;
+  background: var(--paper);
+  display: block;
+}
+.outcome-band {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 110px var(--pad-x);
+  border-bottom: 1px solid var(--border);
+}
+.outcome-band p {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "SOFT" 35, "WONK" 1;
+  font-size: clamp(36px, 5vw, 82px);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  max-width: 1120px;
+  color: var(--text);
+}
+.next-projects {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 70px var(--pad-x) 110px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.project-link {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--warm);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--warm);
+  transition: gap 0.4s var(--ease), color 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+.project-link:hover { gap: 20px; color: var(--gold); border-color: var(--gold); }
+.project-link.forward::after { content: '→'; }
+.project-link.back::before { content: '←'; }
+
+/* ============================================
+   FOOTER — same structure as FORGE page
+   ============================================ */
+footer {
+  padding: 60px var(--pad-x) 40px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  border-top: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+  padding-bottom: 60px;
+}
+.footer-brand {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "WONK" 1;
+  font-size: clamp(56px, 8vw, 120px);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  color: var(--text);
+}
+.footer-brand .em { color: var(--warm); }
+.footer-col h4 {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  margin-bottom: 16px;
+}
+.footer-col a {
+  display: block;
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 13px;
+  padding: 4px 0;
+  transition: color 0.3s var(--ease);
+}
+.footer-col a:hover { color: var(--warm); }
+.footer-bottom {
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  color: var(--text-mute);
+  letter-spacing: 0.1em;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reveal { opacity: 0; animation: fadeUp 1.2s var(--ease) forwards; }
+.reveal.d1 { animation-delay: 0.1s; }
+.reveal.d2 { animation-delay: 0.25s; }
+.reveal.d3 { animation-delay: 0.4s; }
+.reveal.d4 { animation-delay: 0.55s; }
+.in-view { opacity: 0; transform: translateY(32px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+.in-view.visible { opacity: 1; transform: translateY(0); }
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1180px) {
+  .screen-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .flow-line { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 1060px) {
+  .case-hero,
+  .two-col,
+  .audit-layout,
+  .solution-panel {
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+  .case-hero { padding-top: 126px; }
+  .hero-visual { min-height: 560px; }
+  .phone-card.one { left: 0; }
+  .phone-card.two { left: 34%; }
+  .phone-card.three { right: 0; }
+  .decision-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 960px) {
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(82vw, 360px);
+    height: 100vh;
+    padding: 110px 32px 40px;
+    background:
+      radial-gradient(circle at 80% 20%, rgba(199, 123, 61, 0.14), transparent 45%),
+      rgba(11, 9, 7, 0.96);
+    backdrop-filter: blur(18px);
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 26px;
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.45s var(--ease), opacity 0.45s var(--ease);
+    z-index: 110;
+  }
+  .nav-links.open {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .nav-links a {
+    font-family: var(--f-display);
+    font-size: 34px;
+    line-height: 1;
+    color: var(--text);
+  }
+  .nav-links a::after { bottom: -8px; }
+  .hamburger { display: flex; }
+  .cta-resume { display: none; }
+}
+@media (max-width: 760px) {
+  :root { --pad-x: 20px; }
+  .case-title { font-size: 58px; }
+
+  .case-meta,
+  .card-grid,
+  .issue-card,
+  .flow-line {
+    grid-template-columns: 1fr;
+  }
+
+  .screen-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 34px;
+  }
+
+  .screen-card {
+    padding: 10px;
+  }
+
+  .phone-shot {
+    border-radius: 18px;
+    padding: 5px;
+  }
+
+  .phone-shot img {
+    border-radius: 14px;
+  }
+
+  .screen-card h3 {
+    font-size: 18px;
+    margin: 12px 0 4px;
+  }
+
+  .screen-card p {
+    font-size: 10.5px;
+    line-height: 1.45;
+  }
+}
+  .hero-visual { min-height: 630px; }
+  .phone-stack { width: 100%; height: 590px; }
+  .phone-card { width: 170px; }
+  .phone-card.one { left: 2%; top: 86px; }
+  .phone-card.two { left: 50%; top: 24px; width: 190px; transform: translateX(-50%) rotate(1deg); }
+  .phone-card.three { right: 2%; top: 172px; }
+  .hero-visual:hover .phone-card.two { transform: translateX(-50%) rotate(0deg) translateY(-18px) scale(1.03); }
+  .case-section { padding: 78px var(--pad-x); }
+  .issue-card { padding: 16px; }
+  .screen-card { padding: 16px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+
+</style>
+</head>
+<body>
+
+<!-- ================ NAV ================ -->
+<nav class="top">
+  <a href="index.html" class="nav-logo">
+    <img src="logo-icon.svg" alt="Forge Studio Logo" class="logo-icon">
+    <span class="logo-text">FORGE STUDIO</span>
+  </a>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="index.html#capabilities">Capabilities</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="resume.html">Resume</a></li>
+  </ul>
+
+  <a href="files/Thinura-Anjana-Resume-2026.pdf" class="cta-resume" download="Thinura-Anjana-Resume-2026.pdf">Resume</a>
+
+  <button class="hamburger" id="navToggle" type="button" aria-label="Open navigation menu" aria-expanded="false">
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<main class="case-page">
+
+  <!-- ================ HERO ================ -->
+  <section class="case-hero">
+    <div class="hero-copy">
+      <div class="eyebrow reveal d1">University Project / Mobile Prototype</div>
+      <h1 class="case-title reveal d2">Joey Clothing — <span class="em">mobile shopping redesigned.</span></h1>
+      <p class="case-lede reveal d3">
+        A high-fidelity mobile e-commerce prototype focused on fixing trust issues, simplifying the checkout journey, and making product discovery feel clearer for fashion customers.
+      </p>
+      <div class="hero-actions reveal d4">
+        <a class="cta-link" href="https://www.figma.com/community/file/1633711188390540196" target="_blank" rel="noopener">View Figma Prototype</a>
+      </div>
+
+      <div class="case-meta reveal d4">
+        <div class="item"><span class="lbl">Project Type</span><span class="val">UI/UX Redesign</span></div>
+        <div class="item"><span class="lbl">Platform</span><span class="val">Mobile E-commerce</span></div>
+        <div class="item"><span class="lbl">Business Model</span><span class="val">B2C / Brick & Click</span></div>
+        <div class="item"><span class="lbl">Output</span><span class="val">Figma Prototype</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal d3">
+      <div class="phone-stage">
+        <div class="phone-stack">
+          <div class="phone-card one"><img src="images/joey-mobile/screen-home.jpg" alt="Joey Clothing redesigned mobile home screen"></div>
+          <div class="phone-card two"><img src="images/joey-mobile/screen-product-detail.jpg" alt="Joey Clothing product detail screen"></div>
+          <div class="phone-card three"><img src="images/joey-mobile/screen-payment.jpg" alt="Joey Clothing card payment screen"></div>
+        </div>
+      </div>
+      <span class="hero-caption">High-fidelity mobile flow / product to payment</span>
+    </div>
+  </section>
+
+  <!-- ================ OVERVIEW ================ -->
+  <section class="case-section compact in-view">
+    <div class="two-col">
+      <div class="section-copy">
+        <div class="eyebrow">01 — Project Overview</div>
+        <h2>Why this redesign was <span class="em">worth solving.</span></h2>
+        <p>
+          Joey Clothing already had the base structure of an online store: product listings, cart, policies, checkout, and customer account actions. That made it a realistic university redesign project because the goal was not to invent a new business, but to improve an existing shopping journey.
+        </p>
+        <p>
+          The main challenge was trust. Customers need to understand products, shipping, payment, order status, and support before they feel safe enough to complete a purchase on mobile.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        <div class="info-card"><div class="num">Focus 01</div><h3>Trust <span class="em">signals.</span></h3><p>Clear shipping, exchange, secure checkout, and policy information were moved into visible places.</p></div>
+        <div class="info-card"><div class="num">Focus 02</div><h3>Mobile <span class="em">speed.</span></h3><p>Bottom navigation, category shortcuts, and direct cart actions make the user path shorter.</p></div>
+        <div class="info-card"><div class="num">Focus 03</div><h3>Product <span class="em">clarity.</span></h3><p>Product cards and detail pages show price, rating, availability, color, size, care, and return details.</p></div>
+        <div class="info-card"><div class="num">Focus 04</div><h3>After-sale <span class="em">support.</span></h3><p>Order tracking and chatbot support help users after payment, not only before purchase.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================ CURRENT SITE AUDIT ================ -->
+  <section class="case-section in-view">
+    <div class="audit-layout">
+      <div class="section-copy">
+        <div class="eyebrow">02 — Current Site Audit</div>
+        <h2>Four issues that weakened the <span class="em">customer journey.</span></h2>
+        <p>
+          The official site screenshots were reviewed first. The biggest problems were not only visual; they affected confidence at important decision points such as account creation, policy reading, product details, and cart checkout.
+        </p>
+      </div>
+
+      <div class="issue-list">
+        <article class="issue-card">
+          <div class="issue-thumb"><img src="images/joey-mobile/issue-1.jpg" alt="Current site product overlay with placeholder description"></div>
+          <div><span class="issue-tag">Issue 01</span><h3>Product popup confusion</h3><p>The quick-view popup shows placeholder-style description text, making product details feel incomplete and less professional.</p></div>
+        </article>
+        <article class="issue-card">
+          <div class="issue-thumb"><img src="images/joey-mobile/issue-2.jpg" alt="Current site registration error screen"></div>
+          <div><span class="issue-tag">Issue 02</span><h3>Registration friction</h3><p>The account flow creates confusion because users meet errors after filling details, and the sign-in path feels unclear.</p></div>
+        </article>
+        <article class="issue-card">
+          <div class="issue-thumb"><img src="images/joey-mobile/issue-3.jpg" alt="Current site shipping policy page with missing content"></div>
+          <div><span class="issue-tag">Issue 03</span><h3>Weak shipping policy page</h3><p>The policy area does not clearly explain delivery locations, charges, duties, failed delivery, returns, or refunds.</p></div>
+        </article>
+        <article class="issue-card">
+          <div class="issue-thumb"><img src="images/joey-mobile/issue-4.jpg" alt="Current site terms link broken in cart flow"></div>
+          <div><span class="issue-tag">Issue 04</span><h3>Broken cart trust link</h3><p>A terms-related link in the cart leads to a broken page, interrupting trust at the exact moment before checkout.</p></div>
+        </article>
+      </div>
+    </div>
+
+   
+  </section>
+
+  <!-- ================ STRATEGY ================ -->
+  <section class="case-section in-view">
+    <div class="section-copy">
+      <div class="eyebrow">03 — Redesign Strategy</div>
+      <h2>The solution was to make each step feel <span class="em">guided, safe, and clear.</span></h2>
+      <p>
+        The redesign keeps Joey’s fashion identity but improves the shopping logic. Instead of hiding important information, the prototype brings key decisions closer to the user: category shortcuts on home, filters in listing, detailed information on products, one clear checkout path, and separate order tracking after purchase.
+      </p>
+    </div>
+
+    <div class="flow-line">
+      <div class="flow-step"><div class="num">Step 01</div><h3>Discover</h3><p>Home screen with hero image, trust strip, category shortcuts, and bottom navigation.</p></div>
+      <div class="flow-step"><div class="num">Step 02</div><h3>Compare</h3><p>Product listing uses a two-column grid, filters, sort controls, product prices, and wishlist actions.</p></div>
+      <div class="flow-step"><div class="num">Step 03</div><h3>Decide</h3><p>Product detail page adds images, color options, reviews, stock state, care, delivery, and return notes.</p></div>
+      <div class="flow-step"><div class="num">Step 04</div><h3>Pay</h3><p>Checkout focuses on one card payment flow with clear amount, card details, and OTP confirmation.</p></div>
+      <div class="flow-step"><div class="num">Step 05</div><h3>Track</h3><p>After purchase, the user can confirm the order, track delivery status, or ask Jenny chatbot for support.</p></div>
+    </div>
+
+    <div class="screen-flow-frame image-frame dark">
+      <img src="images/joey-mobile/screen-flow-strip.jpg" alt="Joey Clothing mobile prototype key screen flow">
+    </div>
+    <div class="image-caption"><span>Core mobile flow</span><span>Home / product / checkout / tracking / support</span></div>
+  </section>
+
+  <!-- ================ SCREENS ================ -->
+  <section class="case-section in-view">
+    <div class="section-copy">
+      <div class="eyebrow">04 — Major Screens</div>
+      <h2>High-fidelity screens arranged by the <span class="em">shopping journey.</span></h2>
+      <p>
+        The screens are ordered so a user can understand the prototype naturally: enter the store, browse products, inspect a product, complete payment, confirm the order, track delivery, and get support.
+      </p>
+    </div>
+
+    <div class="screen-grid">
+      <article class="screen-card"><div class="phone-shot"><img src="images/joey-mobile/screen-home.jpg" alt="Home page screen"></div><h3>Home</h3><p>Hero, trust strip, category shortcuts, bottom navigation, and chatbot entry.</p></article>
+      <article class="screen-card"><div class="phone-shot"><img src="images/joey-mobile/screen-product-list.jpg" alt="Product listing screen"></div><h3>Product List</h3><p>Two-column product grid with filter, sort, cart button, wishlist, and pricing.</p></article>
+      <article class="screen-card"><div class="phone-shot"><img src="images/joey-mobile/screen-product-detail.jpg" alt="Product detail screen"></div><h3>Product Detail</h3><p>Product images, rating, size, color, stock, material, care, delivery, and return information.</p></article>
+      <article class="screen-card"><div class="phone-shot"><img src="images/joey-mobile/screen-payment.jpg" alt="Card payment screen"></div><h3>Card Payment</h3><p>One direct card interface that shows order amount, card details, accepted cards, and pay action.</p></article>
+      <article class="screen-card"><div class="phone-shot"><img src="images/joey-mobile/screen-order-search.jpg" alt="Order tracking search screen"></div><h3>Track Search</h3><p>User can enter order number with email or phone number before viewing delivery status.</p></article>
+      <article class="screen-card"><div class="phone-shot"><img src="images/joey-mobile/screen-order-track.jpg" alt="Order tracking status screen"></div><h3>Order Timeline</h3><p>Shows order ID, timeline status, courier details, estimated delivery, and address information.</p></article>
+      <article class="screen-card"><div class="phone-shot"><img src="images/joey-mobile/screen-chatbot.jpg" alt="Jenny chatbot screen"></div><h3>Jenny Chatbot</h3><p>Frequently asked questions for size guide, order status, contact team, and cancellation support.</p></article>
+      <article class="screen-card"><div class="phone-shot"><img src="images/joey-mobile/screen-message-ui.jpg" alt="Message UI screen"></div><h3>Message UI</h3><p>SMS-style confirmation and courier updates help users feel informed after purchase.</p></article>
+      <article class="screen-card"><div class="phone-shot"><img src="images/joey-mobile/screen-shipping-policy.jpg" alt="Shipping policy screen"></div><h3>Shipping Policy</h3><p>Clear shipping destinations, processing, delivery times, charges, duties, returns, and refunds.</p></article>
+      <article class="screen-card"><div class="phone-shot"><img src="images/joey-mobile/screen-size-guide.jpg" alt="Size guide screen"></div><h3>Size Guide</h3><p>Measurement tables help reduce size confusion and support better buying decisions.</p></article>
+      <article class="screen-card"><div class="phone-shot"><img src="images/joey-mobile/screen-login.jpg" alt="Login screen"></div><h3>Login</h3><p>A cleaner single route for account access with stronger visual focus and fewer distractions.</p></article>
+      <article class="screen-card"><div class="phone-shot"><img src="images/joey-mobile/screen-about.jpg" alt="About us screen"></div><h3>About</h3><p>Brand story page that supports customer trust and gives the business a human identity.</p></article>
+    </div>
+  </section>
+
+  <!-- ================ UI DECISIONS ================ -->
+  <section class="case-section in-view">
+    <div class="section-copy">
+      <div class="eyebrow">05 — Key UI Decisions</div>
+      <h2>Small decisions were used to reduce <span class="em">friction.</span></h2>
+      <p>
+        Each UI change connects to a practical business problem: users need trust before payment, clarity before choosing a product, and support after the order is placed.
+      </p>
+    </div>
+
+    <div class="decision-grid">
+      <div class="decision-card"><div class="num">Decision 01</div><h3>Trust strip</h3><p>Free shipping, easy exchange, and secure checkout appear early on the home screen to reduce doubt.</p></div>
+      <div class="decision-card"><div class="num">Decision 02</div><h3>Bottom nav</h3><p>Home, Wishlist, Search, Cart, and Account stay within thumb reach for mobile users.</p></div>
+      <div class="decision-card"><div class="num">Decision 03</div><h3>Product cards</h3><p>Cards show name, price, installment note, color, rating, wishlist, and direct add-to-cart action.</p></div>
+      <div class="decision-card"><div class="num">Decision 04</div><h3>Policy clarity</h3><p>Shipping and terms content are separated properly and written clearly to avoid broken trust links.</p></div>
+      <div class="decision-card"><div class="num">Decision 05</div><h3>Payment focus</h3><p>The payment section removes unnecessary alternatives and keeps the card process direct.</p></div>
+      <div class="decision-card"><div class="num">Decision 06</div><h3>Support layer</h3><p>Jenny chatbot and order tracking support the user after purchase, not just during browsing.</p></div>
+    </div>
+  </section>
+
+  <!-- ================ FULL PROTOTYPE BOARD ================ -->
+  <section class="case-section in-view">
+    <div class="section-copy">
+      <div class="eyebrow">06 — Full Prototype View</div>
+      <h2>The final system is shown as a complete <span class="em">mobile flow board.</span></h2>
+      <p>
+        The high-fidelity board connects the redesigned screens into one complete experience. It shows how the user moves from discovery to purchase, confirmation, delivery tracking, and customer support.
+      </p>
+    </div>
+
+    <div class="full-board image-frame light">
+      <img src="images/joey-mobile/full-hi-fi-board.jpg" alt="Full high fidelity Joey Clothing mobile redesign board">
+    </div>
+    <div class="image-caption"><span>High-fidelity board</span><span>Full mobile prototype export</span></div>
+  </section>
+
+  <!-- ================ OUTCOME ================ -->
+  <section class="outcome-band in-view">
+    <p>
+      The redesign turns Joey Clothing’s mobile store into a <span class="em">clearer shopping system</span>: easier to browse, safer to trust, smoother to pay, and stronger after the order is placed.
+    </p>
+  </section>
+
+  <!-- ================ NEXT LINKS ================ -->
+  <section class="next-projects">
+    <a href="index.html#work" class="project-link back">Back to selected work</a>
+    <a href="avengers-process.html" class="project-link forward">Avengers: Doomsday</a>
+  </section>
+
+</main>
+
+<!-- ================ FOOTER ================ -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">FORGE Studio</div>
+    <div class="footer-col">
+      <h4>Studio</h4>
+      <a href="index.html#about">About</a>
+      <a href="index.html#work">Selected work</a>
+      <a href="index.html#capabilities">Capabilities</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Elsewhere</h4>
+      <a href="#">Behance</a>
+      <a href="#">Instagram</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">Dribbble</a>
+    </div>
+    <div class="footer-col">
+      <h4>Get in touch</h4>
+      <a href="mailto:anjanathinura07@gmail.com">anjanathinura07@gmail.com</a>
+      <a href="#">+94 70 777 1405</a>
+      <a href="#">Moratuwa, Sri Lanka</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 FORGE STUDIO — THINURA ANJANA</span>
+    <span>BUILT IN SRI LANKA</span>
+  </div>
+</footer>
+
+<script>
+// Scroll-triggered reveals — same scroll-up effect used in the FORGE page.
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.in-view, .info-card, .issue-card, .decision-card, .flow-step, .screen-card, .image-frame')
+  .forEach((el) => {
+    el.classList.add('in-view');
+    io.observe(el);
+  });
+
+/* ============================================
+   MOBILE NAVIGATION MENU
+   ============================================ */
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+
+if (navToggle && navLinks) {
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+
+    navToggle.classList.toggle('open', isOpen);
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.setAttribute(
+      'aria-label',
+      isOpen ? 'Close navigation menu' : 'Open navigation menu'
+    );
+  });
+
+  navLinks.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Open navigation menu');
+    });
+  });
+}
+</script>
+
+</body>
+</html>
