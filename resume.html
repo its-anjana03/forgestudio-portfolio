@@ -709,6 +709,237 @@ footer {
   color: var(--text-mute);
   letter-spacing: 0.1em;
 }
+
+/* ============================================
+   RESUME FINAL RESPONSIVE PATCH
+   Add this at the END of the CSS
+   ============================================ */
+
+.mobile-only {
+  display: none;
+}
+
+.hamburger {
+  display: none;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--border-bold);
+  background: rgba(11, 9, 7, 0.72);
+  cursor: pointer;
+  position: relative;
+  z-index: 140;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.hamburger span {
+  width: 20px;
+  height: 1px;
+  background: var(--text);
+  display: block;
+  transition: transform 0.35s var(--ease), opacity 0.35s var(--ease);
+}
+
+.hamburger.open span:first-child {
+  transform: translateY(4px) rotate(45deg);
+}
+
+.hamburger.open span:last-child {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+@media (max-width: 960px) {
+  nav.top {
+    padding: 14px var(--pad-x);
+    gap: 14px;
+  }
+
+  .logo-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .logo-text {
+    font-size: 18px;
+  }
+
+  .cta-download {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(82vw, 360px);
+    height: 100vh;
+    padding: 110px 32px 40px;
+    background:
+      radial-gradient(circle at 80% 20%, rgba(199, 123, 61, 0.14), transparent 45%),
+      rgba(11, 9, 7, 0.96);
+    backdrop-filter: blur(18px);
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 26px;
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.45s var(--ease), opacity 0.45s var(--ease);
+    z-index: 120;
+  }
+
+  .nav-links.open {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-links a {
+    font-family: var(--f-display);
+    font-size: 34px;
+    line-height: 1;
+    color: var(--text);
+  }
+
+  .nav-links a::after {
+    bottom: -8px;
+  }
+
+  .mobile-only {
+    display: block;
+  }
+
+  .resume-hero {
+    padding-top: 118px;
+    padding-bottom: 46px;
+  }
+
+  .resume-hero .meta-row {
+    gap: 22px 36px;
+  }
+
+  .resume-body {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 60px var(--pad-x);
+  }
+
+  .resume-body aside.rail {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .skills-grid,
+  .rec-stack,
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .resume-cta {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 72px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 700px) {
+  .resume-body aside.rail {
+    grid-template-columns: 1fr;
+  }
+
+  .resume-main {
+    gap: 52px;
+  }
+
+  .resume-main section h2 {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .resume-main section h2 .num {
+    margin-top: 0;
+  }
+
+  .skill-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --pad-x: 20px;
+  }
+
+  nav.top {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .logo-text {
+    font-size: 16px;
+  }
+
+  .resume-hero .name {
+    font-size: 54px;
+  }
+
+  .resume-hero .role-line {
+    font-size: 18px;
+  }
+
+  .resume-hero .meta-row {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .resume-body {
+    padding-top: 48px;
+  }
+
+  .rec-card {
+    padding: 24px 22px;
+  }
+
+  .edu-row,
+  .cert-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .edu-row .yr,
+  .cert-row .yr {
+    padding-top: 0;
+  }
+
+  .footer-brand {
+    font-size: 56px;
+  }
+}
 </style>
 </head>
 <body>
@@ -719,14 +950,24 @@ footer {
     <img src="logo-icon.svg" alt="Forge Studio Logo" class="logo-icon">
     <span class="logo-text">FORGE STUDIO</span>
   </a>
-  <ul class="nav-links">
+
+  <ul class="nav-links" id="navLinks">
     <li><a href="index.html#work">Work</a></li>
     <li><a href="index.html#capabilities">Capabilities</a></li>
     <li><a href="index.html#about">About</a></li>
     <li><a href="index.html#contact">Contact</a></li>
     <li><a href="resume.html" class="active">Resume</a></li>
+    <li class="mobile-only">
+      <a href="files/Thinura-Anjana-Resume-2026.pdf" download>Download PDF</a>
+    </li>
   </ul>
+
   <a href="files/Thinura-Anjana-Resume-2026.pdf" download class="cta-download">Download PDF</a>
+
+  <button class="hamburger" id="navToggle" type="button" aria-label="Open navigation menu" aria-expanded="false">
+    <span></span>
+    <span></span>
+  </button>
 </nav>
 
 <!-- ================ HERO BANNER ================ -->
@@ -1008,6 +1249,35 @@ const io = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 document.querySelectorAll('.in-view').forEach(el => io.observe(el));
+/* ============================================
+   MOBILE NAVIGATION MENU
+   ============================================ */
+
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+
+if (navToggle && navLinks) {
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+
+    navToggle.classList.toggle('open', isOpen);
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.setAttribute(
+      'aria-label',
+      isOpen ? 'Close navigation menu' : 'Open navigation menu'
+    );
+  });
+
+  navLinks.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Open navigation menu');
+    });
+  });
+}
+
 </script>
 
 </body>
