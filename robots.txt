@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://forgestudio.web.lk/sitemap.xml
