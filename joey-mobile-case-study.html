@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Joey Clothing Mobile Redesign — FORGE Studio Portfolio</title>
 <meta name="description" content="Joey Clothing mobile e-commerce redesign case study: current site audit, redesign strategy, high-fidelity mobile screens, checkout flow, order tracking, and chatbot support.">
+<link rel="canonical" href="https://forgestudio.web.lk/joey-mobile-case-study.html">
+<meta property="og:title" content="Joey Clothing Mobile Redesign — FORGE Studio">
+<meta property="og:description" content="A teardown and redesign of a live Sri Lankan e-commerce brand. UX research, wireframes, and a published Figma prototype.">
+<meta property="og:image" content="https://forgestudio.web.lk/images/joey-thumbnail.jpg">
+<meta property="og:url" content="https://forgestudio.web.lk/joey-mobile-case-study.html">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,200..900,0..100,0..1;1,9..144,200..900,0..100,0..1&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -75,6 +82,9 @@ body::after {
   background: radial-gradient(ellipse at center, transparent 38%, rgba(0,0,0,0.36) 100%);
 }
 ::selection { background: var(--warm); color: var(--bg); }
+:focus-visible { outline: 2px solid var(--warm); outline-offset: 3px; }
+.skip-nav { position:absolute;top:-100%;left:16px;z-index:200;font-family:var(--f-mono);font-size:12px;letter-spacing:0.1em;color:var(--bg);background:var(--warm);padding:12px 20px;text-decoration:none;transition:top 0.2s ease; }
+.skip-nav:focus { top:16px; }
 img { max-width: 100%; }
 
 /* ============================================
@@ -881,9 +891,8 @@ footer {
 </style>
 </head>
 <body>
-
-<!-- ================ NAV ================ -->
-<nav class="top">
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+<nav class="top" aria-label="Main navigation">
   <a href="index.html" class="nav-logo">
     <img src="logo-icon.svg" alt="Forge Studio Logo" class="logo-icon">
     <span class="logo-text">FORGE STUDIO</span>
@@ -905,7 +914,7 @@ footer {
   </button>
 </nav>
 
-<main class="case-page">
+<main class="case-page" id="main-content">
 
   <!-- ================ HERO ================ -->
   <section class="case-hero">
@@ -975,19 +984,19 @@ footer {
 
       <div class="issue-list">
         <article class="issue-card">
-          <div class="issue-thumb"><img src="images/joey-mobile/issue-1.jpg" alt="Current site product overlay with placeholder description"></div>
+          <div class="issue-thumb"><img loading="lazy" src="images/joey-mobile/issue-1.jpg" alt="Current site product overlay with placeholder description"></div>
           <div><span class="issue-tag">Issue 01</span><h3>Product popup confusion</h3><p>The quick-view popup shows placeholder-style description text, making product details feel incomplete and less professional.</p></div>
         </article>
         <article class="issue-card">
-          <div class="issue-thumb"><img src="images/joey-mobile/issue-2.jpg" alt="Current site registration error screen"></div>
+          <div class="issue-thumb"><img loading="lazy" src="images/joey-mobile/issue-2.jpg" alt="Current site registration error screen"></div>
           <div><span class="issue-tag">Issue 02</span><h3>Registration friction</h3><p>The account flow creates confusion because users meet errors after filling details, and the sign-in path feels unclear.</p></div>
         </article>
         <article class="issue-card">
-          <div class="issue-thumb"><img src="images/joey-mobile/issue-3.jpg" alt="Current site shipping policy page with missing content"></div>
+          <div class="issue-thumb"><img loading="lazy" src="images/joey-mobile/issue-3.jpg" alt="Current site shipping policy page with missing content"></div>
           <div><span class="issue-tag">Issue 03</span><h3>Weak shipping policy page</h3><p>The policy area does not clearly explain delivery locations, charges, duties, failed delivery, returns, or refunds.</p></div>
         </article>
         <article class="issue-card">
-          <div class="issue-thumb"><img src="images/joey-mobile/issue-4.jpg" alt="Current site terms link broken in cart flow"></div>
+          <div class="issue-thumb"><img loading="lazy" src="images/joey-mobile/issue-4.jpg" alt="Current site terms link broken in cart flow"></div>
           <div><span class="issue-tag">Issue 04</span><h3>Broken cart trust link</h3><p>A terms-related link in the cart leads to a broken page, interrupting trust at the exact moment before checkout.</p></div>
         </article>
       </div>
@@ -1015,7 +1024,7 @@ footer {
     </div>
 
     <div class="screen-flow-frame image-frame dark">
-      <img src="images/joey-mobile/screen-flow-strip.jpg" alt="Joey Clothing mobile prototype key screen flow">
+      <img loading="lazy" src="images/joey-mobile/screen-flow-strip.jpg" alt="Joey Clothing mobile prototype key screen flow">
     </div>
     <div class="image-caption"><span>Core mobile flow</span><span>Home / product / checkout / tracking / support</span></div>
   </section>
@@ -1032,7 +1041,7 @@ footer {
 
     <div class="screen-grid">
       <article class="screen-card"><div class="phone-shot"><img src="images/joey-mobile/screen-home.jpg" alt="Home page screen"></div><h3>Home</h3><p>Hero, trust strip, category shortcuts, bottom navigation, and chatbot entry.</p></article>
-      <article class="screen-card"><div class="phone-shot"><img src="images/joey-mobile/screen-product-list.jpg" alt="Product listing screen"></div><h3>Product List</h3><p>Two-column product grid with filter, sort, cart button, wishlist, and pricing.</p></article>
+      <article class="screen-card"><div class="phone-shot"><img loading="lazy" src="images/joey-mobile/screen-product-list.jpg" alt="Product listing screen"></div><h3>Product List</h3><p>Two-column product grid with filter, sort, cart button, wishlist, and pricing.</p></article>
       <article class="screen-card"><div class="phone-shot"><img src="images/joey-mobile/screen-product-detail.jpg" alt="Product detail screen"></div><h3>Product Detail</h3><p>Product images, rating, size, color, stock, material, care, delivery, and return information.</p></article>
       <article class="screen-card"><div class="phone-shot"><img src="images/joey-mobile/screen-payment.jpg" alt="Card payment screen"></div><h3>Card Payment</h3><p>One direct card interface that shows order amount, card details, accepted cards, and pay action.</p></article>
       <article class="screen-card"><div class="phone-shot"><img src="images/joey-mobile/screen-order-search.jpg" alt="Order tracking search screen"></div><h3>Track Search</h3><p>User can enter order number with email or phone number before viewing delivery status.</p></article>
@@ -1110,16 +1119,15 @@ footer {
     </div>
     <div class="footer-col">
       <h4>Elsewhere</h4>
-      <a href="#">Behance</a>
-      <a href="#">Instagram</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">Dribbble</a>
+      <a href="https://www.behance.net/thinuraanjana3" aria-label="Behance">Behance</a>
+      <a href="https://www.instagram.com/its_anjana03/" aria-label="Instagram">Instagram</a>
+      <a href="https://www.linkedin.com/in/thinura-anjana-7a4060306?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn">LinkedIn</a>
     </div>
     <div class="footer-col">
       <h4>Get in touch</h4>
       <a href="mailto:anjanathinura07@gmail.com">anjanathinura07@gmail.com</a>
-      <a href="#">+94 70 777 1405</a>
-      <a href="#">Moratuwa, Sri Lanka</a>
+      <a href="tel:+94707771405">+94 70 777 1405</a>
+      <span style="display:block;color:var(--text-dim);font-size:13px;padding:4px 0;">Moratuwa, Sri Lanka</span>
     </div>
   </div>
   <div class="footer-bottom">

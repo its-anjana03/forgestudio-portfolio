@@ -4,10 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FORGE Studio — Thinura Anjana / Designer Portfolio</title>
+<meta name="description" content="Portfolio of Thinura Anjana — cinematic designer specialising in posters, brand identity, and digital product design. Six years of practice from Colombo, Sri Lanka.">
+<link rel="canonical" href="https://forgestudio.web.lk/">
+<meta property="og:title" content="FORGE Studio — Thinura Anjana / Designer Portfolio">
+<meta property="og:description" content="Cinematic design, forged by hand. Posters, brand identity, and digital product design from Colombo, Sri Lanka.">
+<meta property="og:image" content="https://forgestudio.web.lk/imageshero.jpg">
+<meta property="og:url" content="https://forgestudio.web.lk/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FORGE Studio — Thinura Anjana">
+<meta name="twitter:description" content="Cinematic design, forged by hand. Posters, brand identity, and digital product design from Colombo, Sri Lanka.">
+<meta name="twitter:image" content="https://forgestudio.web.lk/imageshero.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,200..900,0..100,0..1;1,9..144,200..900,0..100,0..1&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="logo-icon.svg">
+<link rel="preload" as="image" href="imageshero.jpg">
 <style>
 /* ============================================
    FORGE — Cinematic Portfolio Mockup
@@ -81,6 +93,35 @@ body::after {
 }
 
 ::selection { background: var(--copper); color: var(--bg); }
+
+/* Focus styles for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--copper);
+  outline-offset: 3px;
+}
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--copper);
+  outline-offset: 3px;
+}
+
+/* Skip navigation link */
+.skip-nav {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 200;
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--bg);
+  background: var(--copper);
+  padding: 12px 20px;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+.skip-nav:focus {
+  top: 16px;
+}
 
 /* ============================================
    TYPOGRAPHY UTILITIES
@@ -431,30 +472,6 @@ nav.top {
 }
 
 
-/* Keep hero content above the spotlight */
-.hero-meta,
-.hero-visual,
-.scroll-cue {
-  position: relative;
-  z-index: 2;
-}
-
-/* Title wrapper gets the 3D tilt */
-.hero-title-wrap {
-  perspective: 900px;
-  width: fit-content;
-  max-width: 100%;
-  will-change: transform;
-  transition: transform 0.12s linear;
-}
-
-/* Each title line moves separately */
-.hero-line {
-  display: block;
-  will-change: transform;
-  transition: transform 0.08s linear;
-}
-
 .hero-meta {
   display: flex;
   flex-direction: column;
@@ -531,20 +548,6 @@ nav.top {
   inset: 24px;
   border: 1px solid rgba(212, 160, 74, 0.3);
   pointer-events: none;
-}
-.hero-visual::after {
-  content: '[ HERO IMAGE — VIJAYISM POSTER GOES HERE ]';
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--f-mono);
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  color: rgba(240, 232, 218, 0.4);
-  text-align: center;
-  padding: 0 40px;
 }
 
 .hero-visual .corner {
@@ -1019,16 +1022,6 @@ nav.top {
   overflow: hidden;
 }
 
-.about-portrait {
-  aspect-ratio: 4/5;
-  background:
-    linear-gradient(135deg, #2A1F18 0%, #0B0907 100%),
-    radial-gradient(circle at 30% 30%, rgba(199, 123, 61, 0.2), transparent 50%);
-  border: 1px solid var(--border-bold);
-  position: relative;
-  overflow: hidden;
-}
-
 .about-portrait img {
   width: 100%;
   height: 100%;
@@ -1398,8 +1391,11 @@ footer {
 </head>
 <body>
 
+<!-- Skip navigation for keyboard users -->
+<a href="#work" class="skip-nav">Skip to main content</a>
+
 <!-- ================ NAV ================ -->
-<nav class="top">
+<nav class="top" aria-label="Main navigation">
    <a href="index.html" class="nav-logo">
     <img src="logo-icon.svg" alt="Forge Studio Logo" class="logo-icon">
     <span class="logo-text">FORGE STUDIO</span>
@@ -1461,7 +1457,6 @@ footer {
   </div>
 
   <div class="hero-visual reveal d3">
-    <a href="imageshero.jpg"> </a>
   </div>
 
   <div class="scroll-cue">Scroll</div>
@@ -1510,7 +1505,7 @@ footer {
   <!-- PROJECT 01: JOEY CLOTHING -->
   <article class="project">
 <div class="project-visual visual-joey" data-label="">
-  <img src="images/joey-thumbnail.jpg" alt="Joey Clothing UX case study thumbnail">
+  <img loading="lazy" src="images/joey-thumbnail.jpg" alt="Joey Clothing UX case study thumbnail">
 </div>
 
     <div class="project-text">
@@ -1552,7 +1547,7 @@ footer {
       <a href="avengers-process.html" class="project-link">View process</a>
     </div>
 <div class="project-visual visual-avengers" data-label="">
-  <img src="images/avengers-thumbnail.jpg" alt="Avengers Doomsday poster process thumbnail">
+  <img loading="lazy" src="images/avengers-thumbnail.jpg" alt="Avengers Doomsday poster process thumbnail">
 </div>
 
   </article>
@@ -1560,7 +1555,7 @@ footer {
   <!-- PROJECT 03: VIJAYISM (FEATURED) -->
   <article class="project">
 <div class="project-visual visual-vijayism" data-label="">
-  <img src="images/vijayism-thumbnail.jpg" alt="30 Years of Vijayism poster thumbnail">
+  <img loading="lazy" src="images/vijayism-thumbnail.jpg" alt="30 Years of Vijayism poster thumbnail">
 </div>
 
     <div class="project-text">
@@ -1603,7 +1598,7 @@ footer {
       <a href="rolex-design.html" class="project-link">View design</a>
     </div>
 <div class="project-visual visual-rolex" data-label="">
-  <img src="images/rolex-thumbnail.jpg" alt="Rolex Day-Date 40 design thumbnail">
+  <img loading="lazy" src="images/rolex-thumbnail.jpg" alt="Rolex Day-Date 40 design thumbnail">
 </div>
 
   </article>
@@ -1611,7 +1606,7 @@ footer {
   <!-- PROJECT 05: FORGE STUDIO -->
   <article class="project">
 <div class="project-visual visual-forge" data-label="">
-  <img src="images/forge-identity/forge-thumbnail.jpg" alt="FORGE Studio identity system thumbnail">
+  <img loading="lazy" src="images/forge-identity/forge-thumbnail.jpg" alt="FORGE Studio identity system thumbnail">
 </div>
 
     <div class="project-text">
@@ -1646,43 +1641,43 @@ footer {
   <div class="archive-grid">
 
   <div class="poster-card" data-title="Leo / 2023">
-    <img src="images/leo-poster.jpg" alt="Leo poster design">
+    <img loading="lazy" src="images/leo-poster.jpg" alt="Leo poster design">
   </div>
 
   <div class="poster-card" data-title="Avengers Doomsday / 2025">
-    <img src="images/avengers-poster.jpg" alt="Avengers Doomsday poster design">
+    <img loading="lazy" src="images/avengers-poster.jpg" alt="Avengers Doomsday poster design">
   </div>
 
   <div class="poster-card" data-title="Jana Nayagan / 2026">
-    <img src="images/jana-nayagan-poster.jpg" alt="Jana Nayagan poster design">
+    <img loading="lazy" src="images/jana-nayagan-poster.jpg" alt="Jana Nayagan poster design">
   </div>
 
   <div class="poster-card" data-title="John Wick Chapter 4 / 2024">
-    <img src="images/john-wick-poster.jpg" alt="John Wick Chapter 4 poster design">
+    <img loading="lazy" src="images/john-wick-poster.jpg" alt="John Wick Chapter 4 poster design">
   </div>
 
   <div class="poster-card" data-title="Oppenheimer / 2023">
-    <img src="images/oppenheimer-poster.jpg" alt="Oppenheimer poster design">
+    <img loading="lazy" src="images/oppenheimer-poster.jpg" alt="Oppenheimer poster design">
   </div>
 
   <div class="poster-card" data-title="Indian 2 / 2024">
-    <img src="images/indian2-poster.jpg" alt="Indian 2 poster design">
+    <img loading="lazy" src="images/indian2-poster.jpg" alt="Indian 2 poster design">
   </div>
 
   <div class="poster-card" data-title="F1 / 2025">
-    <img src="images/f1-poster.jpg" alt="F1 poster design">
+    <img loading="lazy" src="images/f1-poster.jpg" alt="F1 poster design">
   </div>
 
   <div class="poster-card" data-title="PS-1 / 2022">
-    <img src="images/ps1-poster.jpg" alt="PS-1 poster design">
+    <img loading="lazy" src="images/ps1-poster.jpg" alt="PS-1 poster design">
   </div>
 
    <div class="poster-card" data-title="LIK / 2026">
-    <img src="images/lik-poster.jpg" alt="LIK poster design">
+    <img loading="lazy" src="images/lik-poster.jpg" alt="LIK poster design">
   </div>
 
    <div class="poster-card" data-title="Kalki 2898AD / 2024">
-    <img src="images/kalki-poster.jpg" alt="Kalki 2898AD poster design">
+    <img loading="lazy" src="images/kalki-poster.jpg" alt="Kalki 2898AD poster design">
   </div>
   </div>
 </div>
@@ -1726,7 +1721,7 @@ footer {
 <!-- ================ ABOUT ================ -->
 <section class="about" id="about">
   <div class="about-portrait">
-  <img src="images/portrait.jpg" alt="Portrait of Thinura Anjana">
+  <img loading="lazy" src="images/portrait.jpg" alt="Portrait of Thinura Anjana">
   <span class="label"></span>
 </div>
 
@@ -1821,16 +1816,16 @@ footer {
     </div>
     <div class="footer-col">
       <h4>Elsewhere</h4>
-      <a href="#">Behance</a>
-      <a href="#">Instagram</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">Dribbble</a>
+      <!-- TODO: Replace # with your real profile URLs -->
+      <a href="https://www.behance.net/thinuraanjana3" aria-label="Behance">Behance</a>
+      <a href="https://www.instagram.com/its_anjana03/" aria-label="Instagram">Instagram</a>
+      <a href="https://www.linkedin.com/in/thinura-anjana-7a4060306?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn">LinkedIn</a>
     </div>
     <div class="footer-col">
       <h4>Get in touch</h4>
       <a href="mailto:anjanathinura07@gmail.com">anjanathinura07@gmail.com</a>
-      <a href="#">+94 70 777 1405</a>
-      <a href="#">Moratuwa, Sri Lanka</a>
+      <a href="tel:+94707771405">+94 70 777 1405</a>
+      <span style="display:block;color:var(--text-dim);font-size:13px;padding:4px 0;">Moratuwa, Sri Lanka</span>
     </div>
   </div>
   <div class="footer-bottom">
