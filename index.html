@@ -301,19 +301,21 @@ nav.top {
   margin: 0;
   overflow: hidden;
   isolation: isolate;
+  cursor: crosshair;
 }
 
-/* Full width hero image */
+/* Cold steel base — desaturated cinematic image */
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(11, 9, 7, 0.88), rgba(11, 9, 7, 0.35)),
     url("imageshero.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  filter: saturate(0.78) brightness(0.95);
   z-index: -2;
 }
 
@@ -327,61 +329,23 @@ nav.top {
 }
 
 /* ============================================
-   FORGE CINEMATIC REVEAL LENS EFFECT
+   FORGE — WORKING THE STEEL
+   Heat trail · Hammer strike · Anvil ring
    ============================================ */
 
 .hero {
   --mx: 50%;
   --my: 50%;
-  --lens-size: 190px;
 }
 
-/* This layer reveals the clean hero image through a moving circle */
-.hero-reveal {
+/* Heat trail canvas — your cursor is the torch */
+.hero-heat {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-
-  background-image: url("imageshero.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  filter: brightness(1.25) contrast(1.12) saturate(1.25);
-  opacity: 0;
-
-  clip-path: circle(var(--lens-size) at var(--mx) var(--my));
-  transition: opacity 0.25s ease, clip-path 0.06s linear;
-}
-
-/* Reveal appears only when mouse is inside hero */
-.hero:hover .hero-reveal {
-  opacity: 0.82;
-}
-
-/* Soft molten glow around the reveal lens */
-.hero-spotlight {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0;
-
-  background:
-    radial-gradient(
-      260px circle at var(--mx) var(--my),
-      rgba(226, 96, 58, 0.28) 0%,
-      rgba(212, 160, 74, 0.15) 35%,
-      transparent 72%
-    );
-
   mix-blend-mode: screen;
-  transition: opacity 0.25s ease;
-}
-
-.hero:hover .hero-spotlight {
-  opacity: 1;
+  opacity: 0.92;
 }
 
 /* Camera focus frame that follows the cursor */
@@ -419,6 +383,66 @@ nav.top {
   transform: translate(-50%, -50%) scale(1);
 }
 
+/* Hammer-strike shockwave — radiates from click point */
+.hero-shockwave {
+  position: absolute;
+  left: var(--sx);
+  top: var(--sy);
+  width: 220px;
+  height: 220px;
+  margin-left: -110px;
+  margin-top: -110px;
+  border-radius: 50%;
+  z-index: 5;
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    transparent 44%,
+    rgba(255, 220, 130, 0.85) 49%,
+    rgba(226, 96, 58, 0.55) 52%,
+    transparent 58%
+  );
+  mix-blend-mode: screen;
+  transform: scale(0);
+  opacity: 1;
+  animation: shockwave 780ms cubic-bezier(0.18, 0.7, 0.3, 1) forwards;
+  filter: blur(0.5px);
+}
+
+@keyframes shockwave {
+  0%   { transform: scale(0);    opacity: 1; }
+  60%  {                         opacity: 0.6; }
+  100% { transform: scale(7.5);  opacity: 0; }
+}
+
+/* Hero tremor — entire frame shakes when struck */
+.hero.struck {
+  animation: heroTremor 200ms cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+@keyframes heroTremor {
+  0%   { transform: translate(0, 0); }
+  15%  { transform: translate(-5px, 2px); }
+  30%  { transform: translate(4px, -3px); }
+  45%  { transform: translate(-3px, 3px); }
+  60%  { transform: translate(3px, -2px); }
+  75%  { transform: translate(-2px, 1px); }
+  90%  { transform: translate(1px, -1px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Title line struck — compress and spring back */
+.hero-line.struck {
+  animation: lineStruck 320ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes lineStruck {
+  0%   { transform: scaleY(1); }
+  25%  { transform: scaleY(0.92); }
+  60%  { transform: scaleY(1.03); }
+  100% { transform: scaleY(1); }
+}
+
 /* Keep hero content above image effects */
 .hero-meta,
 .hero-visual,
@@ -442,6 +466,15 @@ nav.top {
   transition: transform 0.08s linear;
 }
 
+/* "Forged" word heats up when cursor is near it */
+.hero h1 .accent {
+  position: relative;
+  text-shadow:
+    0 0 calc(var(--accent-heat, 0) * 28px) rgba(226, 96, 58, calc(var(--accent-heat, 0) * 0.85)),
+    0 0 calc(var(--accent-heat, 0) * 60px) rgba(212, 160, 74, calc(var(--accent-heat, 0) * 0.55));
+  transition: text-shadow 0.35s ease;
+}
+
 /* Tiny forge sparks */
 .forge-spark {
   position: absolute;
@@ -457,6 +490,11 @@ nav.top {
   box-shadow: 0 0 14px rgba(226, 96, 58, 0.85);
 
   animation: forgeSparkFly 750ms ease-out forwards;
+}
+
+.forge-spark.big {
+  box-shadow: 0 0 22px rgba(255, 220, 130, 0.95), 0 0 40px rgba(226, 96, 58, 0.55);
+  animation-duration: 1000ms;
 }
 
 @keyframes forgeSparkFly {
@@ -1319,7 +1357,7 @@ footer {
    RESPONSIVE
    ============================================ */
 @media (max-width: 960px) {
-  .hero { grid-template-columns: 1fr; gap: 40px; padding-top: 110px; }
+  .hero { grid-template-columns: 1fr; gap: 40px; padding-top: 110px; cursor: default; }
   .manifesto-grid { grid-template-columns: 1fr; gap: 32px; }
   .stats-row { grid-template-columns: repeat(2, 1fr); gap: 24px; }
   .project, .project.alt { grid-template-columns: 1fr; gap: 28px; }
@@ -1387,6 +1425,13 @@ footer {
   .hero h1 { font-size: 56px; }
 }
 
+/* Reduced motion: only stop background heat trail, keep click shockwave working */
+@media (prefers-reduced-motion: reduce) {
+  .hero-heat {
+    display: none;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1424,8 +1469,7 @@ footer {
 
 <!-- ================ HERO ================ -->
 <section class="hero" id="hero">
-  <div class="hero-reveal" id="hero-reveal"></div>
-  <div class="hero-spotlight" id="hero-spotlight"></div>
+  <canvas class="hero-heat" id="heroHeat" aria-hidden="true"></canvas>
   <div class="hero-focus" id="hero-focus"></div>
 
     <div class="hero-meta">
@@ -1846,65 +1890,134 @@ document.querySelectorAll('.project, .poster-card, .cap-item, .rec-card, .tl-row
   .forEach(el => { el.classList.add('in-view'); io.observe(el); });
 
 /* ============================================
-   FORGE CINEMATIC REVEAL LENS + SPARKS
+   FORGE — WORKING THE STEEL
+   Heat trail · Hammer strike · Title parallax
    ============================================ */
 
-const hero = document.getElementById('hero');
-const titleWrap = document.getElementById('hero-title-wrap');
-const heroLines = document.querySelectorAll('.hero-line');
-const heroVisual = document.querySelector('.hero-visual');
+const hero        = document.getElementById('hero');
+const titleWrap   = document.getElementById('hero-title-wrap');
+const heroLines   = document.querySelectorAll('.hero-line');
+const heroVisual  = document.querySelector('.hero-visual');
+const accent      = document.querySelector('.hero h1 .accent');
+const heatCanvas  = document.getElementById('heroHeat');
 
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---- Heat canvas setup (HiDPI aware) ---- */
+let ctx = null;
+const dpr = window.devicePixelRatio || 1;
+
+function resizeHeatCanvas() {
+  if (!heatCanvas || !hero) return;
+  const rect = hero.getBoundingClientRect();
+  heatCanvas.width  = Math.max(1, Math.round(rect.width  * dpr));
+  heatCanvas.height = Math.max(1, Math.round(rect.height * dpr));
+  heatCanvas.style.width  = rect.width  + 'px';
+  heatCanvas.style.height = rect.height + 'px';
+  ctx = heatCanvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+}
+
+if (heatCanvas && !reduceMotion) {
+  resizeHeatCanvas();
+  window.addEventListener('resize', resizeHeatCanvas);
+}
+
+/* ---- Paint a warm pulse at (x,y) ---- */
+function paintHeat(x, y, intensity = 1) {
+  if (!ctx) return;
+  const radius = 95 * intensity;
+  const grad = ctx.createRadialGradient(x, y, 0, x, y, radius);
+  grad.addColorStop(0,    'rgba(255, 240, 180, ' + (0.50 * intensity) + ')');
+  grad.addColorStop(0.30, 'rgba(255, 168, 90,  ' + (0.40 * intensity) + ')');
+  grad.addColorStop(0.65, 'rgba(199, 123, 61,  ' + (0.18 * intensity) + ')');
+  grad.addColorStop(1,    'rgba(199, 123, 61, 0)');
+
+  ctx.globalCompositeOperation = 'lighter';
+  ctx.fillStyle = grad;
+  ctx.beginPath();
+  ctx.arc(x, y, radius, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+/* ---- Decay loop — heat naturally cools to cold steel ---- */
+function decayLoop() {
+  if (ctx) {
+    const w = heatCanvas.width  / dpr;
+    const h = heatCanvas.height / dpr;
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.020)';
+    ctx.fillRect(0, 0, w, h);
+  }
+  requestAnimationFrame(decayLoop);
+}
+if (heatCanvas && !reduceMotion) decayLoop();
+
+/* ---- Update accent glow based on cursor distance ---- */
+function updateAccentHeat(clientX, clientY) {
+  if (!accent) return;
+  const a = accent.getBoundingClientRect();
+  const ax = a.left + a.width  / 2;
+  const ay = a.top  + a.height / 2;
+  const dist = Math.hypot(clientX - ax, clientY - ay);
+  const maxDist = 280;
+  const heat = Math.max(0, 1 - dist / maxDist);
+  accent.style.setProperty('--accent-heat', heat.toFixed(3));
+}
+
+/* ---- Mousemove: heat + parallax ---- */
 let lastSparkTime = 0;
+let lastPaintTime = 0;
 
 if (hero) {
   hero.addEventListener('mousemove', (e) => {
     const rect = hero.getBoundingClientRect();
-
-    // Mouse position inside hero
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-
-    // Convert mouse position into percentage
-    const xPct = (x / rect.width) * 100;
+    const xPct = (x / rect.width)  * 100;
     const yPct = (y / rect.height) * 100;
-
-    // Mouse position from -1 to +1
-    const nx = (x / rect.width - 0.5) * 2;
+    const nx = (x / rect.width  - 0.5) * 2;
     const ny = (y / rect.height - 0.5) * 2;
 
-    // Send mouse position to CSS
+    // Camera focus frame position
     hero.style.setProperty('--mx', xPct + '%');
     hero.style.setProperty('--my', yPct + '%');
 
-    // Make reveal lens bigger near the title area
-    const lensSize = yPct < 55 ? '230px' : '170px';
-    hero.style.setProperty('--lens-size', lensSize);
-
-    // Premium title movement
+    // 3D title tilt
     if (titleWrap) {
       titleWrap.style.transform =
-        `rotateY(${nx * 4}deg) rotateX(${-ny * 2.5}deg)`;
+        'rotateY(' + (nx * 4) + 'deg) rotateX(' + (-ny * 2.5) + 'deg)';
     }
 
-    // Each title line moves slightly with depth
+    // Per-line depth parallax
     heroLines.forEach((line) => {
       const depth = parseFloat(line.dataset.depth || '0.04');
-
       line.style.transform =
-        `translate3d(${nx * depth * 55}px, ${ny * depth * 28}px, ${depth * 90}px)`;
+        'translate3d(' + (nx * depth * 55) + 'px, ' +
+                        (ny * depth * 28) + 'px, ' +
+                        (depth * 90) + 'px)';
     });
 
-    // Hero visual moves opposite direction for depth
+    // Hero visual counter-parallax
     if (heroVisual) {
       heroVisual.style.transform =
-        `translate3d(${-nx * 18}px, ${-ny * 12}px, 0) rotateY(${-nx * 3}deg)`;
+        'translate3d(' + (-nx * 18) + 'px, ' + (-ny * 12) + 'px, 0) ' +
+        'rotateY(' + (-nx * 3) + 'deg)';
     }
 
-    // Create sparks, but controlled
+    // Heat paint — throttled to ~60fps
     const now = Date.now();
+    if (!reduceMotion && now - lastPaintTime > 16) {
+      paintHeat(x, y, 1);
+      lastPaintTime = now;
+    }
 
-    if (now - lastSparkTime > 55) {
-      createForgeSpark(x, y);
+    // Accent word glow
+    updateAccentHeat(e.clientX, e.clientY);
+
+    // Ambient sparks — slower than the original to keep the click burst special
+    if (!reduceMotion && now - lastSparkTime > 95) {
+      createForgeSpark(x, y, false);
       lastSparkTime = now;
     }
   });
@@ -1912,43 +2025,95 @@ if (hero) {
   hero.addEventListener('mouseleave', () => {
     hero.style.setProperty('--mx', '50%');
     hero.style.setProperty('--my', '50%');
-    hero.style.setProperty('--lens-size', '190px');
+    if (titleWrap) titleWrap.style.transform = '';
+    heroLines.forEach((line) => { line.style.transform = ''; });
+    if (heroVisual) heroVisual.style.transform = '';
+    if (accent) accent.style.setProperty('--accent-heat', 0);
+  });
 
-    if (titleWrap) {
-      titleWrap.style.transform = '';
-    }
+  /* ---- Hammer strike: works on desktop click + phone tap ---- */
+  hero.addEventListener('pointerdown', (e) => {
+    // Don't strike when clicking links/buttons
+    if (e.target.closest('a, button')) return;
 
-    heroLines.forEach((line) => {
-      line.style.transform = '';
-    });
+    const rect = hero.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
 
-    if (heroVisual) {
-      heroVisual.style.transform = '';
-    }
+    triggerStrike(x, y);
   });
 }
 
-/* Create one small spark */
-function createForgeSpark(x, y) {
-  const spark = document.createElement('span');
-  spark.className = 'forge-spark';
+function triggerStrike(x, y) {
+  if (!hero) return;
 
-  const size = Math.random() * 4 + 2;
-  const dx = (Math.random() - 0.5) * 95;
-  const dy = (Math.random() - 0.5) * 75;
+  // 1. Shockwave ring
+  const wave = document.createElement('div');
+  wave.className = 'hero-shockwave';
+  wave.style.setProperty('--sx', x + 'px');
+  wave.style.setProperty('--sy', y + 'px');
+  hero.appendChild(wave);
 
-  spark.style.setProperty('--x', x + 'px');
-  spark.style.setProperty('--y', y + 'px');
-  spark.style.setProperty('--size', size + 'px');
-  spark.style.setProperty('--dx', dx + 'px');
-  spark.style.setProperty('--dy', dy + 'px');
+  wave.addEventListener('animationend', () => {
+    wave.remove();
+  });
 
-  hero.appendChild(spark);
+  // backup remove, just in case animationend does not fire
+  setTimeout(() => wave.remove(), 1000);
+
+  // 2. Hero tremor
+  hero.classList.remove('struck');
+  void hero.offsetWidth;
+  hero.classList.add('struck');
 
   setTimeout(() => {
-    spark.remove();
-  }, 800);
+    hero.classList.remove('struck');
+  }, 240);
+
+  // 3. Title line strike
+  heroLines.forEach((line, i) => {
+    setTimeout(() => {
+      line.classList.remove('struck');
+      void line.offsetWidth;
+      line.classList.add('struck');
+
+      setTimeout(() => {
+        line.classList.remove('struck');
+      }, 360);
+    }, i * 35);
+  });
+
+  // 4. Spark burst
+  for (let i = 0; i < 18; i++) {
+    createForgeSpark(x, y, true);
+  }
+
+  // 5. Heat mark only if canvas exists
+  if (ctx) {
+    paintHeat(x, y, 2.4);
+  }
 }
+
+/* ---- Spark — small for ambient, big for strike ---- */
+function createForgeSpark(x, y, big) {
+  const spark = document.createElement('span');
+  spark.className = big ? 'forge-spark big' : 'forge-spark';
+
+  const size = big ? (Math.random() * 5 + 3) : (Math.random() * 4 + 2);
+  const dx   = (Math.random() - 0.5) * (big ? 200 : 95);
+  // bias upward (negative y) for a real "embers off the anvil" feel
+  const dy   = (Math.random() - 0.5) * (big ? 160 : 75) - (big ? 30 : 0);
+
+  spark.style.setProperty('--x',    x + 'px');
+  spark.style.setProperty('--y',    y + 'px');
+  spark.style.setProperty('--size', size + 'px');
+  spark.style.setProperty('--dx',   dx + 'px');
+  spark.style.setProperty('--dy',   dy + 'px');
+
+  hero.appendChild(spark);
+  setTimeout(() => spark.remove(), big ? 1000 : 800);
+}
+
 /* ============================================
    MOBILE NAVIGATION MENU
    ============================================ */
