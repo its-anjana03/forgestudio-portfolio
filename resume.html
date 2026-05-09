@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Resume — Thinura Anjana / FORGE Studio</title>
 <meta name="description" content="Resume of Thinura Anjana — Designer & MIS student at SLIIT University, Sri Lanka. Six years of cinematic design practice. Available for internships from June 2026.">
+<link rel="canonical" href="https://forgestudio.web.lk/resume.html">
+<meta property="og:title" content="Resume — Thinura Anjana / FORGE Studio">
+<meta property="og:description" content="Designer & MIS student at SLIIT University, Sri Lanka. Six years of cinematic design practice. Available for internships from June 2026.">
+<meta property="og:image" content="https://forgestudio.web.lk/imageshero.jpg">
+<meta property="og:url" content="https://forgestudio.web.lk/resume.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,200..900,0..100,0..1;1,9..144,200..900,0..100,0..1&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -70,6 +77,9 @@ body::after {
   background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%);
 }
 ::selection { background: var(--copper); color: var(--bg); }
+:focus-visible { outline: 2px solid var(--copper); outline-offset: 3px; }
+.skip-nav { position:absolute;top:-100%;left:16px;z-index:200;font-family:var(--f-mono);font-size:12px;letter-spacing:0.1em;color:var(--bg);background:var(--copper);padding:12px 20px;text-decoration:none;transition:top 0.2s ease; }
+.skip-nav:focus { top:16px; }
 
 /* TYPOGRAPHY UTILITIES */
 .eyebrow {
@@ -943,9 +953,8 @@ footer {
 </style>
 </head>
 <body>
-
-<!-- ================ NAV ================ -->
-<nav class="top">
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+<nav class="top" aria-label="Main navigation">
   <a href="index.html" class="nav-logo">
     <img src="logo-icon.svg" alt="Forge Studio Logo" class="logo-icon">
     <span class="logo-text">FORGE STUDIO</span>
@@ -1043,7 +1052,7 @@ footer {
 
 
   <!-- MAIN COLUMN -->
-  <main class="resume-main">
+  <main class="resume-main" id="main-content">
 
     <!-- PROFILE -->
     <section class="profile in-view">
@@ -1223,16 +1232,15 @@ footer {
     </div>
     <div class="footer-col">
       <h4>Elsewhere</h4>
-      <a href="#">Behance</a>
-      <a href="#">Instagram</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">Dribbble</a>
+      <a href="https://www.behance.net/thinuraanjana3" aria-label="Behance">Behance</a>
+      <a href="https://www.instagram.com/its_anjana03/" aria-label="Instagram">Instagram</a>
+      <a href="https://www.linkedin.com/in/thinura-anjana-7a4060306?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn">LinkedIn</a>
     </div>
     <div class="footer-col">
       <h4>Get in touch</h4>
       <a href="mailto:anjanathinura07@gmail.com">anjanathinura07@gmail.com</a>
-      <a href="#">+94 70 777 1405</a>
-      <a href="#">Moratuwa, Sri Lanka</a>
+      <a href="tel:+94707771405">+94 70 777 1405</a>
+      <span style="display:block;color:var(--text-dim);font-size:13px;padding:4px 0;">Moratuwa, Sri Lanka</span>
     </div>
   </div>
   <div class="footer-bottom">

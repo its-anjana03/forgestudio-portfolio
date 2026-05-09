@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>30 Years of Vijayism — Tribute Poster / FORGE Studio</title>
+<meta name="description" content="A conceptual portrait tribute to actor Vijay's 30-year career by Thinura Anjana. Featured on Indian television — two portraits, one room, a lifetime of artefacts.">
+<link rel="canonical" href="https://forgestudio.web.lk/vijayism-piece.html">
+<meta property="og:title" content="30 Years of Vijayism — Tribute Poster / FORGE Studio">
+<meta property="og:description" content="A career compressed into a single room. Featured on Indian television as part of the actor's anniversary tribute coverage.">
+<meta property="og:image" content="https://forgestudio.web.lk/images/vijayism-thumbnail.jpg">
+<meta property="og:url" content="https://forgestudio.web.lk/vijayism-piece.html">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,200..900,0..100,0..1;1,9..144,200..900,0..100,0..1&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -79,6 +87,9 @@ body::after {
 }
 
 ::selection { background: var(--copper); color: var(--bg); }
+:focus-visible { outline: 2px solid var(--copper); outline-offset: 3px; }
+.skip-nav { position:absolute;top:-100%;left:16px;z-index:200;font-family:var(--f-mono);font-size:12px;letter-spacing:0.1em;color:var(--bg);background:var(--copper);padding:12px 20px;text-decoration:none;transition:top 0.2s ease; }
+.skip-nav:focus { top:16px; }
 
 /* ============================================
    TYPOGRAPHY UTILITIES
@@ -961,9 +972,8 @@ footer {
 </style>
 </head>
 <body>
-
-<!-- ================ NAV ================ -->
-<nav class="top">
+<a href="#top" class="skip-nav">Skip to main content</a>
+<nav class="top" aria-label="Main navigation">
   <a href="index.html" class="nav-logo">
     <img src="logo-icon.svg" alt="Forge Studio Logo" class="logo-icon">
     <span class="logo-text">FORGE STUDIO</span>
@@ -1152,7 +1162,7 @@ footer {
   <div class="details-grid">
     <article class="detail-card wide in-view" data-lightbox="images/vijayism/detail-filmography-title.jpg">
       <figure>
-        <img src="images/vijayism/detail-filmography-title.jpg" alt="Hidden movie titles behind the Vijayism title detail">
+        <img loading="lazy" src="images/vijayism/detail-filmography-title.jpg" alt="Hidden movie titles behind the Vijayism title detail">
         <figcaption>
           <div class="detail-kicker">Detail 01</div>
           <h3>Film titles behind the main title.</h3>
@@ -1163,7 +1173,7 @@ footer {
 
     <article class="detail-card small in-view" data-lightbox="images/vijayism/detail-autograph.jpg">
       <figure>
-        <img src="images/vijayism/detail-autograph.jpg" alt="Autograph note and Varisu Journey book detail">
+        <img loading="lazy" src="images/vijayism/detail-autograph.jpg" alt="Autograph note and Varisu Journey book detail">
         <figcaption>
           <div class="detail-kicker">Detail 02</div>
           <h3>Autograph, books, and memory.</h3>
@@ -1174,7 +1184,7 @@ footer {
 
     <article class="detail-card third in-view" data-lightbox="images/vijayism/detail-first-film-magazine.jpg">
       <figure>
-        <img src="images/vijayism/detail-first-film-magazine.jpg" alt="First film magazine wall detail">
+        <img loading="lazy" src="images/vijayism/detail-first-film-magazine.jpg" alt="First film magazine wall detail">
         <figcaption>
           <div class="detail-kicker">Detail 03</div>
           <h3>The beginning on the wall.</h3>
@@ -1185,7 +1195,7 @@ footer {
 
     <article class="detail-card third in-view" data-lightbox="images/vijayism/detail-awards-cat.jpg">
       <figure>
-        <img src="images/vijayism/detail-awards-cat.jpg" alt="Awards and cat hidden detail">
+        <img loading="lazy" src="images/vijayism/detail-awards-cat.jpg" alt="Awards and cat hidden detail">
         <figcaption>
           <div class="detail-kicker">Detail 04</div>
           <h3>Awards beside the unexpected.</h3>
@@ -1196,7 +1206,7 @@ footer {
 
     <article class="detail-card third in-view" data-lightbox="images/vijayism/detail-varisu-response.jpg">
       <figure>
-        <img src="images/vijayism/detail-varisu-response.jpg" alt="Newspaper, phone, tea and boxing gloves hidden detail">
+        <img loading="lazy" src="images/vijayism/detail-varisu-response.jpg" alt="Newspaper, phone, tea and boxing gloves hidden detail">
         <figcaption>
           <div class="detail-kicker">Detail 05</div>
           <h3>The floor carries the fan world.</h3>
@@ -1269,7 +1279,7 @@ footer {
 <!-- ================ NEXT ================ -->
 <section class="next-work">
     <a href="index.html#work" class="project-link back">Back to selected work</a>
-  <a href="vijayism-piece.html" class="project-link">Rolex Day-Date 40</a>
+  <a href="rolex-design.html" class="project-link">Rolex Day-Date 40</a>
 </section>
 
 <!-- ================ FOOTER ================ -->
@@ -1285,16 +1295,15 @@ footer {
     </div>
     <div class="footer-col">
       <h4>Elsewhere</h4>
-      <a href="#">Behance</a>
-      <a href="#">Instagram</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">Dribbble</a>
+      <a href="https://www.behance.net/thinuraanjana3" aria-label="Behance">Behance</a>
+      <a href="https://www.instagram.com/its_anjana03/" aria-label="Instagram">Instagram</a>
+      <a href="https://www.linkedin.com/in/thinura-anjana-7a4060306?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn">LinkedIn</a>
     </div>
     <div class="footer-col">
       <h4>Get in touch</h4>
       <a href="mailto:anjanathinura07@gmail.com">anjanathinura07@gmail.com</a>
-      <a href="#">+94 70 777 1405</a>
-      <a href="#">Moratuwa, Sri Lanka</a>
+      <a href="tel:+94707771405">+94 70 777 1405</a>
+      <span style="display:block;color:var(--text-dim);font-size:13px;padding:4px 0;">Moratuwa, Sri Lanka</span>
     </div>
   </div>
   <div class="footer-bottom">
