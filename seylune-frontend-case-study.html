@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seylune Frontend Website — FORGE Studio Portfolio</title>
+<meta name="description" content="Seylune frontend website case study by Thinura Anjana: a fictional luxury fashion e-commerce concept built for an IAD web development assignment using HTML, CSS, JavaScript, and AI-assisted workflows.">
+<link rel="canonical" href="https://forgestudio.web.lk/seylune-frontend-case-study.html">
+<meta property="og:title" content="Seylune Frontend Website — FORGE Studio">
+<meta property="og:description" content="A fictional luxury fashion e-commerce frontend concept for an academic web development assignment. Dark purple and gold visual system, curated categories, and 12-page frontend structure.">
+<meta property="og:image" content="https://forgestudio.web.lk/images/seylune/seylune-thumbnail.jpg">
+<meta property="og:url" content="https://forgestudio.web.lk/seylune-frontend-case-study.html">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,200..900,0..100,0..1;1,9..144,200..900,0..100,0..1&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="logo-icon.svg">
+<style>
+/* ============================================
+   SEYLUNE — Frontend Website Case Study
+   FORGE Studio system preserved: nav, footer, type, grain, reveal rhythm.
+   Page-specific mood: dark purple, antique gold, moonlit luxury, editorial UI.
+   ============================================ */
+
+:root {
+  --bg:           #0B0907;
+  --bg-deep:      #060503;
+  --surface:      #161310;
+  --surface-2:    #1F1B17;
+  --surface-3:    #241F1A;
+  --text:         #F0E8DA;
+  --text-dim:     #A89F8F;
+  --text-mute:    #6B6358;
+  --copper:       #C77B3D;
+  --flame:        #E2603A;
+  --gold:         #D4A04A;
+  --border:       #2A2722;
+  --border-bold:  #3D3934;
+
+  --seylune-purple: #2B1832;
+  --seylune-plum:   #4B2C50;
+  --seylune-wine:   #3A1E2E;
+  --seylune-gold:   #CDB47A;
+  --seylune-moon:   #F5E6B8;
+  --seylune-ink:    #09070B;
+  --seylune-green:  #121C16;
+
+  --f-display: 'Fraunces', 'Times New Roman', serif;
+  --f-italic:  'Instrument Serif', Georgia, serif;
+  --f-body:    'Manrope', system-ui, sans-serif;
+  --f-mono:    'JetBrains Mono', 'SF Mono', monospace;
+
+  --pad-x:   clamp(20px, 4vw, 64px);
+  --max-w:   1440px;
+  --ease:    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--f-body);
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  position: relative;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  background: radial-gradient(ellipse at center, transparent 38%, rgba(0,0,0,0.36) 100%);
+}
+::selection { background: var(--copper); color: var(--bg); }
+:focus-visible { outline: 2px solid var(--copper); outline-offset: 3px; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+
+.skip-nav { position:absolute;top:-100%;left:16px;z-index:200;font-family:var(--f-mono);font-size:12px;letter-spacing:0.1em;color:var(--bg);background:var(--copper);padding:12px 20px;text-decoration:none;transition:top 0.2s ease; }
+.skip-nav:focus { top:16px; }
+
+/* ============================================
+   NAVIGATION — same FORGE structure
+   ============================================ */
+nav.top {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px var(--pad-x);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to bottom, rgba(11,9,7,0.88) 0%, rgba(11,9,7,0.18) 74%, rgba(11,9,7,0) 100%);
+  backdrop-filter: blur(8px);
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-icon { width: 34px; height: 28px; display: block; object-fit: contain; }
+.logo-text {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  text-decoration: none;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: color 0.3s var(--ease);
+  position: relative;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--copper);
+  transition: width 0.4s var(--ease);
+}
+.nav-links a:hover::after { width: 100%; }
+.cta-resume {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--copper);
+  padding: 10px 18px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s var(--ease);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.cta-resume:hover { background: var(--flame); transform: translateY(-1px); }
+.cta-resume::after { content: '↓'; font-size: 13px; }
+.hamburger {
+  display: none;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--border-bold);
+  background: rgba(11, 9, 7, 0.65);
+  cursor: pointer;
+  position: relative;
+  z-index: 120;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 7px;
+}
+.hamburger span { width: 20px; height: 1px; background: var(--text); display: block; transition: transform 0.35s var(--ease), opacity 0.35s var(--ease); }
+.hamburger.open span:first-child { transform: translateY(4px) rotate(45deg); }
+.hamburger.open span:last-child { transform: translateY(-4px) rotate(-45deg); }
+
+/* ============================================
+   TYPOGRAPHY + PAGE BASE
+   ============================================ */
+.eyebrow {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--copper);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.eyebrow::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--copper); }
+.em, .italic-mark { font-family: var(--f-italic); font-style: italic; font-weight: 400; color: var(--gold); }
+.mono { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.05em; }
+
+.seylune-page { position: relative; z-index: 1; }
+.seylune-page::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  width: 1px; height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(205,180,122,0.17), transparent);
+  opacity: 0.42;
+  pointer-events: none;
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+.sey-hero {
+  min-height: 100vh;
+  padding: 150px var(--pad-x) 88px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(420px, 1.12fr);
+  gap: clamp(42px, 6vw, 92px);
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.sey-hero::after {
+  content: '';
+  position: absolute;
+  top: 16%;
+  right: 6%;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(205,180,122,0.18), transparent 66%);
+  filter: blur(10px);
+  z-index: -1;
+}
+.sey-title {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "SOFT" 42, "WONK" 1;
+  font-size: clamp(58px, 8.6vw, 134px);
+  line-height: 0.88;
+  letter-spacing: -0.056em;
+  color: var(--text);
+  margin-top: 28px;
+}
+.sey-title .em { letter-spacing: -0.035em; }
+.sey-lede {
+  margin-top: 32px;
+  font-family: var(--f-italic);
+  font-style: italic;
+  font-size: clamp(18px, 1.55vw, 24px);
+  line-height: 1.46;
+  color: var(--text-dim);
+  max-width: 52ch;
+}
+.hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+.tag {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 7px 12px;
+  border: 1px solid var(--border-bold);
+  border-radius: 999px;
+  background: rgba(11,9,7,0.24);
+}
+.sey-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 28px;
+  margin-top: 44px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+.sey-meta .item { display: flex; flex-direction: column; gap: 4px; }
+.sey-meta .lbl { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-mute); }
+.sey-meta .val { font-family: var(--f-display); font-size: 18px; color: var(--text); }
+
+.hero-interface {
+  position: relative;
+  min-height: 640px;
+  border: 1px solid var(--border-bold);
+  background:
+    radial-gradient(circle at 22% 20%, rgba(205,180,122,0.18), transparent 30%),
+    radial-gradient(circle at 78% 80%, rgba(75,44,80,0.32), transparent 36%),
+    linear-gradient(135deg, #180F1C 0%, #08070A 86%);
+  overflow: hidden;
+  isolation: isolate;
+}
+.hero-interface::before {
+  content: '';
+  position: absolute;
+  inset: 22px;
+  border: 1px solid rgba(205,180,122,0.18);
+  pointer-events: none;
+  z-index: 4;
+}
+.hero-interface::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: linear-gradient(180deg, transparent 48%, rgba(6,5,3,0.74));
+  pointer-events: none;
+}
+.orbit-line {
+  position: absolute;
+  inset: 12%;
+  border: 1px solid rgba(205,180,122,0.13);
+  border-radius: 50%;
+  transform: rotate(-16deg) scaleX(1.2);
+  z-index: 1;
+}
+.orbit-line.two { inset: 24% 8%; transform: rotate(18deg) scaleX(1.25); opacity: 0.55; }
+.browser-stack { position: absolute; inset: 0; z-index: 2; }
+.browser-shot {
+  position: absolute;
+  background: #080609;
+  border: 1px solid rgba(240,232,218,0.14);
+  box-shadow: 0 34px 90px rgba(0,0,0,0.52);
+  overflow: hidden;
+  transition: transform 0.9s var(--ease), filter 0.9s var(--ease), border-color 0.5s var(--ease);
+}
+.browser-shot::before {
+  content: '';
+  display: block;
+  height: 28px;
+  background:
+    radial-gradient(circle at 18px 14px, #E0AD7D 0 4px, transparent 5px),
+    radial-gradient(circle at 34px 14px, #B8893E 0 4px, transparent 5px),
+    radial-gradient(circle at 50px 14px, #6B6358 0 4px, transparent 5px),
+    linear-gradient(90deg, rgba(240,232,218,0.08), rgba(240,232,218,0.03));
+  border-bottom: 1px solid rgba(240,232,218,0.08);
+}
+.browser-shot img {
+  width: 100%;
+  height: calc(100% - 28px);
+  object-fit: cover;
+  filter: brightness(0.92) contrast(1.04) saturate(0.96);
+  transition: transform 0.9s var(--ease), filter 0.9s var(--ease);
+}
+.browser-shot.main { width: 78%; height: 58%; left: 8%; top: 10%; transform: rotate(-2deg); }
+.browser-shot.side { width: 46%; height: 34%; right: 4%; bottom: 10%; transform: rotate(4deg); }
+.browser-shot.tile { width: 38%; height: 26%; left: 14%; bottom: 8%; transform: rotate(-7deg); opacity: 0.95; }
+.hero-interface:hover .browser-shot.main { transform: rotate(0deg) translateY(-14px); border-color: rgba(205,180,122,0.45); }
+.hero-interface:hover .browser-shot.side { transform: rotate(1deg) translateY(-6px); }
+.hero-interface:hover .browser-shot.tile { transform: rotate(-3deg) translateY(-4px); }
+.hero-interface:hover .browser-shot img { filter: brightness(1) contrast(1.07) saturate(1.04); transform: scale(1.025); }
+.hero-caption {
+  position: absolute;
+  left: 28px; bottom: 24px;
+  z-index: 5;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(240,232,218,0.72);
+}
+.scroll-cue {
+  position: absolute;
+  bottom: 32px; left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--text-mute);
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: pulse 2.5s var(--ease) infinite;
+}
+.scroll-cue::after { content: ''; width: 1px; height: 32px; background: linear-gradient(to bottom, var(--copper), transparent); }
+@keyframes pulse { 0%,100%{opacity:.5;} 50%{opacity:1;} }
+
+/* ============================================
+   SHARED SECTIONS
+   ============================================ */
+.sey-section {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 110px var(--pad-x);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.sey-section.compact { padding-top: 78px; padding-bottom: 78px; }
+.section-title-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(280px, 0.72fr);
+  gap: clamp(36px, 6vw, 84px);
+  align-items: end;
+  margin-bottom: 54px;
+}
+.section-title-row h2,
+.section-copy h2 {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "SOFT" 34, "WONK" 1;
+  font-size: clamp(42px, 5.6vw, 86px);
+  line-height: 0.96;
+  letter-spacing: -0.048em;
+  margin-top: 24px;
+}
+.section-note,
+.section-copy p {
+  color: var(--text-dim);
+  font-size: 15px;
+  line-height: 1.75;
+  max-width: 64ch;
+}
+.section-copy p { margin-top: 22px; font-size: 16px; }
+.section-copy strong { color: var(--text); font-weight: 650; }
+.two-col {
+  display: grid;
+  grid-template-columns: 0.78fr 1.22fr;
+  gap: clamp(42px, 5.6vw, 88px);
+  align-items: start;
+}
+.card-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.story-card,
+.info-card,
+.decision-card,
+.tool-card,
+.flow-step,
+.lesson-card,
+.brand-card {
+  padding: 28px;
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(205,180,122,0.10), transparent 38%),
+    rgba(22,19,16,0.72);
+  min-height: 190px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.45s var(--ease), border-color 0.45s var(--ease), background 0.45s var(--ease);
+}
+.story-card::before,
+.info-card::before,
+.decision-card::before,
+.tool-card::before,
+.flow-step::before,
+.lesson-card::before,
+.brand-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 42px; height: 1px;
+  background: var(--gold);
+}
+.story-card:hover,
+.info-card:hover,
+.decision-card:hover,
+.tool-card:hover,
+.flow-step:hover,
+.lesson-card:hover,
+.brand-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(205,180,122,0.44);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(75,44,80,0.20), transparent 42%),
+    rgba(31,27,23,0.9);
+}
+.num {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 22px;
+}
+.story-card h3,
+.info-card h3,
+.decision-card h3,
+.tool-card h3,
+.flow-step h3,
+.lesson-card h3,
+.brand-card h3 {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+.story-card p,
+.info-card p,
+.decision-card p,
+.tool-card p,
+.flow-step p,
+.lesson-card p,
+.brand-card p {
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* ============================================
+   BRAND ORIGIN
+   ============================================ */
+.name-slab {
+  display: grid;
+  grid-template-columns: 0.94fr 1.06fr;
+  gap: 18px;
+  align-items: stretch;
+}
+.name-board {
+  min-height: 440px;
+  padding: clamp(32px, 5vw, 62px);
+  border: 1px solid var(--border-bold);
+  background:
+    radial-gradient(circle at 26% 30%, rgba(245,230,184,0.16), transparent 36%),
+    radial-gradient(circle at 78% 82%, rgba(75,44,80,0.28), transparent 42%),
+    linear-gradient(135deg, rgba(43,24,50,0.78), rgba(6,5,3,0.96));
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.name-board::before {
+  content: '';
+  position: absolute;
+  right: -90px; top: -90px;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  border: 1px solid rgba(205,180,122,0.22);
+  box-shadow: inset 22px -10px 0 rgba(205,180,122,0.13);
+}
+.name-word {
+  position: relative;
+  z-index: 2;
+  font-family: var(--f-display);
+  font-size: clamp(48px, 6.4vw, 92px);
+  line-height: 0.9;
+  letter-spacing: clamp(0.08em, 0.9vw, 0.13em);
+  text-transform: uppercase;
+  white-space: nowrap;
+  max-width: 100%;
+}
+.name-word span { color: var(--gold); }
+.name-equation {
+  display: grid;
+  gap: 14px;
+  margin-top: 36px;
+}
+.equation-row {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 20px;
+  padding: 18px 0;
+  border-top: 1px solid rgba(240,232,218,0.12);
+}
+.equation-row strong { font-family: var(--f-display); font-size: 28px; color: var(--gold); font-weight: 300; }
+.equation-row p { color: var(--text-dim); font-size: 14px; line-height: 1.65; }
+.name-stack { display: grid; gap: 18px; }
+.name-stack .brand-card { min-height: auto; }
+
+/* ============================================
+   SYSTEM / PALETTE
+   ============================================ */
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid var(--border);
+  background: var(--border);
+  margin-top: 46px;
+}
+.swatch {
+  min-height: 190px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+.swatch b { font-size: 14px; }
+.swatch span { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.08em; opacity: 0.78; margin-top: 4px; }
+.swatch.dark { background:#100A14; color:#F0E8DA; }
+.swatch.purple { background:#2B1832; color:#F0E8DA; }
+.swatch.plum { background:#4B2C50; color:#F0E8DA; }
+.swatch.gold { background:#CDB47A; color:#0B0907; }
+.swatch.moon { background:#F5E6B8; color:#0B0907; }
+.decision-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 34px; }
+
+/* ============================================
+   SITE MAP
+   ============================================ */
+.flow-line {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 44px;
+}
+.flow-step { min-height: 190px; }
+.flow-step h3 { font-size: 27px; }
+.scope-strip {
+  margin-top: 44px;
+  border: 1px solid var(--border-bold);
+  background:
+    radial-gradient(circle at 10% 10%, rgba(205,180,122,0.12), transparent 34%),
+    linear-gradient(135deg, rgba(31,27,23,0.84), rgba(6,5,3,0.94));
+  padding: clamp(28px, 4vw, 46px);
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: clamp(28px, 5vw, 70px);
+  align-items: center;
+}
+.scope-number {
+  font-family: var(--f-display);
+  font-size: clamp(92px, 14vw, 190px);
+  line-height: 0.82;
+  letter-spacing: -0.08em;
+  color: var(--gold);
+}
+.scope-copy h3 { font-family: var(--f-display); font-weight: 300; font-size: clamp(34px, 4vw, 58px); line-height: 0.98; letter-spacing: -0.04em; }
+.scope-copy p { margin-top: 18px; color: var(--text-dim); line-height: 1.7; max-width: 58ch; }
+
+/* ============================================
+   SCREEN PRESENTATION
+   ============================================ */
+.screen-showcase {
+  margin-top: 46px;
+  display: grid;
+  gap: 18px;
+}
+.image-frame {
+  position: relative;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  overflow: hidden;
+  isolation: isolate;
+}
+.image-frame::before {
+  content: attr(data-label);
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  z-index: 3;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text);
+  background: rgba(6,5,3,0.66);
+  border: 1px solid rgba(240,232,218,0.13);
+  backdrop-filter: blur(10px);
+  padding: 8px 10px;
+}
+.image-frame img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  filter: brightness(0.9) contrast(1.06) saturate(0.96);
+  transition: transform 0.95s var(--ease), filter 0.95s var(--ease);
+  cursor: zoom-in;
+}
+.image-frame:hover img { transform: scale(1.025); filter: brightness(1) contrast(1.08) saturate(1.03); }
+.image-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 0 0;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+.image-caption span:first-child { color: var(--copper); }
+.home-scroll {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.home-scroll .wide { grid-column: span 2; }
+.home-scroll img { aspect-ratio: 1920 / 947; }
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 46px;
+}
+.utility-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 18px;
+  margin-top: 46px;
+}
+.utility-stack { display: grid; gap: 18px; }
+
+/* ============================================
+   TOOLS / REFLECTION
+   ============================================ */
+.tool-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 44px; }
+.statement {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 110px var(--pad-x);
+  border-bottom: 1px solid var(--border);
+}
+.statement p {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "SOFT" 35, "WONK" 1;
+  font-size: clamp(36px, 5vw, 82px);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  max-width: 1120px;
+  color: var(--text);
+}
+.lesson-panel {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 46px;
+}
+.lesson-lead,
+.lesson-list { background: var(--surface); padding: clamp(32px, 5vw, 60px); }
+.lesson-lead h3 {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-size: clamp(40px, 5vw, 76px);
+  line-height: 0.96;
+  letter-spacing: -0.045em;
+  margin-top: 22px;
+}
+.lesson-lead p { color: var(--text-dim); margin-top: 22px; line-height: 1.75; }
+.lesson-list { display: grid; align-content: center; gap: 22px; }
+.lesson-row {
+  display: grid;
+  grid-template-columns: 74px 1fr;
+  gap: 24px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--border);
+}
+.lesson-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.lesson-row .mark { font-family: var(--f-display); font-size: 42px; color: var(--copper); line-height: 1; }
+.lesson-row h3 { font-family: var(--f-display); font-weight: 300; font-size: 24px; letter-spacing: -0.02em; margin-bottom: 6px; }
+.lesson-row p { color: var(--text-dim); font-size: 13px; line-height: 1.6; }
+
+.next-projects {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 70px var(--pad-x) 110px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.project-link {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--copper);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--copper);
+  transition: gap 0.4s var(--ease), color 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+.project-link:hover { gap: 20px; color: var(--gold); border-color: var(--gold); }
+.project-link.forward::after { content: '→'; }
+.project-link.back::before { content: '←'; }
+
+/* ============================================
+   LIGHTBOX
+   ============================================ */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(6,5,3,0.94);
+  backdrop-filter: blur(14px);
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.32s var(--ease);
+}
+.lightbox.open { opacity: 1; pointer-events: auto; }
+.lightbox img {
+  max-width: min(94vw, 1380px);
+  max-height: 88vh;
+  object-fit: contain;
+  border: 1px solid var(--border-bold);
+  box-shadow: 0 30px 90px rgba(0,0,0,0.55);
+}
+.lightbox button {
+  position: fixed;
+  top: 22px;
+  right: 22px;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--border-bold);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* ============================================
+   FOOTER — same FORGE structure
+   ============================================ */
+footer {
+  padding: 60px var(--pad-x) 40px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  border-top: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+}
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; padding-bottom: 60px; }
+.footer-brand {
+  font-family: var(--f-display);
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "WONK" 1;
+  font-size: clamp(56px, 8vw, 120px);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  color: var(--text);
+}
+.footer-brand .em { font-family: var(--f-italic); font-style: italic; color: var(--copper); font-weight: 400; }
+.footer-col h4 { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-mute); margin-bottom: 16px; }
+.footer-col a { display: block; color: var(--text-dim); text-decoration: none; font-size: 13px; padding: 4px 0; transition: color 0.3s var(--ease); }
+.footer-col a:hover { color: var(--copper); }
+.footer-bottom { padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-family: var(--f-mono); font-size: 11px; color: var(--text-mute); letter-spacing: 0.1em; }
+
+/* ============================================
+   ANIMATIONS + RESPONSIVE
+   ============================================ */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+.reveal { opacity: 0; animation: fadeUp 1.2s var(--ease) forwards; }
+.reveal.d1 { animation-delay: 0.1s; }
+.reveal.d2 { animation-delay: 0.25s; }
+.reveal.d3 { animation-delay: 0.4s; }
+.reveal.d4 { animation-delay: 0.55s; }
+.in-view { opacity: 0; transform: translateY(32px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+.in-view.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 1120px) {
+  .sey-hero,
+  .two-col,
+  .name-slab,
+  .scope-strip,
+  .lesson-panel,
+  .utility-grid {
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+  .sey-hero { padding-top: 126px; }
+  .hero-interface { min-height: 560px; }
+  .browser-shot.main { width: 82%; height: 54%; }
+  .flow-line { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tool-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .palette-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 960px) {
+  .section-title-row,
+  .home-scroll,
+  .category-grid,
+  .decision-grid,
+  .card-grid { grid-template-columns: 1fr; }
+  .home-scroll .wide { grid-column: span 1; }
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  .nav-links {
+    position: fixed;
+    top: 0; right: 0;
+    width: min(82vw, 360px);
+    height: 100vh;
+    padding: 110px 32px 40px;
+    background:
+      radial-gradient(circle at 80% 20%, rgba(199, 123, 61, 0.14), transparent 45%),
+      rgba(11, 9, 7, 0.96);
+    backdrop-filter: blur(18px);
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 26px;
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.45s var(--ease), opacity 0.45s var(--ease);
+    z-index: 110;
+  }
+  .nav-links.open { transform: translateX(0); opacity: 1; pointer-events: auto; }
+  .nav-links a { font-family: var(--f-display); font-size: 34px; line-height: 1; color: var(--text); }
+  .nav-links a::after { bottom: -8px; }
+  .hamburger { display: flex; }
+  .cta-resume { display: none; }
+}
+@media (max-width: 650px) {
+  :root { --pad-x: 20px; }
+  .sey-title { font-size: 58px; }
+  .sey-meta,
+  .flow-line,
+  .tool-grid,
+  .palette-grid { grid-template-columns: 1fr; }
+  .sey-section { padding: 78px var(--pad-x); }
+  .hero-interface { min-height: 430px; }
+  .browser-shot.main { width: 86%; height: 48%; left: 7%; top: 13%; }
+  .browser-shot.side { width: 62%; height: 28%; right: 5%; bottom: 12%; }
+  .browser-shot.tile { width: 52%; height: 22%; left: 8%; bottom: 8%; }
+  .name-word { font-size: 48px; letter-spacing: 0.12em; }
+  .equation-row,
+  .lesson-row { grid-template-columns: 1fr; gap: 10px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+
+<nav class="top" aria-label="Main navigation">
+  <a href="index.html" class="nav-logo">
+    <img src="logo-icon.svg" alt="Forge Studio Logo" class="logo-icon">
+    <span class="logo-text">FORGE STUDIO</span>
+  </a>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="index.html#capabilities">Capabilities</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="resume.html">Resume</a></li>
+  </ul>
+
+  <a href="files/Thinura-Anjana-Resume-2026.pdf" class="cta-resume" download="Thinura-Anjana-Resume-2026.pdf">Resume</a>
+
+  <button class="hamburger" id="navToggle" type="button" aria-label="Open navigation menu" aria-expanded="false">
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<main class="seylune-page" id="main-content">
+
+  <!-- ================ HERO ================ -->
+  <section class="sey-hero" id="top">
+    <div class="hero-copy">
+      <div class="eyebrow reveal d1">IAD Assignment / Frontend Website / 2026</div>
+      <h1 class="sey-title reveal d2">Seylune — <span class="em">luxury fashion frontend.</span></h1>
+      <p class="sey-lede reveal d3">
+        A fictional fashion e-commerce website created as an academic frontend assignment — built around Sri Lankan-inspired naming, moonlit luxury, curated browsing, and a full HTML/CSS/JavaScript shopping interface.
+      </p>
+
+      <div class="hero-tags reveal d4">
+        <span class="tag">Frontend</span>
+        <span class="tag">E-Commerce UI</span>
+        <span class="tag">Academic</span>
+        <span class="tag">HTML/CSS/JS</span>
+        <span class="tag">AI-Assisted</span>
+      </div>
+
+      <div class="sey-meta reveal d4">
+        <div class="item"><span class="lbl">Project Type</span><span class="val">Concept Brand Website</span></div>
+        <div class="item"><span class="lbl">Output</span><span class="val">Frontend Only</span></div>
+        <div class="item"><span class="lbl">Pages</span><span class="val">8 Planned / 12 Final</span></div>
+        <div class="item"><span class="lbl">Role</span><span class="val">Direction / Build / Polish</span></div>
+      </div>
+    </div>
+
+    <div class="hero-interface reveal d3">
+      <span class="orbit-line"></span>
+      <span class="orbit-line two"></span>
+      <div class="browser-stack">
+        <figure class="browser-shot main" data-lightbox="images/seylune/seylune-home-01.png"><img src="images/seylune/seylune-home-01.png" alt="Seylune homepage desktop screenshot"></figure>
+        <figure class="browser-shot side" data-lightbox="images/seylune/seylune-dresses.png"><img src="images/seylune/seylune-dresses.png" alt="Seylune dresses category screenshot"></figure>
+        <figure class="browser-shot tile" data-lightbox="images/seylune/seylune-cart.png"><img src="images/seylune/seylune-cart.png" alt="Seylune cart page screenshot"></figure>
+      </div>
+      <span class="hero-caption">Desktop frontend screenshots / concept e-commerce flow</span>
+    </div>
+
+    <div class="scroll-cue">Scroll</div>
+  </section>
+
+  <!-- ================ CONTEXT ================ -->
+  <section class="sey-section compact in-view">
+    <div class="two-col">
+      <div class="section-copy">
+        <div class="eyebrow">01 — Project Context</div>
+        <h2>A fictional brand, but a <span class="em">real frontend exercise.</span></h2>
+        <p>
+          The assignment required a company website, so the team had to choose a business direction and build a browser-accessible frontend. We chose fashion because we had already explored clothing through the Joey Clothing project, and that gave us a stronger starting point for product categories, visual direction, and customer flow.
+        </p>
+        <p>
+          Seylune is not an existing business. It is a concept brand created for the assignment. The final work focuses on frontend structure, page consistency, visual storytelling, and a complete browsing experience without backend checkout or database features.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        <div class="info-card"><div class="num">Truth 01</div><h3>Academic <span class="em">concept.</span></h3><p>The brand was invented for the IAD Web Development group assignment, not presented as a real client brand.</p></div>
+        <div class="info-card"><div class="num">Truth 02</div><h3>Frontend <span class="em">only.</span></h3><p>The required scope was HTML, CSS, JavaScript, responsive browser access, and interface interactions.</p></div>
+        <div class="info-card"><div class="num">Truth 03</div><h3>AI-assisted <span class="em">workflow.</span></h3><p>Claude was used for coding assistance, while Gemini / Nano Banana supported model imagery and visual assets.</p></div>
+        <div class="info-card"><div class="num">Truth 04</div><h3>Solo final <span class="em">push.</span></h3><p>Although assigned as a group project, the final page build, assembly, structure, and polish were handled under time pressure.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================ BRAND ORIGIN ================ -->
+  <section class="sey-section in-view" id="brand-origin">
+    <div class="section-title-row">
+      <div>
+        <div class="eyebrow">02 — Brand Origin</div>
+        <h2>The name needed to feel <span class="em">Sri Lankan, feminine, and premium.</span></h2>
+      </div>
+      <p class="section-note">The name became the foundation for the visual system. Instead of choosing a random fashion name, Seylune was built from meaning: a local hint, a moon reference, and a feminine luxury mood.</p>
+    </div>
+
+    <div class="name-slab">
+      <div class="name-board in-view">
+        <div>
+          <div class="eyebrow">Name System</div>
+          <div class="name-word">Sey<span>Lune</span></div>
+        </div>
+        <div class="name-equation">
+          <div class="equation-row"><strong>Sey</strong><p>A subtle hint toward Ceylon, giving the name a soft Sri Lankan connection without making it too literal.</p></div>
+          <div class="equation-row"><strong>Lune</strong><p>Moon-inspired language, used to create a feminine, elegant, and night-luxury feeling.</p></div>
+          <div class="equation-row"><strong>Result</strong><p>A fashion identity that feels calm, premium, and slightly mysterious — less like a normal store and more like a curated collection.</p></div>
+        </div>
+      </div>
+
+      <div class="name-stack">
+        <article class="brand-card in-view"><div class="num">Positioning</div><h3>Luxury for the modern muse.</h3><p>The brand voice was shaped around elegance, restraint, and a curated customer journey rather than loud discounts or crowded retail energy.</p></article>
+        <article class="brand-card in-view"><div class="num">Inspiration</div><h3>Joey helped choose the direction.</h3><p>After working with a clothing-related UX project, fashion felt like the strongest business category to turn into a full frontend website.</p></article>
+        <article class="brand-card in-view"><div class="num">Audience</div><h3>Premium female fashion customers.</h3><p>The website language, imagery, categories, and spacing were designed to feel polished and selective for a modern fashion buyer.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================ VISUAL SYSTEM ================ -->
+  <section class="sey-section in-view" id="visual-system">
+    <div class="section-copy">
+      <div class="eyebrow">03 — Visual Direction</div>
+      <h2>Most fashion sites go white. Seylune went <span class="em">dark, purple, and gold.</span></h2>
+      <p>
+        The goal was to avoid the usual clean-white fashion website look. Seylune uses dark purple, antique gold, moon tones, and premium interior-style model imagery to create a more editorial and limited feeling. The design avoids unnecessary animations so the brand feels calm instead of noisy.
+      </p>
+    </div>
+
+    <div class="palette-grid in-view">
+      <div class="swatch dark"><b>Deep Night</b><span>#100A14</span></div>
+      <div class="swatch purple"><b>Dark Purple</b><span>#2B1832</span></div>
+      <div class="swatch plum"><b>Plum Accent</b><span>#4B2C50</span></div>
+      <div class="swatch gold"><b>Antique Gold</b><span>#CDB47A</span></div>
+      <div class="swatch moon"><b>Moon Cream</b><span>#F5E6B8</span></div>
+    </div>
+
+    <div class="decision-grid">
+      <div class="decision-card"><div class="num">Decision 01</div><h3>Premium darkness</h3><p>The darker base separates Seylune from typical white fashion stores and helps the gold accents feel richer.</p></div>
+      <div class="decision-card"><div class="num">Decision 02</div><h3>Generated models</h3><p>Fashion model visuals were created with Gemini / Nano Banana, with an Asian model direction and premium interiors.</p></div>
+      <div class="decision-card"><div class="num">Decision 03</div><h3>No animation noise</h3><p>The page keeps motion controlled so the website feels more luxury editorial than playful or overloaded.</p></div>
+    </div>
+  </section>
+
+  <!-- ================ WEBSITE STRUCTURE ================ -->
+  <section class="sey-section in-view" id="structure">
+    <div class="section-title-row">
+      <div>
+        <div class="eyebrow">04 — Website Structure</div>
+        <h2>Started as eight pages. Finished as a <span class="em">twelve-page frontend.</span></h2>
+      </div>
+      <p class="section-note">The final structure grew beyond the minimum requirement. Instead of only building the core pages, the project added product detail pages and a search results page to make the browsing experience feel more complete.</p>
+    </div>
+
+    <div class="scope-strip in-view">
+      <div class="scope-number">12</div>
+      <div class="scope-copy">
+        <h3>Final frontend pages</h3>
+        <p>Home, New Arrivals, Dresses, Tops, Bottoms, Cart, Account, About, Search Results, and three product detail pages. The screenshots below show the main public-facing flow.</p>
+      </div>
+    </div>
+
+    <div class="flow-line">
+      <div class="flow-step"><div class="num">Route 01</div><h3>Enter</h3><p>The homepage introduces the brand mood, editorial visuals, and limited collection direction.</p></div>
+      <div class="flow-step"><div class="num">Route 02</div><h3>Browse</h3><p>Curated categories make the store feel selective instead of overwhelming the customer.</p></div>
+      <div class="flow-step"><div class="num">Route 03</div><h3>Inspect</h3><p>Product pages support closer decision-making through individual item presentation.</p></div>
+      <div class="flow-step"><div class="num">Route 04</div><h3>Support</h3><p>Search, cart, account, and about pages make the frontend feel like a complete website shell.</p></div>
+    </div>
+  </section>
+
+  <!-- ================ HOMEPAGE EXPERIENCE ================ -->
+  <section class="sey-section in-view" id="homepage">
+    <div class="section-title-row">
+      <div>
+        <div class="eyebrow">05 — Homepage Experience</div>
+        <h2>The home page works like a <span class="em">brand entrance.</span></h2>
+      </div>
+      <p class="section-note">The homepage was not treated as only a product grid. It introduces the brand, the moon-inspired identity, selected collections, and the premium fashion atmosphere before pushing users into categories.</p>
+    </div>
+
+    <div class="home-scroll">
+      <div class="wide">
+        <figure class="image-frame" data-label="Homepage / Hero" data-lightbox="images/seylune/seylune-home-01.png"><img src="images/seylune/seylune-home-01.png" alt="Seylune homepage hero screenshot"></figure>
+        <div class="image-caption"><span>Brand entrance</span><span>Hero / moon symbol / collection cards</span></div>
+      </div>
+      <div>
+        <figure class="image-frame" data-label="Homepage / Story" data-lightbox="images/seylune/seylune-home-02.png"><img loading="lazy" src="images/seylune/seylune-home-02.png" alt="Seylune homepage story section screenshot"></figure>
+        <div class="image-caption"><span>Story section</span><span>Luxury narrative</span></div>
+      </div>
+      <div>
+        <figure class="image-frame" data-label="Homepage / Collection" data-lightbox="images/seylune/seylune-home-03.png"><img loading="lazy" src="images/seylune/seylune-home-03.png" alt="Seylune homepage collection section screenshot"></figure>
+        <div class="image-caption"><span>Collection preview</span><span>Curated product mood</span></div>
+      </div>
+      <div>
+        <figure class="image-frame" data-label="Homepage / Editorial" data-lightbox="images/seylune/seylune-home-04.png"><img loading="lazy" src="images/seylune/seylune-home-04.png" alt="Seylune homepage editorial section screenshot"></figure>
+        <div class="image-caption"><span>Editorial block</span><span>Premium model imagery</span></div>
+      </div>
+      <div>
+        <figure class="image-frame" data-label="Homepage / Footer Flow" data-lightbox="images/seylune/seylune-home-05.png"><img loading="lazy" src="images/seylune/seylune-home-05.png" alt="Seylune homepage lower section screenshot"></figure>
+        <div class="image-caption"><span>Lower journey</span><span>Trust / navigation / closing</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================ CATEGORIES ================ -->
+  <section class="sey-section in-view" id="categories">
+    <div class="section-copy">
+      <div class="eyebrow">06 — Category Strategy</div>
+      <h2>Less categories made the store feel <span class="em">more curated.</span></h2>
+      <p>
+        Instead of adding too many categories, the website focuses on selected shopping paths: New Arrivals, Dresses, Tops, and Bottoms. This keeps the user journey simple and gives the brand a limited-collection feeling.
+      </p>
+    </div>
+
+    <div class="category-grid">
+      <div>
+        <figure class="image-frame" data-label="Category / New Arrivals" data-lightbox="images/seylune/seylune-new-arrivals-01.png"><img loading="lazy" src="images/seylune/seylune-new-arrivals-01.png" alt="Seylune New Arrivals page screenshot"></figure>
+        <div class="image-caption"><span>New Arrivals</span><span>Fresh collection entry</span></div>
+      </div>
+      <div>
+        <figure class="image-frame" data-label="Category / Dresses" data-lightbox="images/seylune/seylune-dresses.png"><img loading="lazy" src="images/seylune/seylune-dresses.png" alt="Seylune Dresses page screenshot"></figure>
+        <div class="image-caption"><span>Dresses</span><span>Statement silhouettes</span></div>
+      </div>
+      <div>
+        <figure class="image-frame" data-label="Category / Tops" data-lightbox="images/seylune/seylune-tops.png"><img loading="lazy" src="images/seylune/seylune-tops.png" alt="Seylune Tops page screenshot"></figure>
+        <div class="image-caption"><span>Tops</span><span>Curated essentials</span></div>
+      </div>
+      <div>
+        <figure class="image-frame" data-label="Category / Bottoms" data-lightbox="images/seylune/seylune-bottoms.png"><img loading="lazy" src="images/seylune/seylune-bottoms.png" alt="Seylune Bottoms page screenshot"></figure>
+        <div class="image-caption"><span>Bottoms</span><span>Limited fashion path</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================ UTILITY PAGES ================ -->
+  <section class="sey-section in-view" id="utility-pages">
+    <div class="section-title-row">
+      <div>
+        <div class="eyebrow">07 — Supporting Pages</div>
+        <h2>The small pages make the frontend feel <span class="em">complete.</span></h2>
+      </div>
+      <p class="section-note">Search, cart, and about pages were included so the website feels like a real customer-facing storefront, not only a set of visual landing pages.</p>
+    </div>
+
+    <div class="utility-grid">
+      <div>
+        <figure class="image-frame" data-label="Search Results" data-lightbox="images/seylune/seylune-search-results.png"><img loading="lazy" src="images/seylune/seylune-search-results.png" alt="Seylune search results page screenshot"></figure>
+        <div class="image-caption"><span>Search results</span><span>Discovery support</span></div>
+      </div>
+      <div class="utility-stack">
+        <div>
+          <figure class="image-frame" data-label="Cart" data-lightbox="images/seylune/seylune-cart.png"><img loading="lazy" src="images/seylune/seylune-cart.png" alt="Seylune cart page screenshot"></figure>
+          <div class="image-caption"><span>Cart page</span><span>Frontend purchase shell</span></div>
+        </div>
+        <div>
+          <figure class="image-frame" data-label="About" data-lightbox="images/seylune/seylune-about-01.png"><img loading="lazy" src="images/seylune/seylune-about-01.png" alt="Seylune About page screenshot"></figure>
+          <div class="image-caption"><span>About page</span><span>Brand explanation</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================ WORKFLOW ================ -->
+  <section class="sey-section in-view" id="workflow">
+    <div class="section-copy">
+      <div class="eyebrow">08 — Workflow & Tools</div>
+      <h2>AI was used as an assistant, not as a <span class="em">fake credit.</span></h2>
+      <p>
+        The build used modern AI-assisted workflow honestly: Claude AI Sonnet 4.6 Adaptive helped with frontend code generation and iteration, while Gemini / Nano Banana helped generate fashion model imagery. The creative direction, page decisions, final structure, edits, visual judgement, file assembly, and polishing were handled manually in Visual Studio Code.
+      </p>
+    </div>
+
+    <div class="tool-grid">
+      <div class="tool-card"><div class="num">Tool 01</div><h3>HTML</h3><p>Used for page structure, navigation, product sections, forms, and page content.</p></div>
+      <div class="tool-card"><div class="num">Tool 02</div><h3>CSS</h3><p>Used for the luxury theme, responsive layout, spacing, typography, product grids, and interactions.</p></div>
+      <div class="tool-card"><div class="num">Tool 03</div><h3>JavaScript</h3><p>Used for frontend interactions required by the assignment and shopping-interface behavior.</p></div>
+      <div class="tool-card"><div class="num">Tool 04</div><h3>AI workflow</h3><p>Claude supported code iteration; Gemini / Nano Banana supported model and fashion visual generation.</p></div>
+    </div>
+  </section>
+
+  <!-- ================ STATEMENT ================ -->
+  <section class="statement in-view">
+    <p>
+      Seylune became more than a class website. It became a test of how fast a concept brand can turn into a <span class="em">structured, consistent, and presentation-ready frontend experience.</span>
+    </p>
+  </section>
+
+  <!-- ================ REFLECTION ================ -->
+  <section class="sey-section in-view" id="reflection">
+    <div class="lesson-panel">
+      <div class="lesson-lead">
+        <div class="eyebrow">09 — Reflection</div>
+        <h3>What the project taught me.</h3>
+        <p>Seylune was built under time pressure, so the strongest learning was not only frontend coding. It was learning how to make quick decisions, keep visual consistency, use AI responsibly, and still explain the work honestly in a portfolio.</p>
+      </div>
+      <div class="lesson-list">
+        <div class="lesson-row"><div class="mark">01</div><div><h3>Concept matters.</h3><p>A fictional brand becomes stronger when the name, color, categories, imagery, and page flow all follow one idea.</p></div></div>
+        <div class="lesson-row"><div class="mark">02</div><div><h3>Limited can feel premium.</h3><p>Reducing categories helped the shopping experience feel curated instead of crowded.</p></div></div>
+        <div class="lesson-row"><div class="mark">03</div><div><h3>AI needs direction.</h3><p>The tools were useful only because the project had a clear mood, page plan, and final editing process.</p></div></div>
+        <div class="lesson-row"><div class="mark">04</div><div><h3>Next step.</h3><p>A future version could add backend cart logic, checkout, product filtering, accessibility testing, and a real hosted demo.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================ NEXT LINKS ================ -->
+  <section class="next-projects">
+    <a href="index.html#work" class="project-link back">Back to selected work</a>
+    <a href="avengers-process.html" class="project-link forward">Avengers: Doomsday</a>
+  </section>
+
+</main>
+
+<!-- ================ FOOTER ================ -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">FORGE Studio</div>
+    <div class="footer-col">
+      <h4>Studio</h4>
+      <a href="index.html#about">About</a>
+      <a href="index.html#work">Selected work</a>
+      <a href="index.html#capabilities">Capabilities</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Elsewhere</h4>
+      <a href="https://www.behance.net/thinuraanjana3" aria-label="Behance">Behance</a>
+      <a href="https://www.instagram.com/its_anjana03/" aria-label="Instagram">Instagram</a>
+      <a href="https://www.linkedin.com/in/thinura-anjana-7a4060306?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn">LinkedIn</a>
+    </div>
+    <div class="footer-col">
+      <h4>Get in touch</h4>
+      <a href="mailto:anjanathinura07@gmail.com">anjanathinura07@gmail.com</a>
+      <a href="tel:+94707771405">+94 70 777 1405</a>
+      <span style="display:block;color:var(--text-dim);font-size:13px;padding:4px 0;">Moratuwa, Sri Lanka</span>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 FORGE STUDIO — THINURA ANJANA</span>
+    <span>BUILT IN SRI LANKA</span>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button type="button" id="lightboxClose" aria-label="Close image preview">×</button>
+  <img src="" alt="Expanded Seylune website screenshot" id="lightboxImg">
+</div>
+
+<script>
+// Scroll-triggered reveals
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.in-view, .info-card, .decision-card, .tool-card, .flow-step, .brand-card, .image-frame, .story-card')
+  .forEach(el => { el.classList.add('in-view'); io.observe(el); });
+
+// Mobile navigation
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+
+if (navToggle && navLinks) {
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.classList.toggle('open', isOpen);
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+    navToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+  });
+
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Open navigation menu');
+    });
+  });
+}
+
+// Hero browser depth movement
+const hero = document.querySelector('.sey-hero');
+const heroInterface = document.querySelector('.hero-interface');
+
+if (hero && heroInterface) {
+  hero.addEventListener('mousemove', (e) => {
+    const rect = hero.getBoundingClientRect();
+    const nx = (e.clientX - rect.left) / rect.width - 0.5;
+    const ny = (e.clientY - rect.top) / rect.height - 0.5;
+    heroInterface.style.transform = `rotateY(${nx * -4}deg) rotateX(${ny * 3}deg) translateY(-2px)`;
+  });
+
+  hero.addEventListener('mouseleave', () => {
+    heroInterface.style.transform = 'rotateY(0deg) rotateX(0deg) translateY(0)';
+  });
+}
+
+// Lightbox for screenshots
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxClose = document.getElementById('lightboxClose');
+
+document.querySelectorAll('[data-lightbox]').forEach(item => {
+  item.addEventListener('click', () => {
+    const src = item.getAttribute('data-lightbox');
+    const img = item.querySelector('img');
+    if (!src || !lightbox || !lightboxImg) return;
+    lightboxImg.src = src;
+    lightboxImg.alt = img ? img.alt : 'Expanded Seylune website screenshot';
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+  });
+});
+
+function closeLightbox() {
+  if (!lightbox) return;
+  lightbox.classList.remove('open');
+  lightbox.setAttribute('aria-hidden', 'true');
+  if (lightboxImg) lightboxImg.src = '';
+}
+
+if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+if (lightbox) lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>
