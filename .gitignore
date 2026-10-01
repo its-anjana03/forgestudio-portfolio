@@ -1,0 +1,9 @@
+# Editor and local tooling
+.vscode/
+.claude/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Release archives
+*.zip

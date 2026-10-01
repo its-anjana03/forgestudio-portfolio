@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cooled down · FORGE Studio</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0A0908">
+<link rel="icon" type="image/svg+xml" href="/assets/img/forge-mark.svg">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap">
+<link rel="stylesheet" href="/assets/css/forge.css">
+<style>
+  .nf { min-height: 100vh; min-height: 100svh; display: grid; place-items: center; padding: 48px var(--pad); text-align: center; position: relative; overflow: hidden; }
+  .nf::before { content: ''; position: absolute; width: 80vmax; height: 80vmax; left: 50%; top: 40%; transform: translate(-50%, -50%); border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 138, 0, .14), transparent 62%); pointer-events: none; }
+  .nf-inner { position: relative; display: flex; flex-direction: column; align-items: center; gap: 24px; max-width: 640px; }
+  .nf-mark { width: min(46vw, 240px); height: auto; filter: grayscale(1) brightness(.55); transition: filter 1.2s var(--ease-out); }
+  .nf:hover .nf-mark, .nf-mark:focus { filter: none; }
+  .nf .num { font-size: clamp(88px, 18vw, 200px); font-weight: 600; letter-spacing: -0.06em; line-height: .85; color: var(--steel-2); }
+  .nf h1 { font-size: clamp(30px, 4.4vw, 56px); font-weight: 600; letter-spacing: -0.04em; line-height: 1; }
+  .nf p { color: var(--dim); font-size: 17px; }
+  .nf .ignite-actions { justify-content: center; }
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<main class="nf">
+  <div class="nf-inner">
+    <svg class="nf-mark" viewBox="0 0 2962 2488" aria-hidden="true">
+      <defs><linearGradient id="g" gradientUnits="userSpaceOnUse" x1="2750" y1="80" x2="250" y2="2420"><stop offset="0" stop-color="#FFE7A6"/><stop offset=".32" stop-color="#FFC247"/><stop offset=".62" stop-color="#FF8A00"/><stop offset=".86" stop-color="#7A3510"/><stop offset="1" stop-color="#2B2B2B"/></linearGradient></defs>
+      <path fill="url(#g)" d="M2962,267L2499,0L1038,392L771,854L1234,1121L504,1317L0,2190L516,2488L1162,2314L1430,1851L2160,1656L2427,1193L1964,925L2695,729Z"/>
+    </svg>
+    <span class="num">404</span>
+    <h1>This page cooled down.</h1>
+    <p>Whatever was forged here has gone cold, or the link was mistyped. Hover the mark to heat it back up, then head back to the studio.</p>
+    <div class="ignite-actions">
+      <a class="btn" href="/">Back to the studio <span class="arr" aria-hidden="true">→</span></a>
+      <a class="btn ghost" href="/#archive">See the posters</a>
+    </div>
+  </div>
+</main>
+</body>
+</html>
