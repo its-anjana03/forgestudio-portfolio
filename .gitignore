@@ -7,3 +7,12 @@ desktop.ini
 
 # Release archives
 *.zip
+
+# Image tool dependencies and original exports (only the compressed WebP files belong in the repo)
+tools/node_modules/
+_originals/
+# Original exports kept inside foundry/ for convenience: only foundry/img is published
+/foundry/*/
+!/foundry/img/
+*.psd
+*.ai

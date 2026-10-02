@@ -1,0 +1,11 @@
+{
+  "name": "forge-tools",
+  "private": true,
+  "description": "Local helpers for maintaining the FORGE Studio site. Not used by the live site.",
+  "scripts": {
+    "foundry-images": "node foundry-images.js"
+  },
+  "dependencies": {
+    "sharp": "^0.33.5"
+  }
+}

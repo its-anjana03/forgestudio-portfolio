@@ -18,6 +18,12 @@ A static site (plain HTML, CSS and JavaScript, no build step) hosted on GitHub P
 ├── rolex-design.html                  Case 05 · Rolex Day-Date 40
 ├── forge-identity.html                Case 06 · FORGE Studio identity
 ├── 404.html                           Branded "page not found"
+├── foundry/                           The Foundry: the full collection on one endless wall (see below)
+│   ├── index.html, foundry.css, foundry.js
+│   ├── data.js                        Every work in the Foundry, in one list
+│   ├── img/<part>/<id>/               1600px WebP for the premiere, 400px wall versions in thumb/
+│   └── <source folders>/              Your original exports (kept out of git and the zip)
+├── tools/foundry-images.js            Prepares new artwork for the Foundry (local only)
 ├── assets/
 │   ├── css/forge.css                  The whole design system (one stylesheet)
 │   ├── js/forge.js                    All motion and interaction (one script)
@@ -55,11 +61,67 @@ every page shows its full content as a static layout.
 ## Features
 
 - Forge hero: the mark welds itself, heats, takes three hammer strikes and opens onto the poster archive
+- Live furnace backdrop behind the mark: real-time WebGL fire and lit smoke, rising embers, and the mark's own
+  30° construction grid with gold energy pulses. It flares on every strike and dies down as the mark breaks open
+  (falls back to a still glow without WebGL, and to a static gradient with reduced motion)
 - Optional anvil sound (synthesised in the browser, off by default, remembered per visitor)
 - Shareable poster links, e.g. `https://forgestudio.web.lk/#poster-leo`
 - Commission brief builder that composes a ready-to-send email (nothing is stored)
 - Copy-email buttons, page transitions, hidden-details hunt, before/after slider
 - Social share cards for every page
+
+## The Foundry (`/foundry/`)
+
+The portfolio shows the best work; the Foundry keeps everything, in two views (Instrument Serif and Instrument Sans):
+
+- **The wall** (`#/`): every piece on one endless wall that drifts slowly and can be dragged in any direction
+  (or moved with the scroll wheel, a trackpad or the arrow keys). Film posters, concept posters and each campaign's
+  key art are hung in the middle, where visitors look first. Hovering lifts a piece and dims the rest; the filter
+  dock narrows the wall to Film (`#/film`), Events (`#/events`), Concepts (`#/concepts`) or Social (`#/social`).
+- **The premiere** (`#/<part>/<collection>`): choosing a piece flies it from the wall to the centre of the screen.
+  The whole screen takes on the colours of the work, the collection's name stands behind it in giant outlined
+  letters, and a filmstrip, the arrows, a swipe or the scroll wheel step through the collection and on into the
+  next one. Tap the work to look closer. Closing flies it back to its place on the wall.
+- **The index** (top right): every film, campaign and collection by name, with a preview on hover, plus the note
+  on tribute work.
+
+A short title opens the first visit of each session. With reduced motion there is no drift, flight or tilt;
+everything simply fades.
+
+- **Hidden on purpose:** it is not in the navigation. The only doors are inside the archive on the home page:
+  the line under "The archive." once the archive opens, and "More in the Foundry" in the poster viewer, which
+  goes straight to that film.
+- **Shareable:** every collection and piece has its own link, e.g. `/foundry/#/film/leo` or
+  `/foundry/#/film/avengers?p=avengers-alt-02`. Older links (`#/cinema/...`, `#/movies/...`, `#/campaigns/...`,
+  `#/studio`, `#/harbour`, `#/vault`) still land in the right place.
+
+### Waiting to be hung
+
+More posters for Leo, Jana Nayagan, LIK, Kalki 2898 AD, Indian 2 and PS-1, and more concept posters, are on
+another computer. Their premieres already say "More posters on the way". When the files are back, drop them
+into the matching source folder (`foundry/Leo`, `foundry/Jananayagan`, `foundry/LIK`, `foundry/Kalki 2898 AD`,
+`foundry/Indian 2`, `foundry/PS 1`, `foundry/30 Years of Vijayism` or a new concepts folder), ideally in
+subfolders named after the groups (Main, Character, Alternate, Process), and process them as below.
+Once a series is complete, remove its `more: true` in `foundry/data.js`.
+
+### Adding work (one command, one paste)
+
+One-time setup: install [Node.js](https://nodejs.org), then run `npm install` inside the `tools` folder.
+
+1. Export the artwork to a folder (JPG, PNG, WebP or TIFF, any size). Folders inside `foundry/` are ignored by git.
+2. From the repo root, run the tool with the image folder, the film or campaign id, and a name prefix:
+
+   ```bash
+   node tools/foundry-images.js "D:/Exports/Leo/Characters" movies/leo leo-character
+   ```
+
+   It writes `leo-character-01.webp`, `-02`... in two sizes (1600px for the premiere, 400px for the wall),
+   continues the numbering if you add more later, and prints lines to paste (size and colour tone included).
+3. Paste those lines into `foundry/data.js` under the right film and group, and write the `alt` text.
+
+Naming: `<film>-main-NN`, `<film>-character-NN`, `<film>-alt-NN`, `<film>-process-NN`,
+`<campaign>-poster-NN`, `<campaign>-social-NN` and so on. The group name becomes each poster's label
+("Character poster"), and the wall, filters, index and counts update by themselves.
 
 ## Analytics (optional)
 
@@ -87,7 +149,8 @@ npx serve .
 
 ## Updating content
 
-- **New poster:** add a 1200px WebP to `assets/img/` and a 640px one to `assets/img/thumb/`, add a `<button class="poster" data-lb="N">` to the archive wall in `index.html`, and add `['Title', year, 'file-name']` to the `POSTERS` list at the top of `assets/js/forge.js`.
+- **New work in the Foundry:** see "Adding work" above.
+- **New poster in the home archive:** add a 1200px WebP to `assets/img/` and a 640px one to `assets/img/thumb/`, add a `<button class="poster" data-lb="N">` to the archive wall in `index.html`, and add `['Title', year, 'file-name']` to the `POSTERS` list at the top of `assets/js/forge.js`.
 - **Text:** edit the HTML directly. Every page uses the same shared stylesheet and script.
 - **Resume PDF:** replace `files/Thinura-Anjana-Resume-2026.pdf` (keep the same file name).
 

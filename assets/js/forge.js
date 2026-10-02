@@ -127,6 +127,7 @@
   let openPosterBySlug = null;
   if (lb) {
     const img = $('.lb-stage img', lb), title = $('.lb-title', lb), count = $('.lb-count', lb), shareBtn = $('.lb-share', lb);
+    const foundryLink = $('.lb-foundry', lb); // archive posters: a quiet door to that film's full wall in the Foundry
     const isArchive = !!$('.poster[data-lb]');
     // Home page: the poster archive. Case pages: every [data-zoom] image, in page order.
     const zooms = $$('[data-zoom]');
@@ -145,6 +146,13 @@
       count.textContent = `${String(idx + 1).padStart(2, '0')} / ${String(items.length).padStart(2, '0')}`;
       // Every archive poster has its own address, so it can be shared directly.
       if (it.slug) history.replaceState(null, '', `#poster-${it.slug}`);
+      if (foundryLink) {
+        foundryLink.hidden = !it.slug;
+        if (it.slug) {
+          foundryLink.href = `foundry/#/cinema/${it.slug}`;
+          foundryLink.setAttribute('aria-label', `See every ${it.title.split(' · ')[0]} poster in the Foundry`);
+        }
+      }
     };
     const open = (i, from) => {
       opener = from; show(i);
@@ -187,6 +195,8 @@
     $('.lb-prev', lb).addEventListener('click', () => step(-1));
     $('.lb-next', lb).addEventListener('click', () => step(1));
     $('.lb-close', lb).addEventListener('click', () => lb.close());
+    // Close first so the page transition is visible (a modal dialog sits above everything).
+    if (foundryLink) foundryLink.addEventListener('click', () => { track('foundry', items[idx].title); lb.close(); });
     lb.addEventListener('click', (e) => { if (e.target === lb || e.target.classList.contains('lb-stage')) lb.close(); });
     lb.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight') step(1); if (e.key === 'ArrowLeft') step(-1); });
     // Swipe left / right on touch screens
@@ -462,6 +472,7 @@
 
     const L = { W: 0, H: 0, k: 1, tx: 0, ty: 0, zMax: 12, ox: 0, oy: 0, s: 1 };
     const zoom = { p: 0 }, heat = { v: 0 }, haze = { v: 0 };
+    let bgSync = null; // set by the furnace backdrop: keeps its hole identical to the veil's
 
     const applyZoom = () => {
       const { W, H, k, tx, ty, zMax } = L;
@@ -474,6 +485,7 @@
       const t = `translate(${L.ox} ${L.oy}) scale(${s})`;
       markG.setAttribute('transform', t);
       holeG.setAttribute('transform', t);
+      if (bgSync) bgSync();
     };
     const applyHaze = () => {
       if (!hazeMap || small) return;
@@ -595,10 +607,294 @@
       });
     }
 
+    /* --- Furnace backdrop: real-time fire and smoke (WebGL), plus the mark's construction grid,
+           energy pulses and rising embers (2D). Sits above the veil and below the mark. --- */
+    const bg = $('.ignite-bg', hero);
+    const F = { amp: 0, flare: 0, t: 0, live: true }; // amp: intro fade-in, flare: strike flash that decays
+    let bgStrike = () => {}, bgRun = () => {}, bgCanClip = false;
+    if (bg) {
+      const fireCv = $('.bg-fire', bg), fx = $('.bg-fx', bg), fctx = fx.getContext('2d');
+      const PATH_TEST = 'path(evenodd, "M0 0H1V1Z")';
+      bgCanClip = !!(window.CSS && CSS.supports && (CSS.supports('clip-path', PATH_TEST) || CSS.supports('-webkit-clip-path', PATH_TEST)));
+
+      // At the breach the backdrop gets the exact mark-shaped hole the veil has, so the archive shows through it.
+      let clipped = false;
+      bgSync = () => {
+        if (holeG.style.visibility !== 'visible' || !bgCanClip) {
+          if (clipped) { bg.style.clipPath = ''; bg.style.webkitClipPath = ''; clipped = false; }
+          return;
+        }
+        const { W, H, ox, oy, s } = L;
+        const pts = OUTLINE.map(([x, y]) => `${(ox + x * s).toFixed(2)} ${(oy + y * s).toFixed(2)}`).join('L');
+        const v = `path(evenodd, "M-4 -4H${W + 4}V${H + 4}H-4ZM${pts}Z")`;
+        bg.style.clipPath = v; bg.style.webkitClipPath = v; clipped = true;
+      };
+
+      /* WebGL fire: two layers of rising, domain-warped flames, lit smoke and a breathing furnace glow */
+      const FS = `
+        #ifdef GL_FRAGMENT_PRECISION_HIGH
+        precision highp float;
+        #else
+        precision mediump float;
+        #endif
+        uniform vec2 uRes; uniform float uTime, uHeat, uFlare, uAmp; uniform vec2 uPtr;
+        float hash(vec2 p) { vec3 p3 = fract(vec3(p.xyx) * 0.1031); p3 += dot(p3, p3.yzx + 33.33); return fract((p3.x + p3.y) * p3.z); }
+        float noise(vec2 p) {
+          vec2 i = floor(p), f = fract(p), u = f * f * (3.0 - 2.0 * f);
+          return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), u.x), mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x), u.y);
+        }
+        const mat2 ROT = mat2(1.6, 1.2, -1.2, 1.6);
+        float fbm(vec2 p) { float v = 0.0, a = 0.5; for (int i = 0; i < 5; i++) { v += a * noise(p); p = ROT * p; a *= 0.5; } return v; }
+        float fbm3(vec2 p) { float v = 0.0, a = 0.5; for (int i = 0; i < 3; i++) { v += a * noise(p); p = ROT * p; a *= 0.5; } return v * 1.1428; }
+        void main() {
+          vec2 uv = gl_FragCoord.xy / uRes;
+          float t = uTime, asp = uRes.x / uRes.y;
+          vec2 p = vec2((uv.x - 0.5) * asp, uv.y) + uPtr * vec2(0.025, 0.012);
+          vec3 ink = vec3(0.039, 0.035, 0.031);
+          float cx = uv.x - 0.5;
+          float breathe = 0.93 + 0.07 * sin(t * 1.05);
+          float energy = (0.86 + 0.24 * uHeat) * (1.0 + 0.35 * uFlare) * breathe;
+          float H = mix(0.24, 0.34, smoothstep(0.6, 1.6, asp)); // flame height: lower on portrait screens
+          // heat shimmer in the air above the fire
+          p.x += (noise(p * vec2(9.0, 5.0) + vec2(0.0, -t * 2.6)) - 0.5) * (0.005 + 0.008 * uHeat) * smoothstep(0.7, 0.0, uv.y);
+
+          vec3 col = ink;
+          // furnace light hanging in the air
+          float g = exp(-uv.y * 3.2) * (0.45 + 0.55 * exp(-cx * cx * 4.0));
+          col += vec3(0.62, 0.15, 0.02) * g * (0.3 + 0.2 * uHeat + 0.5 * uFlare) * breathe;
+
+          // smoke, lit from below
+          float dens = 0.0;
+          if (uv.y < 0.9) {
+            vec2 sq = vec2(p.x * 1.3, uv.y * 1.6) + vec2(t * 0.025, -t * 0.07);
+            vec2 sw = vec2(fbm3(sq * 1.1 + vec2(0.0, t * 0.035)), fbm3(sq * 1.1 + vec2(3.3, 8.1 - t * 0.02)));
+            float sm = fbm(sq * 1.3 + (sw - 0.5) * 2.4);
+            float side = 0.45 + 0.55 * smoothstep(0.04, 0.4, abs(cx));
+            dens = smoothstep(0.36, 0.74, sm) * smoothstep(0.9, 0.08, uv.y) * side;
+            float lit = clamp(exp(-uv.y * 1.8) * (0.95 + 0.35 * uHeat + 0.8 * uFlare) * breathe * (0.55 + 0.6 * sm), 0.0, 1.0);
+            col = mix(col, mix(vec3(0.055, 0.04, 0.035), vec3(0.74, 0.26, 0.07), lit), dens * 0.85);
+          }
+
+          // flames: turbulence rising off a bed of shifting hot spots, licking sideways as it climbs
+          if (uv.y < H * 3.0) {
+            float yh = uv.y / H;
+            // hottest in the middle, between the headline and the paragraph; cooler under the copy
+            float fuel = min(1.6, (0.3 + 0.78 * exp(-cx * cx * 9.0)) * (0.6 + 0.8 * fbm3(vec2(p.x * 2.2 + t * 0.04, t * 0.06))) * energy);
+            vec2 q = vec2(p.x * 3.0, uv.y * 2.0 - t * 1.25);
+            q.x += (fbm3(vec2(p.x * 1.4, uv.y * 1.1 - t * 0.55)) - 0.5) * 1.4 * min(yh, 1.0);
+            float n = fbm(q);
+            float d = fbm(q * 2.3 + vec2(3.1, -t * 0.8));
+            float c = fuel - yh * 0.95 + (n - 0.5) * 1.5 * (0.35 + min(yh, 1.0)) + (d - 0.5) * 0.45;
+            c = 1.0 - exp(-max(c, 0.0) * 1.9); // soft shoulder: the hottest cores keep their detail instead of clipping flat
+            col += vec3(1.5 * c, 1.5 * c * c * c, c * c * c * c * c * c) * (1.0 - 0.3 * dens) * 0.95;
+            // bloom: the hot spots light the air and smoke above them
+            col += vec3(0.55, 0.14, 0.015) * exp(-yh * 1.4) * fuel * 0.32;
+          }
+          col = mix(col, ink, smoothstep(0.6, 1.0, uv.y) * 0.6);
+          // keep the hero copy legible: calmer light behind the headline (left) and paragraph (right) on wide screens
+          float copyZone = smoothstep(0.14, 0.34, abs(cx)) * smoothstep(0.4, 0.16, uv.y) * smoothstep(0.0, 0.1, uv.y) * smoothstep(1.0, 1.4, asp);
+          col *= 1.0 - 0.38 * copyZone * (1.0 - uHeat);
+          col = mix(ink, col, uAmp);
+          col += (hash(gl_FragCoord.xy + fract(t) * 100.0) - 0.5) / 255.0;
+          gl_FragColor = vec4(col, 1.0);
+        }`;
+      let gl = null, U = {};
+      try {
+        gl = fireCv.getContext('webgl', { alpha: false, antialias: false, depth: false, stencil: false, powerPreference: 'low-power' });
+        if (gl) {
+          const sh = (type, src) => {
+            const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+            if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s));
+            return s;
+          };
+          const prog = gl.createProgram();
+          gl.attachShader(prog, sh(gl.VERTEX_SHADER, 'attribute vec2 a; void main() { gl_Position = vec4(a, 0.0, 1.0); }'));
+          gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS));
+          gl.linkProgram(prog);
+          if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
+          gl.useProgram(prog);
+          gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+          gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+          const loc = gl.getAttribLocation(prog, 'a');
+          gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+          ['uRes', 'uTime', 'uHeat', 'uFlare', 'uAmp', 'uPtr'].forEach((n) => { U[n] = gl.getUniformLocation(prog, n); });
+        }
+      } catch (err) { gl = null; }
+      const noGL = () => { gl = null; bg.classList.add('no-gl'); };
+      if (!gl) noGL();
+      fireCv.addEventListener('webglcontextlost', (e) => { e.preventDefault(); noGL(); });
+
+      const bgResize = () => {
+        const W = hero.clientWidth, H = hero.clientHeight, dpr = window.devicePixelRatio || 1;
+        // Fire is soft, so it renders at reduced resolution; the grid and embers stay crisp.
+        const glS = Math.min(small ? 0.55 : 0.5, 1000 / Math.max(W, 1)) * Math.min(dpr, small ? 1.5 : 1.25);
+        fireCv.width = Math.max(2, Math.round(W * glS)); fireCv.height = Math.max(2, Math.round(H * glS));
+        if (gl) gl.viewport(0, 0, fireCv.width, fireCv.height);
+        const fd = Math.min(dpr, small ? 1.5 : 2);
+        fx.width = Math.round(W * fd); fx.height = Math.round(H * fd);
+        fctx.setTransform(fd, 0, 0, fd, 0, 0);
+      };
+      bgResize();
+      ScrollTrigger.addEventListener('refreshInit', bgResize);
+
+      /* The mark is drawn on a 534-unit square lattice turned 30°; its long edges are the lattice diagonals. */
+      const STEP = 534;
+      const FAM = [{ d: [0.8660, 0.5], n: [-0.5, 0.8660], phase: 354 }, { d: [-0.5, 0.8660], n: [0.8660, 0.5], phase: 27 }];
+      const DIAG = { d: [0.9659, -0.2588], n: [0.2588, 0.9659], offs: [647, 1402, 2159, 2537] };
+      const screenLine = (path, d, n, c, D) => {
+        const off = c * L.s + L.ox * n[0] + L.oy * n[1], px = n[0] * off, py = n[1] * off;
+        path.moveTo(px - d[0] * D, py - d[1] * D); path.lineTo(px + d[0] * D, py + d[1] * D);
+      };
+      const gridPaths = () => {
+        const { W, H, ox, oy, s } = L, D = W + H, lat = new Path2D(), dia = new Path2D();
+        FAM.forEach(({ d, n, phase }) => {
+          const base = phase * s + ox * n[0] + oy * n[1], step = STEP * s;
+          const c = [0, W * n[0], H * n[1], W * n[0] + H * n[1]];
+          const k0 = Math.ceil((Math.min(...c) - base) / step), k1 = Math.floor((Math.max(...c) - base) / step);
+          for (let k = k0; k <= k1; k++) screenLine(lat, d, n, phase + k * STEP, D);
+        });
+        DIAG.offs.forEach((c) => screenLine(dia, DIAG.d, DIAG.n, c, D));
+        return [lat, dia];
+      };
+
+      const sprite = document.createElement('canvas');
+      sprite.width = sprite.height = 64;
+      {
+        const g = sprite.getContext('2d'), r = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+        r.addColorStop(0, 'rgba(255, 240, 200, 1)'); r.addColorStop(0.18, 'rgba(255, 196, 90, .75)');
+        r.addColorStop(0.45, 'rgba(255, 128, 10, .22)'); r.addColorStop(1, 'rgba(255, 100, 0, 0)');
+        g.fillStyle = r; g.fillRect(0, 0, 64, 64);
+      }
+
+      // Energy pulses run along the lattice into the mark, as if feeding it.
+      const pulses = [], ripples = [];
+      let pulseWait = 0.6;
+      const newPulse = () => {
+        let d, n, c;
+        if (Math.random() < 0.3) { ({ d, n } = DIAG); c = DIAG.offs[(Math.random() * DIAG.offs.length) | 0]; }
+        else {
+          const f = FAM[(Math.random() * 2) | 0]; ({ d, n } = f);
+          const k = Math.round((PIVOT[0] * n[0] + PIVOT[1] * n[1] - f.phase) / STEP) + ((Math.random() * 5) | 0) - 2;
+          c = f.phase + k * STEP;
+        }
+        const mid = PIVOT[0] * d[0] + PIVOT[1] * d[1], dir = Math.random() < 0.5 ? 1 : -1;
+        return { d, n, c, pos: mid + dir * (3600 + Math.random() * 1800), end: mid + dir * 1000, dir: -dir,
+          speed: 240 + Math.random() * 260, tail: 420 + Math.random() * 380, age: 0 };
+      };
+
+      // Rising embers: a few out-of-focus ones close to camera, most small and streaking.
+      const EMB = small ? 60 : 150, embers = [];
+      const spawn = (fresh) => {
+        const z = Math.random(), bokeh = z > 0.93, W = L.W || innerWidth, H = L.H || innerHeight;
+        const u = Math.random() < 0.6 ? 0.5 + ((Math.random() + Math.random() + Math.random()) / 3 - 0.5) * 1.7 : Math.random();
+        const max = 2.5 + Math.random() * 4;
+        return { x: u * W, y: fresh ? Math.random() * H : H + 10 + Math.random() * 60, z, bokeh,
+          vy: (50 + Math.random() * 120) * (0.45 + z * 0.9), drift: (Math.random() - 0.5) * 30, seed: Math.random() * 100,
+          size: bokeh ? 7 + Math.random() * 12 : 0.7 + z * 1.9, max, age: fresh ? Math.random() * max : 0 };
+      };
+      for (let i = 0; i < EMB; i++) embers.push(spawn(true));
+
+      const drawFx = (dt) => {
+        const { W, H } = L, a = F.amp, h = heat.v, fl = Math.min(1, F.flare);
+        fctx.clearRect(0, 0, W, H);
+        if (a < 0.01) return;
+        fctx.globalCompositeOperation = 'lighter';
+        const [pcx, pcy] = toScreen(PIVOT[0], PIVOT[1]);
+        const [lat, dia] = gridPaths();
+        const R = Math.hypot(W, H) * 0.5, gi = a * (0.7 + 0.6 * h + 0.5 * fl);
+        const gr = fctx.createRadialGradient(pcx, pcy, 0, pcx, pcy, R);
+        gr.addColorStop(0, `rgba(255, 214, 150, ${0.07 * gi})`);
+        gr.addColorStop(0.45, `rgba(255, 194, 71, ${0.025 * gi})`);
+        gr.addColorStop(1, 'rgba(255, 194, 71, 0)');
+        fctx.lineWidth = 1; fctx.strokeStyle = gr; fctx.stroke(lat);
+        fctx.stroke(dia); fctx.stroke(dia); // the construction diagonals read twice as bright
+        // Strike ripples flash outward through the grid.
+        for (let i = ripples.length - 1; i >= 0; i--) {
+          const r = ripples[i];
+          r.r += dt * R * 1.5; r.life -= dt * 0.9;
+          if (r.life <= 0) { ripples.splice(i, 1); continue; }
+          const rg = fctx.createRadialGradient(pcx, pcy, Math.max(0, r.r - 80), pcx, pcy, r.r + 80);
+          rg.addColorStop(0, 'rgba(255, 200, 110, 0)');
+          rg.addColorStop(0.5, `rgba(255, 220, 150, ${0.75 * r.life * a})`);
+          rg.addColorStop(1, 'rgba(255, 200, 110, 0)');
+          fctx.lineWidth = 1.5; fctx.strokeStyle = rg; fctx.stroke(lat); fctx.stroke(dia);
+        }
+        // Pulses
+        pulseWait -= dt * (1 + h * 1.6);
+        if (pulseWait <= 0 && pulses.length < 6) { pulses.push(newPulse()); pulseWait = 0.55 + Math.random() * 0.7; }
+        fctx.lineCap = 'round';
+        for (let i = pulses.length - 1; i >= 0; i--) {
+          const p = pulses[i];
+          p.age += dt; p.pos += p.dir * p.speed * dt / L.s;
+          const left = (p.end - p.pos) * p.dir;
+          if (left <= 0) { pulses.splice(i, 1); continue; }
+          const pa = Math.min(1, p.age * 2.5) * Math.min(1, left / 900) * a * (0.75 + 0.5 * h);
+          const at = (tau) => toScreen(p.n[0] * p.c + p.d[0] * tau, p.n[1] * p.c + p.d[1] * tau);
+          const [hx, hy] = at(p.pos), [tx, ty] = at(p.pos - p.dir * p.tail);
+          const lg = fctx.createLinearGradient(tx, ty, hx, hy);
+          lg.addColorStop(0, 'rgba(255, 138, 0, 0)'); lg.addColorStop(1, `rgba(255, 214, 120, ${0.85 * pa})`);
+          fctx.strokeStyle = lg; fctx.lineWidth = 1.6;
+          fctx.beginPath(); fctx.moveTo(tx, ty); fctx.lineTo(hx, hy); fctx.stroke();
+          fctx.globalAlpha = pa * 0.8; fctx.drawImage(sprite, hx - 10, hy - 10, 20, 20); fctx.globalAlpha = 1;
+        }
+        // Embers
+        const lift = 1 + fl * 1.3 + h * 0.5;
+        for (let i = 0; i < embers.length; i++) {
+          const e = embers[i];
+          e.age += dt;
+          // Rise with a lazy, turbulent sway; strikes blow them outward from the mark.
+          let vx = e.drift + Math.sin(F.t * (0.8 + e.z * 0.9) + e.seed + e.y * 0.006) * 34 * (0.4 + e.z);
+          let vy = -e.vy * lift;
+          if (fl > 0.05) { const dx = e.x - pcx, dy = e.y - pcy, dd = Math.hypot(dx, dy) || 1; vx += (dx / dd) * fl * 160; vy += (dy / dd) * fl * 60; }
+          e.x += vx * dt; e.y += vy * dt;
+          if (e.age > e.max || e.y < -30) { embers[i] = spawn(false); continue; }
+          const life = Math.min(1, e.age / 0.35) * Math.min(1, (e.max - e.age) / 1.4);
+          const ea = life * a * (0.6 + 0.4 * Math.sin(F.t * (6 + e.z * 7) + e.seed)) * (0.45 + 0.55 * e.z);
+          if (ea <= 0.01) continue;
+          if (e.bokeh) { fctx.globalAlpha = ea * 0.18; fctx.drawImage(sprite, e.x - e.size, e.y - e.size, e.size * 2, e.size * 2); continue; }
+          const gs = 4 + e.size * 6;
+          fctx.globalAlpha = ea * 0.55; fctx.drawImage(sprite, e.x - gs / 2, e.y - gs / 2, gs, gs);
+          fctx.globalAlpha = ea;
+          fctx.strokeStyle = e.z > 0.55 ? '#FFE9B8' : '#FFB25A';
+          fctx.lineWidth = e.size;
+          fctx.beginPath(); fctx.moveTo(e.x, e.y); fctx.lineTo(e.x - vx * 0.022, e.y - vy * 0.022); fctx.stroke();
+        }
+        fctx.globalAlpha = 1;
+        fctx.globalCompositeOperation = 'source-over';
+      };
+
+      let rafBg = 0, bgOn = false, lastT = 0, ptrX = 0, ptrY = 0, ptx = 0, pty = 0;
+      const frame = (now) => {
+        const dt = Math.min(0.05, Math.max(0, (now - lastT) / 1000)); lastT = now;
+        F.t += dt; F.flare *= Math.exp(-dt * 2.4);
+        ptx += (ptrX - ptx) * Math.min(1, dt * 3); pty += (ptrY - pty) * Math.min(1, dt * 3);
+        if (gl) {
+          gl.uniform2f(U.uRes, fireCv.width, fireCv.height);
+          gl.uniform1f(U.uTime, F.t % 3600); gl.uniform1f(U.uHeat, heat.v);
+          gl.uniform1f(U.uFlare, Math.min(1, F.flare)); gl.uniform1f(U.uAmp, F.amp);
+          gl.uniform2f(U.uPtr, ptx, pty);
+          gl.drawArrays(gl.TRIANGLES, 0, 3);
+        }
+        drawFx(dt);
+        rafBg = bgOn ? requestAnimationFrame(frame) : 0;
+      };
+      bgRun = () => {
+        const on = F.live && !document.hidden;
+        if (on === bgOn) return;
+        bgOn = on;
+        if (on && !rafBg) { lastT = performance.now(); rafBg = requestAnimationFrame(frame); }
+      };
+      bgRun();
+      document.addEventListener('visibilitychange', bgRun);
+      if (fine) hero.addEventListener('pointermove', (e) => { ptrX = (e.clientX / innerWidth - 0.5) * 2; ptrY = (0.5 - e.clientY / innerHeight) * 2; });
+      bgStrike = (big) => { F.flare = big ? 1.4 : 1; ripples.push({ r: 0, life: 1 }); };
+    }
+
     /* --- Hammer strikes: discrete events fired as the scroll crosses each threshold --- */
     const strike = (n, big = false) => {
       const [cx, cy] = toScreen(PIVOT[0], PIVOT[1]);
       clang(big ? 1.6 : 1);
+      bgStrike(big);
       gsap.fromTo(flash, { opacity: big ? 1 : 0.9 }, { opacity: 0, duration: big ? 0.9 : 0.55, ease: 'power2.out', overwrite: true });
       gsap.fromTo(kickG, { scale: big ? 1.06 : 0.94, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.7, ease: 'power4.out', overwrite: true });
       gsap.fromTo(markSvg, { x: 0, y: 0 }, { keyframes: { x: [-7, 6, -4, 2, 0], y: [4, -5, 3, -1, 0] }, duration: 0.38, ease: 'none', overwrite: true });
@@ -629,6 +925,8 @@
     const intro = gsap.timeline({ delay: 0.25, onComplete: unlock });
     intro
       .add(unlock, 1.55)
+      .to(F, { amp: 1, duration: 2.2, ease: 'power2.inOut' }, 0)
+      .add(() => { F.flare = Math.max(F.flare, 0.8); }, 1.32) // the weld kicks the furnace
       .to(shards, { opacity: 1, duration: 0.3, stagger: 0.08 }, 0)
       .to(colds, { strokeDashoffset: 0, duration: 0.9, ease: 'power2.inOut', stagger: 0.1 }, 0)
       .to(colds, { fillOpacity: 1, duration: 0.5 }, 0.5)
@@ -665,6 +963,8 @@
         }
         lastP = p;
         holeG.style.visibility = p >= P.breach ? 'visible' : 'hidden';
+        if (bgSync) bgSync();
+        F.live = p < P.breach + 0.16; bgRun();
         wall.classList.toggle('is-live', p > P.zoomEnd);
         setSparks(p < 0.48 && !document.hidden);
         canvas.style.opacity = String(p < 0.3 ? 1 : Math.max(0, 1 - (p - 0.3) * 6));
@@ -688,6 +988,8 @@
       // breach and zoom
       .to(zoom, { p: 1, duration: P.zoomEnd - P.breach, ease: 'power1.in', onUpdate: applyZoom }, P.breach)
       .to(markVis, { opacity: 0, duration: 0.12 }, P.breach + 0.01)
+      // The furnace dies down as the mark breaks open (or just before, where the hole cannot be cut from it).
+      .to(bg, { autoAlpha: 0, duration: bgCanClip ? 0.12 : 0.03, ease: 'power1.in' }, bgCanClip ? P.breach + 0.02 : P.breach - 0.03)
       .fromTo(wall, { scale: 1.32 }, { scale: 1, duration: P.zoomEnd - P.breach + 0.05 }, P.breach - 0.02)
       .to(shade, { opacity: 1, duration: 0.25 }, 0.45)
       .set(veilSvg, { autoAlpha: 0 }, P.zoomEnd)

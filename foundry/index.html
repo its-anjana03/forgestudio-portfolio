@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Foundry · FORGE Studio</title>
+<meta name="description" content="The Foundry is the full collection of FORGE Studio by Thinura Anjana: tribute movie posters, event campaigns, concept posters and social media on one endless wall.">
+<meta name="theme-color" content="#0c0b0a">
+<link rel="canonical" href="https://forgestudio.web.lk/foundry/">
+<meta property="og:title" content="The Foundry · FORGE Studio">
+<meta property="og:description" content="Every poster, campaign and social post by FORGE Studio on one endless wall. Drag to explore.">
+<meta property="og:image" content="https://forgestudio.web.lk/assets/img/og/foundry.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://forgestudio.web.lk/foundry/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://forgestudio.web.lk/assets/img/og/foundry.jpg">
+<link rel="icon" type="image/svg+xml" href="../assets/img/forge-mark.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="foundry.css">
+<script>
+  document.documentElement.classList.add('js');
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('has-motion');
+</script>
+</head>
+<body>
+
+<!-- Opening title, once per visit -->
+<div class="intro" aria-hidden="true">
+  <p class="intro-word"></p>
+  <p class="intro-sub"><span>FORGE Studio</span><span class="intro-count"></span></p>
+</div>
+
+<header class="top">
+  <a class="top-exit" href="../#archive"><span class="arr" aria-hidden="true">←</span><span>FORGE Studio</span></a>
+  <a class="top-mark" href="#/" aria-label="The Foundry, all work">The Foundry</a>
+  <button class="top-index" type="button" aria-expanded="false" aria-controls="index">
+    <span class="ti-open">Index</span><span class="ti-close">Close</span><sup class="ti-n"></sup>
+  </button>
+</header>
+
+<main id="view">
+  <h1 class="sr-only">The Foundry, the full collection of FORGE Studio</h1>
+  <!-- The endless wall: every piece, drag in any direction -->
+  <div class="cv" tabindex="-1" aria-label="The collection. Drag, scroll or use the arrow keys to move around.">
+    <div class="cv-plane"></div>
+  </div>
+  <noscript>
+    <div class="nojs">
+      <p class="nojs-word">The Foundry</p>
+      <p>The collection needs JavaScript to hang its work. Turn it on, or head back to the <a href="../">FORGE Studio portfolio</a>.</p>
+    </div>
+  </noscript>
+</main>
+
+<nav class="dock" aria-label="Show part of the collection"></nav>
+<p class="hint" aria-hidden="true"><span class="hint-ico"></span><span class="hint-text">Drag to explore</span></p>
+
+<!-- Premiere: one piece at a time, lit in its own colours -->
+<div class="pm" id="premiere" role="dialog" aria-modal="true" aria-labelledby="pm-name" hidden>
+  <div class="pm-bg" aria-hidden="true"><i class="pm-amb"></i><i class="pm-amb"></i><i class="pm-vig"></i></div>
+  <div class="pm-titles" aria-hidden="true"></div>
+  <div class="pm-stage"></div>
+  <div class="pm-top">
+    <button class="pm-close pill" type="button"><span class="arr" aria-hidden="true">←</span><span>All work</span></button>
+    <p class="pm-room"></p>
+    <p class="pm-count" aria-hidden="true"><b></b><span></span></p>
+  </div>
+  <div class="pm-info">
+    <p class="pm-kicker"></p>
+    <h2 class="pm-name" id="pm-name"></h2>
+    <p class="pm-note"></p>
+    <p class="pm-extra"></p>
+  </div>
+  <div class="pm-strip" aria-label="Pieces in this collection"></div>
+  <div class="pm-nav">
+    <button class="pm-prev" type="button" aria-label="Previous piece"><span aria-hidden="true">←</span></button>
+    <button class="pm-next" type="button" aria-label="Next piece"><span aria-hidden="true">→</span></button>
+  </div>
+  <p class="sr-only pm-live" aria-live="polite"></p>
+</div>
+
+<!-- Index: every collection by name -->
+<div class="ix" id="index" role="dialog" aria-modal="true" aria-label="Index of the collection" hidden>
+  <div class="ix-scroll">
+    <div class="ix-head">
+      <p class="ix-eyebrow">Index</p>
+      <p class="ix-lede">Everything that did not make the portfolio, kept in one place: tribute posters, full event campaigns, concept work and a year of social media.</p>
+    </div>
+    <div class="ix-cols"></div>
+    <footer class="ix-foot">
+      <p>Movie posters in the Foundry are personal tribute and concept work, made for practice and for the love of cinema. They are not official studio artwork, and all film titles and characters belong to their owners. Campaign and client work is shown with thanks to the organisers and to Saagara Seafoods.</p>
+      <p><a href="../">Back to the portfolio</a><span>© 2026 FORGE Studio · Thinura Anjana</span></p>
+    </footer>
+  </div>
+  <div class="ix-peek" aria-hidden="true"><img alt=""></div>
+</div>
+
+<div class="cur" aria-hidden="true"><span class="cur-ring"></span><span class="cur-label"></span></div>
+
+<script src="data.js"></script>
+<script src="foundry.js"></script>
+</body>
+</html>
