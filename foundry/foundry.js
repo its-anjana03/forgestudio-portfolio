@@ -20,6 +20,23 @@
   const mod = (a, n) => ((a % n) + n) % n;
   const now = () => performance.now();
 
+  /* Analytics (GoatCounter, cookie-free, same site code as the portfolio). Counts the visit, plus each collection
+     opened, e.g. /foundry/film/leo. Off on localhost. */
+  const GOATCOUNTER = 'forgestudio';
+  const live = !!GOATCOUNTER && !/^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+  const pending = [];
+  const count = (path, title) => {
+    if (!live) return;
+    if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path, title });
+    else pending.push([path, title]);
+  };
+  if (live) {
+    const gc = document.createElement('script');
+    gc.async = true; gc.dataset.goatcounter = `https://${GOATCOUNTER}.goatcounter.com/count`; gc.src = 'https://gc.zgo.at/count.js';
+    gc.onload = () => { while (pending.length) count(...pending.shift()); };
+    document.head.appendChild(gc);
+  }
+
   /* ---------------------------------------------------------------
      The collection
      --------------------------------------------------------------- */
@@ -40,7 +57,7 @@
         key: it.file, src: `img/${dir}/${it.file}.webp`, thumb: `img/${dir}/thumb/${it.file}.webp`,
         w: it.w || 1200, h: it.h || 1600, tone: it.tone || '#1b1917', alt: it.alt || '',
         label: it.label, title: it.title || it.label, year: it.year || c.year,
-        note: it.note || '', link: it.link || null, coll: c, i,
+        note: it.note || '', link: it.link || null, motion: !!it.motion, coll: c, i,
       };
       ITEMS.push(item); BYKEY[item.key] = item;
       return item;
@@ -365,7 +382,45 @@
     img.src = item.src;
     if (img.complete && img.naturalWidth) img.classList.add('is-loaded');
     el.item = item;
+    if (motion && item.motion) attachMotion(el, item);
     return el;
+  }
+  // Remove a piece, stopping its motion poster first.
+  function dropPiece(el) {
+    if (el.motion) { el.motion.destroy(); el.motion = null; }
+    el.remove();
+  }
+
+  /* Motion posters (motion.js, loaded the first time one is opened). Off with reduced motion;
+     visitors can pause them, and the choice is remembered. */
+  let motionOff = false;
+  try { motionOff = localStorage.getItem('foundry-motion') === 'off'; } catch (_) {}
+  let motionLib = null;
+  const loadMotion = () => motionLib || (motionLib = new Promise((res, rej) => {
+    const s = document.createElement('script');
+    const v = (document.querySelector('script[src*="foundry.js"]') || {}).src || '';
+    s.src = 'motion.js' + (v.includes('?') ? v.slice(v.indexOf('?')) : '');
+    s.onload = () => (window.FoundryMotion ? res(window.FoundryMotion) : rej(new Error('motion')));
+    s.onerror = rej;
+    document.head.appendChild(s);
+  }));
+  function attachMotion(el, item) {
+    loadMotion()
+      .then(lib => lib.has(item.key) ? lib.mount(el.firstElementChild, item) : null)
+      .then(ctrl => {
+        if (!ctrl) return;
+        if (!el.isConnected) { ctrl.destroy(); return; }
+        el.motion = ctrl;
+        if (motionOff) ctrl.pause(true);
+      })
+      .catch(() => { motionLib = null; });
+  }
+  function setMotionOff(off) {
+    motionOff = off;
+    try { localStorage.setItem('foundry-motion', off ? 'off' : 'on'); } catch (_) {}
+    stage.querySelectorAll('.pm-piece').forEach(x => { if (x.motion) x.motion.pause(off); });
+    const b = $('.pm-motion-btn');
+    if (b) { b.setAttribute('aria-pressed', off ? 'false' : 'true'); b.textContent = off ? 'Play motion' : 'Pause motion'; }
   }
   function setRect(el, r) {
     el.style.left = r.l + 'px'; el.style.top = r.t + 'px';
@@ -409,6 +464,7 @@
     if (c.client) extra.push(`<span class="pm-tag">For ${esc(c.client)}</span>`);
     if (c.more) extra.push(`<span class="pm-tag">More ${c.room === 'film' ? 'posters' : 'work'} on the way</span>`);
     if (item.link) extra.push(`<a class="pm-tag" href="${esc(item.link.href)}">${esc(item.link.label)} →</a>`);
+    if (item.motion && motion) extra.push(`<button type="button" class="pm-tag pm-motion-btn" aria-pressed="${!motionOff}">${motionOff ? 'Play motion' : 'Pause motion'}</button>`);
     $('.pm-extra').innerHTML = extra.join('');
     if (motion) [...info.children].forEach(x => { x.classList.remove('pm-swap'); void x.offsetWidth; x.classList.add('pm-swap'); });
     const room = roomOf(c.room);
@@ -447,7 +503,7 @@
     const t = c.byItem ? item.title : c.title;
     if (t !== P.title) setTitle(t);
     setAmbient(item);
-    if (newColl) buildStrip(c);
+    if (newColl) { buildStrip(c); count(`/foundry/${c.room}/${c.id}`, `${c.title} · The Foundry`); }
     markStrip(i);
     if (P.zoom) { P.zoom = false; pm.classList.remove('is-zoom'); }
 
@@ -464,9 +520,9 @@
       setTimeout(() => el.classList.remove('is-entering', 'is-go', 'from-left'), 1050);
       old.classList.add('is-leaving');
       old.style.transform = `translateX(${-dir * 7}%) scale(.94)`;
-      setTimeout(() => old.remove(), 1000);
+      setTimeout(() => dropPiece(old), 1000);
     } else {
-      if (old) old.remove();
+      if (old) dropPiece(old);
       if (motion) el.animate([{ opacity: 0, transform: 'translateY(26px) scale(.965)' }, { opacity: 1, transform: 'none' }], { duration: 950, easing: 'cubic-bezier(.22,1,.36,1)' });
     }
     // Have the neighbours ready.
@@ -491,7 +547,7 @@
     P.lastFocus = document.activeElement;
     C.vx = C.vy = 0;
     P.coll = null; P.title = null; P.piece = null; P.zoom = false;
-    stage.textContent = ''; titles.textContent = '';
+    stage.querySelectorAll('.pm-piece').forEach(dropPiece); titles.textContent = '';
     pm.classList.remove('is-leaving', 'is-fading', 'is-zoom');
     if (P.source) { P.source.classList.remove('is-source'); P.source = null; }
     pm.hidden = false;
@@ -527,7 +583,7 @@
       closed = true;
       pm.hidden = true;
       pm.classList.remove('is-leaving', 'is-fading', 'is-zoom');
-      stage.textContent = ''; titles.textContent = ''; strip.textContent = '';
+      stage.querySelectorAll('.pm-piece').forEach(dropPiece); titles.textContent = ''; strip.textContent = '';
       ambs.forEach(a => a.classList.remove('is-on'));
       if (P.source) P.source.classList.remove('is-source');
       P.source = null; P.coll = null; P.piece = null; P.title = null; P.zoom = false;
@@ -541,7 +597,7 @@
       if (P.source && P.source !== tile) P.source.classList.remove('is-source');
       tile.classList.add('is-source');
       P.source = tile;
-      stage.querySelectorAll('.pm-piece').forEach(x => { if (x !== el) x.remove(); });
+      stage.querySelectorAll('.pm-piece').forEach(x => { if (x !== el) dropPiece(x); });
       pm.classList.add('is-leaving');
       const from = getComputedStyle(el).transform;
       el.style.transition = 'none';
@@ -587,6 +643,7 @@
   }
 
   $('.pm-close').addEventListener('click', leave);
+  $('.pm-extra').addEventListener('click', e => { if (e.target.closest('.pm-motion-btn')) setMotionOff(!motionOff); });
   $('.pm-prev').addEventListener('click', () => step(-1));
   $('.pm-next').addEventListener('click', () => step(1));
 
@@ -705,7 +762,11 @@
 
   function tiltStep() {
     if (!P.piece || !fine || !motion) return;
-    const tx = P.zoom ? 0 : (M.x / innerWidth - .5) * 7, ty = P.zoom ? 0 : -(M.y / innerHeight - .5) * 5;
+    const mo = P.piece.motion;
+    // A motion poster already moves in depth with the pointer, so the card itself tilts half as much.
+    if (mo) mo.pointer(P.zoom ? 0 : (M.x / innerWidth - .5) * 2, P.zoom ? 0 : (M.y / innerHeight - .5) * 2);
+    const k = mo ? .5 : 1;
+    const tx = P.zoom ? 0 : (M.x / innerWidth - .5) * 7 * k, ty = P.zoom ? 0 : -(M.y / innerHeight - .5) * 5 * k;
     P.ry += (tx - P.ry) * .06; P.rx += (ty - P.rx) * .06;
     const tilt = P.piece.firstElementChild;
     tilt.style.setProperty('--ry', P.ry.toFixed(2) + 'deg');
@@ -837,7 +898,7 @@
     rt = setTimeout(() => {
       if (C.list.length) build(C.list, false);
       if (P.open && P.piece) {
-        stage.querySelectorAll('.pm-piece').forEach(x => { if (x !== P.piece) x.remove(); });
+        stage.querySelectorAll('.pm-piece').forEach(x => { if (x !== P.piece) dropPiece(x); });
         setRect(P.piece, rectFor(P.item, false));
         const z = P.zoom; P.zoom = false; P.piece.style.transform = '';
         if (z) setZoom(true);
@@ -845,6 +906,17 @@
       }
     }, 180);
   });
+  // Have the portfolio ready before the visitor clicks back to it.
+  const exit = $('.top-exit');
+  const warmExit = () => {
+    if (exit.dataset.warm) return;
+    exit.dataset.warm = '1';
+    const l = document.createElement('link');
+    l.rel = 'prefetch'; l.href = new URL('../', location.href).href;
+    document.head.appendChild(l);
+  };
+  ['pointerover', 'touchstart', 'focus'].forEach(ev => exit.addEventListener(ev, warmExit, { passive: true }));
+
   addEventListener('hashchange', route);
   intro().then(() => { route(); requestAnimationFrame(tick); });
 })();

@@ -25,6 +25,8 @@
      title     the piece's name; films fall back to the group name ("Main poster")
      note      optional line under the name in the premiere
      type      campaigns: logo, poster, banner, invitation, social, ticket, certificate, sticker
+     motion    true plays it as a motion poster in the premiere (needs foundry/img/motion/<file>.webp,
+               a depth map made offline, and an entry in foundry/motion.js)
 
    more: true on a film (or conceptsMore) shows "More posters on the way" in its
    premiere until the rest of the series is added. Remove it once the series is complete.
@@ -42,7 +44,7 @@ window.FOUNDRY = {
       note: 'The largest series in the collection: around twenty posters, made over more than a month.',
       groups: [
         { name: 'Main posters', items: [
-          { file: 'leo-main-01', w: 1053, h: 1600, tone: '#a3b7c0', alt: 'Leo tribute poster, main version', featured: true },
+          { file: 'leo-main-01', w: 1053, h: 1600, tone: '#a3b7c0', motion: true, alt: 'Leo tribute poster, main version', featured: true },
         ] },
       ],
     },
@@ -66,7 +68,7 @@ window.FOUNDRY = {
       id: 'kalki', title: 'Kalki 2898 AD', year: 2024, cover: 'kalki-main-01', more: true, // source folder: foundry/Kalki 2898 AD
       groups: [
         { name: 'Main posters', items: [
-          { file: 'kalki-main-01', w: 1120, h: 1600, tone: '#9a7250', alt: 'Kalki 2898 AD tribute poster' },
+          { file: 'kalki-main-01', w: 1120, h: 1600, motion: true, tone: '#9a7250', alt: 'Kalki 2898 AD tribute poster' },
         ] },
       ],
     },

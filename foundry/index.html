@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
-<link rel="stylesheet" href="foundry.css">
+<link rel="stylesheet" href="foundry.css?v=20261002g">
 <script>
   document.documentElement.classList.add('js');
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('has-motion');
@@ -37,9 +37,12 @@
 <header class="top">
   <a class="top-exit" href="../#archive"><span class="arr" aria-hidden="true">←</span><span>FORGE Studio</span></a>
   <a class="top-mark" href="#/" aria-label="The Foundry, all work">The Foundry</a>
-  <button class="top-index" type="button" aria-expanded="false" aria-controls="index">
-    <span class="ti-open">Index</span><span class="ti-close">Close</span><sup class="ti-n"></sup>
-  </button>
+  <div class="top-right">
+    <span class="top-sound" data-sound-slot></span>
+    <button class="top-index" type="button" aria-expanded="false" aria-controls="index">
+      <span class="ti-open">Index</span><span class="ti-close">Close</span><sup class="ti-n"></sup>
+    </button>
+  </div>
 </header>
 
 <main id="view">
@@ -101,7 +104,8 @@
 
 <div class="cur" aria-hidden="true"><span class="cur-ring"></span><span class="cur-label"></span></div>
 
-<script src="data.js"></script>
-<script src="foundry.js"></script>
+<script src="../assets/js/forge-sound.js?v=20261002g" defer></script>
+<script src="data.js?v=20261002g"></script>
+<script src="foundry.js?v=20261002g"></script>
 </body>
 </html>
