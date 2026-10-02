@@ -133,15 +133,15 @@ Browsers only allow sound after a click or tap, so on a newly opened page the mu
 
 | File | Track | Pages |
 |---|---|---|
-| `assets/audio/home.mp3` | Dramatic Cinematic Documentary (musicdream) | Home, 404 |
-| `assets/audio/foundry.mp3` | Dark Cinematic Thriller (leberch) | The Foundry |
+| `assets/audio/home.mp3` | Dark Cinematic Thriller (leberch) | Home, 404 |
+| `assets/audio/foundry.mp3` | Dramatic Cinematic Documentary (musicdream) | The Foundry |
 | `assets/audio/work.mp3` | Dark (leberch) | Every case study, resume |
 
 Tracks are from [Pixabay Music](https://pixabay.com/music/) (free for websites, no attribution needed).
 The level is deliberately subtle (`LEVEL` at the top of the script), each track is evened out to the same
 loudness, and a soft compressor keeps the big passages in the background. To change a track, replace the file
 with the same name (and re-check its gain in `MOODS`). Tracks loop with a 4-second crossfade, so the loop
-point is not heard. A page whose track is missing simply shows no switch. The hammer impacts are synthesised in
+point is not heard. Moving between pages, a soft whoosh carries the music out and a soft bloom brings the next page's music in (both synthesised in the browser). A page whose track is missing simply shows no switch. The hammer impacts are synthesised in
 the browser (no file). Original downloads go in `audio-originals/`, which is kept out of git and the zip.
 
 ## Analytics (optional)
@@ -171,7 +171,7 @@ npx serve .
 ## Updating content
 
 - **After changing CSS or JavaScript:** every page links its stylesheet and scripts with a version stamp
-  (`forge.css?v=20261002g`). Change the stamp in all pages (a find-and-replace across the `.html` files and
+  (`forge.css?v=20261002h`). Change the stamp in all pages (a find-and-replace across the `.html` files and
   `foundry/index.html`) so visitors' browsers fetch the new files instead of an old cached copy.
 
 - **New work in the Foundry:** see "Adding work" above.

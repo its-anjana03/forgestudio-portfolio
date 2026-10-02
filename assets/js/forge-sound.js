@@ -4,8 +4,9 @@
    for the hero's hammer strikes. Off by default; the visitor's choice is remembered across pages.
 
    Three tracks (assets/audio/<name>.mp3, from Pixabay Music, free for websites):
-     home     · Dramatic Cinematic Documentary (musicdream)   index, 404
-     foundry  · Dark Cinematic Thriller (leberch)             foundry/
+     home     · Dark Cinematic Thriller (leberch)             index, 404
+     foundry  · Dramatic Cinematic Documentary (musicdream)   foundry/
+   Moving between pages: a soft whoosh as the music leaves, a soft bloom as the next page's music arrives.
      work     · Dark (leberch)                                every case study, resume
 
    Browsers only allow sound after a click or tap on the page, so when sound is on and a new page
@@ -19,8 +20,8 @@
   // track is about 2.7 dB louder than the others), and a soft compressor keeps the peaks down.
   const LEVEL = 0.24;
   const MOODS = {
-    home: { gain: LEVEL * 0.73 },     // Dramatic Cinematic Documentary (musicdream)
-    foundry: { gain: LEVEL * 0.92 },  // Dark Cinematic Thriller (leberch)
+    home: { gain: LEVEL * 0.92 },     // Dark Cinematic Thriller (leberch)
+    foundry: { gain: LEVEL * 0.73 },  // Dramatic Cinematic Documentary (musicdream)
     work: { gain: LEVEL },            // Dark (leberch)
   };
   const path = location.pathname.toLowerCase();
@@ -43,6 +44,13 @@
   let on = store.get('forge-sound') === 'on';
   let ctx = null, master = null, musicBus = null, impactBus = null, verb = null;
   let players = [], active = 0, crossing = false, hasTrack = null, waiting = false, playing = false;
+  // Did the visitor just come from another page of the site? Then the music arrives with a soft bloom.
+  let arriving = false;
+  try {
+    const t = +sessionStorage.getItem('forge-sound-arrive');
+    arriving = !!t && Date.now() - t < 15000;
+    sessionStorage.removeItem('forge-sound-arrive');
+  } catch (_) {}
 
   /* ---------- audio graph ---------- */
   function ensureCtx() {
@@ -115,6 +123,7 @@
         playing = true; waiting = false; paint();
         ramp(p.g.gain, 1, 0.01);
         ramp(musicBus.gain, level, 2.8);
+        if (arriving) { arriving = false; bloom(); }
       }).catch(() => { waiting = true; paint(); armGesture(); });
     };
     if (t0 && p.el.readyState < 1) p.el.addEventListener('loadedmetadata', () => { try { p.el.currentTime = Math.min(t0, Math.max(0, p.el.duration - XFADE - 1)); } catch (_) {} go(); }, { once: true });
@@ -190,6 +199,44 @@
     }
   }
 
+  /* ---------- transitions between pages: a soft whoosh out, a soft bloom in ---------- */
+  function noiseBuffer(sec) {
+    const len = Math.floor(ctx.sampleRate * sec), buf = ctx.createBuffer(1, len, ctx.sampleRate), d = buf.getChannelData(0);
+    for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+    return buf;
+  }
+  // Leaving: air rushing past, rising and opening up, as the music fades.
+  function whoosh() {
+    if (!on || !ctx || ctx.state !== 'running') return;
+    const t = ctx.currentTime;
+    const n = ctx.createBufferSource(), bp = ctx.createBiquadFilter(), g = ctx.createGain();
+    n.buffer = noiseBuffer(0.9);
+    bp.type = 'bandpass'; bp.Q.value = 0.9;
+    bp.frequency.setValueAtTime(260, t); bp.frequency.exponentialRampToValueAtTime(2400, t + 0.6);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.16, t + 0.32); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.8);
+    n.connect(bp); bp.connect(g); g.connect(impactBus); g.connect(verb);
+    n.start(t); n.stop(t + 0.9);
+  }
+  // Arriving: a breath of air opening, with a faint warm fifth underneath, as the new music fades in.
+  function bloom() {
+    if (!on || !ctx || ctx.state !== 'running') return;
+    const t = ctx.currentTime;
+    const n = ctx.createBufferSource(), lp = ctx.createBiquadFilter(), g = ctx.createGain();
+    n.buffer = noiseBuffer(1.8);
+    lp.type = 'lowpass'; lp.Q.value = 0.5;
+    lp.frequency.setValueAtTime(180, t); lp.frequency.exponentialRampToValueAtTime(1400, t + 1.1);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.07, t + 0.9); g.gain.exponentialRampToValueAtTime(0.0001, t + 1.7);
+    n.connect(lp); lp.connect(g); g.connect(verb);
+    n.start(t); n.stop(t + 1.8);
+    [[146.83, 0.05], [220, 0.035]].forEach(([f, a]) => {
+      const o = ctx.createOscillator(), og = ctx.createGain();
+      o.type = 'sine'; o.frequency.value = f;
+      og.gain.setValueAtTime(0.0001, t); og.gain.exponentialRampToValueAtTime(a, t + 0.8); og.gain.exponentialRampToValueAtTime(0.0001, t + 2.6);
+      o.connect(og); og.connect(verb); og.connect(impactBus);
+      o.start(t); o.stop(t + 2.7);
+    });
+  }
+
   /* ---------- the switch ---------- */
   const btn = document.createElement('button');
   btn.type = 'button';
@@ -234,9 +281,18 @@
   document.addEventListener('click', (e) => {
     const a = e.target.closest && e.target.closest('a[href]');
     if (!a || !playing || a.target === '_blank' || a.hasAttribute('download')) return;
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     const url = new URL(a.href, location.href);
-    if (url.origin !== location.origin || url.pathname === location.pathname) return;
+    if (url.origin !== location.origin || url.pathname === location.pathname || !/(\.html|\/)$/.test(url.pathname)) return;
+    whoosh();
     stopMusic(0.55);
+    try { sessionStorage.setItem('forge-sound-arrive', String(Date.now())); } catch (_) {}
+    // Pages with the heat-and-ink wipe (forge.js) already wait for it; elsewhere (the Foundry, 404) wait a moment
+    // so the whoosh and the fade finish instead of being cut off.
+    if (!document.querySelector('.pt')) {
+      e.preventDefault();
+      setTimeout(() => { location.href = url.href; }, 520);
+    }
   });
   addEventListener('pagehide', () => savePoint());
   document.addEventListener('visibilitychange', () => {
