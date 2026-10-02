@@ -163,6 +163,13 @@
     <rect x="-10000" y="-10000" width="40000" height="40000" fill="currentColor" mask="url(#hole)"/>
   </svg>
 
+  <!-- Furnace backdrop: live fire and smoke, the mark's construction grid and rising embers.
+       It sits over the veil, so the same mark-shaped hole is cut out of it at the breach. -->
+  <div class="ignite-bg" aria-hidden="true">
+    <canvas class="bg-fire"></canvas>
+    <canvas class="bg-fx"></canvas>
+  </div>
+
   <svg class="ignite-mark" viewBox="0 0 2962 2488" aria-hidden="true">
     <g class="mark-g"><g class="kick-g"><g class="mark-vis">
       <use class="glow" href="#mark-path" fill="url(#heatG)" opacity="0"/>
@@ -209,7 +216,11 @@
 
   <div class="archive-cap">
     <h2 class="h2">The archive.</h2>
-    <p>Ten of fifty-plus posters, 2022 to 2026. Select any poster to see it full size.</p>
+    <div class="archive-side">
+      <p>Ten of fifty-plus posters, 2022 to 2026. Select any poster to see it full size.</p>
+      <!-- The only door to the Foundry: a quiet link, found once the archive opens -->
+      <a class="foundry-door" href="foundry/"><span class="fd-dot" aria-hidden="true"></span>More work waits in the Foundry <span class="arr" aria-hidden="true">→</span></a>
+    </div>
   </div>
 </section>
 
@@ -524,7 +535,7 @@
 
 <!-- Poster lightbox -->
 <dialog class="lightbox" aria-label="Poster viewer">
-  <div class="lb-top"><span class="lb-count tnum"></span><div class="lb-top-actions"><button class="lb-btn lb-share" type="button" aria-label="Share this poster">Share ↗</button><button class="lb-btn lb-close" type="button" aria-label="Close viewer">✕</button></div></div>
+  <div class="lb-top"><span class="lb-count tnum"></span><div class="lb-top-actions"><a class="lb-btn lb-foundry" href="foundry/" hidden>More in the Foundry</a><button class="lb-btn lb-share" type="button" aria-label="Share this poster">Share ↗</button><button class="lb-btn lb-close" type="button" aria-label="Close viewer">✕</button></div></div>
   <div class="lb-stage"><img alt=""></div>
   <div class="lb-bottom">
     <button class="lb-btn lb-prev" type="button" aria-label="Previous poster">←</button>

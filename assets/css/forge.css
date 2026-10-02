@@ -327,6 +327,18 @@ ul { list-style: none; }
 }
 .ignite-veil, .ignite-mark, .ignite-sparks { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .ignite-veil { color: var(--ink); }
+/* Furnace backdrop: WebGL fire + 2D grid and embers. The still gradient is the no-WebGL / no-JS fallback. */
+.ignite-bg {
+  --furnace: radial-gradient(75% 48% at 52% 112%, rgba(255, 138, 0, .5), rgba(122, 53, 16, .22) 55%, transparent 82%),
+             radial-gradient(42% 34% at 12% 104%, rgba(255, 110, 0, .22), transparent 72%),
+             radial-gradient(42% 34% at 90% 104%, rgba(255, 110, 0, .2), transparent 72%);
+  position: absolute; inset: 0; pointer-events: none; background: var(--ink);
+}
+.ignite-bg canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.ignite-bg .bg-fx { mix-blend-mode: screen; }
+.ignite-bg.no-gl { background: var(--furnace), var(--ink); animation: furnace 6s ease-in-out infinite; }
+.ignite-bg.no-gl .bg-fire { display: none; }
+@keyframes furnace { 50% { filter: brightness(1.25); } }
 .ignite-mark .seam { stroke: #FFF4D6; stroke-linecap: round; fill: none; opacity: 0; }
 .ignite-mark .glow { filter: url(#bloom); }
 
@@ -338,7 +350,8 @@ ul { list-style: none; }
 .ignite-copy h1 { font-size: clamp(34px, 4.4vw, 76px); font-weight: 600; letter-spacing: -0.04em; line-height: .95; max-width: 15ch; text-wrap: balance; }
 .ignite-copy .kicker { display: block; margin-bottom: 18px; }
 .ignite-side { display: flex; flex-direction: column; gap: 22px; align-items: flex-start; justify-self: end; max-width: 440px; }
-.ignite-side p { color: var(--dim); font-size: 16px; }
+.ignite-side p { color: var(--dim); font-size: 16px; text-shadow: 0 1px 2px rgba(10, 9, 8, .9), 0 0 22px rgba(10, 9, 8, .85); }
+.ignite-copy .kicker { text-shadow: 0 0 18px rgba(10, 9, 8, .9); }
 .ignite-side p strong { color: var(--bone); font-weight: 500; }
 .ignite-actions { display: flex; gap: 10px; flex-wrap: wrap; }
 .scroll-cue {
@@ -373,6 +386,12 @@ html:not(.has-motion) .archive-cap { order: 3; }
 html:not(.has-motion) .ignite-wall { order: 4; }
 html:not(.has-motion) .ignite-shade { display: none; }
 html:not(.has-motion) .ignite-veil, html:not(.has-motion) .ignite-sparks { display: none; }
+html:not(.has-motion) .ignite { isolation: isolate; }
+html:not(.has-motion) .ignite-bg {
+  bottom: auto; height: 100vh; height: 100svh; z-index: -1; background: var(--furnace), var(--ink);
+  -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent); mask-image: linear-gradient(to bottom, #000 72%, transparent);
+}
+html:not(.has-motion) .ignite-bg canvas { display: none; }
 html:not(.has-motion) .ignite-mark { position: relative; height: 46vh; }
 html:not(.has-motion) .ignite-copy { position: relative; padding-top: 24px; }
 html:not(.has-motion) .ignite-wall { position: relative; inset: auto; margin-top: 64px; padding: 0 var(--pad); pointer-events: auto; }
@@ -1059,6 +1078,22 @@ html:not(.has-motion) .sound-btn { display: none; }
 /* Lightbox share */
 .lb-share { width: auto; padding: 0 18px; gap: 8px; display: inline-flex; font-size: 14px; font-weight: 600; }
 .lb-share[hidden] { display: none; }
+/* Doors to the Foundry: quiet on purpose, only inside the archive */
+.lb-foundry { width: auto; padding: 0 18px; display: inline-flex; align-items: center; font-size: 14px; font-weight: 500; color: var(--dim); text-decoration: none; white-space: nowrap; }
+.lb-foundry[hidden] { display: none; }
+@media (hover: hover) and (pointer: fine) { .lb-foundry:hover { color: var(--bone); } }
+@media (max-width: 520px) { .lb-foundry { padding: 0 14px; font-size: 13px; } .lb-share { padding: 0 14px; } }
+.archive-side { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
+.foundry-door {
+  pointer-events: auto; display: inline-flex; align-items: center; gap: 10px; min-height: 44px;
+  font-size: 14px; font-weight: 500; color: var(--dim); text-decoration: none; text-shadow: 0 2px 18px rgba(0, 0, 0, .8);
+  background: linear-gradient(var(--ember), var(--ember)) 0 calc(100% - 8px) / 0 1px no-repeat; transition: color .4s, background-size .6s var(--ease-out);
+}
+.foundry-door .fd-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ember); box-shadow: 0 0 0 0 rgba(255, 138, 0, .6); animation: fd-pulse 2.6s ease-out infinite; }
+.foundry-door .arr { transition: transform .4s var(--ease-out); }
+.foundry-door:hover, .foundry-door:focus-visible { color: var(--bone); background-size: 100% 1px; }
+.foundry-door:hover .arr { transform: translateX(4px); }
+@keyframes fd-pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 138, 0, .55); } 70%, 100% { box-shadow: 0 0 0 9px rgba(255, 138, 0, 0); } }
 .lb-top-actions { display: flex; gap: 10px; }
 
 @media (max-width: 1100px) {
