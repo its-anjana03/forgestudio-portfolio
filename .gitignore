@@ -16,3 +16,5 @@ _originals/
 !/foundry/img/
 *.psd
 *.ai
+# Music as downloaded (the web-ready copies live in assets/audio)
+/audio-originals/

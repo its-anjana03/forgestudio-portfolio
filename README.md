@@ -64,7 +64,8 @@ every page shows its full content as a static layout.
 - Live furnace backdrop behind the mark: real-time WebGL fire and lit smoke, rising embers, and the mark's own
   30° construction grid with gold energy pulses. It flares on every strike and dies down as the mark breaks open
   (falls back to a still glow without WebGL, and to a static gradient with reduced motion)
-- Optional anvil sound (synthesised in the browser, off by default, remembered per visitor)
+- Cinematic sound (off by default, remembered across pages): a different mood of music on each part of the site,
+  and soft cinematic impacts on the hero's hammer strikes (see "Sound" below)
 - Shareable poster links, e.g. `https://forgestudio.web.lk/#poster-leo`
 - Commission brief builder that composes a ready-to-send email (nothing is stored)
 - Copy-email buttons, page transitions, hidden-details hunt, before/after slider
@@ -123,15 +124,35 @@ Naming: `<film>-main-NN`, `<film>-character-NN`, `<film>-alt-NN`, `<film>-proces
 `<campaign>-poster-NN`, `<campaign>-social-NN` and so on. The group name becomes each poster's label
 ("Character poster"), and the wall, filters, index and counts update by themselves.
 
+## Sound
+
+`assets/js/forge-sound.js` runs on every page. The switch sits in the bottom-left corner (in the Foundry's header).
+Sound starts off; once a visitor turns it on, every page fades in its own music and the choice is remembered.
+Browsers only allow sound after a click or tap, so on a newly opened page the music starts on the first click
+(the switch glows softly until then). A track shared by two pages carries on where it stopped.
+
+| File | Track | Pages |
+|---|---|---|
+| `assets/audio/home.mp3` | Dramatic Cinematic Documentary (musicdream) | Home, 404 |
+| `assets/audio/foundry.mp3` | Dark Cinematic Thriller (leberch) | The Foundry |
+| `assets/audio/work.mp3` | Dark (leberch) | Every case study, resume |
+
+Tracks are from [Pixabay Music](https://pixabay.com/music/) (free for websites, no attribution needed).
+The level is deliberately subtle (`LEVEL` at the top of the script), each track is evened out to the same
+loudness, and a soft compressor keeps the big passages in the background. To change a track, replace the file
+with the same name (and re-check its gain in `MOODS`). Tracks loop with a 4-second crossfade, so the loop
+point is not heard. A page whose track is missing simply shows no switch. The hammer impacts are synthesised in
+the browser (no file). Original downloads go in `audio-originals/`, which is kept out of git and the zip.
+
 ## Analytics (optional)
 
-The site is ready for [GoatCounter](https://www.goatcounter.com): free, no cookies, no consent banner.
+Visitor stats are on, with [GoatCounter](https://www.goatcounter.com): free, no cookies, no consent banner.
+Dashboard: **https://forgestudio.goatcounter.com**
 
-1. Create a free account at goatcounter.com and choose a site code (for example `forgestudio`).
-2. Open `assets/js/forge.js` and set `const GOATCOUNTER = 'forgestudio';` near the top.
-3. Push. Page views, plus events (poster views, shares, brief sends, email copies, detail hunt completions), appear in your dashboard.
-
-It stays off on `localhost`, so local testing never counts.
+- Page views on every page, plus events from the portfolio (poster views, shares, brief sends, email copies,
+  detail hunt completions) and every collection opened in the Foundry (e.g. `/foundry/film/leo`).
+- The site code `forgestudio` is set in `assets/js/forge.js` and `foundry/foundry.js`. Set it to `''` in both to switch stats off.
+- It stays off on `localhost`, so local testing never counts. Ad blockers may hide some visits.
 
 ## Run locally
 
@@ -148,6 +169,10 @@ npx serve .
 3. Keep the `CNAME` file so the site stays on `forgestudio.web.lk`. Tick **Enforce HTTPS** once the certificate is issued.
 
 ## Updating content
+
+- **After changing CSS or JavaScript:** every page links its stylesheet and scripts with a version stamp
+  (`forge.css?v=20261002g`). Change the stamp in all pages (a find-and-replace across the `.html` files and
+  `foundry/index.html`) so visitors' browsers fetch the new files instead of an old cached copy.
 
 - **New work in the Foundry:** see "Adding work" above.
 - **New poster in the home archive:** add a 1200px WebP to `assets/img/` and a 640px one to `assets/img/thumb/`, add a `<button class="poster" data-lb="N">` to the archive wall in `index.html`, and add `['Title', year, 'file-name']` to the `POSTERS` list at the top of `assets/js/forge.js`.

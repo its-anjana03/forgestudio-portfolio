@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap">
-<link rel="stylesheet" href="assets/css/forge.css">
+<link rel="stylesheet" href="assets/css/forge.css?v=20261002g">
 <script>
   // Motion is opt-in: only hide-then-reveal content when JS runs and the visitor allows motion.
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -211,7 +211,6 @@
     </div>
   </div>
   <div class="scroll-cue" aria-hidden="true"><i></i>Scroll to strike the mark</div>
-  <button class="sound-btn" type="button" aria-pressed="false" aria-label="Toggle forge sound effects"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span class="sound-label">Sound off</span></button>
   <div class="strike-hud" aria-hidden="true"><span class="strike-n tnum">0</span><span>/ 3 strikes</span></div>
 
   <div class="archive-cap">
@@ -389,10 +388,10 @@
     </ul>
   </div>
   <div class="disc-preview" aria-hidden="true">
-    <img src="assets/img/thumb/leo-poster.webp" alt="" loading="lazy">
-    <img src="assets/img/joey-thumbnail.webp" alt="" loading="lazy">
-    <img src="assets/img/forge-identity/cover-foil-logo.webp" alt="" loading="lazy">
-    <img src="assets/img/vijayism/main-poster.webp" alt="" loading="lazy">
+    <img data-src="assets/img/preview/leo.webp" alt="">
+    <img data-src="assets/img/preview/joey.webp" alt="">
+    <img data-src="assets/img/preview/forge-identity.webp" alt="">
+    <img data-src="assets/img/preview/vijayism.webp" alt="">
   </div>
 </section>
 
@@ -547,6 +546,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
-<script src="assets/js/forge.js" defer></script>
+<script src="assets/js/forge-sound.js?v=20261002g" defer></script>
+<script src="assets/js/forge.js?v=20261002g" defer></script>
 </body>
 </html>

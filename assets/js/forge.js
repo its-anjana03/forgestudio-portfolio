@@ -19,8 +19,8 @@
   ];
 
   /* ---------------- Analytics (GoatCounter: free, cookie-free, privacy-friendly) ----------------
-     Sign up at goatcounter.com, then put your site code here, e.g. 'forgestudio'. Empty = off. */
-  const GOATCOUNTER = '';
+     Dashboard: https://forgestudio.goatcounter.com · empty string = off. The Foundry uses the same code (foundry/foundry.js). */
+  const GOATCOUNTER = 'forgestudio';
   const slug = (t) => String(t).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   function track(name, label) {
     if (window.goatcounter && window.goatcounter.count) {
@@ -39,8 +39,7 @@
     gsap.registerPlugin(ScrollTrigger);
     gsap.defaults({ ease: 'power3.out', duration: 0.9 });
     if (window.Lenis) {
-      lenis = new Lenis({ lerp: 0.09, smoothWheel: true, wheelMultiplier: 0.95 });
-      lenis.on('scroll', ScrollTrigger.update);
+      lenis = new Lenis({ lerp: 0.09, smoothWheel: true, wheelMultiplier: 0.95 });      lenis.on('scroll', ScrollTrigger.update);
       gsap.ticker.add((t) => lenis.raf(t * 1000));
       gsap.ticker.lagSmoothing(0);
     }
@@ -384,12 +383,40 @@
     requestAnimationFrame(() => requestAnimationFrame(() => pt.classList.add('is-out')));
     setTimeout(() => pt.classList.remove('is-cover', 'is-out'), 1300);
   }
+  // A link to another page of this site (not a download, new tab, file or same-page anchor).
+  const pageUrl = (a) => {
+    if (!a || a.target === '_blank' || a.hasAttribute('download')) return null;
+    const url = new URL(a.href, location.href);
+    if (url.origin !== location.origin || !/(\.html|\/)$/.test(url.pathname) || url.pathname === location.pathname) return null;
+    return url;
+  };
+  // Fetch the next page as soon as the visitor shows intent (hover, touch, keyboard focus), so it is ready behind the wipe.
+  const warmed = new Set();
+  const conn = navigator.connection;
+  const canPrefetch = (() => { const l = document.createElement('link'); return !!(l.relList && l.relList.supports && l.relList.supports('prefetch')); })();
+  const warm = (e) => {
+    const a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    const url = pageUrl(a);
+    if (!url) return;
+    const href = url.origin + url.pathname;
+    if (warmed.has(href) || (conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType || '')))) return;
+    warmed.add(href);
+    if (canPrefetch) {
+      const l = document.createElement('link');
+      l.rel = 'prefetch'; l.href = href;
+      document.head.appendChild(l);
+    } else fetch(href, { credentials: 'same-origin' }).catch(() => {});
+  };
+  document.addEventListener('pointerover', warm, { passive: true });
+  document.addEventListener('touchstart', warm, { passive: true });
+  document.addEventListener('focusin', warm);
+
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a[href]');
     if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-    if (a.target === '_blank' || a.hasAttribute('download')) return;
-    const url = new URL(a.href, location.href);
-    if (url.origin !== location.origin || !/(\.html|\/)$/.test(url.pathname) || url.pathname === location.pathname) return;
+    const url = pageUrl(a);
+    if (!url) return;
+    warm(e);
     e.preventDefault();
     try { sessionStorage.setItem('forge-pt', '1'); } catch (err) { /* private mode: no enter animation */ }
     pt.classList.add('is-in');
@@ -397,46 +424,9 @@
   });
   window.addEventListener('pageshow', (e) => { if (e.persisted) pt.classList.remove('is-in', 'is-cover', 'is-out'); });
 
-  /* ---------------- Optional forge sound (synthesised, off by default, remembered) ---------------- */
-  let audio = null, soundOn = false;
-  try { soundOn = localStorage.getItem('forge-sound') === 'on'; } catch (e) { soundOn = false; }
-  const clang = (power = 1) => {
-    if (!soundOn) return;
-    const AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return;
-    audio = audio || new AC();
-    const t = audio.currentTime;
-    const master = audio.createGain();
-    master.gain.value = 0.18 * power;
-    master.connect(audio.destination);
-    // Inharmonic partials with fast decay read as struck metal.
-    [[523, 1], [1187, 0.6], [1873, 0.42], [2650, 0.28], [3520, 0.18]].forEach(([f, a]) => {
-      const o = audio.createOscillator(), g = audio.createGain();
-      o.type = 'sine';
-      o.frequency.value = f * (0.98 + Math.random() * 0.04) * (power > 1 ? 0.78 : 1);
-      g.gain.setValueAtTime(a, t);
-      g.gain.exponentialRampToValueAtTime(0.0008, t + 1.5 / (1 + f / 2200));
-      o.connect(g); g.connect(master); o.start(t); o.stop(t + 1.7);
-    });
-    const len = Math.floor(audio.sampleRate * 0.07), buf = audio.createBuffer(1, len, audio.sampleRate), d = buf.getChannelData(0);
-    for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / len);
-    const n = audio.createBufferSource(), hp = audio.createBiquadFilter(), ng = audio.createGain();
-    n.buffer = buf; hp.type = 'highpass'; hp.frequency.value = 1800; ng.gain.value = 0.55;
-    n.connect(hp); hp.connect(ng); ng.connect(master); n.start(t);
-  };
-  const soundBtn = $('.sound-btn');
-  if (soundBtn) {
-    const paint = () => {
-      soundBtn.setAttribute('aria-pressed', String(soundOn));
-      $('.sound-label', soundBtn).textContent = soundOn ? 'Sound on' : 'Sound off';
-    };
-    paint();
-    soundBtn.addEventListener('click', () => {
-      soundOn = !soundOn;
-      try { localStorage.setItem('forge-sound', soundOn ? 'on' : 'off'); } catch (e) { /* not persisted */ }
-      paint(); clang(0.6); track('sound', soundOn ? 'on' : 'off');
-    });
-  }
+  /* ---------------- Sound: music and the hammer's impacts live in assets/js/forge-sound.js ---------------- */
+  const clang = (power = 1) => { if (window.ForgeSound) window.ForgeSound.impact(power); };
+  window.addEventListener('forge:sound', (e) => track('sound', e.detail.on ? 'on' : 'off'));
 
   /* =====================================================
      01 IGNITE · weld the mark, heat it, strike it three times,
@@ -497,6 +487,7 @@
     };
     const layout = () => {
       const W = hero.clientWidth, H = hero.clientHeight;
+      if (!W || !H) return; // not laid out yet (hidden tab or zero-size frame): wait for the next resize
       // Fit the mark into the free band between the nav and the hero copy.
       const navH = nav ? nav.offsetHeight : 72;
       const copyTop = copy.offsetTop || H * 0.7;
@@ -1044,6 +1035,12 @@
   const prev = $('.disc-preview');
   if (prev && fine) {
     const imgs = $$('img', prev);
+    // The preview sits fixed on screen, so the browser would fetch it on page load: wait until the list is near.
+    const feed = () => imgs.forEach((im) => { if (im.dataset.src && !im.src) im.src = im.dataset.src; });
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((en) => { if (en.some((x) => x.isIntersecting)) { feed(); io.disconnect(); } }, { rootMargin: '600px 0px' });
+      io.observe(prev.closest('section') || prev);
+    } else feed();
     const xTo = gsap.quickTo(prev, 'x', { duration: 0.6, ease: 'power3.out' });
     const yTo = gsap.quickTo(prev, 'y', { duration: 0.6, ease: 'power3.out' });
     const rTo = gsap.quickTo(prev, 'rotation', { duration: 0.8, ease: 'power3.out' });
