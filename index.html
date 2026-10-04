@@ -20,7 +20,8 @@
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap">
-<link rel="stylesheet" href="assets/css/forge.css?v=20261002h">
+<link rel="stylesheet" href="assets/css/forge.css?v=20261004g">
+<link rel="stylesheet" href="assets/css/forge-fx.css?v=20261004g">
 <script>
   // Motion is opt-in: only hide-then-reveal content when JS runs and the visitor allows motion.
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -444,6 +445,26 @@
       <p data-reveal>Seven years on, my work has aired on Indian television, placed first out of two hundred entries, and grown into <strong>FORGE Studio</strong>: a practice where cinematic design meets campaigns and digital product thinking.</p>
       <p data-reveal>Alongside work, I'm reading for a <strong>BBA (Hons) specialising in Management Information Systems</strong> at SLIIT, and I design event campaigns as Co-Editor of the SLIIT Business School Student Community.</p>
 
+      <!-- The maker signs the work: drawn stroke by stroke in hot gold, then it cools -->
+      <div class="sig" data-sig>
+        <svg class="sig-mark" viewBox="0 0 1431 1178" role="img" aria-label="Signature of Thinura Anjana">
+          <defs>
+            <mask id="sig-shape" maskUnits="userSpaceOnUse" x="0" y="0" width="1431" height="1178"><image href="assets/img/signature.webp" width="1431" height="1178"/></mask>
+            <mask id="sig-draw" maskUnits="userSpaceOnUse" x="0" y="0" width="1431" height="1178">
+              <path class="sig-stroke" d="M35,608 L12,640 L40,655 L120,640 L330,545 L560,430 L800,310 L1000,150 L1150,20 L1160,30 L1090,110 L940,205 L880,250 L800,330 L700,460 L560,660 L470,760 L330,1000 L250,1160"/>
+              <!-- written in this order: the long first stroke, the upper line, the wave, the lower line, the dot -->
+              <path class="sig-stroke" style="stroke-width:48" d="M60,925 L95,905 L480,740 L900,575 L1250,440 L1420,378"/>
+              <path class="sig-stroke" d="M590,740 L640,780 L655,735 L705,735 L760,660 L850,520 L940,400 L1040,345 L1000,420 L965,540 L985,590 L1050,615 L1140,610 L1210,598"/>
+              <path class="sig-stroke" style="stroke-width:48" d="M80,1105 L330,1020 L700,880 L1000,770 L1150,720"/>
+              <path class="sig-stroke" d="M1262,718 L1276,714"/>
+            </mask>
+          </defs>
+          <g mask="url(#sig-draw)"><rect class="sig-ink" width="1431" height="1178" mask="url(#sig-shape)"/></g>
+          <circle class="sig-tip" r="22" cx="-100" cy="-100"/>
+        </svg>
+        <div class="sig-cap"><span class="label">Made by hand</span><b>Thinura Anjana</b><span>Designer, FORGE Studio</span></div>
+      </div>
+
       <div class="facts" data-reveal-group>
         <div class="fact" data-reveal-item><span class="label">Now</span><b>Marketing Executive</b><span>Jeewa Education · since August 2026</span></div>
         <div class="fact" data-reveal-item><span class="label">Studio</span><b>FORGE Studio</b><span>Freelance design practice · since 2020</span></div>
@@ -524,6 +545,23 @@
       <div><h4>Direct</h4><ul><li><a href="mailto:anjanathinura07@gmail.com">Email</a></li><li><a href="tel:+94707771405">+94 70 777 1405</a></li><li>Sri Lanka</li></ul></div>
     </div>
   </div>
+  <!-- End credits: the page closes the way a film does -->
+  <div class="credits wrap" data-credits aria-label="Credits">
+    <div class="credits-roll">
+      <p class="credits-title">A FORGE Studio production</p>
+      <dl>
+        <div><dt>Designed and built by</dt><dd>Thinura Anjana</dd></div>
+        <div><dt>Posters</dt><dd>2022 to 2026</dd></div>
+        <div><dt>Identity</dt><dd>FORGE Studio, formerly Master Creations</dd></div>
+        <div><dt>Recognition</dt><dd>Thanthi TV broadcast, 2022<br>First of 200, Best Watch Design</dd></div>
+        <div><dt>Typeface</dt><dd>General Sans</dd></div>
+        <div><dt>Motion</dt><dd>GSAP and Lenis</dd></div>
+        <div><dt>Music</dt><dd>leberch and musicdream</dd></div>
+        <div><dt>Made in</dt><dd>Sri Lanka</dd></div>
+      </dl>
+      <p class="credits-end">Made by hand, since 2019.</p>
+    </div>
+  </div>
   <div class="foot-mark" aria-hidden="true"><span class="foot-word wrap">FORGE</span></div>
   <div class="wrap foot-bottom">
     <span>© 2026 FORGE Studio · Thinura Anjana</span>
@@ -546,7 +584,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
-<script src="assets/js/forge-sound.js?v=20261002h" defer></script>
-<script src="assets/js/forge.js?v=20261002h" defer></script>
+<script src="assets/js/forge-sound.js?v=20261004g" defer></script>
+<script src="assets/js/forge.js?v=20261004g" defer></script>
+<script src="assets/js/forge-fx.js?v=20261004g" defer></script>
 </body>
 </html>

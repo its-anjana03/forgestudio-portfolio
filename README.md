@@ -27,6 +27,7 @@ A static site (plain HTML, CSS and JavaScript, no build step) hosted on GitHub P
 ├── assets/
 │   ├── css/forge.css                  The whole design system (one stylesheet)
 │   ├── js/forge.js                    All motion and interaction (one script)
+│   ├── css/forge-fx.css, js/forge-fx.js  Heat details layered over every page (see "Heat details")
 │   ├── img/                           Optimised WebP images, grouped by project
 │   │   ├── thumb/                     640px poster thumbnails for the archive wall
 │   │   ├── og/                        1200x630 social share cards
@@ -70,6 +71,8 @@ every page shows its full content as a static layout.
 - Commission brief builder that composes a ready-to-send email (nothing is stored)
 - Copy-email buttons, page transitions, hidden-details hunt, before/after slider
 - Social share cards for every page
+- Heat details on every page: main headings are revealed by a pass of gold heat (and again on hover),
+  major buttons carry a travelling gold edge, plus small touches on section numbers, links, dividers and images
 
 ## The Foundry (`/foundry/`)
 
@@ -124,6 +127,33 @@ Naming: `<film>-main-NN`, `<film>-character-NN`, `<film>-alt-NN`, `<film>-proces
 `<campaign>-poster-NN`, `<campaign>-social-NN` and so on. The group name becomes each poster's label
 ("Character poster"), and the wall, filters, index and counts update by themselves.
 
+## Heat details
+
+`assets/css/forge-fx.css` and `assets/js/forge-fx.js` load after the main stylesheet and script on every page
+(not the Foundry). They only decorate what is already there, with one idea throughout: gold heat arrives, then settles.
+
+- **Headings:** every main heading comes out of the dark under a pass of gold heat; the same pass crosses it on hover.
+- **Major buttons:** a gold highlight travels round the edge on hover, with a quick flash on click.
+- **Small touches:** section numbers and resume dates catch light as they arrive, menu links take the heat pass,
+  text-link underlines draw in gold, counters flare when they land, divider lines draw themselves behind a gold tip,
+  case-study images get one glint round the edge, and tags warm at the edge on hover.
+- **Signature:** under the About statement on the home page, the signature (`assets/img/signature.webp`) writes itself
+  stroke by stroke in hot gold, then cools to cream. The stroke order is the five `sig-stroke` paths in `index.html`.
+- **Award seals:** the two recognitions (Thanthi TV, first of 200) are stamped onto their cards on the home page and
+  onto the main image of their case studies as round maker's seals. The wording is in `SEALS` in `forge-fx.js`.
+- **End credits:** the home page closes with a slow film-style credit roll above the footer word. The lines are the
+  `credits` block in `index.html`.
+- **Scrollbar:** the scrollbar handle is a small ingot that cools from gold to steel as the page goes down.
+- **One detail per project page** (all built in `forge-fx.js`, section "One detail for each project page"):
+  Joey has its four audit findings numbered with stamped seals; Vijayism has an ON AIR lamp that switches on at
+  Recognition; Seylune opens its home page screenshot inside a browser window; Avengers counts up to the 27-character
+  cast and demonstrates its before/after slider once; Rolex shows the visitor's own day and date in a Day-Date window;
+  the FORGE identity page draws the mark on its construction grid.
+- **Hidden strike:** typing F-O-R-G-E anywhere fires one hammer strike from the logo.
+
+Timings are the `T` values at the top of `forge-fx.js`. Everything is off with reduced motion, and hover
+effects are off on touch screens. To remove the whole layer, delete the two tags that load these files from each page.
+
 ## Sound
 
 `assets/js/forge-sound.js` runs on every page. The switch sits in the bottom-left corner (in the Foundry's header).
@@ -171,7 +201,7 @@ npx serve .
 ## Updating content
 
 - **After changing CSS or JavaScript:** every page links its stylesheet and scripts with a version stamp
-  (`forge.css?v=20261002h`). Change the stamp in all pages (a find-and-replace across the `.html` files and
+  (`forge.css?v=20261004g`). Change the stamp in all pages (a find-and-replace across the `.html` files and
   `foundry/index.html`) so visitors' browsers fetch the new files instead of an old cached copy.
 
 - **New work in the Foundry:** see "Adding work" above.

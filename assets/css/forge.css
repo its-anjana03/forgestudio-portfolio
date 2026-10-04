@@ -320,11 +320,15 @@ ul { list-style: none; }
   .poster:hover .cap, .poster:focus-visible .cap { opacity: 1; transform: none; }
 }
 .ignite-shade {
-  position: absolute; inset: 0; pointer-events: none;
+  position: absolute; inset: 0 0 -3px 0; pointer-events: none;   /* past the bottom edge, so no sliver of the wall shows on fractional heights */
   background: radial-gradient(120% 90% at 50% 50%, transparent 40%, rgba(10, 9, 8, .75) 100%),
-              linear-gradient(to bottom, rgba(10, 9, 8, .5), transparent 22%, transparent 70%, rgba(10, 9, 8, .9));
+              /* the wall melts fully into the page colour at the bottom, so the archive never ends on a cut line */
+              linear-gradient(to bottom, rgba(10, 9, 8, .5), transparent 22%, transparent 62%, rgba(10, 9, 8, .82) 84%, var(--ink) 97%);
   opacity: 0;
 }
+/* the section after the hero overlaps its bottom edge by a few pixels: on fractional heights the moving
+   poster columns could otherwise show as a bright hairline just under the archive */
+.heat::before { content: ''; position: absolute; left: 0; right: 0; top: -3px; height: 6px; background: var(--ink); pointer-events: none; }
 .ignite-veil, .ignite-mark, .ignite-sparks { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .ignite-veil { color: var(--ink); }
 /* Furnace backdrop: WebGL fire + 2D grid and embers. The still gradient is the no-WebGL / no-JS fallback. */
@@ -565,6 +569,18 @@ html:not(.has-motion) .work-progress { display: none; }
 .about-copy .h2 { font-size: clamp(36px, 4.6vw, 80px); }
 .about-copy p { color: var(--dim); font-size: 18px; max-width: 56ch; }
 .about-copy p strong { color: var(--bone); font-weight: 500; }
+/* The maker's signature under the statement */
+.sig { display: flex; align-items: center; gap: clamp(18px, 2.4vw, 32px); margin: 4px 0 8px; }
+.sig-mark { flex: none; width: clamp(132px, 15vw, 196px); height: auto; overflow: visible; }
+.sig-stroke { fill: none; stroke: #fff; stroke-width: 66; stroke-linecap: round; stroke-linejoin: round; }
+.sig-ink { fill: var(--bone); transition: fill 2.2s var(--ease-out); }
+.sig-mark { transition: filter 2.2s var(--ease-out); }
+.sig-tip { fill: #FFF4D6; opacity: 0; filter: drop-shadow(0 0 18px #FFC247) drop-shadow(0 0 44px #FF8A00); }
+.sig.is-hot .sig-ink { fill: var(--gold); transition: none; }
+.sig.is-hot .sig-mark { filter: drop-shadow(0 0 7px rgba(255, 150, 40, .7)); transition: none; }
+.sig-cap { display: flex; flex-direction: column; gap: 4px; padding-left: clamp(18px, 2.4vw, 32px); border-left: 1px solid var(--line); }
+.sig-cap b { font-size: 18px; font-weight: 600; letter-spacing: -0.02em; }
+.sig-cap span:last-child { color: var(--dim); font-size: 14px; }
 .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
 .fact { background: var(--ink); padding: 22px; display: flex; flex-direction: column; gap: 6px; }
 .fact .label { font-size: 11px; }
@@ -604,6 +620,20 @@ html:not(.has-motion) .tl-fill { transform: none; }
 .quench-cols a, .quench-cols li { color: var(--dim); transition: color .3s var(--ease-out); }
 @media (hover: hover) and (pointer: fine) { .quench-cols a:hover { color: var(--gold); } }
 .quench-cols p { color: var(--dim); max-width: 34ch; }
+/* End credits: a short window the credits roll through, fading at both edges */
+.credits {
+  position: relative; height: clamp(190px, 27vh, 250px); overflow: hidden; margin-top: var(--s-12);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 24%, #000 76%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 24%, #000 76%, transparent);
+}
+.credits-roll { display: flex; flex-direction: column; align-items: center; gap: 30px; padding-block: 8px; text-align: center; will-change: transform; }
+.credits-title { font-size: 12px; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); }
+.credits dl { display: flex; flex-direction: column; gap: 18px; width: min(100%, 620px); }
+.credits dl div { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: baseline; }
+.credits dt { text-align: right; font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--mute); }
+.credits dd { text-align: left; font-size: 15px; font-weight: 500; color: var(--bone); line-height: 1.45; }
+.credits-end { font-size: 14px; color: var(--dim); }
+html:not(.has-motion) .credits { height: auto; -webkit-mask-image: none; mask-image: none; }
 .foot-mark { position: relative; margin-top: 16px; }
 .foot-word {
   display: block; font-weight: 700; letter-spacing: -0.06em; line-height: .78;
@@ -946,6 +976,10 @@ html:not(.has-motion) .cs-steps .tl-fill-x { transform: none; }
 @media (max-width: 1100px), (pointer: coarse) {
   .quench-cols a, .menu-foot a, .back-row .link-u, .proof-text .link-u, .cv-item .link-u, .cv-contact a, .foot-bottom .link-u, .mark-copy .link-u {
     display: inline-flex; align-items: center; min-height: 44px; padding-block: 8px;
+  }
+  /* the taller tap target must not drag the underline away from the words */
+  .back-row .link-u::after, .proof-text .link-u::after, .cv-item .link-u::after, .foot-bottom .link-u::after, .mark-copy .link-u::after {
+    bottom: calc(50% - 0.775em - 4px);
   }
   .quench-cols li + li { margin-top: 0; }
   .cv-item ul .link-u { min-height: 40px; }
