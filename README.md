@@ -149,6 +149,9 @@ Naming: `<film>-main-NN`, `<film>-character-NN`, `<film>-alt-NN`, `<film>-proces
   Recognition; Seylune opens its home page screenshot inside a browser window; Avengers counts up to the 27-character
   cast and demonstrates its before/after slider once; Rolex shows the visitor's own day and date in a Day-Date window;
   the FORGE identity page draws the mark on its construction grid.
+- **Chapter words:** on the home page, each section's chapter name (Heat, Proof, Practice, Mark, Temper, Quench) stands
+  behind it as a large, faint outline that drifts with the scroll and takes one pass of gold heat as the section arrives.
+  It is switched on by `data-fx-chapters` on the `<html>` tag of `index.html`; remove the attribute to switch it off.
 - **Hidden strike:** typing F-O-R-G-E anywhere fires one hammer strike from the logo.
 
 Timings are the `T` values at the top of `forge-fx.js`. Everything is off with reduced motion, and hover
@@ -201,7 +204,7 @@ npx serve .
 ## Updating content
 
 - **After changing CSS or JavaScript:** every page links its stylesheet and scripts with a version stamp
-  (`forge.css?v=20261004g`). Change the stamp in all pages (a find-and-replace across the `.html` files and
+  (`forge.css?v=20261005a`). Change the stamp in all pages (a find-and-replace across the `.html` files and
   `foundry/index.html`) so visitors' browsers fetch the new files instead of an old cached copy.
 
 - **New work in the Foundry:** see "Adding work" above.
