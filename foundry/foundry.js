@@ -11,6 +11,7 @@
   const D = window.FOUNDRY;
   if (!D) return;
   const root = document.documentElement;
+  document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
   const $ = (s, r = document) => r.querySelector(s);
   const motion = root.classList.contains('has-motion');
   const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
