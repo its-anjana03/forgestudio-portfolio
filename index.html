@@ -17,11 +17,9 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://forgestudio.web.lk/assets/img/og/home.jpg">
 <link rel="icon" type="image/svg+xml" href="assets/img/forge-mark.svg">
-<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
-<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap">
-<link rel="stylesheet" href="assets/css/forge.css?v=20261005a">
-<link rel="stylesheet" href="assets/css/forge-fx.css?v=20261005a">
+<link rel="stylesheet" href="assets/css/forge.css?v=20261006c">
+<link rel="stylesheet" href="assets/css/forge-fx.css?v=20261006c">
+<link rel="stylesheet" href="assets/css/forge-strike.css?v=20261006c">
 <script>
   // Motion is opt-in: only hide-then-reveal content when JS runs and the visitor allows motion.
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -32,13 +30,31 @@
   }
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","name":"Thinura Anjana","jobTitle":"Marketing Executive & Creative Designer","worksFor":{"@type":"Organization","name":"Jeewa Education"},"url":"https://forgestudio.web.lk/","alumniOf":{"@type":"CollegeOrUniversity","name":"SLIIT"},"sameAs":["https://www.behance.net/thinuraanjana3","https://www.instagram.com/its_anjana03/","https://www.linkedin.com/in/thinura-anjana-7a4060306"]}
+{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://forgestudio.web.lk/#thinura","name":"Thinura Anjana","jobTitle":"Marketing Executive & Creative Designer","description":"Designer behind FORGE Studio: cinematic posters, brand identity, campaign design and UI/UX.","worksFor":{"@type":"Organization","name":"Jeewa Education"},"url":"https://forgestudio.web.lk/","image":"https://forgestudio.web.lk/assets/img/og/home.jpg","alumniOf":{"@type":"CollegeOrUniversity","name":"SLIIT"},"knowsAbout":["Poster design","Brand identity","Campaign design","UI/UX design","Graphic design"],"award":["Featured on Thanthi TV, 2022","First place of 200, Best Watch Design, Academy of Graphics, 2022"],"sameAs":["https://www.behance.net/thinuraanjana3","https://www.instagram.com/its_anjana03/","https://www.linkedin.com/in/thinura-anjana-7a4060306"]},{"@type":"WebSite","@id":"https://forgestudio.web.lk/#site","name":"FORGE Studio","url":"https://forgestudio.web.lk/","inLanguage":"en","author":{"@id":"https://forgestudio.web.lk/#thinura"}},{"@type":"Organization","@id":"https://forgestudio.web.lk/#studio","name":"FORGE Studio","alternateName":"Master Creations","url":"https://forgestudio.web.lk/","logo":"https://forgestudio.web.lk/assets/img/forge-mark.svg","foundingDate":"2020","founder":{"@id":"https://forgestudio.web.lk/#thinura"},"email":"anjanathinura07@gmail.com"}]}
+</script>
+<link rel="stylesheet" href="assets/css/forge-mode.css?v=20261006c">
+<script>
+  // Light or dark, as last chosen, before the first paint.
+  try { if (localStorage.getItem('forge-theme') === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
 </script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="grain" aria-hidden="true"></div>
 <div class="cursor" aria-hidden="true"><span class="cursor-label"></span></div>
+
+<!-- First visit: choose how to enter. The click also lets the browser start the music. -->
+<div class="door" hidden>
+  <div class="door-in">
+    <svg class="door-mark" viewBox="0 0 2962 2488" aria-hidden="true"><use href="#mark-solid"/></svg>
+    <p class="door-q">How would you like to enter?</p>
+    <div class="door-acts">
+      <button class="btn" type="button" data-door="on">Enter with sound</button>
+      <button class="btn ghost" type="button" data-door="off">Enter silent</button>
+    </div>
+    <p class="door-note">You can change this any time with the sound bars at the top.</p>
+  </div>
+</div>
 
 <!-- ================= NAV ================= -->
 <header class="nav" id="nav">
@@ -52,8 +68,16 @@
     <a href="#about">About</a>
     <a href="resume.html">Resume</a>
   </nav>
+  <div class="nav-right">
+  <span class="nav-sound" data-sound-slot></span>
+  <button class="theme-btn" type="button" role="switch" aria-checked="false" aria-label="Light mode">
+    <span class="ts-knob" aria-hidden="true"></span>
+    <svg class="ts-ico ts-flame" viewBox="0 0 16 16" aria-hidden="true"><path d="M8.3 1.2c.4 2.6 3.5 4 3.5 7.6a3.8 3.8 0 0 1-7.6 0c0-1.6.7-2.7 1.6-3.6.1 1.1.6 1.8 1.3 2.1-.2-2.3.2-4.3 1.2-6.1Z"/></svg>
+    <svg class="ts-ico ts-sun" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="2.7"/><path d="M8 1.3v1.9M8 12.8v1.9M1.3 8h1.9M12.8 8h1.9M3.3 3.3l1.3 1.3M11.4 11.4l1.3 1.3M3.300 12.7l1.3-1.3M11.4 4.600l1.3-1.3"/></svg>
+  </button>
   <a class="nav-status" href="#contact"><span class="pulse" aria-hidden="true"></span>Start a project</a>
   <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span class="mb-bar"></span><span class="mb-bar"></span><span class="mb-spark" aria-hidden="true"></span></button>
+  </div>
 </header>
 
 <div class="menu" id="menu">
@@ -100,6 +124,20 @@
       </feTurbulence>
       <feDisplacementMap class="haze-map" in="SourceGraphic" in2="n" scale="0" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
+    <!-- The hero mark's own gradient: forge.js cools it from heated gold to steel when the mode changes -->
+    <linearGradient id="markG" gradientUnits="userSpaceOnUse" x1="2750" y1="80" x2="250" y2="2420">
+      <stop offset="0" stop-color="#FFE7A6"/><stop offset=".32" stop-color="#FFC247"/><stop offset=".62" stop-color="#FF8A00"/><stop offset=".86" stop-color="#7A3510"/><stop offset="1" stop-color="#2B2B2B"/>
+    </linearGradient>
+    <!-- Light mode: the mark struck back to heat, in the burnt ember of the light palette -->
+    <linearGradient id="emberG" gradientUnits="userSpaceOnUse" x1="2750" y1="80" x2="250" y2="2420">
+      <stop offset="0" stop-color="#D9730D"/><stop offset=".4" stop-color="#B85400"/><stop offset=".75" stop-color="#7A3510"/><stop offset="1" stop-color="#2B2B2B"/>
+    </linearGradient>
+    <!-- Light mode: the mark as cooled steel -->
+    <linearGradient id="steelG" gradientUnits="userSpaceOnUse" x1="2750" y1="80" x2="250" y2="2420">
+      <stop offset="0" stop-color="#625E58"/>
+      <stop offset=".45" stop-color="#302F2D"/>
+      <stop offset="1" stop-color="#161514"/>
+    </linearGradient>
     <linearGradient id="whiteHotG" gradientUnits="userSpaceOnUse" x1="2750" y1="80" x2="250" y2="2420">
       <stop offset="0" stop-color="#FFFFFF"/>
       <stop offset=".5" stop-color="#FFF4D6"/>
@@ -293,11 +331,15 @@
 </section>
 
 <!-- ================= 04 STRIKE / WORK ================= -->
+<!-- Chapter transition: the word STRIKE, with the section's label above it -->
+<div class="strike-chapter">
+  <div class="wrap"><p class="label strike-label"><b>03</b><span>/ Selected work</span><i aria-hidden="true"></i></p></div>
+  <div class="strike-word" aria-hidden="true"><span class="strike-base">STRIKE</span><span class="strike-hot">STRIKE</span><span class="strike-haze">STRIKE</span></div>
+</div>
 <section class="sec work" id="work" data-chapter="Strike" aria-labelledby="work-h">
   <div class="work-pin">
     <div class="work-track">
       <div class="work-intro">
-        <span class="label"><b>03</b> Selected work</span>
         <h2 class="h2" id="work-h">Six projects.<br><span class="gold">Three disciplines.</span></h2>
         <p class="lede">Posters, brands and product screens from 2022 to 2026. Each one opens into the full process.</p>
       </div>
@@ -442,7 +484,7 @@
       <span class="label" data-reveal><b>06</b> About</span>
       <h2 class="h2" id="about-h" data-lines>I taught myself design in 2019 with free YouTube tutorials and a copy of Photoshop.</h2>
       <p data-reveal>I'm <strong>Thinura Anjana</strong>, Marketing Executive at <strong>Jeewa Education</strong> and the designer behind FORGE Studio. I started designing the year I finished my O/Ls and took on my first client work in 2020.</p>
-      <p data-reveal>Seven years on, my work has aired on Indian television, placed first out of two hundred entries, and grown into <strong>FORGE Studio</strong>: a practice where cinematic design meets campaigns and digital product thinking.</p>
+      <p data-reveal><span data-since="2019">Seven</span> years on, my work has aired on Indian television, placed first out of two hundred entries, and grown into <strong>FORGE Studio</strong>: a practice where cinematic design meets campaigns and digital product thinking.</p>
       <p data-reveal>Alongside work, I'm reading for a <strong>BBA (Hons) specialising in Management Information Systems</strong> at SLIIT, and I design event campaigns as Co-Editor of the SLIIT Business School Student Community.</p>
 
       <!-- The maker signs the work: drawn stroke by stroke in hot gold, then it cools -->
@@ -564,7 +606,7 @@
   </div>
   <div class="foot-mark" aria-hidden="true"><span class="foot-word wrap">FORGE</span></div>
   <div class="wrap foot-bottom">
-    <span>© 2026 FORGE Studio · Thinura Anjana</span>
+    <span>© <span data-year>2026</span> FORGE Studio · Thinura Anjana</span>
     <a href="#top" class="link-u">Back to the heat ↑</a>
   </div>
 </footer>
@@ -581,11 +623,12 @@
   </div>
 </dialog>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
-<script src="assets/js/forge-sound.js?v=20261005a" defer></script>
-<script src="assets/js/forge.js?v=20261005a" defer></script>
-<script src="assets/js/forge-fx.js?v=20261005a" defer></script>
+<script src="assets/vendor/gsap.min.js" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="assets/vendor/lenis.min.js" defer></script>
+<script src="assets/js/forge-sound.js?v=20261006c" defer></script>
+<script src="assets/js/forge.js?v=20261006c" defer></script>
+<script src="assets/js/forge-fx.js?v=20261006c" defer></script>
+<script src="assets/js/forge-strike.js?v=20261006c" defer></script>
 </body>
 </html>

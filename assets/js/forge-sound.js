@@ -236,6 +236,18 @@
       o.start(t); o.stop(t + 2.7);
     });
   }
+  // The quench: hot metal into water. A soft hiss that falls and thins out (rises and warms when relit).
+  function hiss(cooling = true) {
+    if (!on || !ctx || ctx.state !== 'running') return;
+    const t = ctx.currentTime;
+    const n = ctx.createBufferSource(), hp = ctx.createBiquadFilter(), g = ctx.createGain();
+    n.buffer = noiseBuffer(1.5);
+    hp.type = 'highpass'; hp.Q.value = 0.4;
+    hp.frequency.setValueAtTime(cooling ? 5200 : 1400, t); hp.frequency.exponentialRampToValueAtTime(cooling ? 1800 : 4200, t + 1.1);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.085, t + 0.12); g.gain.exponentialRampToValueAtTime(0.0001, t + 1.35);
+    n.connect(hp); hp.connect(g); g.connect(impactBus); g.connect(verb);
+    n.start(t); n.stop(t + 1.5);
+  }
 
   /* ---------- the switch ---------- */
   const btn = document.createElement('button');
@@ -315,7 +327,9 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 
   window.ForgeSound = {
-    impact, mood, isOn: () => on,
+    impact, hiss, mood, isOn: () => on,
+    // Turn sound on or off from elsewhere (call it inside a click, so the browser lets the music start).
+    set: (v) => { if (!!v !== on) btn.click(); else store.set('forge-sound', on ? 'on' : 'off'); },
     // For checking what is playing (console, tests).
     state: () => ({
       on, playing, waiting, hasTrack, crossing, ctx: ctx && ctx.state, active,

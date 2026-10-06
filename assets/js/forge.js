@@ -10,6 +10,15 @@
   const motion = html.classList.contains('has-motion') && !!window.gsap && !!window.ScrollTrigger;
   if (!motion) html.classList.remove('has-motion');
 
+  /* ---------------- Dates that keep themselves right ---------------- */
+  const YEAR = new Date().getFullYear();
+  $$('[data-year]').forEach((el) => { el.textContent = YEAR; });
+  // "Seven years on": counted from the year in data-since, so the sentence is still true next year
+  const COUNT = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen', 'Twenty'];
+  $$('[data-since]').forEach((el) => { const n = YEAR - Number(el.dataset.since); if (n > 0) el.textContent = COUNT[n] || String(n); });
+  // Theme: dark is the forge at night, light is the morning after (ash and smoke). Canvases read this every frame.
+  let light = html.dataset.theme === 'light';
+
   const POSTERS = [
     ['Leo', 2023, 'leo-poster'], ['Avengers: Doomsday', 2025, 'avengers-poster'],
     ['Jana Nayagan', 2026, 'jana-nayagan-poster'], ['John Wick: Chapter 4', 2024, 'john-wick-poster'],
@@ -46,6 +55,111 @@
   }
   const scrollToY = (y) => (lenis ? lenis.scrollTo(y, { duration: 1.4 }) : window.scrollTo({ top: y, behavior: motion ? 'smooth' : 'auto' }));
 
+  /* ---------------- Theme switch: the fire burns out, in front of you ----------------
+     Nothing covers the page. mode.k runs from 0 (dark) to 1 (light) over a few seconds and everything reads it
+     live: the flames gutter and die, smoke thickens, daylight comes through it, embers give way to ash, the
+     mark cools from gold through dull red to steel, and the page's own colours follow (text glows ember as it
+     crosses, so it never disappears against the changing background). Going back, the coals catch again. */
+  const themeBtn = $('.theme-btn');
+  const themeMeta = $('meta[name="theme-color"]');
+  const mode = { k: light ? 1 : 0 };
+  // Parts of the page that play their own small part in a mode change register here.
+  const modeSubs = [], modeStarts = [];
+  const onMode = (fn) => modeSubs.push(fn), onModeStart = (fn) => modeStarts.push(fn);
+  const ss = (x) => { const v = Math.min(1, Math.max(0, x)); return v * v * (3 - 2 * v); };
+  const rgb = (h) => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
+  // dark, light, and (optionally) what it passes through on the way
+  const TOK = {
+    '--ink': ['#0A0908', '#E8E3D9'], '--ink-2': ['#121110', '#DED8CC'], '--steel': ['#2B2B2B', '#D2CCC0'], '--steel-2': ['#3A3936', '#BDB6A9'],
+    '--bone': ['#F4EFE6', '#181614', '#FF9A2E'], '--dim': ['#A8A196', '#4F4A44', '#D9781F'], '--mute': ['#8A8378', '#6B655C', '#B8651A'],
+    '--gold': ['#FFC247', '#9A4A00', '#FF8A00'], '--ember': ['#FF8A00', '#C25A00'],
+  };
+  Object.keys(TOK).forEach((n) => { TOK[n] = TOK[n].map(rgb); });
+  const SURFACE = { '--ink': 1, '--ink-2': 1, '--steel': 1, '--steel-2': 1 };
+  // The hero mark has its own gradient: heated gold, dull red as it loses its heat, cooled steel.
+  const MARK = [['#FFE7A6', '#B5651D', '#625E58'], ['#FFC247', '#8A3D12', '#454340'], ['#FF8A00', '#5A2410', '#302F2D'], ['#7A3510', '#32180F', '#1E1D1B'], ['#2B2B2B', '#1E1614', '#161514']].map((s) => s.map(rgb));
+  const markStops = $$('#markG stop');
+  const mix3 = (a, b, t) => `rgb(${Math.round(a[0] + (b[0] - a[0]) * t)}, ${Math.round(a[1] + (b[1] - a[1]) * t)}, ${Math.round(a[2] + (b[2] - a[2]) * t)})`;
+  const via = (d, m, l, t) => (t < 0.5 ? mix3(d, m, t * 2) : mix3(m, l, t * 2 - 1));
+  const paintMode = (resting) => {
+    const k = mode.k;
+    markStops.forEach((s, i) => { s.style.stopColor = via(MARK[i][0], MARK[i][1], MARK[i][2], ss((k - 0.1) / 0.8)); });
+    // The change travels: the nav (next to the switch) goes first, then the page, then the readouts at the foot.
+    // Sections on screen follow in order from the top of the window down, so the change is seen to pass through.
+    if (!areas) {
+      areas = [[html, 0.14], [$('#nav'), 0], [$('.heat-meter'), 0.28], [$('.scroll-cue'), 0.28]].filter(([el]) => el);
+      if (!resting) $$('.sec, footer.quench, .cs-hero, main > section').forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < innerHeight && !areas.some(([a]) => a === el)) areas.push([el, 0.04 + 0.24 * Math.min(1, Math.max(0, r.top / innerHeight))]);
+      });
+    }
+    areas.forEach(([el, lag]) => {
+      const st = el.style;
+      if (resting) { Object.keys(TOK).forEach((n) => st.removeProperty(n)); st.removeProperty('--line'); st.removeProperty('--line-2'); return; }
+      const kl = Math.min(1, Math.max(0, (k - lag) / 0.72));
+      const bgK = ss((kl - 0.3) / 0.55); // surfaces lighten a little after the fire starts to fail
+      Object.keys(TOK).forEach((n) => {
+        const [d, l, m] = TOK[n];
+        st.setProperty(n, SURFACE[n] ? mix3(d, l, bgK) : (m ? via(d, m, l, kl) : mix3(d, l, kl)));
+      });
+      const lc = kl < 0.5 ? '244, 239, 230' : '24, 22, 20', la = Math.abs(kl - 0.5) * 2;
+      st.setProperty('--line', `rgba(${lc}, ${(0.13 * la).toFixed(3)})`); st.setProperty('--line-2', `rgba(${lc}, ${(0.24 * la).toFixed(3)})`);
+    });
+  };
+  let areas = null;
+  const applyTheme = (to) => {
+    light = to === 'light';
+    if (light) html.dataset.theme = 'light'; else delete html.dataset.theme;
+    if (themeMeta) themeMeta.content = light ? '#E8E3D9' : '#0A0908';
+  };
+  applyTheme(light ? 'light' : 'dark');
+  if (themeBtn) themeBtn.setAttribute('aria-checked', String(light));
+  paintMode(true);
+  let modeTween = null;
+  const setMode = (to) => {
+    const target = to === 'light' ? 1 : 0;
+    if (themeBtn) themeBtn.setAttribute('aria-checked', String(target === 1)); // the knob slides at once; the scene follows
+    if (!motion || document.hidden) { mode.k = target; applyTheme(to); paintMode(true); return; }
+    if (modeTween) modeTween.kill();
+    paintMode(true); areas = null; // measure afresh which sections are on screen
+    html.classList.add('mode-shift');
+    modeStarts.forEach((fn) => fn(to));
+    modeTween = gsap.to(mode, {
+      k: target, duration: 3.6 * Math.max(0.35, Math.abs(target - mode.k)), ease: 'sine.inOut',
+      onUpdate: () => {
+        // the stylesheet's own mode rules change hands at the midpoint, when the 2D layers are at their faintest
+        if ((mode.k >= 0.5) !== light) applyTheme(mode.k >= 0.5 ? 'light' : 'dark');
+        paintMode(false);
+        modeSubs.forEach((fn) => fn(mode.k));
+      },
+      onComplete: () => {
+        applyTheme(to); paintMode(true); areas = null; modeSubs.forEach((fn) => fn(mode.k));
+        html.classList.remove('mode-shift'); modeTween = null;
+        $$('.mode-glow, .mode-warm').forEach((el) => el.classList.remove('mode-glow', 'mode-warm'));
+      },
+    });
+  };
+  // Away from the hero the page still takes part: headings on screen glow in turn as the heat passes, and the
+  // artwork on screen warms for a moment, like something held near the fire.
+  onModeStart(() => {
+    const seen = (el) => { const r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight && r.width > 0 ? r : null; };
+    $$('.h2, .h3, .display, .manifesto, .cs-title').forEach((el) => {
+      const r = seen(el); if (!r) return;
+      el.style.setProperty('--mi', Math.min(1, Math.max(0, r.top / innerHeight)).toFixed(2)); el.classList.add('mode-glow');
+    });
+    let n = 0;
+    $$('main img, footer img').forEach((el) => {
+      const r = n < 14 && seen(el); if (!r) return; n++;
+      el.style.setProperty('--mi', Math.min(1, Math.max(0, r.top / innerHeight)).toFixed(2)); el.classList.add('mode-warm');
+    });
+  });
+  if (themeBtn) themeBtn.addEventListener('click', () => {
+    const to = themeBtn.getAttribute('aria-checked') === 'true' ? 'dark' : 'light'; // also reverses a change that is still running
+    try { localStorage.setItem('forge-theme', to); } catch (e) { /* private mode: the choice lasts for this page */ }
+    track('theme', to);
+    if (window.ForgeSound && window.ForgeSound.hiss) window.ForgeSound.hiss(to === 'light');
+    setMode(to);
+  });
   /* ---------------- Nav + menu ---------------- */
   const nav = $('#nav');
   const menuBtn = $('.menu-btn');
@@ -506,8 +620,15 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       applyZoom();
     };
+    markSvg.setAttribute('preserveAspectRatio', 'none'); // like the veil, so the mark and its hole can never drift apart
     layout();
     ScrollTrigger.addEventListener('refreshInit', layout);
+    // A resized window re-measures the pinned hero even if ScrollTrigger's own refresh is skipped or late.
+    let rzT = 0, rzW = innerWidth, rzH = innerHeight;
+    window.addEventListener('resize', () => {
+      clearTimeout(rzT);
+      rzT = setTimeout(() => { if (innerWidth === rzW && innerHeight === rzH) return; rzW = innerWidth; rzH = innerHeight; ScrollTrigger.refresh(); }, 260);
+    });
 
     const toScreen = (x, y) => [L.ox + x * L.s, L.oy + y * L.s];
     const edgePoint = () => {
@@ -521,9 +642,10 @@
     const parts = [], rings = [];
     let sparksOn = true, rafId = 0, shed = 0;
     const emberCount = small ? 18 : 38;
+    // Dark: embers rise from the fire. Light: ash sinks from the smoke.
     const ember = () => ({
-      x: Math.random() * L.W, y: L.H + Math.random() * L.H * 0.4, vx: (Math.random() - 0.5) * 0.25,
-      vy: -(0.25 + Math.random() * 0.6), life: 1, decay: 0, r: 0.6 + Math.random() * 1.6, ember: true, f: Math.random() * 6,
+      x: Math.random() * L.W, y: light ? -Math.random() * L.H * 0.4 : L.H + Math.random() * L.H * 0.4, vx: (Math.random() - 0.5) * 0.25,
+      vy: light ? 0.18 + Math.random() * 0.4 : -(0.25 + Math.random() * 0.6), life: 1, decay: 0, r: 0.6 + Math.random() * 1.6, ember: true, f: Math.random() * 6,
     });
     for (let i = 0; i < emberCount; i++) { const p = ember(); p.y = Math.random() * L.H; parts.push(p); }
     const burst = (x, y, n, power = 1) => {
@@ -535,7 +657,7 @@
     const ring = (x, y, max, w = 2) => rings.push({ x, y, r: 6, max, w, life: 1 });
     const tick = () => {
       ctx.clearRect(0, 0, L.W, L.H);
-      ctx.globalCompositeOperation = 'lighter';
+      ctx.globalCompositeOperation = light ? 'source-over' : 'lighter'; // light adds nothing to pale paper
       const h = heat.v * Math.max(0, 1 - zoom.p * 4);
       // While the mark heats, it sheds sparks from its edges and pulls the embers in.
       if (h > 0.02) {
@@ -553,16 +675,19 @@
           p.f += 0.05;
           if (h > 0.02) { p.vx += (pcx - p.x) * 0.00003 * h; p.vy += (pcy - p.y) * 0.00003 * h; p.vx *= 0.985; }
           p.x += p.vx + Math.sin(p.f) * 0.2; p.y += p.vy;
-          if (p.y < -10 || p.y > L.H + L.H * 0.5) Object.assign(p, ember());
+          if (p.y < (light ? -L.H * 0.5 : -10) || p.y > L.H + (light ? 10 : L.H * 0.5)) Object.assign(p, ember());
           const a = 0.35 + Math.sin(p.f * 1.7) * 0.2 + h * 0.35;
-          ctx.fillStyle = `rgba(255, ${150 + Math.round(Math.sin(p.f) * 40 + h * 60)}, ${40 + Math.round(h * 80)}, ${a})`;
+          // Ash is grey until the mark heats again, then it catches.
+          if (light) ctx.fillStyle = `rgba(${70 + Math.round(h * 150)}, ${64 + Math.round(h * 30)}, ${58 - Math.round(h * 50)}, ${a * (0.6 + h * 0.4)})`;
+          else ctx.fillStyle = `rgba(255, ${150 + Math.round(Math.sin(p.f) * 40 + h * 60)}, ${40 + Math.round(h * 80)}, ${a})`;
           ctx.beginPath(); ctx.arc(p.x, p.y, Math.max(0.1, p.r * (1 + h * 0.6)), 0, 6.283); ctx.fill();
           continue;
         }
         p.vx *= 0.96; p.vy = p.vy * 0.96 + 0.18; p.x += p.vx; p.y += p.vy; p.life -= p.decay;
         if (p.life <= 0) { parts.splice(i, 1); continue; }
         const g = Math.round(140 + 115 * p.life), b = Math.round(60 + 180 * Math.max(0, p.life - 0.6));
-        ctx.strokeStyle = `rgba(255, ${g}, ${b}, ${Math.min(1, p.life * 1.4)})`;
+        ctx.strokeStyle = light ? `rgba(${150 + Math.round(80 * p.life)}, ${Math.round(40 + 70 * p.life)}, 0, ${Math.min(1, p.life * 1.4)})`
+          : `rgba(255, ${g}, ${b}, ${Math.min(1, p.life * 1.4)})`;
         ctx.lineWidth = p.r;
         ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p.x - p.vx * 2.4, p.y - p.vy * 2.4); ctx.stroke();
       }
@@ -570,7 +695,7 @@
         const r = rings[i];
         r.r += (r.max - r.r) * 0.09; r.life -= 0.028;
         if (r.life <= 0) { rings.splice(i, 1); continue; }
-        ctx.strokeStyle = `rgba(255, ${200 - Math.round((1 - r.life) * 80)}, 90, ${r.life * 0.8})`;
+        ctx.strokeStyle = light ? `rgba(70, 62, 54, ${r.life * 0.45})` : `rgba(255, ${200 - Math.round((1 - r.life) * 80)}, 90, ${r.life * 0.8})`;
         ctx.lineWidth = r.w * r.life;
         ctx.beginPath(); ctx.arc(r.x, r.y, Math.max(0.1, r.r), 0, 6.283); ctx.stroke();
       }
@@ -587,6 +712,14 @@
         setTimeout(() => burst(sx, sy, small ? 14 : 26, 1), i * 40);
       });
     };
+    // Mode change, at the mark: it shimmers in its own heat haze while it cools or reheats, and throws a last
+    // scatter of sparks as the fire goes out (or welds again as it returns).
+    onMode((k) => { if (zoom.p < 0.02 && heat.v < 0.02) { haze.v = Math.sin(k * Math.PI) * 0.4; applyHaze(); } });
+    onModeStart((to) => {
+      if (zoom.p > 0.02) return;
+      if (to === 'dark') { setTimeout(weldBurst, 1500); return; }
+      for (let i = 0; i < 12; i++) { const [x, y] = edgePoint(); setTimeout(() => burst(x, y, small ? 3 : 7, 0.55), i * 70); }
+    });
     if (fine) {
       let last = 0;
       hero.addEventListener('pointermove', (e) => {
@@ -628,7 +761,7 @@
         #else
         precision mediump float;
         #endif
-        uniform vec2 uRes; uniform float uTime, uHeat, uFlare, uAmp; uniform vec2 uPtr;
+        uniform vec2 uRes; uniform float uTime, uHeat, uFlare, uAmp, uLight; uniform vec2 uPtr;
         float hash(vec2 p) { vec3 p3 = fract(vec3(p.xyx) * 0.1031); p3 += dot(p3, p3.yzx + 33.33); return fract((p3.x + p3.y) * p3.z); }
         float noise(vec2 p) {
           vec2 i = floor(p), f = fract(p), u = f * f * (3.0 - 2.0 * f);
@@ -644,15 +777,53 @@
           vec3 ink = vec3(0.039, 0.035, 0.031);
           float cx = uv.x - 0.5;
           float breathe = 0.93 + 0.07 * sin(t * 1.05);
-          float energy = (0.86 + 0.24 * uHeat) * (1.0 + 0.35 * uFlare) * breathe;
+          float fireK = 1.0 - smoothstep(0.0, 0.55, uLight); // the fire fails first, before the daylight comes
+          float energy = (0.86 + 0.24 * uHeat) * (1.0 + 0.35 * uFlare) * breathe * fireK;
           float H = mix(0.24, 0.34, smoothstep(0.6, 1.6, asp)); // flame height: lower on portrait screens
           // heat shimmer in the air above the fire
           p.x += (noise(p * vec2(9.0, 5.0) + vec2(0.0, -t * 2.6)) - 0.5) * (0.005 + 0.008 * uHeat) * smoothstep(0.7, 0.0, uv.y);
 
+          // Light mode, the morning after: the fire is out. Smoke climbs off a bed of dying coals into daylight.
+          vec3 lc = vec3(0.0);
+          if (uLight > 0.001) {
+            vec3 paper = vec3(0.910, 0.890, 0.851);
+            lc = paper * (1.0 - 0.09 * exp(-uv.y * 2.6)); // daylight thins toward the floor, where the ash lies
+            // tall, slow plumes that lean and fold as they climb; thicker over the hearth
+            vec2 sq = vec2(p.x * 1.15, uv.y * 1.25) + vec2(t * 0.018, -t * 0.055);
+            vec2 sw = vec2(fbm3(sq * 1.05 + vec2(0.0, t * 0.03)), fbm3(sq * 1.05 + vec2(3.3, 8.1 - t * 0.018)));
+            float sm = fbm(sq * 1.25 + (sw - 0.5) * 2.6);
+            float hearth = 0.5 + 0.5 * exp(-cx * cx * 5.0);
+            float dens = smoothstep(0.34, 0.8, sm) * smoothstep(1.02, 0.1, uv.y) * hearth * (0.8 + 0.35 * uHeat + 0.5 * uFlare);
+            vec3 smoke = mix(vec3(0.63, 0.61, 0.585), vec3(0.34, 0.325, 0.31), smoothstep(0.45, 0.85, sm));
+            // the copy stays readable: thinner smoke behind the headline (left) and paragraph (right) on wide screens
+            float copyZone = smoothstep(0.14, 0.34, abs(cx)) * smoothstep(0.42, 0.16, uv.y) * smoothstep(1.0, 1.4, asp);
+            lc = mix(lc, smoke, clamp(dens, 0.0, 1.0) * 0.6 * (1.0 - 0.7 * copyZone * (1.0 - uHeat)));
+            // the hearth, burnt out: a low heap of grey-white ash and charcoal along the floor. Only thin cracks
+            // still hold a dull red, pulsing slowly; heat and strikes wake them for a moment.
+            float heapH = (0.014 + 0.02 * fbm3(vec2(p.x * 2.6, 3.0)) + 0.028 * exp(-cx * cx * 7.0) + 0.004 * noise(vec2(p.x * 26.0, 1.0))) * min(1.0, asp * 0.8 + 0.2);
+            float heap = smoothstep(heapH + 0.006, heapH - 0.004, uv.y);
+            lc = mix(lc, lc * 0.9, smoothstep(heapH + 0.07, heapH, uv.y) * (1.0 - heap) * 0.6); // the heap's soft shadow in the smoke
+            vec2 hp = vec2(p.x, uv.y * 2.0);
+            // soft, powdery grey: gentle mottling, a scatter of small charcoal specks, nothing bright
+            vec3 ash = mix(vec3(0.775, 0.76, 0.735), vec3(0.64, 0.625, 0.6), smoothstep(0.3, 0.75, fbm(hp * 7.0)));
+            ash = mix(ash, vec3(0.42, 0.4, 0.38), smoothstep(0.74, 0.86, noise(hp * vec2(150.0, 190.0) + 4.0)) * 0.6);
+            ash *= 0.86 + 0.14 * smoothstep(0.0, heapH, uv.y);                                                 // darker toward the floor
+            // the last of the heat: a few small points of dull red deep in the ash, breathing slowly
+            float warm = smoothstep(0.5, 0.78, fbm3(vec2(p.x * 2.4, t * 0.04)) + 0.3 * uHeat + 0.45 * uFlare);
+            float glint = smoothstep(0.84, 0.94, noise(hp * vec2(70.0, 95.0) + 9.0)) * warm * smoothstep(heapH, heapH * 0.35, uv.y);
+            glint *= 0.5 + 0.3 * sin(t * 0.8 + p.x * 11.0) + 0.6 * uHeat + 0.9 * uFlare;
+            ash = mix(ash, vec3(0.6, 0.13, 0.03), clamp(glint, 0.0, 0.85));
+            ash = mix(ash, vec3(1.0, 0.5, 0.1), clamp(glint - 0.85, 0.0, 0.5));
+            lc = mix(lc, ash, heap);
+            lc = mix(paper, lc, uAmp);
+            lc += (hash(gl_FragCoord.xy + fract(t) * 100.0) - 0.5) / 255.0;
+          }
+          if (uLight > 0.999) { gl_FragColor = vec4(lc, 1.0); return; }
+
           vec3 col = ink;
           // furnace light hanging in the air
           float g = exp(-uv.y * 3.2) * (0.45 + 0.55 * exp(-cx * cx * 4.0));
-          col += vec3(0.62, 0.15, 0.02) * g * (0.3 + 0.2 * uHeat + 0.5 * uFlare) * breathe;
+          col += vec3(0.62, 0.15, 0.02) * g * (0.3 + 0.2 * uHeat + 0.5 * uFlare) * breathe * fireK;
 
           // smoke, lit from below
           float dens = 0.0;
@@ -662,7 +833,8 @@
             float sm = fbm(sq * 1.3 + (sw - 0.5) * 2.4);
             float side = 0.45 + 0.55 * smoothstep(0.04, 0.4, abs(cx));
             dens = smoothstep(0.36, 0.74, sm) * smoothstep(0.9, 0.08, uv.y) * side;
-            float lit = clamp(exp(-uv.y * 1.8) * (0.95 + 0.35 * uHeat + 0.8 * uFlare) * breathe * (0.55 + 0.6 * sm), 0.0, 1.0);
+            dens = min(1.0, dens * (1.0 + 1.6 * sin(uLight * 3.14159))); // a dying fire throws its thickest smoke
+            float lit = clamp(exp(-uv.y * 1.8) * (0.95 + 0.35 * uHeat + 0.8 * uFlare) * breathe * (0.55 + 0.6 * sm) * (0.15 + 0.85 * fireK), 0.0, 1.0);
             col = mix(col, mix(vec3(0.055, 0.04, 0.035), vec3(0.74, 0.26, 0.07), lit), dens * 0.85);
           }
 
@@ -686,6 +858,11 @@
           float copyZone = smoothstep(0.14, 0.34, abs(cx)) * smoothstep(0.4, 0.16, uv.y) * smoothstep(0.0, 0.1, uv.y) * smoothstep(1.0, 1.4, asp);
           col *= 1.0 - 0.38 * copyZone * (1.0 - uHeat);
           col = mix(ink, col, uAmp);
+          // daylight arrives unevenly, through the smoke, rather than as a flat fade
+          if (uLight > 0.001) {
+            float day = (uLight - 0.3) / 0.62 + (fbm3(p * 1.7 + vec2(0.0, -t * 0.06)) - 0.5) * 0.55 * sin(uLight * 3.14159);
+            col = mix(col, lc, smoothstep(0.0, 1.0, day));
+          }
           col += (hash(gl_FragCoord.xy + fract(t) * 100.0) - 0.5) / 255.0;
           gl_FragColor = vec4(col, 1.0);
         }`;
@@ -708,13 +885,14 @@
           gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
           const loc = gl.getAttribLocation(prog, 'a');
           gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-          ['uRes', 'uTime', 'uHeat', 'uFlare', 'uAmp', 'uPtr'].forEach((n) => { U[n] = gl.getUniformLocation(prog, n); });
+          ['uRes', 'uTime', 'uHeat', 'uFlare', 'uAmp', 'uLight', 'uPtr'].forEach((n) => { U[n] = gl.getUniformLocation(prog, n); });
         }
       } catch (err) { gl = null; }
       const noGL = () => { gl = null; bg.classList.add('no-gl'); };
       if (!gl) noGL();
       fireCv.addEventListener('webglcontextlost', (e) => { e.preventDefault(); noGL(); });
 
+      let fxD = 1; // device scale of the 2D layer, for restoring its transform after a rotated draw
       const bgResize = () => {
         const W = hero.clientWidth, H = hero.clientHeight, dpr = window.devicePixelRatio || 1;
         // Fire is soft, so it renders at reduced resolution; the grid and embers stay crisp.
@@ -723,7 +901,7 @@
         if (gl) gl.viewport(0, 0, fireCv.width, fireCv.height);
         const fd = Math.min(dpr, small ? 1.5 : 2);
         fx.width = Math.round(W * fd); fx.height = Math.round(H * fd);
-        fctx.setTransform(fd, 0, 0, fd, 0, 0);
+        fctx.setTransform(fd, 0, 0, fd, 0, 0); fxD = fd;
       };
       bgResize();
       ScrollTrigger.addEventListener('refreshInit', bgResize);
@@ -756,6 +934,37 @@
         r.addColorStop(0.45, 'rgba(255, 128, 10, .22)'); r.addColorStop(1, 'rgba(255, 100, 0, 0)');
         g.fillStyle = r; g.fillRect(0, 0, 64, 64);
       }
+      // Light mode sprites: a live coal (drawn normally, not added) and a soft out-of-focus ash flake.
+      const dot = (stops) => {
+        const c = document.createElement('canvas'); c.width = c.height = 64;
+        const g = c.getContext('2d'), r = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+        stops.forEach(([o, col]) => r.addColorStop(o, col));
+        g.fillStyle = r; g.fillRect(0, 0, 64, 64);
+        return c;
+      };
+      const coalSprite = dot([[0, 'rgba(255, 150, 30, 1)'], [0.22, 'rgba(232, 96, 0, .8)'], [0.55, 'rgba(214, 80, 0, .2)'], [1, 'rgba(214, 80, 0, 0)']]);
+      const ashSprite = dot([[0, 'rgba(120, 114, 106, .5)'], [0.5, 'rgba(120, 114, 106, .24)'], [1, 'rgba(120, 114, 106, 0)']]);
+      // Real ash is torn, not round: each flake is an irregular scrap, pale where it burnt through and darker at
+      // the edges, with a few holes eaten into it.
+      const flakes = [['#C9C4BB', '#8F8A82'], ['#B4AEA5', '#6F6A63'], ['#DAD5CC', '#A39D94'], ['#7C766F', '#3E3A36'], ['#5A5550', '#2A2725'], ['#A8A299', '#57524D']].map(([pale, edge], k) => {
+        const c = document.createElement('canvas'); c.width = c.height = 48;
+        const g = c.getContext('2d');
+        let seed = 7 + k * 13;
+        const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+        const n = 7 + Math.floor(rnd() * 4);
+        g.beginPath();
+        for (let i = 0; i < n; i++) {
+          const a = (i / n) * 6.283 + rnd() * 0.5, r = 9 + rnd() * 13;
+          g[i ? 'lineTo' : 'moveTo'](24 + Math.cos(a) * r, 24 + Math.sin(a) * r * (0.55 + rnd() * 0.3));
+        }
+        g.closePath();
+        const gr = g.createRadialGradient(22, 22, 2, 24, 24, 22);
+        gr.addColorStop(0, pale); gr.addColorStop(1, edge);
+        g.fillStyle = gr; g.fill();
+        g.globalCompositeOperation = 'destination-out';
+        for (let i = 0; i < 3; i++) { g.beginPath(); g.arc(14 + rnd() * 20, 16 + rnd() * 16, 1 + rnd() * 2.2, 0, 6.283); g.fill(); }
+        return c;
+      });
 
       // Energy pulses run along the lattice into the mark, as if feeding it.
       const pulses = [], ripples = [];
@@ -779,24 +988,26 @@
         const z = Math.random(), bokeh = z > 0.93, W = L.W || innerWidth, H = L.H || innerHeight;
         const u = Math.random() < 0.6 ? 0.5 + ((Math.random() + Math.random() + Math.random()) / 3 - 0.5) * 1.7 : Math.random();
         const max = 2.5 + Math.random() * 4;
-        return { x: u * W, y: fresh ? Math.random() * H : H + 10 + Math.random() * 60, z, bokeh,
+        return { x: u * W, y: fresh ? Math.random() * H : (light ? -10 - Math.random() * 60 : H + 10 + Math.random() * 60), z, bokeh,
           vy: (50 + Math.random() * 120) * (0.45 + z * 0.9), drift: (Math.random() - 0.5) * 30, seed: Math.random() * 100,
           size: bokeh ? 7 + Math.random() * 12 : 0.7 + z * 1.9, max, age: fresh ? Math.random() * max : 0 };
       };
       for (let i = 0; i < EMB; i++) embers.push(spawn(true));
 
       const drawFx = (dt) => {
-        const { W, H } = L, a = F.amp, h = heat.v, fl = Math.min(1, F.flare);
+        // during a mode change the embers thin out to nothing, then the ash gathers
+        const { W, H } = L, a = F.amp * (light ? ss(mode.k * 2 - 1) : ss(1 - mode.k * 2)), h = heat.v, fl = Math.min(1, F.flare);
         fctx.clearRect(0, 0, W, H);
         if (a < 0.01) return;
-        fctx.globalCompositeOperation = 'lighter';
+        fctx.globalCompositeOperation = light ? 'source-over' : 'lighter';
         const [pcx, pcy] = toScreen(PIVOT[0], PIVOT[1]);
         const [lat, dia] = gridPaths();
         const R = Math.hypot(W, H) * 0.5, gi = a * (0.7 + 0.6 * h + 0.5 * fl);
         const gr = fctx.createRadialGradient(pcx, pcy, 0, pcx, pcy, R);
-        gr.addColorStop(0, `rgba(255, 214, 150, ${0.07 * gi})`);
-        gr.addColorStop(0.45, `rgba(255, 194, 71, ${0.025 * gi})`);
-        gr.addColorStop(1, 'rgba(255, 194, 71, 0)');
+        // On paper the construction grid is drawn in graphite; in the dark it glows.
+        gr.addColorStop(0, light ? `rgba(40, 36, 32, ${0.13 * gi})` : `rgba(255, 214, 150, ${0.07 * gi})`);
+        gr.addColorStop(0.45, light ? `rgba(40, 36, 32, ${0.05 * gi})` : `rgba(255, 194, 71, ${0.025 * gi})`);
+        gr.addColorStop(1, light ? 'rgba(40, 36, 32, 0)' : 'rgba(255, 194, 71, 0)');
         fctx.lineWidth = 1; fctx.strokeStyle = gr; fctx.stroke(lat);
         fctx.stroke(dia); fctx.stroke(dia); // the construction diagonals read twice as bright
         // Strike ripples flash outward through the grid.
@@ -805,9 +1016,9 @@
           r.r += dt * R * 1.5; r.life -= dt * 0.9;
           if (r.life <= 0) { ripples.splice(i, 1); continue; }
           const rg = fctx.createRadialGradient(pcx, pcy, Math.max(0, r.r - 80), pcx, pcy, r.r + 80);
-          rg.addColorStop(0, 'rgba(255, 200, 110, 0)');
-          rg.addColorStop(0.5, `rgba(255, 220, 150, ${0.75 * r.life * a})`);
-          rg.addColorStop(1, 'rgba(255, 200, 110, 0)');
+          rg.addColorStop(0, light ? 'rgba(200, 84, 0, 0)' : 'rgba(255, 200, 110, 0)');
+          rg.addColorStop(0.5, light ? `rgba(200, 84, 0, ${0.6 * r.life * a})` : `rgba(255, 220, 150, ${0.75 * r.life * a})`);
+          rg.addColorStop(1, light ? 'rgba(200, 84, 0, 0)' : 'rgba(255, 200, 110, 0)');
           fctx.lineWidth = 1.5; fctx.strokeStyle = rg; fctx.stroke(lat); fctx.stroke(dia);
         }
         // Pulses
@@ -823,15 +1034,39 @@
           const at = (tau) => toScreen(p.n[0] * p.c + p.d[0] * tau, p.n[1] * p.c + p.d[1] * tau);
           const [hx, hy] = at(p.pos), [tx, ty] = at(p.pos - p.dir * p.tail);
           const lg = fctx.createLinearGradient(tx, ty, hx, hy);
-          lg.addColorStop(0, 'rgba(255, 138, 0, 0)'); lg.addColorStop(1, `rgba(255, 214, 120, ${0.85 * pa})`);
+          lg.addColorStop(0, light ? 'rgba(200, 84, 0, 0)' : 'rgba(255, 138, 0, 0)');
+          lg.addColorStop(1, light ? `rgba(214, 90, 0, ${0.8 * pa})` : `rgba(255, 214, 120, ${0.85 * pa})`);
           fctx.strokeStyle = lg; fctx.lineWidth = 1.6;
           fctx.beginPath(); fctx.moveTo(tx, ty); fctx.lineTo(hx, hy); fctx.stroke();
-          fctx.globalAlpha = pa * 0.8; fctx.drawImage(sprite, hx - 10, hy - 10, 20, 20); fctx.globalAlpha = 1;
+          fctx.globalAlpha = pa * 0.8; fctx.drawImage(light ? coalSprite : sprite, hx - 10, hy - 10, 20, 20); fctx.globalAlpha = 1;
         }
         // Embers
         const lift = 1 + fl * 1.3 + h * 0.5;
         for (let i = 0; i < embers.length; i++) {
           const e = embers[i];
+          if (light) {
+            // Ash: sparse scraps sinking out of the smoke. Each one tumbles, and as it turns edge-on it slips
+            // sideways, the way paper ash falls. Strikes blow them outward.
+            if (i % 3 === 2) continue; // ash hangs thinner in the air than sparks do
+            e.age += dt * 0.3;
+            const tum = F.t * (0.5 + e.z * 0.8) + e.seed, flat = Math.cos(tum);       // flat: 1 face-on, 0 edge-on
+            let ax = e.drift * 0.5 + Math.sin(tum * 0.5) * 22 * (0.4 + e.z) + (1 - Math.abs(flat)) * Math.sin(e.seed) * 30;
+            let ay = e.vy * (0.16 + 0.2 * (1 - Math.abs(flat)));                        // falls faster edge-on
+            if (fl > 0.05) { const dx = e.x - pcx, dy = e.y - pcy, dd = Math.hypot(dx, dy) || 1; ax += (dx / dd) * fl * 150; ay += (dy / dd) * fl * 90; }
+            e.x += ax * dt; e.y += ay * dt;
+            if (e.age > e.max || e.y > H + 30) { embers[i] = spawn(false); continue; }
+            const al = Math.min(1, e.age / 0.3) * Math.min(1, (e.max - e.age) / 1.2) * a;
+            if (al <= 0.01) continue;
+            if (e.bokeh) { fctx.globalAlpha = al * 0.45; fctx.drawImage(ashSprite, e.x - e.size * 1.4, e.y - e.size * 1.4, e.size * 2.8, e.size * 2.8); continue; }
+            const fs = 3 + e.z * 9 + (e.seed % 5), sp = flakes[Math.floor(e.seed) % flakes.length];
+            fctx.globalAlpha = al * (0.5 + 0.45 * e.z);
+            fctx.translate(e.x, e.y); fctx.rotate(tum * 0.7 + e.seed); fctx.scale(1, 0.18 + 0.82 * Math.abs(flat));
+            fctx.drawImage(sp, -fs / 2, -fs / 2, fs, fs);
+            fctx.setTransform(fxD, 0, 0, fxD, 0, 0);
+            // a rare flake still carries a dull red edge
+            if (e.seed % 17 < 1) { fctx.globalAlpha = al * 0.5 * (0.6 + 0.4 * Math.sin(F.t * 2 + e.seed)); fctx.drawImage(coalSprite, e.x - 3, e.y - 3, 6, 6); }
+            continue;
+          }
           e.age += dt;
           // Rise with a lazy, turbulent sway; strikes blow them outward from the mark.
           let vx = e.drift + Math.sin(F.t * (0.8 + e.z * 0.9) + e.seed + e.y * 0.006) * 34 * (0.4 + e.z);
@@ -862,7 +1097,7 @@
         if (gl) {
           gl.uniform2f(U.uRes, fireCv.width, fireCv.height);
           gl.uniform1f(U.uTime, F.t % 3600); gl.uniform1f(U.uHeat, heat.v);
-          gl.uniform1f(U.uFlare, Math.min(1, F.flare)); gl.uniform1f(U.uAmp, F.amp);
+          gl.uniform1f(U.uFlare, Math.min(1, F.flare)); gl.uniform1f(U.uAmp, F.amp); gl.uniform1f(U.uLight, mode.k);
           gl.uniform2f(U.uPtr, ptx, pty);
           gl.drawArrays(gl.TRIANGLES, 0, 3);
         }
@@ -894,13 +1129,14 @@
       for (let i = 0; i < (big ? 6 : 3); i++) { const [x, y] = edgePoint(); burst(x, y, small ? 8 : 16, 1); }
       if (!big && hudN) {
         hudN.textContent = String(n);
-        gsap.fromTo(hudN, { scale: 1.6, color: '#FFFFFF' }, { scale: 1, color: '#FFC247', duration: 0.6, ease: 'power3.out', overwrite: true });
+        gsap.fromTo(hudN, { scale: 1.6, color: light ? '#FF8A00' : '#FFFFFF' }, { scale: 1, color: light ? '#9A4A00' : '#FFC247', duration: 0.6, ease: 'power3.out', overwrite: true, clearProps: 'color' });
       }
     };
 
     /* --- Intro: draw, fly in, weld, heat --- */
     const heroBits = $$('[data-hero]', hero);
     const h1Words = splitWordsInto($('h1', hero), 'word-mask');
+    h1Words.forEach((w, i) => w.style.setProperty('--wi', i)); // order for the glow that crosses the headline on a mode change
     gsap.set(heroBits, { autoAlpha: 0, y: 24 });
     gsap.set(h1Words, { yPercent: 110 });
     gsap.set(hots, { opacity: 0 });
@@ -936,7 +1172,31 @@
     // Impatient visitors: any scroll attempt fast-forwards the intro.
     const hurry = () => { if (intro.isActive()) intro.timeScale(4); };
     ['wheel', 'touchstart', 'keydown'].forEach((ev) => window.addEventListener(ev, hurry, { once: true, passive: true }));
-    if (window.scrollY > 10 || location.hash.length > 1) intro.progress(1);
+    const deep = window.scrollY > 10 || location.hash.length > 1;
+    if (deep) intro.progress(1);
+
+    // The door: on a first visit the mark waits while the visitor chooses to enter with sound or without.
+    // Their click is also what lets the browser start the music.
+    const door = $('.door');
+    let asked = true;
+    try { asked = !!localStorage.getItem('forge-sound'); } catch (e) { /* no storage: do not ask */ }
+    if (door && !asked && !deep) {
+      intro.pause(0);
+      door.hidden = false;
+      requestAnimationFrame(() => door.classList.add('is-open'));
+      const first = $('[data-door="on"]', door);
+      if (first) first.focus({ preventScroll: true });
+      const enter = (withSound) => {
+        if (window.ForgeSound && window.ForgeSound.set) window.ForgeSound.set(withSound);
+        else { try { localStorage.setItem('forge-sound', withSound ? 'on' : 'off'); } catch (e) { /* asked again next time */ } }
+        track('door', withSound ? 'sound' : 'silent');
+        door.classList.remove('is-open'); door.classList.add('is-leaving');
+        setTimeout(() => { door.hidden = true; }, 900);
+        intro.play();
+      };
+      door.addEventListener('click', (e) => { const b = e.target.closest('[data-door]'); if (b) enter(b.dataset.door === 'on'); });
+      door.addEventListener('keydown', (e) => { if (e.key === 'Escape') enter(false); });
+    }
 
     /* --- Scroll: heat, three strikes, breach, zoom open onto the archive --- */
     const pinLen = () => window.innerHeight * 3.4;
@@ -1190,8 +1450,9 @@
       if (gold && gold.contains(w)) w.classList.add('gold');
       return w;
     });
-    gsap.to(words, {
-      color: (i, w) => (w.classList.contains('gold') ? '#FFC247' : '#F4EFE6'),
+    // Each word carries --lit (0 cold, 1 heated); the stylesheet turns that into the theme's colours.
+    gsap.fromTo(words, { '--lit': 0 }, {
+      '--lit': 1,
       ease: 'none', stagger: 0.1,
       scrollTrigger: { trigger: el, start: 'top 78%', end: 'bottom 48%', scrub: 0.6 },
     });
@@ -1201,14 +1462,15 @@
   const meter = $('.heat-meter');
   if (meter) {
     const temp = $('.temp', meter), chap = $('.chap', meter);
-    ScrollTrigger.create({
-      start: 0, end: 'max',
-      onUpdate: (s) => {
-        const p = s.progress;
-        temp.textContent = `${Math.round(24 + 1276 * Math.pow(1 - p, 1.5)).toLocaleString('en-US')}°C`;
-        meter.style.setProperty('--heat', (1 - p * 0.92).toFixed(3));
-      },
-    });
+    // In the light the fire is out: the same scale tops out near 200°C, and the reading falls as the mode changes.
+    let meterP = 0;
+    const paintTemp = () => {
+      const top = 1276 * (1 - 0.86 * mode.k);
+      temp.textContent = `${Math.round(24 + top * Math.pow(1 - meterP, 1.5)).toLocaleString('en-US')}°C`;
+      meter.style.setProperty('--heat', ((1 - meterP * 0.92) * (1 - 0.6 * mode.k)).toFixed(3));
+    };
+    ScrollTrigger.create({ start: 0, end: 'max', onUpdate: (s) => { meterP = s.progress; paintTemp(); } });
+    onMode(paintTemp); paintTemp();
     $$('[data-chapter]').forEach((sec) => {
       ScrollTrigger.create({
         trigger: sec, start: 'top 55%', end: 'bottom 55%',

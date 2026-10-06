@@ -1,0 +1,66 @@
+/* FORGE Studio · STRIKE chapter transition (home page only)
+   The chapter between Recognition and Selected Work: its label, then the word itself as a cream outline
+   that takes one pass of gold the first time it is seen. */
+
+.strike-chapter { position: relative; overflow: clip; padding-top: clamp(28px, 4vw, 56px); }
+
+/* 03 / SELECTED WORK ────────── */
+.strike-label { display: flex; align-items: center; gap: 12px; width: 100%; }
+.strike-label b { color: var(--gold); font-weight: 600; }
+.strike-label i { flex: 1; height: 1px; margin-left: 8px; background: linear-gradient(90deg, var(--line-2), var(--line) 60%, transparent); }
+
+/* the word: wider than the page by a little, so the first and last letters are cropped at the edges */
+.strike-word {
+  position: relative; left: -0.025em; display: flex; justify-content: center; margin-top: clamp(14px, 2vw, 28px);   /* nudged so both end letters are cropped evenly */
+  font-family: var(--f); font-weight: 600; font-size: 32vw; letter-spacing: -0.065em; line-height: .76;
+  white-space: nowrap; user-select: none; pointer-events: none;
+}
+.strike-word span { display: block; padding-block: .05em .02em; color: transparent; }
+.strike-base { -webkit-text-stroke: 1px rgba(244, 239, 230, .28); }
+/* the same letters in gold, visible only inside a narrow band that crosses once */
+@property --strike-p { syntax: '<percentage>'; inherits: false; initial-value: -12%; }
+.strike-hot {
+  position: absolute; top: 0; left: 50%; translate: -50% 0;
+  -webkit-text-stroke: 1.5px #FFC247;
+  -webkit-mask-image: linear-gradient(90deg, transparent calc(var(--strike-p) - 7%), #000 calc(var(--strike-p) - 1.5%), #000 calc(var(--strike-p) + 1.5%), transparent calc(var(--strike-p) + 7%));
+  mask-image: linear-gradient(90deg, transparent calc(var(--strike-p) - 7%), #000 calc(var(--strike-p) - 1.5%), #000 calc(var(--strike-p) + 1.5%), transparent calc(var(--strike-p) + 7%));
+  filter: drop-shadow(0 0 12px rgba(255, 160, 50, .45));
+  --strike-p: -12%;
+}
+.strike-chapter.is-struck .strike-hot { animation: strike-pass 2.5s cubic-bezier(0.65, 0, 0.35, 1) both; }
+@keyframes strike-pass { from { --strike-p: -12%; } to { --strike-p: 112%; } }
+
+/* heat left behind the band: a soft warm copy of the letter tops that wavers, rises a little and fades.
+   The filter (blur + displacement) is built by forge-strike.js; the letters themselves stay sharp. */
+@property --strike-h { syntax: '<percentage>'; inherits: false; initial-value: -12%; }
+.strike-word .strike-haze {
+  position: absolute; top: -.3em; left: 50%; translate: -50% 0; padding-top: .35em; opacity: 0;
+  -webkit-text-stroke: .014em #FF9A32;
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(var(--strike-h) - 6%), transparent var(--strike-h)), linear-gradient(180deg, transparent 4%, #000 24%, #000 40%, transparent 60%);
+  mask-image: linear-gradient(90deg, #000 calc(var(--strike-h) - 6%), transparent var(--strike-h)), linear-gradient(180deg, transparent 4%, #000 24%, #000 40%, transparent 60%);
+  -webkit-mask-composite: source-in; mask-composite: intersect;
+  --strike-h: -12%;
+}
+.strike-chapter.is-struck .strike-haze {
+  filter: url(#strike-heat);
+  animation: strike-haze-pass 2.5s cubic-bezier(0.65, 0, 0.35, 1) both, strike-haze-life 5.5s linear both;
+}
+.strike-chapter.is-cooled .strike-haze { display: none; }
+@keyframes strike-haze-pass { from { --strike-h: -12%; } to { --strike-h: 118%; } }
+@keyframes strike-haze-life {
+  0% { opacity: 0; translate: -50% 0; }
+  10%, 45% { opacity: .6; }
+  100% { opacity: 0; translate: -50% -.06em; }
+}
+
+/* spacing around the transition */
+.sec.proof { padding-bottom: clamp(32px, 4vw, 64px); }
+body:not(.work-horizontal) .sec.work { padding-top: 32px; }
+@media (max-width: 600px) {
+  body:not(.work-horizontal) .sec.work { padding-top: 20px; }
+  .strike-base { -webkit-text-stroke-width: .8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .strike-hot, .strike-word .strike-haze { display: none; }
+}

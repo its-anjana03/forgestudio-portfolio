@@ -17,17 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://forgestudio.web.lk/assets/img/og/joey.jpg">
 <link rel="icon" type="image/svg+xml" href="assets/img/forge-mark.svg">
-<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
-<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap">
-<link rel="stylesheet" href="assets/css/forge.css?v=20261005a">
-<link rel="stylesheet" href="assets/css/forge-fx.css?v=20261005a">
+<link rel="stylesheet" href="assets/css/forge.css?v=20261006c">
+<link rel="stylesheet" href="assets/css/forge-fx.css?v=20261006c">
 <script>
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.documentElement.classList.add('has-motion');
     try { if (sessionStorage.getItem('forge-pt')) { sessionStorage.removeItem('forge-pt'); document.documentElement.classList.add('pt-in'); } } catch (e) {}
     setTimeout(function () { if (!window.__forgeReady) document.documentElement.classList.remove('has-motion', 'pt-in'); }, 4000);
   }
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"CreativeWork","name":"Joey Clothing, mobile UX redesign","description":"Case study: a mobile e-commerce redesign for Joey Clothing focused on trust, product clarity and a simpler checkout. Figma prototype by Thinura Anjana, FORGE Studio.","genre":"Mobile UX design","url":"https://forgestudio.web.lk/joey-mobile-case-study.html","image":"https://forgestudio.web.lk/assets/img/og/joey.jpg","inLanguage":"en","creator":{"@type":"Person","@id":"https://forgestudio.web.lk/#thinura","name":"Thinura Anjana","url":"https://forgestudio.web.lk/"},"isPartOf":{"@type":"WebSite","@id":"https://forgestudio.web.lk/#site","name":"FORGE Studio","url":"https://forgestudio.web.lk/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"FORGE Studio","item":"https://forgestudio.web.lk/"},{"@type":"ListItem","position":2,"name":"Work","item":"https://forgestudio.web.lk/#work"},{"@type":"ListItem","position":3,"name":"Joey Clothing, mobile UX redesign","item":"https://forgestudio.web.lk/joey-mobile-case-study.html"}]}]}
+</script>
+<link rel="stylesheet" href="assets/css/forge-mode.css?v=20261006c">
+<script>
+  // Light or dark, as last chosen, before the first paint.
+  try { if (localStorage.getItem('forge-theme') === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
 </script>
 </head>
 <body>
@@ -56,8 +61,16 @@
     <a href="index.html#about">About</a>
     <a href="resume.html">Resume</a>
   </nav>
+  <div class="nav-right">
+  <span class="nav-sound" data-sound-slot></span>
+  <button class="theme-btn" type="button" role="switch" aria-checked="false" aria-label="Light mode">
+    <span class="ts-knob" aria-hidden="true"></span>
+    <svg class="ts-ico ts-flame" viewBox="0 0 16 16" aria-hidden="true"><path d="M8.3 1.2c.4 2.6 3.5 4 3.5 7.6a3.8 3.8 0 0 1-7.6 0c0-1.6.7-2.7 1.6-3.6.1 1.1.6 1.8 1.3 2.1-.2-2.3.2-4.3 1.2-6.1Z"/></svg>
+    <svg class="ts-ico ts-sun" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="2.7"/><path d="M8 1.3v1.9M8 12.8v1.9M1.3 8h1.9M12.8 8h1.9M3.3 3.3l1.3 1.3M11.4 11.4l1.3 1.3M3.300 12.7l1.3-1.3M11.4 4.600l1.3-1.3"/></svg>
+  </button>
   <a class="nav-status" href="index.html#contact"><span class="pulse" aria-hidden="true"></span>Start a project</a>
   <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span class="mb-bar"></span><span class="mb-bar"></span><span class="mb-spark" aria-hidden="true"></span></button>
+  </div>
 </header>
 
 <div class="menu" id="menu">
@@ -252,7 +265,7 @@
   </div>
   <div class="foot-mark" aria-hidden="true"><span class="foot-word wrap">FORGE</span></div>
   <div class="wrap foot-bottom">
-    <span>© 2026 FORGE Studio · Thinura Anjana</span>
+    <span>© <span data-year>2026</span> FORGE Studio · Thinura Anjana</span>
     <a href="#main" class="link-u">Back to top ↑</a>
   </div>
 </footer>
@@ -267,11 +280,11 @@
   </div>
 </dialog>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
-<script src="assets/js/forge-sound.js?v=20261005a" defer></script>
-<script src="assets/js/forge.js?v=20261005a" defer></script>
-<script src="assets/js/forge-fx.js?v=20261005a" defer></script>
+<script src="assets/vendor/gsap.min.js" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="assets/vendor/lenis.min.js" defer></script>
+<script src="assets/js/forge-sound.js?v=20261006c" defer></script>
+<script src="assets/js/forge.js?v=20261006c" defer></script>
+<script src="assets/js/forge-fx.js?v=20261006c" defer></script>
 </body>
 </html>

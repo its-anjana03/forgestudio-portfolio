@@ -1,0 +1,203 @@
+/* FORGE Studio · modes
+   Dark is the forge at night. Light is the morning after: ash paper, smoke, cooled steel.
+   The switch, the door (enter with or without sound) and every light-mode colour live here; the change itself
+   is run by forge.js (search "Theme switch"). The Foundry keeps its own dark look. */
+
+/* ---------- Nav controls (both modes): sound bars, then the mode switch ---------- */
+.nav-right { display: flex; align-items: center; gap: 10px; }
+.nav-sound { display: inline-flex; }
+/* The sound switch lives in the nav as four small bars: still when off, moving when on. */
+.nav-sound .snd { width: 42px; height: 42px; padding: 0; justify-content: center; background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.nav-sound .snd-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.nav-sound .snd-hint { display: none; }
+.nav-sound .snd-bars { gap: 3px; }
+html[data-theme="light"] .snd[aria-pressed="true"] { border-color: var(--gold); }
+html[data-theme="light"] .snd.is-floating { background: rgba(232, 227, 217, .72); }
+
+/* The mode switch: a small sliding pill. Flame is the forge at night, sun is the morning after. */
+.theme-btn {
+  position: relative; flex: none; width: 66px; height: 34px; border-radius: 999px; border: 1px solid var(--line-2);
+  display: grid; grid-template-columns: 1fr 1fr; align-items: center; justify-items: center; padding: 0 3px;
+  transition: border-color .3s var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) { .theme-btn:hover { border-color: var(--gold); } }
+.ts-knob {
+  position: absolute; left: 3px; top: 3px; width: 28px; height: 26px; border-radius: 999px;
+  background: linear-gradient(135deg, #FFE7A6, #FFC247 45%, #FF8A00); box-shadow: 0 0 12px rgba(255, 138, 0, .55);
+  transition: transform .7s cubic-bezier(0.22, 1, 0.36, 1), background-color .5s, box-shadow .5s;
+}
+.theme-btn[aria-checked="true"] .ts-knob { transform: translateX(30px); background: #181614; box-shadow: none; }
+.theme-btn:active .ts-knob { width: 32px; }
+.ts-ico { position: relative; width: 15px; height: 15px; transition: color .5s var(--ease-out), opacity .5s var(--ease-out); }
+.ts-flame { fill: currentColor; color: #0A0908; }
+.ts-sun { fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; color: var(--mute); }
+.ts-sun circle { fill: currentColor; stroke: none; }
+.theme-btn[aria-checked="true"] .ts-flame { color: var(--mute); }
+.theme-btn[aria-checked="true"] .ts-sun { color: #E8E3D9; }
+
+/* The hero mark is filled from its own gradient, which the script cools or reheats with the mode. */
+.ignite-mark .hot { fill: url(#markG); }
+.ignite-mark .whole { fill: url(#markG); stroke: url(#markG); }
+
+/* The door: a first-visit choice between entering with sound and entering silent. */
+.door {
+  position: fixed; inset: 0; z-index: 350; display: grid; place-items: center; padding: var(--pad);
+  background: var(--ink); opacity: 0; transition: opacity .5s var(--ease-out);
+}
+.door[hidden] { display: none; }
+.door.is-open { opacity: 1; }
+.door.is-leaving { opacity: 0; pointer-events: none; transition-duration: .8s; }
+.door-in { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px; transform: translateY(12px); transition: transform .9s var(--ease-out); }
+.door.is-open .door-in { transform: none; }
+.door-mark { width: 64px; height: auto; }
+.door-q { font-size: clamp(26px, 3.4vw, 44px); font-weight: 600; letter-spacing: -0.035em; line-height: 1.05; max-width: 16ch; text-wrap: balance; }
+.door-acts { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.door-note { font-size: 13px; color: var(--mute); max-width: 34ch; }
+/* Manifesto words carry --lit (0 cold, 1 heated), so their colours follow the mode. */
+.has-motion .manifesto .w { color: color-mix(in srgb, var(--bone) calc(16% + 84% * var(--lit, 0)), transparent); }
+.has-motion .manifesto .w.gold { color: color-mix(in srgb, var(--gold) calc(18% + 82% * var(--lit, 0)), transparent); }
+
+/* ---------- Tokens ---------- */
+html[data-theme="light"] {
+  --ink: #E8E3D9;          /* warm ash paper */
+  --ink-2: #DED8CC;
+  --steel: #D2CCC0;
+  --steel-2: #BDB6A9;
+  --bone: #181614;         /* charcoal ink */
+  --dim: #4F4A44;
+  --mute: #6B655C;
+  --gold: #9A4A00;         /* burnt ember: Heated Gold cannot be read on paper */
+  --ember: #C25A00;
+  --line: rgba(24, 22, 20, 0.14);
+  --line-2: rgba(24, 22, 20, 0.26);
+  --heat: linear-gradient(115deg, #FFB02E 0%, #FF8A00 35%, #C25A00 70%, #5A2A0C 100%);
+  color-scheme: light;
+}
+/* Surfaces that stay dark in both modes (captions over artwork, the menu, the poster viewer) keep the dark palette. */
+html[data-theme="light"] .poster .cap,
+html[data-theme="light"] .play,
+html[data-theme="light"] .proof-thumb span,
+html[data-theme="light"] .portrait figcaption,
+html[data-theme="light"] .cs-hero-visual .tag-float,
+html[data-theme="light"] .compare .tag,
+html[data-theme="light"] .menu,
+html[data-theme="light"] .lightbox {
+  --ink: #0A0908; --ink-2: #121110; --steel: #2B2B2B; --steel-2: #3A3936;
+  --bone: #F4EFE6; --dim: #A8A196; --mute: #8A8378; --gold: #FFC247; --ember: #FF8A00;
+  --line: rgba(244, 239, 230, 0.12); --line-2: rgba(244, 239, 230, 0.22);
+  color: var(--bone);
+}
+/* The heated gradient, deepened so it holds on paper. */
+html[data-theme="light"] #heatG stop:nth-child(1) { stop-color: #FFCB6B; }
+html[data-theme="light"] #heatG stop:nth-child(2) { stop-color: #FFA01A; }
+html[data-theme="light"] #heatG stop:nth-child(3) { stop-color: #EE7400; }
+
+/* ---------- Chrome ---------- */
+html[data-theme="light"] .nav.is-scrolled { background: rgba(232, 227, 217, .74); }
+html[data-theme="light"] .nav-links { background: rgba(232, 227, 217, .5); }
+@media (hover: hover) and (pointer: fine) {
+  html[data-theme="light"] .nav-links a:hover { background: rgba(24, 22, 20, .06); }
+  html[data-theme="light"] .disc:hover a:not(:hover) .t { color: rgba(24, 22, 20, .3); }
+}
+/* The cursor dot inverts whatever is under it: dark on paper, pale on a poster. */
+html[data-theme="light"] .cursor { background: #E8E3D9; }
+html[data-theme="light"] .cursor.is-label { background: var(--gold); }
+
+/* ---------- Hero ---------- */
+html[data-theme="light"] .ignite-bg .bg-fx { mix-blend-mode: normal; }
+html[data-theme="light"] .ignite-bg {
+  --furnace: radial-gradient(75% 30% at 52% 108%, rgba(214, 90, 0, .5), rgba(122, 53, 16, .12) 55%, transparent 82%),
+             linear-gradient(to top, rgba(90, 84, 78, .35), transparent 60%);
+}
+/* The mark: cooled steel. Striking it brings the heat back before it breaks open. */
+html[data-theme="light"] .ignite-mark .cold { fill: #1B1A18; stroke: #5A554F; }
+html[data-theme="light"] .ignite-mark .white-hot { fill: url(#emberG); }
+html[data-theme="light"] .ignite-mark .glow { fill: #C25A00; fill-opacity: .4; }
+html[data-theme="light"] .ignite-mark .strike-flash { fill: #D9730D; }
+html[data-theme="light"] .ignite-mark .seam { stroke: #C25A00; }
+html[data-theme="light"] .ignite-side p { text-shadow: 0 1px 2px rgba(232, 227, 217, .9), 0 0 22px rgba(232, 227, 217, .9); }
+html[data-theme="light"] .ignite-copy .kicker { text-shadow: 0 0 18px rgba(232, 227, 217, .95); }
+/* The archive: posters hang on paper and dissolve into it at the bottom. */
+html[data-theme="light"] .ignite-shade {
+  background: radial-gradient(120% 90% at 50% 50%, transparent 46%, rgba(232, 227, 217, .4) 100%),
+              linear-gradient(to bottom, rgba(232, 227, 217, .45), transparent 20%, transparent 54%, rgba(232, 227, 217, .9) 80%, var(--ink) 96%);
+}
+html[data-theme="light"] .archive-cap .h2 { text-shadow: 0 0 50px rgba(232, 227, 217, .9); }
+html[data-theme="light"] .archive-cap p { text-shadow: 0 0 20px rgba(232, 227, 217, .95), 0 0 6px rgba(232, 227, 217, .9); }
+html[data-theme="light"] .poster img { filter: none; }
+
+/* ---------- Details below the hero (first pass) ---------- */
+html[data-theme="light"] .mark-art .grid line { stroke: rgba(24, 22, 20, .16); }
+html[data-theme="light"] .sig-tip { fill: #FF8A00; }
+/* Brand swatches always show the real brand colours. */
+html[data-theme="light"] .swatch.g { background: #FFC247; color: #0A0908; }
+html[data-theme="light"] .swatch.o { background: #FF8A00; color: #0A0908; }
+html[data-theme="light"] .swatch.s { background: #2B2B2B; color: #F4EFE6; }
+html[data-theme="light"] .fx-ch-base { -webkit-text-stroke-color: rgba(24, 22, 20, .1); }
+html[data-theme="light"] .strike-base { -webkit-text-stroke-color: rgba(24, 22, 20, .3); }
+html[data-theme="light"] .cv-role li { background: rgba(232, 227, 217, .6); }
+
+/* The menu opens in the cooled steel of the hero mark. */
+html[data-theme="light"] .menu-panel { background: linear-gradient(115deg, #4A4743 0%, #302F2D 42%, #161514 100%); }
+html[data-theme="light"] .menu-heat { background: linear-gradient(115deg, #FFCB6B, #FFA01A 35%, #EE7400 70%, #7A3510); }
+
+/* ---------- Small parts of the mode change ---------- */
+/* The switch: the sun turns up into place as the flame shrinks back, and the knob flares while the scene changes. */
+.ts-ico { transition: color .5s var(--ease-out), transform 1.3s cubic-bezier(0.22, 1, 0.36, 1); }
+.ts-sun { transform: rotate(-90deg) scale(.78); }
+.theme-btn[aria-checked="true"] .ts-sun { transform: none; }
+.theme-btn[aria-checked="true"] .ts-flame { transform: scale(.78) translateY(1px); }
+.mode-shift .ts-knob { animation: knobFlare 1.6s var(--ease-out); }
+@keyframes knobFlare { 30% { box-shadow: 0 0 0 5px rgba(255, 138, 0, .22), 0 0 22px rgba(255, 138, 0, .7); } }
+/* The nav logo cools or reheats with the rest, instead of snapping. */
+#heatG stop { transition: stop-color 2.4s ease; }
+/* The headline: a glow crosses it word by word as the heat leaves (or returns). */
+.mode-shift .ignite-copy h1 .word-mask { overflow: visible; }
+.mode-shift .ignite-copy h1 .word-mask > span { animation: wordHeat 1.5s ease-in-out both; animation-delay: calc(.35s + var(--wi, 0) * .11s); }
+@keyframes wordHeat { 45% { text-shadow: 0 0 26px rgba(255, 138, 0, .8), 0 0 4px rgba(255, 194, 71, .6); } }
+/* Buttons and the status dot settle a beat after the text around them. */
+.mode-shift .btn, .mode-shift .nav-status, .mode-shift .nav-links { transition: background-color .5s ease, border-color .5s ease, color .5s ease; }
+.mode-shift .pulse { animation: dotFlare 1.8s var(--ease-out); }
+@keyframes dotFlare { 35% { box-shadow: 0 0 0 6px rgba(255, 138, 0, .25), 0 0 16px rgba(255, 138, 0, .8); transform: scale(1.5); } }
+/* The scroll cue's line and the thermometer bar drain and refill. */
+.mode-shift .scroll-cue i::after { animation-duration: .9s; }
+.heat-meter .bar i { transition: transform .5s var(--ease-out); }
+/* Headings and artwork on screen take the heat in turn, from the top of the window down. */
+.mode-glow { animation: wordHeat 1.7s ease-in-out both; animation-delay: calc(.3s + var(--mi, 0) * 1s); }
+.mode-glow .line-mask, .mode-glow .word-mask { overflow: visible; }
+.mode-warm { animation: imgWarm 2.1s ease-in-out both; animation-delay: calc(.2s + var(--mi, 0) * 1s); }
+@keyframes imgWarm { 42% { filter: brightness(1.1) saturate(1.16) sepia(.2); } }@media (prefers-reduced-motion: reduce) { .mode-shift * { animation: none !important; } }
+
+/* ---------- The gold-heat details, retuned so they hold on paper ---------- */
+/* On paper, pale gold disappears: the travelling heat uses the deeper end of the same fire. */
+html[data-theme="light"] .fx-heatline {
+  background-image: linear-gradient(100deg,
+    var(--fx-base) 0, var(--fx-base) calc(var(--p) - 16%),
+    #FFA01A calc(var(--p) - 5%), #EE7400 var(--p), #C25A00 calc(var(--p) + 6%),
+    rgba(24, 22, 20, .1) calc(var(--p) + 17%), rgba(24, 22, 20, .1) 100%);
+}
+html[data-theme="light"] .fx-heatpass {
+  background-image: linear-gradient(100deg,
+    var(--fx-base) 0, var(--fx-base) calc(var(--p) - 15%),
+    #FFA01A calc(var(--p) - 6%), #EE7400 var(--p), #C25A00 calc(var(--p) + 6%),
+    var(--fx-base) calc(var(--p) + 15%), var(--fx-base) 100%);
+}
+html[data-theme="light"] .fx-edge::after { background: conic-gradient(from var(--fx-a), transparent 0 58%, #FF8A00 76%, #FFC247 88%, transparent 100%); }
+html[data-theme="light"] .fx-ignite { animation-name: fx-ignite-paper; }
+@keyframes fx-ignite-paper {
+  0% { color: var(--gold); text-shadow: 0 0 0 rgba(255, 138, 0, 0); }
+  22% { color: #EE7400; text-shadow: 0 0 14px rgba(255, 138, 0, .6); }
+  100% { color: var(--gold); text-shadow: 0 0 0 rgba(255, 138, 0, 0); }
+}
+html[data-theme="light"] .fx-ch-hot { -webkit-text-stroke-color: rgba(194, 90, 0, .7); }
+html[data-theme="light"] .strike-hot { -webkit-text-stroke-color: #C25A00; }
+@supports not selector(::-webkit-scrollbar) { html[data-theme="light"] { scrollbar-color: #9A4A00 #E8E3D9; } }
+/* The scrollbar: a paper track, and an ingot that cools from ember to steel as the page goes down. */
+html[data-theme="light"]::-webkit-scrollbar-track { background: #E8E3D9; }
+html[data-theme="light"]::-webkit-scrollbar-thumb {
+  border-color: #E8E3D9;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, #FFA01A calc(var(--fx-heat) * 100%), #6B655C),
+    color-mix(in srgb, #EE7400 calc(var(--fx-heat) * 100%), #4F4A44) 45%,
+    color-mix(in srgb, #9A4A00 calc(var(--fx-heat) * 100%), #302F2D));
+}

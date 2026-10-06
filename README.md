@@ -26,7 +26,10 @@ A static site (plain HTML, CSS and JavaScript, no build step) hosted on GitHub P
 ├── tools/foundry-images.js            Prepares new artwork for the Foundry (local only)
 ├── assets/
 │   ├── css/forge.css                  The whole design system (one stylesheet)
+│   ├── css/forge-mode.css             Light mode, the mode switch and the entry choice
 │   ├── js/forge.js                    All motion and interaction (one script)
+│   ├── vendor/                        GSAP, ScrollTrigger and Lenis
+│   ├── fonts/                         General Sans, Instrument Sans, Instrument Serif
 │   ├── css/forge-fx.css, js/forge-fx.js  Heat details layered over every page (see "Heat details")
 │   ├── img/                           Optimised WebP images, grouped by project
 │   │   ├── thumb/                     640px poster thumbnails for the archive wall
@@ -37,6 +40,7 @@ A static site (plain HTML, CSS and JavaScript, no build step) hosted on GitHub P
 ├── CNAME                              Custom domain: forgestudio.web.lk
 ├── .nojekyll                          Serve files as-is on GitHub Pages
 ├── robots.txt, sitemap.xml            Search engines
+├── llms.txt                           Plain summary of the studio for AI assistants and search tools
 ```
 
 ## Brand system
@@ -50,11 +54,13 @@ A static site (plain HTML, CSS and JavaScript, no build step) hosted on GitHub P
 
 Gradients appear only inside the mark, never on text.
 
-## Libraries (loaded from CDNs, nothing to install)
+## Libraries and fonts (hosted with the site, nothing to install)
 
-- [GSAP 3.12 + ScrollTrigger](https://gsap.com) for animation
-- [Lenis](https://lenis.darkroom.engineering) for smooth scrolling
-- [General Sans](https://www.fontshare.com/fonts/general-sans) from Fontshare
+Nothing is loaded from another company's server, so the site keeps working whatever happens to them.
+
+- [GSAP 3.12 + ScrollTrigger](https://gsap.com) and [Lenis](https://lenis.darkroom.engineering) in `assets/vendor/`
+- [General Sans](https://www.fontshare.com/fonts/general-sans) (Fontshare), plus Instrument Sans and Instrument Serif
+  (Google Fonts, used by the Foundry), in `assets/fonts/`
 
 Everything degrades gracefully: with JavaScript off, a blocked CDN, or "reduce motion" turned on,
 every page shows its full content as a static layout.
@@ -157,10 +163,26 @@ Naming: `<film>-main-NN`, `<film>-character-NN`, `<film>-alt-NN`, `<film>-proces
 Timings are the `T` values at the top of `forge-fx.js`. Everything is off with reduced motion, and hover
 effects are off on touch screens. To remove the whole layer, delete the two tags that load these files from each page.
 
+## Light and dark mode
+
+A small sliding switch in the nav bar (flame for dark, sun for light) changes the whole portfolio, and the choice
+is remembered. The Foundry stays dark.
+
+- **Dark** is the forge at night: fire, embers, the mark in heated gold.
+- **Light** is the morning after: warm ash paper (`#E8E3D9`), charcoal text, grey smoke, falling ash, a burnt-out
+  hearth, and the mark as cooled steel. Heated Gold cannot be read on paper, so gold text becomes a burnt ember
+  (`#9A4A00`); the real brand colours stay in the logo, the swatches and the artwork.
+- **The change is played live, not as a wipe.** Over about three and a half seconds the flames die, the smoke
+  thickens, daylight comes through it, the mark cools from gold to steel, the thermometer falls and the page's
+  colours follow from the nav downward. Going back, the coals catch and the fire rises.
+
+Everything for light mode is in `assets/css/forge-mode.css`; the change itself is in `assets/js/forge.js`
+(search "Theme switch"). Each page sets the saved mode in a tiny script in its `<head>`, before the first paint.
 ## Sound
 
-`assets/js/forge-sound.js` runs on every page. The switch sits in the bottom-left corner (in the Foundry's header).
-Sound starts off; once a visitor turns it on, every page fades in its own music and the choice is remembered.
+`assets/js/forge-sound.js` runs on every page. On a first visit the home page asks "How would you like to enter?"
+(with sound or silent). After that, four small sound bars in the nav bar turn it on and off (in the Foundry's header;
+bottom-left on the 404 page). Every page fades in its own music and the choice is remembered.
 Browsers only allow sound after a click or tap, so on a newly opened page the music starts on the first click
 (the switch glows softly until then). A track shared by two pages carries on where it stopped.
 
@@ -187,6 +209,14 @@ Dashboard: **https://forgestudio.goatcounter.com**
 - The site code `forgestudio` is set in `assets/js/forge.js` and `foundry/foundry.js`. Set it to `''` in both to switch stats off.
 - It stays off on `localhost`, so local testing never counts. Ad blockers may hide some visits.
 
+## Being found
+
+- Every case study carries structured details (what it is, who made it, where it sits in the site) in a small
+  `application/ld+json` block in its `<head>`; the home page describes the person, the studio and the site.
+- `llms.txt` is a plain summary for AI assistants. If your role, study or headline facts change, update it and the
+  block in `index.html` together.
+- The copyright year and "Seven years on" count themselves from today's date (`data-year`, `data-since="2019"`).
+
 ## Run locally
 
 Any static server works, for example the VS Code **Live Server** extension, or:
@@ -204,7 +234,7 @@ npx serve .
 ## Updating content
 
 - **After changing CSS or JavaScript:** every page links its stylesheet and scripts with a version stamp
-  (`forge.css?v=20261005a`). Change the stamp in all pages (a find-and-replace across the `.html` files and
+  (`forge.css?v=20261006c`). Change the stamp in all pages (a find-and-replace across the `.html` files and
   `foundry/index.html`) so visitors' browsers fetch the new files instead of an old cached copy.
 
 - **New work in the Foundry:** see "Adding work" above.
