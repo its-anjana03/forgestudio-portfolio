@@ -1,0 +1,1359 @@
+{
+ "about": "Machine-readable catalogue of FORGE Studio, the design practice of Thinura Anjana. Built from the site by tools/build-catalogue.js. A plain-language summary is at https://forgestudio.web.lk/llms.txt",
+ "studio": {
+  "name": "FORGE Studio",
+  "designer": "Thinura Anjana",
+  "url": "https://forgestudio.web.lk/",
+  "email": "anjanathinura07@gmail.com"
+ },
+ "notes": [
+  "Movie posters are personal tribute and concept work, not official studio artwork. Film titles and characters belong to their owners.",
+  "Campaign and client work is shown with thanks to the organisers and clients named on each collection."
+ ],
+ "updated": "2026-10-08",
+ "counts": {
+  "caseStudies": 6,
+  "homeArchive": 10,
+  "foundryPieces": 119
+ },
+ "caseStudies": [
+  {
+   "title": "Avengers: Doomsday, poster process",
+   "type": "Poster design",
+   "summary": "Case study: two versions of an Avengers: Doomsday poster, from a crowded 27-character layout to a controlled cinematic hierarchy. By Thinura Anjana, FORGE Studio.",
+   "url": "https://forgestudio.web.lk/avengers-process.html",
+   "image": "https://forgestudio.web.lk/assets/img/og/avengers.jpg"
+  },
+  {
+   "title": "FORGE Studio, brand identity",
+   "type": "Brand identity",
+   "summary": "Case study: the FORGE Studio identity, a lightning mark with a hidden F, its grid, lockups, colour and type system. By Thinura Anjana.",
+   "url": "https://forgestudio.web.lk/forge-identity.html",
+   "image": "https://forgestudio.web.lk/assets/img/og/forge.jpg"
+  },
+  {
+   "title": "Joey Clothing, mobile UX redesign",
+   "type": "Mobile UX design",
+   "summary": "Case study: a mobile e-commerce redesign for Joey Clothing focused on trust, product clarity and a simpler checkout. Figma prototype by Thinura Anjana, FORGE Studio.",
+   "url": "https://forgestudio.web.lk/joey-mobile-case-study.html",
+   "image": "https://forgestudio.web.lk/assets/img/og/joey.jpg"
+  },
+  {
+   "title": "Rolex Day-Date 40, first place",
+   "type": "Product illustration",
+   "summary": "Case study: an Illustrator watch study that took first place out of 200 entries at the Academy of Graphics in 2022. By Thinura Anjana, FORGE Studio.",
+   "url": "https://forgestudio.web.lk/rolex-design.html",
+   "image": "https://forgestudio.web.lk/assets/img/og/rolex.jpg"
+  },
+  {
+   "title": "Seylune, luxury fashion frontend",
+   "type": "Frontend web design",
+   "summary": "Case study: Seylune, a twelve-page luxury fashion frontend built in HTML, CSS and JavaScript for a university assignment. By Thinura Anjana, FORGE Studio.",
+   "url": "https://forgestudio.web.lk/seylune-frontend-case-study.html",
+   "image": "https://forgestudio.web.lk/assets/img/og/seylune.jpg"
+  },
+  {
+   "title": "30 Years of Vijayism, tribute portrait",
+   "type": "Poster design",
+   "summary": "Case study: a tribute poster built as a room of memory, featured on Thanthi TV in 2022. Concept, compositing and room build by Thinura Anjana, FORGE Studio.",
+   "url": "https://forgestudio.web.lk/vijayism-piece.html",
+   "image": "https://forgestudio.web.lk/assets/img/og/vijayism.jpg"
+  }
+ ],
+ "homeArchive": [
+  {
+   "title": "Leo",
+   "year": 2023,
+   "type": "Tribute poster",
+   "image": "https://forgestudio.web.lk/assets/img/leo-poster.webp",
+   "thumbnail": "https://forgestudio.web.lk/assets/img/thumb/leo-poster.webp",
+   "url": "https://forgestudio.web.lk/#poster-leo"
+  },
+  {
+   "title": "Avengers: Doomsday",
+   "year": 2025,
+   "type": "Tribute poster",
+   "image": "https://forgestudio.web.lk/assets/img/avengers-poster.webp",
+   "thumbnail": "https://forgestudio.web.lk/assets/img/thumb/avengers-poster.webp",
+   "url": "https://forgestudio.web.lk/#poster-avengers"
+  },
+  {
+   "title": "Jana Nayagan",
+   "year": 2026,
+   "type": "Tribute poster",
+   "image": "https://forgestudio.web.lk/assets/img/jana-nayagan-poster.webp",
+   "thumbnail": "https://forgestudio.web.lk/assets/img/thumb/jana-nayagan-poster.webp",
+   "url": "https://forgestudio.web.lk/#poster-jana-nayagan"
+  },
+  {
+   "title": "John Wick: Chapter 4",
+   "year": 2024,
+   "type": "Tribute poster",
+   "image": "https://forgestudio.web.lk/assets/img/john-wick-poster.webp",
+   "thumbnail": "https://forgestudio.web.lk/assets/img/thumb/john-wick-poster.webp",
+   "url": "https://forgestudio.web.lk/#poster-john-wick"
+  },
+  {
+   "title": "Oppenheimer",
+   "year": 2023,
+   "type": "Tribute poster",
+   "image": "https://forgestudio.web.lk/assets/img/oppenheimer-poster.webp",
+   "thumbnail": "https://forgestudio.web.lk/assets/img/thumb/oppenheimer-poster.webp",
+   "url": "https://forgestudio.web.lk/#poster-oppenheimer"
+  },
+  {
+   "title": "Indian 2",
+   "year": 2024,
+   "type": "Tribute poster",
+   "image": "https://forgestudio.web.lk/assets/img/indian2-poster.webp",
+   "thumbnail": "https://forgestudio.web.lk/assets/img/thumb/indian2-poster.webp",
+   "url": "https://forgestudio.web.lk/#poster-indian2"
+  },
+  {
+   "title": "F1",
+   "year": 2025,
+   "type": "Tribute poster",
+   "image": "https://forgestudio.web.lk/assets/img/f1-poster.webp",
+   "thumbnail": "https://forgestudio.web.lk/assets/img/thumb/f1-poster.webp",
+   "url": "https://forgestudio.web.lk/#poster-f1"
+  },
+  {
+   "title": "PS-1",
+   "year": 2022,
+   "type": "Tribute poster",
+   "image": "https://forgestudio.web.lk/assets/img/ps1-poster.webp",
+   "thumbnail": "https://forgestudio.web.lk/assets/img/thumb/ps1-poster.webp",
+   "url": "https://forgestudio.web.lk/#poster-ps1"
+  },
+  {
+   "title": "LIK",
+   "year": 2026,
+   "type": "Tribute poster",
+   "image": "https://forgestudio.web.lk/assets/img/lik-poster.webp",
+   "thumbnail": "https://forgestudio.web.lk/assets/img/thumb/lik-poster.webp",
+   "url": "https://forgestudio.web.lk/#poster-lik"
+  },
+  {
+   "title": "Kalki 2898 AD",
+   "year": 2024,
+   "type": "Tribute poster",
+   "image": "https://forgestudio.web.lk/assets/img/kalki-poster.webp",
+   "thumbnail": "https://forgestudio.web.lk/assets/img/thumb/kalki-poster.webp",
+   "url": "https://forgestudio.web.lk/#poster-kalki"
+  }
+ ],
+ "foundry": {
+  "url": "https://forgestudio.web.lk/foundry/",
+  "film": [
+   {
+    "title": "Leo",
+    "year": 2023,
+    "note": "The largest series in the collection: around twenty posters, made over more than a month.",
+    "url": "https://forgestudio.web.lk/foundry/#/film/leo",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "description": "Leo tribute poster, main version",
+      "width": 1053,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/leo/leo-main-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/leo/thumb/leo-main-01.webp"
+     }
+    ]
+   },
+   {
+    "title": "Jana Nayagan",
+    "year": 2026,
+    "url": "https://forgestudio.web.lk/foundry/#/film/jana-nayagan",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "description": "Jana Nayagan tribute poster",
+      "width": 908,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/jana-nayagan/jana-nayagan-main-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/jana-nayagan/thumb/jana-nayagan-main-01.webp"
+     }
+    ]
+   },
+   {
+    "title": "LIK",
+    "year": 2026,
+    "url": "https://forgestudio.web.lk/foundry/#/film/lik",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "description": "LIK tribute poster",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/lik/lik-main-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/lik/thumb/lik-main-01.webp"
+     }
+    ]
+   },
+   {
+    "title": "Kalki 2898 AD",
+    "year": 2024,
+    "url": "https://forgestudio.web.lk/foundry/#/film/kalki",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "description": "Kalki 2898 AD tribute poster",
+      "width": 1120,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/kalki/kalki-main-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/kalki/thumb/kalki-main-01.webp"
+     }
+    ]
+   },
+   {
+    "title": "Indian 2",
+    "year": 2024,
+    "url": "https://forgestudio.web.lk/foundry/#/film/indian2",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "description": "Indian 2 tribute poster",
+      "width": 1023,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/indian2/indian2-main-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/indian2/thumb/indian2-main-01.webp"
+     }
+    ]
+   },
+   {
+    "title": "PS-1",
+    "year": 2022,
+    "url": "https://forgestudio.web.lk/foundry/#/film/ps1",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "description": "Ponniyin Selvan: Part 1 tribute poster",
+      "width": 1062,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/ps1/ps1-main-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/ps1/thumb/ps1-main-01.webp"
+     }
+    ]
+   },
+   {
+    "title": "Avengers: Doomsday",
+    "year": 2025,
+    "note": "From pencil layout to final key art. The full process lives in the portfolio case study.",
+    "url": "https://forgestudio.web.lk/foundry/#/film/avengers",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "description": "Avengers: Doomsday tribute poster, final version",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/avengers/avengers-main-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/avengers/thumb/avengers-main-01.webp"
+     },
+     {
+      "group": "Alternate versions",
+      "title": "Version one",
+      "description": "Avengers: Doomsday poster, first version",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/avengers/avengers-alt-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/avengers/thumb/avengers-alt-01.webp"
+     },
+     {
+      "group": "Alternate versions",
+      "title": "Version two",
+      "description": "Avengers: Doomsday poster, second version",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/avengers/avengers-alt-02.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/avengers/thumb/avengers-alt-02.webp"
+     },
+     {
+      "group": "Process",
+      "title": "Layout sketch",
+      "description": "Pencil layout sketch for the Avengers: Doomsday poster",
+      "width": 1164,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/avengers/avengers-process-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/avengers/thumb/avengers-process-01.webp"
+     }
+    ]
+   },
+   {
+    "title": "F1",
+    "year": 2025,
+    "url": "https://forgestudio.web.lk/foundry/#/film/f1",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "description": "F1 tribute poster",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/f1/f1-main-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/f1/thumb/f1-main-01.webp"
+     }
+    ]
+   },
+   {
+    "title": "John Wick: Chapter 4",
+    "year": 2024,
+    "url": "https://forgestudio.web.lk/foundry/#/film/john-wick",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "description": "John Wick: Chapter 4 tribute poster",
+      "width": 1023,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/john-wick/john-wick-main-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/john-wick/thumb/john-wick-main-01.webp"
+     }
+    ]
+   },
+   {
+    "title": "Oppenheimer",
+    "year": 2023,
+    "url": "https://forgestudio.web.lk/foundry/#/film/oppenheimer",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "description": "Oppenheimer tribute poster",
+      "width": 1080,
+      "height": 1350,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/oppenheimer/oppenheimer-main-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/oppenheimer/thumb/oppenheimer-main-01.webp"
+     }
+    ]
+   }
+  ],
+  "events": [
+   {
+    "title": "Lantharuma 2027",
+    "year": 2027,
+    "client": "SLIIT Business School Student Community",
+    "role": "Event campaign design",
+    "note": "The lantern rises, the rhythm begins: a fusion of Sri Lankan music, dance and living tradition, with a ten-day countdown.",
+    "url": "https://forgestudio.web.lk/foundry/#/events/lantharuma-2027",
+    "pieces": [
+     {
+      "title": "Event logo",
+      "type": "logo",
+      "description": "Lantharuma event logo in glowing blue Sinhala neon lettering",
+      "width": 1600,
+      "height": 1143,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-logo-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-logo-01.webp"
+     },
+     {
+      "title": "Official poster",
+      "type": "poster",
+      "description": "Lantharuma official poster: a masked figure holding a lantern before a full moon, rising over a festival stage with a microphone, guitar and horns",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-poster-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-poster-01.webp"
+     },
+     {
+      "title": "Fighting with the dark",
+      "type": "banner",
+      "description": "Lantharuma wide banner, Fighting with the dark",
+      "width": 1600,
+      "height": 900,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-banner-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-banner-01.webp"
+     },
+     {
+      "title": "Coming soon",
+      "type": "social",
+      "description": "Lantharuma social media post: coming soon, two blindfolded figures",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-social-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-social-01.webp"
+     },
+     {
+      "title": "The symbol",
+      "type": "social",
+      "description": "Lantharuma social media post: the lantern symbol",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-social-02.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-social-02.webp"
+     },
+     {
+      "title": "Note feeling",
+      "type": "social",
+      "description": "Lantharuma social media post: note feeling",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-social-03.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-social-03.webp"
+     },
+     {
+      "title": "Yaka portrayal",
+      "type": "social",
+      "description": "Lantharuma social media post: yaka mask portrayal, registration closes soon",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-social-05.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-social-05.webp"
+     },
+     {
+      "title": "Lantharuma × Karnan",
+      "type": "social",
+      "description": "Lantharuma social media post: Lantharuma × Karnan",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-social-06.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-social-06.webp"
+     },
+     {
+      "title": "Sponsors",
+      "type": "social",
+      "description": "Lantharuma social media post: sponsors",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-social-07.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-social-07.webp"
+     },
+     {
+      "title": "Registration, 3 days left",
+      "type": "social",
+      "description": "Lantharuma social media post: registration, 3 days left",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-social-08.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-social-08.webp"
+     },
+     {
+      "title": "Registration, 2 days left",
+      "type": "social",
+      "description": "Lantharuma social media post: registration, 2 days left",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-social-09.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-social-09.webp"
+     },
+     {
+      "title": "Registration, 1 day left",
+      "type": "social",
+      "description": "Lantharuma social media post: registration, 1 day left",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-social-10.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-social-10.webp"
+     },
+     {
+      "title": "Registration closing",
+      "type": "social",
+      "description": "Lantharuma social media post: registration closes soon",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-social-11.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-social-11.webp"
+     },
+     {
+      "title": "Registration closed",
+      "type": "social",
+      "description": "Lantharuma social media post: registrations closed",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-social-12.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-social-12.webp"
+     },
+     {
+      "title": "10 days to go",
+      "type": "social",
+      "description": "Lantharuma countdown post: 10 days to go",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-social-13.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-social-13.webp"
+     },
+     {
+      "title": "9 days to go",
+      "type": "social",
+      "description": "Lantharuma countdown post: 9 days to go",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-social-14.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-social-14.webp"
+     },
+     {
+      "title": "8 days to go",
+      "type": "social",
+      "description": "Lantharuma countdown post: 8 days to go",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-social-15.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-social-15.webp"
+     },
+     {
+      "title": "7 days to go",
+      "type": "social",
+      "description": "Lantharuma countdown post: 7 days to go",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-social-16.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-social-16.webp"
+     },
+     {
+      "title": "6 days to go",
+      "type": "social",
+      "description": "Lantharuma countdown post: 6 days to go",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-social-17.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-social-17.webp"
+     },
+     {
+      "title": "5 days to go",
+      "type": "social",
+      "description": "Lantharuma countdown post: 5 days to go",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-social-18.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-social-18.webp"
+     },
+     {
+      "title": "4 days to go",
+      "type": "social",
+      "description": "Lantharuma countdown post: 4 days to go",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-social-19.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-social-19.webp"
+     },
+     {
+      "title": "3 days to go",
+      "type": "social",
+      "description": "Lantharuma countdown post: 3 days to go",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-social-20.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-social-20.webp"
+     },
+     {
+      "title": "2 days to go",
+      "type": "social",
+      "description": "Lantharuma countdown post: 2 days to go",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-social-21.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-social-21.webp"
+     },
+     {
+      "title": "1 day to go",
+      "type": "social",
+      "description": "Lantharuma countdown post: 1 day to go",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-social-22.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-social-22.webp"
+     },
+     {
+      "title": "Today",
+      "type": "social",
+      "description": "Lantharuma social media post: the wait is over, today",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-social-23.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-social-23.webp"
+     }
+    ]
+   },
+   {
+    "title": "Enchanté",
+    "year": 2026,
+    "client": "SLIIT Business School Student Community",
+    "role": "Full campaign design, independently",
+    "note": "An evening of art and creativity under one line: \"Envision the unspoken. Paint it.\"",
+    "url": "https://forgestudio.web.lk/foundry/#/events/enchante",
+    "pieces": [
+     {
+      "title": "Event logo",
+      "type": "logo",
+      "description": "Enchanté gold logo: a quill-pen E with the line Envision the unspoken. Paint it.",
+      "width": 1600,
+      "height": 1368,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/enchante-logo-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/thumb/enchante-logo-01.webp"
+     },
+     {
+      "title": "Coming soon",
+      "type": "social",
+      "description": "Enchanté social media post: coming soon",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/enchante-social-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/thumb/enchante-social-01.webp"
+     },
+     {
+      "title": "Date reveal",
+      "type": "social",
+      "description": "Enchanté date reveal: 02 September, painted on an old fresco wall",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/enchante-social-02.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/thumb/enchante-social-02.webp"
+     },
+     {
+      "title": "Registration open",
+      "type": "social",
+      "description": "Enchanté social media post: the canvas is yours, registration open",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/enchante-social-03.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/thumb/enchante-social-03.webp"
+     },
+     {
+      "title": "Registration countdown, three",
+      "type": "social",
+      "description": "Enchanté countdown post: registration closes in 3 days",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/enchante-social-04.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/thumb/enchante-social-04.webp"
+     },
+     {
+      "title": "Registration countdown, two",
+      "type": "social",
+      "description": "Enchanté countdown post: registration closes in 2 days",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/enchante-social-05.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/thumb/enchante-social-05.webp"
+     },
+     {
+      "title": "Registration countdown, one",
+      "type": "social",
+      "description": "Enchanté countdown post: registration closes in 1 day",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/enchante-social-06.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/thumb/enchante-social-06.webp"
+     },
+     {
+      "title": "Registration reminder",
+      "type": "social",
+      "description": "Enchanté social media post: what if your greatest story has never been spoken? Register today",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/enchante-social-07.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/thumb/enchante-social-07.webp"
+     },
+     {
+      "title": "Registration closed",
+      "type": "social",
+      "description": "Enchanté social media post: registrations are now closed",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/enchante-social-08.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/thumb/enchante-social-08.webp"
+     },
+     {
+      "title": "Guest feature",
+      "type": "social",
+      "description": "Enchanté guest feature post",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/enchante-social-09.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/thumb/enchante-social-09.webp"
+     },
+     {
+      "title": "Guest feature",
+      "type": "social",
+      "description": "Enchanté guest feature post",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/enchante-social-10.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/thumb/enchante-social-10.webp"
+     },
+     {
+      "title": "Guest feature",
+      "type": "social",
+      "description": "Enchanté guest feature post",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/enchante-social-11.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/thumb/enchante-social-11.webp"
+     },
+     {
+      "title": "Platinum sponsor",
+      "type": "social",
+      "description": "Enchanté social media post: welcoming the platinum sponsor",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/enchante-social-12.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/thumb/enchante-social-12.webp"
+     },
+     {
+      "title": "Platinum sponsor, second version",
+      "type": "social",
+      "description": "Enchanté social media post: platinum sponsor, second version",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/enchante-social-13.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/thumb/enchante-social-13.webp"
+     },
+     {
+      "title": "Silver sponsors",
+      "type": "social",
+      "description": "Enchanté social media post: silver sponsors",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/enchante-social-14.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/thumb/enchante-social-14.webp"
+     },
+     {
+      "title": "Gift partners",
+      "type": "social",
+      "description": "Enchanté social media post: gift partners",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/enchante-social-15.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/thumb/enchante-social-15.webp"
+     },
+     {
+      "title": "3 days to go",
+      "type": "social",
+      "description": "Enchanté countdown post: 3 days to go",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/enchante-social-16.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/thumb/enchante-social-16.webp"
+     },
+     {
+      "title": "2 days to go",
+      "type": "social",
+      "description": "Enchanté countdown post: 2 days to go, an hourglass",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/enchante-social-17.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/thumb/enchante-social-17.webp"
+     },
+     {
+      "title": "1 day to go",
+      "type": "social",
+      "description": "Enchanté countdown post: 1 day to go",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/enchante-social-18.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/thumb/enchante-social-18.webp"
+     },
+     {
+      "title": "Today",
+      "type": "social",
+      "description": "Enchanté social media post: today, the unseen is finally revealed",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/enchante-social-19.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/thumb/enchante-social-19.webp"
+     }
+    ]
+   },
+   {
+    "title": "Down the Wicket",
+    "year": 2026,
+    "client": "SLIIT Business School Student Community",
+    "role": "Full campaign design, independently",
+    "note": "The SLIIT SBS cricket tournament, 24 and 25 August 2026 at the SLIIT main ground. The full run, from date reveal to thank you.",
+    "url": "https://forgestudio.web.lk/foundry/#/events/down-the-wicket",
+    "pieces": [
+     {
+      "title": "Event logo",
+      "type": "logo",
+      "description": "Down the Wicket 2026 tournament crest with crossed bats, stumps and a cricket ball",
+      "width": 709,
+      "height": 915,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-logo-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-logo-01.webp"
+     },
+     {
+      "title": "Print flyer",
+      "type": "poster",
+      "description": "Down the Wicket print flyer with dates, venue and a registration QR code",
+      "width": 1131,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-poster-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-poster-01.webp"
+     },
+     {
+      "title": "Print flyer with QR code",
+      "type": "poster",
+      "description": "Down the Wicket print flyer: register your team, with QR code",
+      "width": 1131,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-poster-02.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-poster-02.webp"
+     },
+     {
+      "title": "Invitation",
+      "type": "invitation",
+      "description": "Down the Wicket invitation card for 25 August 2026",
+      "width": 1128,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-invitation-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-invitation-01.webp"
+     },
+     {
+      "title": "Date reveal",
+      "type": "social",
+      "description": "Down the Wicket date reveal: a stadium scoreboard reading Aug 24 and 25",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-social-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-social-01.webp"
+     },
+     {
+      "title": "Registration open",
+      "type": "social",
+      "description": "Down the Wicket social media post: registration open now",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-social-02.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-social-02.webp"
+     },
+     {
+      "title": "Registration, all faculties",
+      "type": "social",
+      "description": "Down the Wicket social media post: all faculties, one ground",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-social-03.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-social-03.webp"
+     },
+     {
+      "title": "Registration, all faculties, second version",
+      "type": "social",
+      "description": "Down the Wicket social media post: your faculty, your team, your moment",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-social-04.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-social-04.webp"
+     },
+     {
+      "title": "Register your team",
+      "type": "social",
+      "description": "Down the Wicket social media post: register your team, with QR code",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-social-05.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-social-05.webp"
+     },
+     {
+      "title": "Registration closes on the 14th",
+      "type": "social",
+      "description": "Down the Wicket social media post: the last spin, registration closes 14 August",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-social-06.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-social-06.webp"
+     },
+     {
+      "title": "Registration closes on the 20th",
+      "type": "social",
+      "description": "Down the Wicket social media post: the final face, registration closes 20 August",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-social-07.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-social-07.webp"
+     },
+     {
+      "title": "Registration open again",
+      "type": "social",
+      "description": "Down the Wicket social media post: due to high demand, open again",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-social-08.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-social-08.webp"
+     },
+     {
+      "title": "Final call",
+      "type": "social",
+      "description": "Down the Wicket social media post: final call, registrations close today",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-social-09.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-social-09.webp"
+     },
+     {
+      "title": "Last call",
+      "type": "social",
+      "description": "Down the Wicket social media post: last call",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-social-10.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-social-10.webp"
+     },
+     {
+      "title": "Prizes",
+      "type": "social",
+      "description": "Down the Wicket social media post: champion and runner-up prizes",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-social-11.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-social-11.webp"
+     },
+     {
+      "title": "Sponsors",
+      "type": "social",
+      "description": "Down the Wicket social media post: the power behind the pitch, sponsors",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-social-12.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-social-12.webp"
+     },
+     {
+      "title": "First line-up",
+      "type": "social",
+      "description": "Down the Wicket social media post: the first line-up is in",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-social-13.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-social-13.webp"
+     },
+     {
+      "title": "Final line-up locked",
+      "type": "social",
+      "description": "Down the Wicket social media post: final line-up locked",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-social-14.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-social-14.webp"
+     },
+     {
+      "title": "Final window, 3 days left",
+      "type": "social",
+      "description": "Down the Wicket social media post: final window, 3 days left",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-social-15.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-social-15.webp"
+     },
+     {
+      "title": "Final window, 2 days left",
+      "type": "social",
+      "description": "Down the Wicket social media post: final window, 2 days left",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-social-16.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-social-16.webp"
+     },
+     {
+      "title": "Final window, 1 day left",
+      "type": "social",
+      "description": "Down the Wicket social media post: final window, 1 day left",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-social-17.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-social-17.webp"
+     },
+     {
+      "title": "2 days to go",
+      "type": "social",
+      "description": "Down the Wicket social media post: 2 days to take the field",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-social-18.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-social-18.webp"
+     },
+     {
+      "title": "First round",
+      "type": "social",
+      "description": "Down the Wicket social media post: first round, match day",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-social-19.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-social-19.webp"
+     },
+     {
+      "title": "Match day",
+      "type": "social",
+      "description": "Down the Wicket social media post: match day",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-social-20.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-social-20.webp"
+     },
+     {
+      "title": "Thank you",
+      "type": "social",
+      "description": "Down the Wicket social media post: thank you",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-social-21.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-social-21.webp"
+     }
+    ]
+   },
+   {
+    "title": "ADMELIORA'26",
+    "year": 2026,
+    "client": "SLIIT Business School Student Community",
+    "role": "Event campaign design",
+    "note": "Remarkable journeys, influential minds, one stage. A guest-led campaign built around the reveal of each speaker.",
+    "url": "https://forgestudio.web.lk/foundry/#/events/admeliora-26",
+    "pieces": [
+     {
+      "title": "Wordmark",
+      "type": "logo",
+      "description": "ADMELIORA'26 gold wordmark: inspire, connect, elevate",
+      "width": 1600,
+      "height": 345,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/admeliora-26-logo-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/thumb/admeliora-26-logo-01.webp"
+     },
+     {
+      "title": "Coming soon",
+      "type": "social",
+      "description": "ADMELIORA'26 social media post: who will take the stage? Coming soon",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/admeliora-26-social-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/thumb/admeliora-26-social-01.webp"
+     },
+     {
+      "title": "Teaser",
+      "type": "social",
+      "description": "ADMELIORA'26 teaser post: the voices that move us",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/admeliora-26-social-02.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/thumb/admeliora-26-social-02.webp"
+     },
+     {
+      "title": "Title reveal",
+      "type": "social",
+      "description": "ADMELIORA'26 title reveal: the conversation has a name, a panel on a lit stage",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/admeliora-26-social-03.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/thumb/admeliora-26-social-03.webp"
+     },
+     {
+      "title": "Date reveal",
+      "type": "social",
+      "description": "ADMELIORA'26 date reveal: 20th September",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/admeliora-26-social-04.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/thumb/admeliora-26-social-04.webp"
+     },
+     {
+      "title": "Guess the guests",
+      "type": "social",
+      "description": "ADMELIORA'26 social media post: guess the guests",
+      "width": 1280,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/admeliora-26-social-05.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/thumb/admeliora-26-social-05.webp"
+     },
+     {
+      "title": "Guest feature",
+      "type": "social",
+      "description": "ADMELIORA'26 guest feature post",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/admeliora-26-social-06.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/thumb/admeliora-26-social-06.webp"
+     },
+     {
+      "title": "Guest feature",
+      "type": "social",
+      "description": "ADMELIORA'26 guest feature post",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/admeliora-26-social-07.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/thumb/admeliora-26-social-07.webp"
+     },
+     {
+      "title": "Guest feature",
+      "type": "social",
+      "description": "ADMELIORA'26 guest feature post",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/admeliora-26-social-08.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/thumb/admeliora-26-social-08.webp"
+     },
+     {
+      "title": "Guest feature",
+      "type": "social",
+      "description": "ADMELIORA'26 guest feature post",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/admeliora-26-social-09.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/thumb/admeliora-26-social-09.webp"
+     },
+     {
+      "title": "Guest feature",
+      "type": "social",
+      "description": "ADMELIORA'26 guest feature post",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/admeliora-26-social-10.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/thumb/admeliora-26-social-10.webp"
+     },
+     {
+      "title": "Guest feature",
+      "type": "social",
+      "description": "ADMELIORA'26 guest feature post",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/admeliora-26-social-11.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/thumb/admeliora-26-social-11.webp"
+     },
+     {
+      "title": "Guest feature",
+      "type": "social",
+      "description": "ADMELIORA'26 guest feature post",
+      "width": 1200,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/admeliora-26-social-12.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/thumb/admeliora-26-social-12.webp"
+     }
+    ]
+   }
+  ],
+  "concepts": [
+   {
+    "title": "Concept posters",
+    "url": "https://forgestudio.web.lk/foundry/#/concepts/posters",
+    "pieces": [
+     {
+      "title": "30 Years of Vijayism",
+      "type": "Tribute poster",
+      "year": 2022,
+      "description": "The 30 Years of Vijayism tribute poster: the actor seated in a vintage green room beneath a gilded portrait of himself, surrounded by small details from his career",
+      "note": "Featured on Thanthi TV, Indian television. Every object in the room is a hidden detail.",
+      "width": 1068,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/concepts/vijayism-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/concepts/thumb/vijayism-01.webp"
+     }
+    ]
+   },
+   {
+    "title": "From the sketchbook",
+    "url": "https://forgestudio.web.lk/foundry/#/concepts/sketchbook",
+    "pieces": [
+     {
+      "title": "Pencil layout",
+      "year": 2025,
+      "description": "Pencil layout sketch for the Avengers: Doomsday poster, with handwritten notes",
+      "note": "Avengers: Doomsday, before a single pixel.",
+      "width": 1164,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/vault/vault-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/vault/thumb/vault-01.webp"
+     },
+     {
+      "title": "Outline wireframe",
+      "year": 2022,
+      "description": "Wireframe outline of the Rolex Day-Date watch",
+      "note": "Rolex Day-Date 40, drawn line by line.",
+      "width": 864,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/vault/vault-02.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/vault/thumb/vault-02.webp"
+     },
+     {
+      "title": "Base geometry",
+      "year": 2022,
+      "description": "Rolex watch base geometry in flat gold",
+      "note": "The first gold before the details.",
+      "width": 1120,
+      "height": 1355,
+      "image": "https://forgestudio.web.lk/foundry/img/vault/vault-03.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/vault/thumb/vault-03.webp"
+     },
+     {
+      "title": "Dial build",
+      "year": 2022,
+      "description": "Rolex dial build with Roman numerals and the day window",
+      "note": "Hands, indices and the day window.",
+      "width": 1180,
+      "height": 1040,
+      "image": "https://forgestudio.web.lk/foundry/img/vault/vault-04.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/vault/thumb/vault-04.webp"
+     },
+     {
+      "title": "Metal gradients",
+      "year": 2022,
+      "description": "Swatches of gold and steel gradients for the Rolex study",
+      "note": "Every gold and steel tone, tested first.",
+      "width": 1400,
+      "height": 723,
+      "image": "https://forgestudio.web.lk/foundry/img/vault/vault-05.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/vault/thumb/vault-05.webp"
+     },
+     {
+      "title": "Construction grid",
+      "year": 2025,
+      "description": "The FORGE logo construction grid on black",
+      "note": "How the FORGE mark was drawn.",
+      "width": 1600,
+      "height": 1000,
+      "image": "https://forgestudio.web.lk/foundry/img/vault/vault-06.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/vault/thumb/vault-06.webp"
+     },
+     {
+      "title": "Every screen at once",
+      "year": 2025,
+      "description": "Board showing every screen of the Joey mobile app design",
+      "note": "The whole Joey app, laid out flat.",
+      "width": 1600,
+      "height": 1196,
+      "image": "https://forgestudio.web.lk/foundry/img/vault/vault-07.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/vault/thumb/vault-07.webp"
+     }
+    ]
+   }
+  ],
+  "social": [
+   {
+    "title": "Saagara Seafoods",
+    "year": 2026,
+    "client": "Saagara Seafoods (Pvt) Ltd",
+    "note": "Social media for a seafood market: the brand, a grand opening, everyday market posts and a year of festive greetings.",
+    "url": "https://forgestudio.web.lk/foundry/#/social/saagara",
+    "pieces": [
+     {
+      "group": "The brand",
+      "title": "Brand logo",
+      "description": "Saagara Seafoods logo: a leaping tuna in navy and magenta with a splash of blue water",
+      "width": 1600,
+      "height": 873,
+      "image": "https://forgestudio.web.lk/foundry/img/social/saagara/saagara-logo-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/saagara/thumb/saagara-logo-01.webp"
+     },
+     {
+      "group": "The brand",
+      "title": "Page cover",
+      "description": "Saagara Seafoods page cover: fresh fish, prawns and squid beside the brand name",
+      "width": 851,
+      "height": 360,
+      "image": "https://forgestudio.web.lk/foundry/img/social/saagara/saagara-banner-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/saagara/thumb/saagara-banner-01.webp"
+     },
+     {
+      "group": "Grand opening",
+      "title": "Grand opening invitation",
+      "description": "Grand opening invitation framed by hand-drawn fish, lobsters and squid",
+      "width": 1200,
+      "height": 1500,
+      "image": "https://forgestudio.web.lk/foundry/img/social/saagara/saagara-social-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/saagara/thumb/saagara-social-01.webp"
+     },
+     {
+      "group": "Grand opening",
+      "title": "One day to go",
+      "description": "A hand lifts a fresh fish from the sea: one day to go",
+      "width": 1200,
+      "height": 1500,
+      "image": "https://forgestudio.web.lk/foundry/img/social/saagara/saagara-social-02.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/saagara/thumb/saagara-social-02.webp"
+     },
+     {
+      "group": "Grand opening",
+      "title": "Opening day",
+      "description": "A smiling fisherman greets the morning by the sea on opening day",
+      "width": 1200,
+      "height": 1500,
+      "image": "https://forgestudio.web.lk/foundry/img/social/saagara/saagara-social-03.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/saagara/thumb/saagara-social-03.webp"
+     },
+     {
+      "group": "At the market",
+      "title": "Today's price list",
+      "description": "Today's fish price list on a chalkboard at a seaside market stall",
+      "width": 1200,
+      "height": 1500,
+      "image": "https://forgestudio.web.lk/foundry/img/social/saagara/saagara-social-04.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/saagara/thumb/saagara-social-04.webp"
+     },
+     {
+      "group": "At the market",
+      "title": "Know your fish: sardines",
+      "description": "A bowl of fresh sardines on ice at the beach: things you did not know about sardines",
+      "width": 1200,
+      "height": 1500,
+      "image": "https://forgestudio.web.lk/foundry/img/social/saagara/saagara-social-05.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/saagara/thumb/saagara-social-05.webp"
+     },
+     {
+      "group": "Through the seasons",
+      "title": "Christmas",
+      "description": "Fishing boats on a calm winter sea: wishing you a joyful and delicious Christmas",
+      "width": 1200,
+      "height": 1500,
+      "image": "https://forgestudio.web.lk/foundry/img/social/saagara/saagara-social-06.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/saagara/thumb/saagara-social-06.webp"
+     },
+     {
+      "group": "Through the seasons",
+      "title": "A fresh start, 2026",
+      "description": "A fish made of the numbers 2026 leaps over the sea: a fresh start for the new year",
+      "width": 1200,
+      "height": 1500,
+      "image": "https://forgestudio.web.lk/foundry/img/social/saagara/saagara-social-07.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/saagara/thumb/saagara-social-07.webp"
+     },
+     {
+      "group": "Through the seasons",
+      "title": "Poya day, January",
+      "description": "Poya day greeting with the Buddha beneath the Bodhi tree",
+      "width": 1200,
+      "height": 1500,
+      "image": "https://forgestudio.web.lk/foundry/img/social/saagara/saagara-social-08.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/saagara/thumb/saagara-social-08.webp"
+     },
+     {
+      "group": "Through the seasons",
+      "title": "Thai Pongal",
+      "description": "A family celebrating Thai Pongal with a pot of milk rice",
+      "width": 1200,
+      "height": 1500,
+      "image": "https://forgestudio.web.lk/foundry/img/social/saagara/saagara-social-09.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/saagara/thumb/saagara-social-09.webp"
+     },
+     {
+      "group": "Through the seasons",
+      "title": "Poya day, February",
+      "description": "Poya day greeting with the Buddha and a gathering of monks",
+      "width": 1200,
+      "height": 1500,
+      "image": "https://forgestudio.web.lk/foundry/img/social/saagara/saagara-social-10.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/saagara/thumb/saagara-social-10.webp"
+     },
+     {
+      "group": "Through the seasons",
+      "title": "Independence Day",
+      "description": "Fishing families on the shore beneath the lion of the national flag: 78th Independence Day",
+      "width": 1200,
+      "height": 1500,
+      "image": "https://forgestudio.web.lk/foundry/img/social/saagara/saagara-social-11.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/saagara/thumb/saagara-social-11.webp"
+     },
+     {
+      "group": "Through the seasons",
+      "title": "Maha Shivratri",
+      "description": "Maha Shivratri greeting with Lord Shiva and devotees",
+      "width": 1200,
+      "height": 1500,
+      "image": "https://forgestudio.web.lk/foundry/img/social/saagara/saagara-social-12.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/saagara/thumb/saagara-social-12.webp"
+     },
+     {
+      "group": "Through the seasons",
+      "title": "Sinhala and Tamil New Year",
+      "description": "A festive table of seafood and sweets for the Sinhala and Tamil New Year",
+      "width": 1200,
+      "height": 1500,
+      "image": "https://forgestudio.web.lk/foundry/img/social/saagara/saagara-social-13.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/saagara/thumb/saagara-social-13.webp"
+     }
+    ]
+   }
+  ]
+ }
+}

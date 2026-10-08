@@ -201,3 +201,24 @@ html[data-theme="light"]::-webkit-scrollbar-thumb {
     color-mix(in srgb, #EE7400 calc(var(--fx-heat) * 100%), #4F4A44) 45%,
     color-mix(in srgb, #9A4A00 calc(var(--fx-heat) * 100%), #302F2D));
 }
+
+/* ---------- Richer colour on screens that can show it ---------- */
+/* Most recent phones and laptops show more saturated oranges and golds than standard web colour allows.
+   There, the brand's gold and ember use that wider range (Display P3); everywhere else nothing changes. */
+@media (color-gamut: p3) {
+  :root {
+    --gold: color(display-p3 1 0.77 0.3);
+    --ember: color(display-p3 1 0.56 0.1);
+    --heat: linear-gradient(115deg, color(display-p3 1 0.91 0.66) 0%, color(display-p3 1 0.77 0.3) 30%, color(display-p3 1 0.56 0.1) 65%, #7A3510 100%);
+  }
+  html[data-theme="light"] {
+    --ember: color(display-p3 0.78 0.37 0.04);
+    --heat: linear-gradient(115deg, color(display-p3 1 0.7 0.2) 0%, color(display-p3 1 0.56 0.1) 35%, color(display-p3 0.78 0.37 0.04) 70%, #5A2A0C 100%);
+  }
+  #heatG stop:nth-child(1) { stop-color: color(display-p3 1 0.91 0.66); }
+  #heatG stop:nth-child(2) { stop-color: color(display-p3 1 0.77 0.3); }
+  #heatG stop:nth-child(3) { stop-color: color(display-p3 1 0.56 0.1); }
+  html[data-theme="light"] #heatG stop:nth-child(1) { stop-color: color(display-p3 1 0.8 0.42); }
+  html[data-theme="light"] #heatG stop:nth-child(2) { stop-color: color(display-p3 1 0.64 0.14); }
+  html[data-theme="light"] #heatG stop:nth-child(3) { stop-color: color(display-p3 0.94 0.47 0.05); }
+}
