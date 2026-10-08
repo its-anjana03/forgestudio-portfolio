@@ -521,9 +521,19 @@
       document.head.appendChild(l);
     } else fetch(href, { credentials: 'same-origin' }).catch(() => {});
   };
-  document.addEventListener('pointerover', warm, { passive: true });
-  document.addEventListener('touchstart', warm, { passive: true });
-  document.addEventListener('focusin', warm);
+  // Browsers with speculation rules do this themselves, and better: one rule covers every page link on the site.
+  // (Fetch only, never pre-run: a page that ran early would play its entrance before anyone saw it.)
+  const canSpeculate = !!(window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules'));
+  if (canSpeculate && !(conn && conn.saveData)) {
+    const rules = document.createElement('script');
+    rules.type = 'speculationrules';
+    rules.textContent = JSON.stringify({ prefetch: [{ where: { and: [{ href_matches: '/*' }, { not: { href_matches: '/files/*' } }, { not: { selector_matches: '[download], [target=_blank]' } }] }, eagerness: 'moderate' }] });
+    document.head.appendChild(rules);
+  } else {
+    document.addEventListener('pointerover', warm, { passive: true });
+    document.addEventListener('touchstart', warm, { passive: true });
+    document.addEventListener('focusin', warm);
+  }
 
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a[href]');
@@ -888,6 +898,11 @@
           ['uRes', 'uTime', 'uHeat', 'uFlare', 'uAmp', 'uLight', 'uPtr'].forEach((n) => { U[n] = gl.getUniformLocation(prog, n); });
         }
       } catch (err) { gl = null; }
+      // Screens that can show more colour than standard web colour (most recent phones and laptops) get a richer
+      // fire: the same numbers, drawn in the wider Display P3 range. Light mode stays in standard colour so the
+      // paper matches the rest of the page exactly.
+      const wideGamut = !!gl && 'drawingBufferColorSpace' in gl && matchMedia('(color-gamut: p3)').matches;
+      let wideOn = false;
       const noGL = () => { gl = null; bg.classList.add('no-gl'); };
       if (!gl) noGL();
       fireCv.addEventListener('webglcontextlost', (e) => { e.preventDefault(); noGL(); });
@@ -1095,6 +1110,7 @@
         F.t += dt; F.flare *= Math.exp(-dt * 2.4);
         ptx += (ptrX - ptx) * Math.min(1, dt * 3); pty += (ptrY - pty) * Math.min(1, dt * 3);
         if (gl) {
+          if (wideGamut && (mode.k < 0.5) !== wideOn) { wideOn = !wideOn; try { gl.drawingBufferColorSpace = wideOn ? 'display-p3' : 'srgb'; } catch (err) { /* stays as it was */ } }
           gl.uniform2f(U.uRes, fireCv.width, fireCv.height);
           gl.uniform1f(U.uTime, F.t % 3600); gl.uniform1f(U.uHeat, heat.v);
           gl.uniform1f(U.uFlare, Math.min(1, F.flare)); gl.uniform1f(U.uAmp, F.amp); gl.uniform1f(U.uLight, mode.k);

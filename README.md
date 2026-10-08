@@ -24,6 +24,7 @@ A static site (plain HTML, CSS and JavaScript, no build step) hosted on GitHub P
 │   ├── img/<part>/<id>/               1600px WebP for the premiere, 400px wall versions in thumb/
 │   └── <source folders>/              Your original exports (kept out of git and the zip)
 ├── tools/foundry-images.js            Prepares new artwork for the Foundry (local only)
+├── tools/build-catalogue.js           Rewrites the home poster wall and work.json from the site's own data
 ├── assets/
 │   ├── css/forge.css                  The whole design system (one stylesheet)
 │   ├── css/forge-mode.css             Light mode, the mode switch and the entry choice
@@ -41,6 +42,7 @@ A static site (plain HTML, CSS and JavaScript, no build step) hosted on GitHub P
 ├── .nojekyll                          Serve files as-is on GitHub Pages
 ├── robots.txt, sitemap.xml            Search engines
 ├── llms.txt                           Plain summary of the studio for AI assistants and search tools
+├── work.json                          The whole catalogue as data (built by tools/build-catalogue.js)
 ```
 
 ## Brand system
@@ -213,9 +215,19 @@ Dashboard: **https://forgestudio.goatcounter.com**
 
 - Every case study carries structured details (what it is, who made it, where it sits in the site) in a small
   `application/ld+json` block in its `<head>`; the home page describes the person, the studio and the site.
+- `work.json` is the whole catalogue as data: every case study, home poster and Foundry piece with titles, years,
+  descriptions and image addresses. `tools/build-catalogue.js` builds it from the site itself.
 - `llms.txt` is a plain summary for AI assistants. If your role, study or headline facts change, update it and the
   block in `index.html` together.
 - The copyright year and "Seven years on" count themselves from today's date (`data-year`, `data-since="2019"`).
+
+## Built to grow into newer browsers
+
+These switch on by themselves where the browser or screen supports them, and do nothing elsewhere:
+
+- **Richer colour.** On screens that show the wider Display P3 range, the gold, the ember and the hero fire use it.
+- **Early page fetching.** Browsers with speculation rules fetch the next page as the visitor moves toward a link;
+  others use the older hover prefetch.
 
 ## Run locally
 
@@ -234,11 +246,16 @@ npx serve .
 ## Updating content
 
 - **After changing CSS or JavaScript:** every page links its stylesheet and scripts with a version stamp
-  (`forge.css?v=20261006c`). Change the stamp in all pages (a find-and-replace across the `.html` files and
+  (`forge.css?v=20261008a`). Change the stamp in all pages (a find-and-replace across the `.html` files and
   `foundry/index.html`) so visitors' browsers fetch the new files instead of an old cached copy.
 
 - **New work in the Foundry:** see "Adding work" above.
-- **New poster in the home archive:** add a 1200px WebP to `assets/img/` and a 640px one to `assets/img/thumb/`, add a `<button class="poster" data-lb="N">` to the archive wall in `index.html`, and add `['Title', year, 'file-name']` to the `POSTERS` list at the top of `assets/js/forge.js`.
+- **Changing a poster in the home archive:** the wall always shows ten. Put a 1200px WebP in `assets/img/` and a
+  640px one in `assets/img/thumb/`, change that poster's line in the `POSTERS` list at the top of
+  `assets/js/forge.js` (`['Title', year, 'file-name']`), then run `node tools/build-catalogue.js`. It rewrites the
+  poster wall in `index.html` to match and refreshes `work.json`.
+- **After any change to the work shown** (a new Foundry piece, a new case study): run
+  `node tools/build-catalogue.js` so `work.json` stays true.
 - **Text:** edit the HTML directly. Every page uses the same shared stylesheet and script.
 - **Resume PDF:** replace `files/Thinura-Anjana-Resume-2026.pdf` (keep the same file name).
 

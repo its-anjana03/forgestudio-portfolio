@@ -38,6 +38,7 @@
 - [Home and poster archive](https://forgestudio.web.lk/)
 - [Resume](https://forgestudio.web.lk/resume.html)
 - [The Foundry, the full collection](https://forgestudio.web.lk/foundry/)
+- [Full catalogue as data](https://forgestudio.web.lk/work.json): every case study, poster and Foundry piece with titles, years, descriptions and image addresses
 
 ## Notes for accuracy
 
