@@ -1163,6 +1163,8 @@
       gsap.set(s, { x: dx, y: dy, rotation: rot, transformOrigin: '50% 50%', opacity: 0 });
     });
 
+    // The mark is measured and set to its starting pose: it may be shown now (see "forge-ready" in forge-mode.css).
+    html.classList.add('forge-ready');
     lenis && lenis.stop();
     const unlock = () => { lenis && lenis.start(); };
     const intro = gsap.timeline({ delay: 0.25, onComplete: unlock });
