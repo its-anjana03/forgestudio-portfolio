@@ -173,7 +173,7 @@ is remembered. The Foundry stays dark.
 - **Dark** is the forge at night: fire, embers, the mark in heated gold.
 - **Light** is the morning after: warm ash paper (`#E8E3D9`), charcoal text, grey smoke, falling ash, a burnt-out
   hearth, and the mark as cooled steel. Heated Gold cannot be read on paper, so gold text becomes a burnt ember
-  (`#9A4A00`); the real brand colours stay in the logo, the swatches and the artwork.
+  (`#8A4200`); the real brand colours stay in the logo, the swatches and the artwork.
 - **The change is played live, not as a wipe.** Over about three and a half seconds the flames die, the smoke
   thickens, daylight comes through it, the mark cools from gold to steel, the thermometer falls and the page's
   colours follow from the nav downward. Going back, the coals catch and the fire rises.
@@ -182,9 +182,10 @@ Everything for light mode is in `assets/css/forge-mode.css`; the change itself i
 (search "Theme switch"). Each page sets the saved mode in a tiny script in its `<head>`, before the first paint.
 ## Sound
 
-`assets/js/forge-sound.js` runs on every page. On a first visit the home page asks "How would you like to enter?"
-(with sound or silent). After that, four small sound bars in the nav bar turn it on and off (in the Foundry's header;
-bottom-left on the 404 page). Every page fades in its own music and the choice is remembered.
+`assets/js/forge-sound.js` runs on every page. The site starts silent. On a first visit the home page shows a small
+prompt under the nav ("This site has sound. Turn it on") that never blocks the page and leaves on its own. Four small
+sound bars in the nav bar turn sound on and off at any time (in the Foundry's header; bottom-left on the 404 page).
+Every page fades in its own music and the choice is remembered.
 Browsers only allow sound after a click or tap, so on a newly opened page the music starts on the first click
 (the switch glows softly until then). A track shared by two pages carries on where it stopped.
 
@@ -246,7 +247,7 @@ npx serve .
 ## Updating content
 
 - **After changing CSS or JavaScript:** every page links its stylesheet and scripts with a version stamp
-  (`forge.css?v=20261009b`). Change the stamp in all pages (a find-and-replace across the `.html` files and
+  (`forge.css?v=20261009h`). Change the stamp in all pages (a find-and-replace across the `.html` files and
   `foundry/index.html`) so visitors' browsers fetch the new files instead of an old cached copy.
 
 - **New work in the Foundry:** see "Adding work" above.
@@ -256,6 +257,9 @@ npx serve .
   poster wall in `index.html` to match and refreshes `work.json`.
 - **After any change to the work shown** (a new Foundry piece, a new case study): run
   `node tools/build-catalogue.js` so `work.json` stays true.
+- **Event campaigns on the home page:** the four cards in the "Campaigns" section are plain HTML in `index.html`.
+  Each links to `foundry/#/events/<id>` and shows a piece count; if you add or remove pieces in the Foundry, update
+  the count on the card and the total in the intro line.
 - **Text:** edit the HTML directly. Every page uses the same shared stylesheet and script.
 - **Resume PDF:** replace `files/Thinura-Anjana-Resume-2026.pdf` (keep the same file name).
 

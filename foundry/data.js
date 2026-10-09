@@ -139,7 +139,6 @@ window.FOUNDRY = {
       cover: 'lantharuma-2027-poster-01', role: 'Event campaign design',
       note: 'The lantern rises, the rhythm begins: a fusion of Sri Lankan music, dance and living tradition, with a ten-day countdown.',
       items: [
-        { file: 'lantharuma-2027-logo-01', type: 'logo', w: 1600, h: 1143, tone: '#0a273b', title: 'Event logo', alt: 'Lantharuma event logo in glowing blue Sinhala neon lettering' },
         { file: 'lantharuma-2027-poster-01', type: 'poster', w: 1200, h: 1600, tone: '#8e5d59', title: 'Official poster', alt: 'Lantharuma official poster: a masked figure holding a lantern before a full moon, rising over a festival stage with a microphone, guitar and horns' },
         { file: 'lantharuma-2027-banner-01', type: 'banner', w: 1600, h: 900, tone: '#53473c', title: 'Fighting with the dark', alt: 'Lantharuma wide banner, Fighting with the dark' },
         { file: 'lantharuma-2027-social-01', type: 'social', w: 1200, h: 1600, tone: '#473335', title: 'Coming soon', alt: 'Lantharuma social media post: coming soon, two blindfolded figures' },
@@ -171,7 +170,6 @@ window.FOUNDRY = {
       cover: 'enchante-social-02', role: 'Full campaign design, independently',
       note: 'An evening of art and creativity under one line: "Envision the unspoken. Paint it."',
       items: [
-        { file: 'enchante-logo-01', type: 'logo', w: 1600, h: 1368, tone: '#261d0e', title: 'Event logo', alt: 'Enchanté gold logo: a quill-pen E with the line Envision the unspoken. Paint it.' },
         { file: 'enchante-social-01', type: 'social', w: 1280, h: 1600, tone: '#33170c', title: 'Coming soon', alt: 'Enchanté social media post: coming soon' },
         { file: 'enchante-social-02', type: 'social', w: 1280, h: 1600, tone: '#64554c', title: 'Date reveal', alt: 'Enchanté date reveal: 02 September, painted on an old fresco wall' },
         { file: 'enchante-social-03', type: 'social', w: 1280, h: 1600, tone: '#563d2a', title: 'Registration open', alt: 'Enchanté social media post: the canvas is yours, registration open' },
@@ -198,7 +196,6 @@ window.FOUNDRY = {
       cover: 'down-the-wicket-social-01', role: 'Full campaign design, independently',
       note: 'The SLIIT SBS cricket tournament, 24 and 25 August 2026 at the SLIIT main ground. The full run, from date reveal to thank you.',
       items: [
-        { file: 'down-the-wicket-logo-01', type: 'logo', w: 709, h: 915, tone: '#6d5e4c', title: 'Event logo', alt: 'Down the Wicket 2026 tournament crest with crossed bats, stumps and a cricket ball' },
         { file: 'down-the-wicket-poster-01', type: 'poster', w: 1131, h: 1600, tone: '#7a6558', title: 'Print flyer', alt: 'Down the Wicket print flyer with dates, venue and a registration QR code' },
         { file: 'down-the-wicket-poster-02', type: 'poster', w: 1131, h: 1600, tone: '#60493a', title: 'Print flyer with QR code', alt: 'Down the Wicket print flyer: register your team, with QR code' },
         { file: 'down-the-wicket-invitation-01', type: 'invitation', w: 1128, h: 1600, tone: '#958777', title: 'Invitation', alt: 'Down the Wicket invitation card for 25 August 2026' },
@@ -230,7 +227,6 @@ window.FOUNDRY = {
       cover: 'admeliora-26-social-03', role: 'Event campaign design',
       note: 'Remarkable journeys, influential minds, one stage. A guest-led campaign built around the reveal of each speaker.',
       items: [
-        { file: 'admeliora-26-logo-01', type: 'logo', w: 1600, h: 345, tone: '#3a331d', title: 'Wordmark', alt: 'ADMELIORA\'26 gold wordmark: inspire, connect, elevate' },
         { file: 'admeliora-26-social-01', type: 'social', w: 1280, h: 1600, tone: '#28251d', title: 'Coming soon', alt: 'ADMELIORA\'26 social media post: who will take the stage? Coming soon' },
         { file: 'admeliora-26-social-02', type: 'social', w: 1280, h: 1600, tone: '#473822', title: 'Teaser', alt: 'ADMELIORA\'26 teaser post: the voices that move us' },
         { file: 'admeliora-26-social-03', type: 'social', w: 1280, h: 1600, tone: '#4b3f33', title: 'Title reveal', alt: 'ADMELIORA\'26 title reveal: the conversation has a name, a panel on a lit stage' },

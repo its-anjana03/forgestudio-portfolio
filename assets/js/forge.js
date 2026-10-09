@@ -71,8 +71,8 @@
   // dark, light, and (optionally) what it passes through on the way
   const TOK = {
     '--ink': ['#0A0908', '#E8E3D9'], '--ink-2': ['#121110', '#DED8CC'], '--steel': ['#2B2B2B', '#D2CCC0'], '--steel-2': ['#3A3936', '#BDB6A9'],
-    '--bone': ['#F4EFE6', '#181614', '#FF9A2E'], '--dim': ['#A8A196', '#4F4A44', '#D9781F'], '--mute': ['#8A8378', '#6B655C', '#B8651A'],
-    '--gold': ['#FFC247', '#9A4A00', '#FF8A00'], '--ember': ['#FF8A00', '#C25A00'],
+    '--bone': ['#F4EFE6', '#181614', '#FF9A2E'], '--dim': ['#A8A196', '#4F4A44', '#D9781F'], '--mute': ['#8A8378', '#5A544C', '#B8651A'],
+    '--gold': ['#FFC247', '#8A4200', '#FF8A00'], '--ember': ['#FF8A00', '#C25A00'],
   };
   Object.keys(TOK).forEach((n) => { TOK[n] = TOK[n].map(rgb); });
   const SURFACE = { '--ink': 1, '--ink-2': 1, '--steel': 1, '--steel-2': 1 };
@@ -165,6 +165,10 @@
       menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     }
     if (lenis) open ? lenis.stop() : lenis.start();
+    // While the menu covers the page, the page behind it is out of reach for the keyboard and screen readers.
+    $$('main, footer, .heat-meter, .sound-ask').forEach((el) => { el.inert = open; });
+    if (open) { const first = $('.menu ul a'); if (first) setTimeout(() => first.focus({ preventScroll: true }), 450); }
+    else if (menuBtn && document.activeElement && document.activeElement.closest('.menu')) menuBtn.focus({ preventScroll: true });
   };
   menuBtn && menuBtn.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && document.body.classList.contains('menu-open')) setMenu(false); });
@@ -1118,7 +1122,7 @@
       for (let i = 0; i < (big ? 6 : 3); i++) { const [x, y] = edgePoint(); burst(x, y, small ? 8 : 16, 1); }
       if (!big && hudN) {
         hudN.textContent = String(n);
-        gsap.fromTo(hudN, { scale: 1.6, color: light ? '#FF8A00' : '#FFFFFF' }, { scale: 1, color: light ? '#9A4A00' : '#FFC247', duration: 0.6, ease: 'power3.out', overwrite: true, clearProps: 'color' });
+        gsap.fromTo(hudN, { scale: 1.6, color: light ? '#FF8A00' : '#FFFFFF' }, { scale: 1, color: light ? '#8A4200' : '#FFC247', duration: 0.6, ease: 'power3.out', overwrite: true, clearProps: 'color' });
       }
     };
 
@@ -1130,6 +1134,7 @@
     gsap.set(h1Words, { yPercent: 110 });
     gsap.set(hots, { opacity: 0 });
     holeG.style.visibility = 'hidden'; // the archive hole stays closed until the breach
+    wall.inert = true;                 // and the posters behind it cannot be tabbed to yet
     colds.forEach((c) => { const len = c.getTotalLength(); gsap.set(c, { strokeDasharray: len, strokeDashoffset: len, fillOpacity: 0 }); });
     shards.forEach((s) => {
       const [dx, dy, rot] = s.dataset.from.split(',').map(Number);
@@ -1166,31 +1171,36 @@
     const deep = window.scrollY > 10 || location.hash.length > 1;
     if (deep) intro.progress(1);
 
-    // The door: on a first visit the mark waits while the visitor chooses to enter with sound or without.
-    // Their click is also what lets the browser start the music.
-    const door = $('.door');
+    // Sound is offered, never demanded: on a first visit the site starts silent and a small prompt appears once the
+    // mark is forged. It leaves on its own, or as soon as the visitor scrolls. Their click is what lets music start.
+    const ask = $('.sound-ask');
     let asked = true;
-    try { asked = !!localStorage.getItem('forge-sound'); } catch (e) { /* no storage: do not ask */ }
-    if (door && !asked && !deep) {
-      intro.pause(0);
-      door.hidden = false;
-      requestAnimationFrame(() => door.classList.add('is-open'));
-      const first = $('[data-door="on"]', door);
-      if (first) first.focus({ preventScroll: true });
-      const enter = (withSound) => {
-        if (window.ForgeSound && window.ForgeSound.set) window.ForgeSound.set(withSound);
-        else { try { localStorage.setItem('forge-sound', withSound ? 'on' : 'off'); } catch (e) { /* asked again next time */ } }
-        track('door', withSound ? 'sound' : 'silent');
-        door.classList.remove('is-open'); door.classList.add('is-leaving');
-        setTimeout(() => { door.hidden = true; }, 900);
-        intro.play();
+    try { asked = !!(localStorage.getItem('forge-sound') || localStorage.getItem('forge-sound-asked')); } catch (e) { /* no storage: do not ask */ }
+    if (ask && !asked && !deep) {
+      let open = false, timer = 0;
+      const close = () => {
+        if (!open) return; open = false; clearTimeout(timer);
+        ask.classList.remove('is-on');
+        setTimeout(() => { ask.hidden = true; }, 500);
+        try { localStorage.setItem('forge-sound-asked', '1'); } catch (e) { /* asked again next visit */ }
       };
-      door.addEventListener('click', (e) => { const b = e.target.closest('[data-door]'); if (b) enter(b.dataset.door === 'on'); });
-      door.addEventListener('keydown', (e) => { if (e.key === 'Escape') enter(false); });
+      setTimeout(() => {
+        if (window.scrollY > 40) return;          // already on their way: do not interrupt
+        open = true; ask.hidden = false;
+        requestAnimationFrame(() => ask.classList.add('is-on'));
+        timer = setTimeout(close, 9000);
+        window.addEventListener('scroll', () => { if (window.scrollY > 80) close(); }, { passive: true });
+      }, 3200);
+      ask.addEventListener('click', (e) => {
+        const b = e.target.closest('[data-ask]'); if (!b) return;
+        const yes = b.dataset.ask === 'on';
+        if (window.ForgeSound && window.ForgeSound.set) window.ForgeSound.set(yes);
+        track('sound-ask', yes ? 'on' : 'no');
+        close();
+      });
     }
-
     /* --- Scroll: heat, three strikes, breach, zoom open onto the archive --- */
-    const pinLen = () => window.innerHeight * 3.4;
+    const pinLen = () => window.innerHeight * 2.3;   // was 3.4 screens: the same forging, a third less scrolling
     let lastP = 0;
     const tl = gsap.timeline({
       defaults: { ease: 'none' },
@@ -1208,6 +1218,7 @@
         if (bgSync) bgSync();
         F.live = p < P.breach + 0.16; bgRun();
         wall.classList.toggle('is-live', p > P.zoomEnd);
+        wall.inert = p <= P.zoomEnd;   // hidden behind the mark until the zoom ends: keep the keyboard out of it too
         if (skipWork) skipWork.classList.toggle('is-on', p > 0.035 && p < 0.6); // from the first strike until the archive opens
         setSparks(p < 0.48 && !document.hidden);
         canvas.style.opacity = String(p < 0.3 ? 1 : Math.max(0, 1 - (p - 0.3) * 6));

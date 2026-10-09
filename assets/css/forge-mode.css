@@ -39,20 +39,27 @@ html[data-theme="light"] .snd.is-floating { background: rgba(232, 227, 217, .72)
 .ignite-mark .hot { fill: url(#markG); }
 .ignite-mark .whole { fill: url(#markG); stroke: url(#markG); }
 
-/* The door: a first-visit choice between entering with sound and entering silent. */
-.door {
-  position: fixed; inset: 0; z-index: 350; display: grid; place-items: center; padding: var(--pad);
-  background: var(--ink); opacity: 0; transition: opacity .5s var(--ease-out);
+/* The sound prompt: a first visit starts silent, and this small card offers sound without blocking anything. */
+.sound-ask {
+  position: fixed; z-index: 130; right: var(--pad); top: calc(var(--nav-h) + 6px); display: flex; align-items: center; gap: 14px;   /* hangs under the sound bars it belongs to */
+  padding: 10px 10px 10px 16px; border-radius: 999px; border: 1px solid var(--line-2);
+  background: color-mix(in srgb, var(--ink) 72%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  font-size: 14px; font-weight: 500; color: var(--bone);
+  opacity: 0; transform: translateY(-10px); transition: opacity .5s var(--ease-out), transform .6s var(--ease-out);
 }
-.door[hidden] { display: none; }
-.door.is-open { opacity: 1; }
-.door.is-leaving { opacity: 0; pointer-events: none; transition-duration: .8s; }
-.door-in { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px; transform: translateY(12px); transition: transform .9s var(--ease-out); }
-.door.is-open .door-in { transform: none; }
-.door-mark { width: 64px; height: auto; }
-.door-q { font-size: clamp(26px, 3.4vw, 44px); font-weight: 600; letter-spacing: -0.035em; line-height: 1.05; max-width: 16ch; text-wrap: balance; }
-.door-acts { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-.door-note { font-size: 13px; color: var(--mute); max-width: 34ch; }
+.sound-ask[hidden] { display: none; }
+.sound-ask.is-on { opacity: 1; transform: none; }
+.sa-bars { display: inline-flex; align-items: center; gap: 3px; height: 14px; color: var(--gold); }
+.sa-bars i { width: 2px; height: 3px; background: currentColor; border-radius: 1px; animation: sndEq 1.3s ease-in-out infinite alternate; }
+.sa-bars i:nth-child(2) { animation-duration: .9s; animation-delay: -.3s; }
+.sa-bars i:nth-child(3) { animation-duration: 1.6s; animation-delay: -.7s; }
+.sa-bars i:nth-child(4) { animation-duration: 1.1s; animation-delay: -.5s; }
+.sa-yes { height: 36px; padding: 0 16px; border-radius: 999px; background: var(--gold); color: var(--ink); font-size: 14px; font-weight: 600; transition: transform .2s var(--ease-out); }
+.sa-yes:active { transform: scale(.96); }
+.sa-no { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line-2); font-size: 18px; line-height: 1; color: var(--dim); transition: border-color .3s var(--ease-out), color .3s var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .sa-no:hover { border-color: var(--gold); color: var(--bone); } }
+@media (max-width: 760px) { .sound-ask { left: 12px; right: 12px; justify-content: space-between; } .sound-ask p { flex: 1; } }
+@media (prefers-reduced-motion: reduce) { .sa-bars i { animation: none; height: 9px; } }
 /* Manifesto words carry --lit (0 cold, 1 heated), so their colours follow the mode. */
 .has-motion .manifesto .w { color: color-mix(in srgb, var(--bone) calc(16% + 84% * var(--lit, 0)), transparent); }
 .has-motion .manifesto .w.gold { color: color-mix(in srgb, var(--gold) calc(18% + 82% * var(--lit, 0)), transparent); }
@@ -65,8 +72,8 @@ html[data-theme="light"] {
   --steel-2: #BDB6A9;
   --bone: #181614;         /* charcoal ink */
   --dim: #4F4A44;
-  --mute: #6B655C;
-  --gold: #9A4A00;         /* burnt ember: Heated Gold cannot be read on paper */
+  --mute: #5A544C;         /* small labels: readable on paper and on the darker card surfaces */
+  --gold: #8A4200;         /* burnt ember: Heated Gold cannot be read on paper; this passes on paper and on cards */
   --ember: #C25A00;
   --line: rgba(24, 22, 20, 0.14);
   --line-2: rgba(24, 22, 20, 0.26);
@@ -129,6 +136,8 @@ html[data-theme="light"] .poster img { filter: none; }
 /* ---------- Details below the hero (first pass) ---------- */
 html[data-theme="light"] .mark-art .grid line { stroke: rgba(24, 22, 20, .16); }
 html[data-theme="light"] .sig-tip { fill: #FF8A00; }
+/* Ember Orange is too pale to read as text on paper, so ember-coloured words use the burnt ember. */
+html[data-theme="light"] .ember { color: var(--gold); }
 /* Brand swatches always show the real brand colours. */
 html[data-theme="light"] .swatch.g { background: #FFC247; color: #0A0908; }
 html[data-theme="light"] .swatch.o { background: #FF8A00; color: #0A0908; }
@@ -189,7 +198,7 @@ html[data-theme="light"] .fx-ignite { animation-name: fx-ignite-paper; }
 }
 html[data-theme="light"] .fx-ch-hot { -webkit-text-stroke-color: rgba(194, 90, 0, .7); }
 html[data-theme="light"] .strike-hot { -webkit-text-stroke-color: #C25A00; }
-@supports not selector(::-webkit-scrollbar) { html[data-theme="light"] { scrollbar-color: #9A4A00 #E8E3D9; } }
+@supports not selector(::-webkit-scrollbar) { html[data-theme="light"] { scrollbar-color: #8A4200 #E8E3D9; } }
 /* The scrollbar: a paper track, and an ingot that cools from ember to steel as the page goes down. */
 html[data-theme="light"]::-webkit-scrollbar-track { background: #E8E3D9; }
 html[data-theme="light"]::-webkit-scrollbar-thumb {
@@ -197,7 +206,7 @@ html[data-theme="light"]::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg,
     color-mix(in srgb, #FFA01A calc(var(--fx-heat) * 100%), #6B655C),
     color-mix(in srgb, #EE7400 calc(var(--fx-heat) * 100%), #4F4A44) 45%,
-    color-mix(in srgb, #9A4A00 calc(var(--fx-heat) * 100%), #302F2D));
+    color-mix(in srgb, #8A4200 calc(var(--fx-heat) * 100%), #302F2D));
 }
 
 /* ---------- Richer colour on screens that can show it ---------- */

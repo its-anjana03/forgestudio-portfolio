@@ -14,7 +14,7 @@
  "counts": {
   "caseStudies": 6,
   "homeArchive": 10,
-  "foundryPieces": 119
+  "foundryPieces": 115
  },
  "caseStudies": [
   {
@@ -335,15 +335,6 @@
     "url": "https://forgestudio.web.lk/foundry/#/events/lantharuma-2027",
     "pieces": [
      {
-      "title": "Event logo",
-      "type": "logo",
-      "description": "Lantharuma event logo in glowing blue Sinhala neon lettering",
-      "width": 1600,
-      "height": 1143,
-      "image": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/lantharuma-2027-logo-01.webp",
-      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-logo-01.webp"
-     },
-     {
       "title": "Official poster",
       "type": "poster",
       "description": "Lantharuma official poster: a masked figure holding a lantern before a full moon, rising over a festival stage with a microphone, guitar and horns",
@@ -570,15 +561,6 @@
     "url": "https://forgestudio.web.lk/foundry/#/events/enchante",
     "pieces": [
      {
-      "title": "Event logo",
-      "type": "logo",
-      "description": "Enchanté gold logo: a quill-pen E with the line Envision the unspoken. Paint it.",
-      "width": 1600,
-      "height": 1368,
-      "image": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/enchante-logo-01.webp",
-      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/thumb/enchante-logo-01.webp"
-     },
-     {
       "title": "Coming soon",
       "type": "social",
       "description": "Enchanté social media post: coming soon",
@@ -759,15 +741,6 @@
     "note": "The SLIIT SBS cricket tournament, 24 and 25 August 2026 at the SLIIT main ground. The full run, from date reveal to thank you.",
     "url": "https://forgestudio.web.lk/foundry/#/events/down-the-wicket",
     "pieces": [
-     {
-      "title": "Event logo",
-      "type": "logo",
-      "description": "Down the Wicket 2026 tournament crest with crossed bats, stumps and a cricket ball",
-      "width": 709,
-      "height": 915,
-      "image": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/down-the-wicket-logo-01.webp",
-      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-logo-01.webp"
-     },
      {
       "title": "Print flyer",
       "type": "poster",
@@ -994,15 +967,6 @@
     "note": "Remarkable journeys, influential minds, one stage. A guest-led campaign built around the reveal of each speaker.",
     "url": "https://forgestudio.web.lk/foundry/#/events/admeliora-26",
     "pieces": [
-     {
-      "title": "Wordmark",
-      "type": "logo",
-      "description": "ADMELIORA'26 gold wordmark: inspire, connect, elevate",
-      "width": 1600,
-      "height": 345,
-      "image": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/admeliora-26-logo-01.webp",
-      "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/thumb/admeliora-26-logo-01.webp"
-     },
      {
       "title": "Coming soon",
       "type": "social",
