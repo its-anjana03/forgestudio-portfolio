@@ -155,14 +155,12 @@ html[data-theme="light"] .menu-heat { background: linear-gradient(115deg, #FFCB6
 .mode-shift .ignite-copy h1 .word-mask { overflow: visible; }
 .mode-shift .ignite-copy h1 .word-mask > span { animation: wordHeat 1.5s ease-in-out both; animation-delay: calc(.35s + var(--wi, 0) * .11s); }
 @keyframes wordHeat { 45% { text-shadow: 0 0 26px rgba(255, 138, 0, .8), 0 0 4px rgba(255, 194, 71, .6); } }
-/* Buttons and the status dot settle a beat after the text around them. */
+/* Buttons settle a beat after the text around them. */
 .mode-shift .btn, .mode-shift .nav-status, .mode-shift .nav-links { transition: background-color .5s ease, border-color .5s ease, color .5s ease; }
-.mode-shift .pulse { animation: dotFlare 1.8s var(--ease-out); }
-@keyframes dotFlare { 35% { box-shadow: 0 0 0 6px rgba(255, 138, 0, .25), 0 0 16px rgba(255, 138, 0, .8); transform: scale(1.5); } }
 /* The scroll cue's line and the thermometer bar drain and refill. */
 .mode-shift .scroll-cue i::after { animation-duration: .9s; }
 .heat-meter .bar i { transition: transform .5s var(--ease-out); }
-/* Headings and artwork on screen take the heat in turn, from the top of the window down. */
+/* Headings on screen take the heat in turn, from the top of the window down. */
 .mode-glow { animation: wordHeat 1.7s ease-in-out both; animation-delay: calc(.3s + var(--mi, 0) * 1s); }
 .mode-glow .line-mask, .mode-glow .word-mask { overflow: visible; }
 .mode-warm { animation: imgWarm 2.1s ease-in-out both; animation-delay: calc(.2s + var(--mi, 0) * 1s); }
@@ -234,3 +232,21 @@ html.has-motion:not(.forge-ready) .ignite::after {
   opacity: 0; animation: emberWait 1.6s ease-in-out .35s infinite;
 }
 @keyframes emberWait { 0%, 100% { opacity: .25; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.25); } }
+
+/* ---------- Skip to work ---------- */
+/* While the hero holds the screen (from the first strike until the archive opens), a quiet way straight to the work. */
+.skip-work {
+  position: absolute; z-index: 5; left: var(--pad); bottom: clamp(28px, 7vh, 64px);
+  display: inline-flex; align-items: center; gap: 10px; padding: 10px 16px; border-radius: 999px; border: 1px solid var(--line-2);
+  font-size: 13px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--bone);
+  background: color-mix(in srgb, var(--ink) 55%, transparent); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: opacity .5s var(--ease-out), transform .5s var(--ease-out), visibility 0s linear .5s, border-color .3s var(--ease-out);
+}
+.skip-work.is-on { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+.skip-work .arr { transition: transform .4s var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .skip-work:hover { border-color: var(--gold); } .skip-work:hover .arr { transform: translateY(3px); } }
+.skip-work:focus-visible { opacity: 1; visibility: visible; transform: none; }
+html:not(.has-motion) .skip-work { display: none; }
+/* On a phone the strike counter sits bottom-centre, so the link moves above it. */
+@media (max-width: 760px) { .skip-work { left: 50%; bottom: calc(clamp(28px, 7vh, 64px) + 68px); translate: -50% 0; } }

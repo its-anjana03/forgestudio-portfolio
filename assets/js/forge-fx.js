@@ -1,9 +1,8 @@
 /* FORGE Studio · heat details
    Loaded after forge.js on every page. One idea throughout: gold heat arrives, then settles.
-   - main headings are revealed by a pass of heat, and the same pass crosses them on hover
-   - major buttons carry a gold highlight round their edge, with a flash on click
-   - small details: section numbers, menu links, link underlines, counters, divider lines,
-     image frames, tags, resume dates */
+   - main headings are revealed by a pass of heat
+   - small details: menu links, link underlines, tags, award seals, one detail per project page
+   Kept deliberately few: small things do not glow, and nothing carries two effects at once. */
 (() => {
   'use strict';
   // timings, in seconds: slow enough to be seen, never long enough to wait for
@@ -20,13 +19,6 @@
   const { gsap, ScrollTrigger } = window;
   const motion = root.classList.contains('has-motion') && gsap && ScrollTrigger;
   const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
-
-  /* ---------- Major buttons ---------- */
-  $$('.btn:not(.ghost), a.btn[download]').forEach((b) => {
-    b.classList.add('fx-edge');
-    b.addEventListener('click', () => { b.classList.remove('fx-flash'); void b.offsetWidth; b.classList.add('fx-flash'); });
-    b.addEventListener('animationend', (e) => { if (e.animationName === 'fx-flash') b.classList.remove('fx-flash'); });
-  });
 
   /* ---------- The scrollbar cools with the page ---------- */
   {
@@ -205,43 +197,6 @@
     el.addEventListener('animationend', () => el.classList.remove(cls), { once: true });
   };
   const onArrive = (el, fn, start = 'top 86%') => ScrollTrigger.create({ trigger: el, start, once: true, onEnter: fn });
-
-  /* ---------- Section numbers and resume dates catch light as they arrive ---------- */
-  $$('.label b, .cv-sec > h2 span, .cv-item .when').forEach((el) => {
-    if (el.closest('.menu, .cs-meta')) return;
-    onArrive(el, () => gsap.delayedCall(0.35, () => once(el, 'fx-ignite')), 'top 88%');
-  });
-
-  /* ---------- Counters flare when they land ---------- */
-  $$('[data-count]').forEach((el) => {
-    const host = el.closest('.num-v') || el;
-    // forge.js counts for 1.8s (large numbers) or 1.1s from the same scroll position
-    onArrive(el, () => gsap.delayedCall((+el.dataset.count > 50 ? 1.8 : 1.1) - 0.15, () => once(host, 'fx-flare')), 'top 88%');
-  });
-
-  /* ---------- Divider lines draw themselves, led by a gold tip ---------- */
-  [['.numbers', 'top'], ['.disc', 'top'], ['.disc li', 'bottom'], ['.quench-cols', 'top'],
-    ['.cv-sec:not(:first-child)', 'top'], ['.cv-item:not(:last-child)', 'bottom']].forEach(([sel, side]) => {
-    $$(sel).forEach((el) => {
-      const cs = getComputedStyle(el);
-      if (parseFloat(side === 'top' ? cs.borderTopWidth : cs.borderBottomWidth) < 0.5) return;
-      el.classList.add('fx-ruled');
-      onArrive(el, () => {
-        gsap.timeline({ onComplete: () => { el.classList.remove('fx-ruled'); el.style.removeProperty('--fx-w'); el.style.removeProperty('--fx-tip'); } })
-          .fromTo(el, { '--fx-w': '0%' }, { '--fx-w': '100%', duration: T.rule, ease: 'power2.inOut' })
-          .to(el, { '--fx-tip': 0, duration: 0.6, ease: 'power1.out' }, '-=0.2');
-      }, 'top 90%');
-    });
-  });
-  /* ---------- A glint runs once round an image as it appears ---------- */
-  $$('.cs-figure .frame, .cs-hero-visual figure, .hunt-stage').forEach((frame) => {
-    onArrive(frame, () => gsap.delayedCall(0.5, () => {
-      const ring = document.createElement('i');
-      ring.className = 'fx-ring'; ring.setAttribute('aria-hidden', 'true');
-      frame.appendChild(ring);
-      ring.addEventListener('animationend', (e) => { if (e.animationName === 'fx-ring') ring.remove(); });
-    }), 'top 82%');
-  });
 
   /* ---------- Seals are struck as they come into view ---------- */
   seals.forEach((el) => {
@@ -470,19 +425,6 @@
       });
     });
 
-    // the cursor meeting a heading sends one pass of heat across it
-    if (fine) {
-      $$('h1, h2.h2, h2.display, .display').forEach((el) => {
-        if (el._whoosh || el.classList.contains('sr-only')) return;
-        el._whoosh = true;
-        el.addEventListener('pointerenter', () => {
-          let ps = parts(el);
-          if (!ps.length) ps = [el];
-          ps.forEach(tone);
-          pass(el, ps, ps.length > 6);
-        });
-      });
-    }
   };
   // forge.js splits headings during its own start-up; wait until that has happened
   let tries = 0;
