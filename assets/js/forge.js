@@ -139,18 +139,12 @@
       },
     });
   };
-  // Away from the hero the page still takes part: headings on screen glow in turn as the heat passes, and the
-  // artwork on screen warms for a moment, like something held near the fire.
+  // Away from the hero the page still takes part: headings on screen glow in turn as the heat passes.
   onModeStart(() => {
     const seen = (el) => { const r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight && r.width > 0 ? r : null; };
     $$('.h2, .h3, .display, .manifesto, .cs-title').forEach((el) => {
       const r = seen(el); if (!r) return;
       el.style.setProperty('--mi', Math.min(1, Math.max(0, r.top / innerHeight)).toFixed(2)); el.classList.add('mode-glow');
-    });
-    let n = 0;
-    $$('main img, footer img').forEach((el) => {
-      const r = n < 14 && seen(el); if (!r) return; n++;
-      el.style.setProperty('--mi', Math.min(1, Math.max(0, r.top / innerHeight)).toFixed(2)); el.classList.add('mode-warm');
     });
   });
   if (themeBtn) themeBtn.addEventListener('click', () => {
@@ -457,7 +451,7 @@
     return $$('.line-mask > span', el);
   };
 
-  /* ---------------- Cursor + magnetic ---------------- */
+  /* ---------------- Cursor ---------------- */
   if (fine) {
     const cur = $('.cursor');
     if (cur) {
@@ -472,17 +466,6 @@
         label.textContent = t ? t.dataset.cursorLabel : '';
       });
     }
-    $$('[data-magnetic]').forEach((el) => {
-      const s = parseFloat(el.dataset.magnetic) || 0.25;
-      const xTo = gsap.quickTo(el, 'x', { duration: 0.5, ease: 'power3.out' });
-      const yTo = gsap.quickTo(el, 'y', { duration: 0.5, ease: 'power3.out' });
-      el.addEventListener('pointermove', (e) => {
-        const r = el.getBoundingClientRect();
-        xTo((e.clientX - r.left - r.width / 2) * s);
-        yTo((e.clientY - r.top - r.height / 2) * s);
-      });
-      el.addEventListener('pointerleave', () => { xTo(0); yTo(0); });
-    });
   }
 
   /* ---------------- Page transitions: heat and ink wipe across on the mark's slant ---------------- */
@@ -571,6 +554,7 @@
     const shade = $('.ignite-shade', hero), cap = $('.archive-cap', hero);
     const copy = $('.ignite-copy', hero), cue = $('.scroll-cue', hero);
     const hud = $('.strike-hud', hero), hudN = $('.strike-n', hero);
+    const skipWork = $('.skip-work', hero);
     const canvas = $('.ignite-sparks', hero), ctx = canvas.getContext('2d');
     const small = innerWidth < 760;
 
@@ -730,17 +714,6 @@
       if (to === 'dark') { setTimeout(weldBurst, 1500); return; }
       for (let i = 0; i < 12; i++) { const [x, y] = edgePoint(); setTimeout(() => burst(x, y, small ? 3 : 7, 0.55), i * 70); }
     });
-    if (fine) {
-      let last = 0;
-      hero.addEventListener('pointermove', (e) => {
-        const now = performance.now();
-        if (zoom.p > 0.02 || now - last < 45) return;
-        last = now;
-        const r = hero.getBoundingClientRect();
-        burst(e.clientX - r.left, e.clientY - r.top, 2 + Math.round(heat.v * 4), 0.45 + heat.v * 0.4);
-      });
-    }
-
     /* --- Furnace backdrop: real-time fire and smoke (WebGL), plus the mark's construction grid,
            energy pulses and rising embers (2D). Sits above the veil and below the mark. --- */
     const bg = $('.ignite-bg', hero);
@@ -1235,6 +1208,7 @@
         if (bgSync) bgSync();
         F.live = p < P.breach + 0.16; bgRun();
         wall.classList.toggle('is-live', p > P.zoomEnd);
+        if (skipWork) skipWork.classList.toggle('is-on', p > 0.035 && p < 0.6); // from the first strike until the archive opens
         setSparks(p < 0.48 && !document.hidden);
         canvas.style.opacity = String(p < 0.3 ? 1 : Math.max(0, 1 - (p - 0.3) * 6));
       },

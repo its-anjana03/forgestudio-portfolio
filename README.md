@@ -246,7 +246,7 @@ npx serve .
 ## Updating content
 
 - **After changing CSS or JavaScript:** every page links its stylesheet and scripts with a version stamp
-  (`forge.css?v=20261009a`). Change the stamp in all pages (a find-and-replace across the `.html` files and
+  (`forge.css?v=20261009b`). Change the stamp in all pages (a find-and-replace across the `.html` files and
   `foundry/index.html`) so visitors' browsers fetch the new files instead of an old cached copy.
 
 - **New work in the Foundry:** see "Adding work" above.
