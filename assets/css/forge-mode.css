@@ -222,3 +222,15 @@ html[data-theme="light"]::-webkit-scrollbar-thumb {
   html[data-theme="light"] #heatG stop:nth-child(2) { stop-color: color(display-p3 1 0.64 0.14); }
   html[data-theme="light"] #heatG stop:nth-child(3) { stop-color: color(display-p3 0.94 0.47 0.05); }
 }
+
+/* ---------- While the home page is still loading ---------- */
+/* Until the script has measured the hero, the mark's raw artwork would fill the whole screen. It is held back,
+   and if loading takes more than a moment a single ember waits in the dark where the mark will be forged. */
+html.has-motion:not(.forge-ready) .ignite-mark { visibility: hidden; }
+html.has-motion:not(.forge-ready) .ignite::after {
+  content: ''; position: absolute; left: 50%; top: 44%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%;
+  background: radial-gradient(circle, #FFE7A6, #FFC247 45%, #FF8A00);
+  box-shadow: 0 0 18px rgba(255, 138, 0, .8), 0 0 60px rgba(255, 138, 0, .35);
+  opacity: 0; animation: emberWait 1.6s ease-in-out .35s infinite;
+}
+@keyframes emberWait { 0%, 100% { opacity: .25; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.25); } }
