@@ -5,7 +5,7 @@ $root = Split-Path -Parent $PSScriptRoot
 Add-Type -AssemblyName System.IO.Compression, System.IO.Compression.FileSystem
 $zip = Join-Path $root "forgestudio-site.zip"
 if (Test-Path $zip) { [IO.File]::Delete($zip) }
-$skipTop = @('.claude', '.vscode', '.git', 'forgestudio.web.lk', 'audio-originals')
+$skipTop = @('.claude', '.vscode', '.git', 'forgestudio.web.lk', 'audio-originals', '_video')
 $files = Get-ChildItem $root -Recurse -File -Force | Where-Object {
   $rel = $_.FullName.Substring($root.Length + 1)
   $parts = $rel.Split('\')

@@ -8,7 +8,7 @@
 
    1. THE HOME ARCHIVE. The ten posters behind the mark come from the POSTERS list at the top of
       assets/js/forge.js. Change a line there (title, year, image name), put the 1200px image in assets/img/
-      and the 640px one in assets/img/thumb/, run this tool, and the poster wall in index.html is rewritten to
+      the 640px one in assets/img/thumb/ and a 400px one in assets/img/thumb400/, run this tool, and the poster wall in index.html is rewritten to
       match. The wall always shows ten.
 
    2. THE CATALOGUE. work.json is rewritten: every case study, every home poster and every piece in the Foundry,
@@ -44,7 +44,7 @@ if (POSTERS.length !== 10) throw new Error(`The home archive shows exactly ten p
 // that only fill the wall (hidden from keyboards and screen readers).
 const WALL = [['0', '4', '6', '9h'], ['1', '5', '8', '0h'], ['2', '7', '3h', '1h'], ['3', '9', '2h', '6h'], ['7h', '8h', '4h', '5h']];
 const sizes = POSTERS.map(([title, , file]) => {
-  for (const f of [`assets/img/${file}.webp`, `assets/img/thumb/${file}.webp`]) {
+  for (const f of [`assets/img/${file}.webp`, `assets/img/thumb/${file}.webp`, `assets/img/thumb400/${file}.webp`]) {
     if (!fs.existsSync(path.join(ROOT, f))) throw new Error(`"${title}" needs ${f}`);
   }
   return webpSize(path.join(ROOT, `assets/img/thumb/${file}.webp`));
@@ -54,7 +54,7 @@ const wall = WALL.map((col) => {
     const i = parseInt(slot, 10), hidden = slot.endsWith('h');
     const [title, year, file] = POSTERS[i], [w, h] = sizes[i];
     return `      <button class="poster" type="button" data-lb="${i}"${hidden ? ' tabindex="-1" aria-hidden="true"' : ''}>`
-      + `<img src="assets/img/thumb/${file}.webp" width="${w}" height="${h}" alt="${hidden ? '' : `${esc(title)} poster design`}"${hidden ? ' loading="lazy"' : ''}>`
+      + `<img src="assets/img/thumb/${file}.webp" srcset="assets/img/thumb400/${file}.webp 400w, assets/img/thumb/${file}.webp 640w" sizes="(max-width: 760px) 34vw, 22vw" width="${w}" height="${h}" alt="${hidden ? '' : `${esc(title)} poster design`}" decoding="async"${hidden ? ' loading="lazy"' : ' fetchpriority="low"'}>`
       + `<span class="cap"><b>${esc(title)}</b><span>${year}</span></span></button>`;
   });
   return `    <div class="wall-col">\n${items.join('\n')}\n    </div>`;

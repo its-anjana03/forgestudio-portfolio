@@ -18,3 +18,5 @@ _originals/
 *.ai
 # Music as downloaded (the web-ready copies live in assets/audio)
 /audio-originals/
+# Video projects (the intro sting): made from the site's assets, not part of the website
+/_video/

@@ -18,9 +18,9 @@
 <meta name="twitter:image" content="https://forgestudio.web.lk/assets/img/og/home.jpg">
 <link rel="icon" type="image/svg+xml" href="assets/img/forge-mark.svg">
 <link rel="alternate" type="application/json" href="work.json" title="FORGE Studio catalogue">
-<link rel="stylesheet" href="assets/css/forge.css?v=20261009b">
-<link rel="stylesheet" href="assets/css/forge-fx.css?v=20261009b">
-<link rel="stylesheet" href="assets/css/forge-strike.css?v=20261009b">
+<link rel="stylesheet" href="assets/css/forge.css?v=20261009h">
+<link rel="stylesheet" href="assets/css/forge-fx.css?v=20261009h">
+<link rel="stylesheet" href="assets/css/forge-strike.css?v=20261009h">
 <script>
   // Motion is opt-in: only hide-then-reveal content when JS runs and the visitor allows motion.
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -33,7 +33,7 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://forgestudio.web.lk/#thinura","name":"Thinura Anjana","jobTitle":"Marketing Executive & Creative Designer","description":"Designer behind FORGE Studio: cinematic posters, brand identity, campaign design and UI/UX.","worksFor":{"@type":"Organization","name":"Jeewa Education"},"url":"https://forgestudio.web.lk/","image":"https://forgestudio.web.lk/assets/img/og/home.jpg","alumniOf":{"@type":"CollegeOrUniversity","name":"SLIIT"},"knowsAbout":["Poster design","Brand identity","Campaign design","UI/UX design","Graphic design"],"award":["Featured on Thanthi TV, 2022","First place of 200, Best Watch Design, Academy of Graphics, 2022"],"sameAs":["https://www.behance.net/thinuraanjana3","https://www.instagram.com/its_anjana03/","https://www.linkedin.com/in/thinura-anjana-7a4060306"]},{"@type":"WebSite","@id":"https://forgestudio.web.lk/#site","name":"FORGE Studio","url":"https://forgestudio.web.lk/","inLanguage":"en","author":{"@id":"https://forgestudio.web.lk/#thinura"}},{"@type":"Organization","@id":"https://forgestudio.web.lk/#studio","name":"FORGE Studio","alternateName":"Master Creations","url":"https://forgestudio.web.lk/","logo":"https://forgestudio.web.lk/assets/img/forge-mark.svg","foundingDate":"2020","founder":{"@id":"https://forgestudio.web.lk/#thinura"},"email":"anjanathinura07@gmail.com"}]}
 </script>
-<link rel="stylesheet" href="assets/css/forge-mode.css?v=20261009b">
+<link rel="stylesheet" href="assets/css/forge-mode.css?v=20261009h">
 <script>
   // Light or dark, as last chosen, before the first paint.
   try { if (localStorage.getItem('forge-theme') === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
@@ -44,17 +44,12 @@
 <div class="grain" aria-hidden="true"></div>
 <div class="cursor" aria-hidden="true"><span class="cursor-label"></span></div>
 
-<!-- First visit: choose how to enter. The click also lets the browser start the music. -->
-<div class="door" hidden>
-  <div class="door-in">
-    <svg class="door-mark" viewBox="0 0 2962 2488" aria-hidden="true"><use href="#mark-solid"/></svg>
-    <p class="door-q">How would you like to enter?</p>
-    <div class="door-acts">
-      <button class="btn" type="button" data-door="on">Enter with sound</button>
-      <button class="btn ghost" type="button" data-door="off">Enter silent</button>
-    </div>
-    <p class="door-note">You can change this any time with the sound bars at the top.</p>
-  </div>
+<!-- First visit: the site starts silent and offers sound in a small prompt that never blocks the page -->
+<div class="sound-ask" role="status" hidden>
+  <span class="sa-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  <p>This site has sound.</p>
+  <button class="sa-yes" type="button" data-ask="on">Turn it on</button>
+  <button class="sa-no" type="button" data-ask="off" aria-label="No thanks, keep it silent">&times;</button>
 </div>
 
 <!-- ================= NAV ================= -->
@@ -160,34 +155,34 @@
 
   <div class="ignite-wall" id="archive" aria-label="Poster archive">
     <div class="wall-col">
-      <button class="poster" type="button" data-lb="0"><img src="assets/img/thumb/leo-poster.webp" width="640" height="972" alt="Leo poster design"><span class="cap"><b>Leo</b><span>2023</span></span></button>
-      <button class="poster" type="button" data-lb="4"><img src="assets/img/thumb/oppenheimer-poster.webp" width="640" height="800" alt="Oppenheimer poster design"><span class="cap"><b>Oppenheimer</b><span>2023</span></span></button>
-      <button class="poster" type="button" data-lb="6"><img src="assets/img/thumb/f1-poster.webp" width="640" height="960" alt="F1 poster design"><span class="cap"><b>F1</b><span>2025</span></span></button>
-      <button class="poster" type="button" data-lb="9" tabindex="-1" aria-hidden="true"><img src="assets/img/thumb/kalki-poster.webp" width="640" height="914" alt="" loading="lazy"><span class="cap"><b>Kalki 2898 AD</b><span>2024</span></span></button>
+      <button class="poster" type="button" data-lb="0"><img src="assets/img/thumb/leo-poster.webp" srcset="assets/img/thumb400/leo-poster.webp 400w, assets/img/thumb/leo-poster.webp 640w" sizes="(max-width: 760px) 34vw, 22vw" width="640" height="972" alt="Leo poster design" decoding="async" fetchpriority="low"><span class="cap"><b>Leo</b><span>2023</span></span></button>
+      <button class="poster" type="button" data-lb="4"><img src="assets/img/thumb/oppenheimer-poster.webp" srcset="assets/img/thumb400/oppenheimer-poster.webp 400w, assets/img/thumb/oppenheimer-poster.webp 640w" sizes="(max-width: 760px) 34vw, 22vw" width="640" height="800" alt="Oppenheimer poster design" decoding="async" fetchpriority="low"><span class="cap"><b>Oppenheimer</b><span>2023</span></span></button>
+      <button class="poster" type="button" data-lb="6"><img src="assets/img/thumb/f1-poster.webp" srcset="assets/img/thumb400/f1-poster.webp 400w, assets/img/thumb/f1-poster.webp 640w" sizes="(max-width: 760px) 34vw, 22vw" width="640" height="960" alt="F1 poster design" decoding="async" fetchpriority="low"><span class="cap"><b>F1</b><span>2025</span></span></button>
+      <button class="poster" type="button" data-lb="9" tabindex="-1" aria-hidden="true"><img src="assets/img/thumb/kalki-poster.webp" srcset="assets/img/thumb400/kalki-poster.webp 400w, assets/img/thumb/kalki-poster.webp 640w" sizes="(max-width: 760px) 34vw, 22vw" width="640" height="914" alt="" decoding="async" loading="lazy"><span class="cap"><b>Kalki 2898 AD</b><span>2024</span></span></button>
     </div>
     <div class="wall-col">
-      <button class="poster" type="button" data-lb="1"><img src="assets/img/thumb/avengers-poster.webp" width="640" height="960" alt="Avengers: Doomsday poster design"><span class="cap"><b>Avengers: Doomsday</b><span>2025</span></span></button>
-      <button class="poster" type="button" data-lb="5"><img src="assets/img/thumb/indian2-poster.webp" width="640" height="1001" alt="Indian 2 poster design"><span class="cap"><b>Indian 2</b><span>2024</span></span></button>
-      <button class="poster" type="button" data-lb="8"><img src="assets/img/thumb/lik-poster.webp" width="640" height="960" alt="LIK poster design"><span class="cap"><b>LIK</b><span>2026</span></span></button>
-      <button class="poster" type="button" data-lb="0" tabindex="-1" aria-hidden="true"><img src="assets/img/thumb/leo-poster.webp" width="640" height="972" alt="" loading="lazy"><span class="cap"><b>Leo</b><span>2023</span></span></button>
+      <button class="poster" type="button" data-lb="1"><img src="assets/img/thumb/avengers-poster.webp" srcset="assets/img/thumb400/avengers-poster.webp 400w, assets/img/thumb/avengers-poster.webp 640w" sizes="(max-width: 760px) 34vw, 22vw" width="640" height="960" alt="Avengers: Doomsday poster design" decoding="async" fetchpriority="low"><span class="cap"><b>Avengers: Doomsday</b><span>2025</span></span></button>
+      <button class="poster" type="button" data-lb="5"><img src="assets/img/thumb/indian2-poster.webp" srcset="assets/img/thumb400/indian2-poster.webp 400w, assets/img/thumb/indian2-poster.webp 640w" sizes="(max-width: 760px) 34vw, 22vw" width="640" height="1001" alt="Indian 2 poster design" decoding="async" fetchpriority="low"><span class="cap"><b>Indian 2</b><span>2024</span></span></button>
+      <button class="poster" type="button" data-lb="8"><img src="assets/img/thumb/lik-poster.webp" srcset="assets/img/thumb400/lik-poster.webp 400w, assets/img/thumb/lik-poster.webp 640w" sizes="(max-width: 760px) 34vw, 22vw" width="640" height="960" alt="LIK poster design" decoding="async" fetchpriority="low"><span class="cap"><b>LIK</b><span>2026</span></span></button>
+      <button class="poster" type="button" data-lb="0" tabindex="-1" aria-hidden="true"><img src="assets/img/thumb/leo-poster.webp" srcset="assets/img/thumb400/leo-poster.webp 400w, assets/img/thumb/leo-poster.webp 640w" sizes="(max-width: 760px) 34vw, 22vw" width="640" height="972" alt="" decoding="async" loading="lazy"><span class="cap"><b>Leo</b><span>2023</span></span></button>
     </div>
     <div class="wall-col">
-      <button class="poster" type="button" data-lb="2"><img src="assets/img/thumb/jana-nayagan-poster.webp" width="640" height="1128" alt="Jana Nayagan poster design"><span class="cap"><b>Jana Nayagan</b><span>2026</span></span></button>
-      <button class="poster" type="button" data-lb="7"><img src="assets/img/thumb/ps1-poster.webp" width="640" height="964" alt="PS-1 poster design"><span class="cap"><b>PS-1</b><span>2022</span></span></button>
-      <button class="poster" type="button" data-lb="3" tabindex="-1" aria-hidden="true"><img src="assets/img/thumb/john-wick-poster.webp" width="640" height="1001" alt="" loading="lazy"><span class="cap"><b>John Wick: Chapter 4</b><span>2024</span></span></button>
-      <button class="poster" type="button" data-lb="1" tabindex="-1" aria-hidden="true"><img src="assets/img/thumb/avengers-poster.webp" width="640" height="960" alt="" loading="lazy"><span class="cap"><b>Avengers: Doomsday</b><span>2025</span></span></button>
+      <button class="poster" type="button" data-lb="2"><img src="assets/img/thumb/jana-nayagan-poster.webp" srcset="assets/img/thumb400/jana-nayagan-poster.webp 400w, assets/img/thumb/jana-nayagan-poster.webp 640w" sizes="(max-width: 760px) 34vw, 22vw" width="640" height="1128" alt="Jana Nayagan poster design" decoding="async" fetchpriority="low"><span class="cap"><b>Jana Nayagan</b><span>2026</span></span></button>
+      <button class="poster" type="button" data-lb="7"><img src="assets/img/thumb/ps1-poster.webp" srcset="assets/img/thumb400/ps1-poster.webp 400w, assets/img/thumb/ps1-poster.webp 640w" sizes="(max-width: 760px) 34vw, 22vw" width="640" height="964" alt="PS-1 poster design" decoding="async" fetchpriority="low"><span class="cap"><b>PS-1</b><span>2022</span></span></button>
+      <button class="poster" type="button" data-lb="3" tabindex="-1" aria-hidden="true"><img src="assets/img/thumb/john-wick-poster.webp" srcset="assets/img/thumb400/john-wick-poster.webp 400w, assets/img/thumb/john-wick-poster.webp 640w" sizes="(max-width: 760px) 34vw, 22vw" width="640" height="1001" alt="" decoding="async" loading="lazy"><span class="cap"><b>John Wick: Chapter 4</b><span>2024</span></span></button>
+      <button class="poster" type="button" data-lb="1" tabindex="-1" aria-hidden="true"><img src="assets/img/thumb/avengers-poster.webp" srcset="assets/img/thumb400/avengers-poster.webp 400w, assets/img/thumb/avengers-poster.webp 640w" sizes="(max-width: 760px) 34vw, 22vw" width="640" height="960" alt="" decoding="async" loading="lazy"><span class="cap"><b>Avengers: Doomsday</b><span>2025</span></span></button>
     </div>
     <div class="wall-col">
-      <button class="poster" type="button" data-lb="3"><img src="assets/img/thumb/john-wick-poster.webp" width="640" height="1001" alt="John Wick: Chapter 4 poster design"><span class="cap"><b>John Wick: Chapter 4</b><span>2024</span></span></button>
-      <button class="poster" type="button" data-lb="9"><img src="assets/img/thumb/kalki-poster.webp" width="640" height="914" alt="Kalki 2898 AD poster design"><span class="cap"><b>Kalki 2898 AD</b><span>2024</span></span></button>
-      <button class="poster" type="button" data-lb="2" tabindex="-1" aria-hidden="true"><img src="assets/img/thumb/jana-nayagan-poster.webp" width="640" height="1128" alt="" loading="lazy"><span class="cap"><b>Jana Nayagan</b><span>2026</span></span></button>
-      <button class="poster" type="button" data-lb="6" tabindex="-1" aria-hidden="true"><img src="assets/img/thumb/f1-poster.webp" width="640" height="960" alt="" loading="lazy"><span class="cap"><b>F1</b><span>2025</span></span></button>
+      <button class="poster" type="button" data-lb="3"><img src="assets/img/thumb/john-wick-poster.webp" srcset="assets/img/thumb400/john-wick-poster.webp 400w, assets/img/thumb/john-wick-poster.webp 640w" sizes="(max-width: 760px) 34vw, 22vw" width="640" height="1001" alt="John Wick: Chapter 4 poster design" decoding="async" fetchpriority="low"><span class="cap"><b>John Wick: Chapter 4</b><span>2024</span></span></button>
+      <button class="poster" type="button" data-lb="9"><img src="assets/img/thumb/kalki-poster.webp" srcset="assets/img/thumb400/kalki-poster.webp 400w, assets/img/thumb/kalki-poster.webp 640w" sizes="(max-width: 760px) 34vw, 22vw" width="640" height="914" alt="Kalki 2898 AD poster design" decoding="async" fetchpriority="low"><span class="cap"><b>Kalki 2898 AD</b><span>2024</span></span></button>
+      <button class="poster" type="button" data-lb="2" tabindex="-1" aria-hidden="true"><img src="assets/img/thumb/jana-nayagan-poster.webp" srcset="assets/img/thumb400/jana-nayagan-poster.webp 400w, assets/img/thumb/jana-nayagan-poster.webp 640w" sizes="(max-width: 760px) 34vw, 22vw" width="640" height="1128" alt="" decoding="async" loading="lazy"><span class="cap"><b>Jana Nayagan</b><span>2026</span></span></button>
+      <button class="poster" type="button" data-lb="6" tabindex="-1" aria-hidden="true"><img src="assets/img/thumb/f1-poster.webp" srcset="assets/img/thumb400/f1-poster.webp 400w, assets/img/thumb/f1-poster.webp 640w" sizes="(max-width: 760px) 34vw, 22vw" width="640" height="960" alt="" decoding="async" loading="lazy"><span class="cap"><b>F1</b><span>2025</span></span></button>
     </div>
     <div class="wall-col">
-      <button class="poster" type="button" data-lb="7" tabindex="-1" aria-hidden="true"><img src="assets/img/thumb/ps1-poster.webp" width="640" height="964" alt="" loading="lazy"><span class="cap"><b>PS-1</b><span>2022</span></span></button>
-      <button class="poster" type="button" data-lb="8" tabindex="-1" aria-hidden="true"><img src="assets/img/thumb/lik-poster.webp" width="640" height="960" alt="" loading="lazy"><span class="cap"><b>LIK</b><span>2026</span></span></button>
-      <button class="poster" type="button" data-lb="4" tabindex="-1" aria-hidden="true"><img src="assets/img/thumb/oppenheimer-poster.webp" width="640" height="800" alt="" loading="lazy"><span class="cap"><b>Oppenheimer</b><span>2023</span></span></button>
-      <button class="poster" type="button" data-lb="5" tabindex="-1" aria-hidden="true"><img src="assets/img/thumb/indian2-poster.webp" width="640" height="1001" alt="" loading="lazy"><span class="cap"><b>Indian 2</b><span>2024</span></span></button>
+      <button class="poster" type="button" data-lb="7" tabindex="-1" aria-hidden="true"><img src="assets/img/thumb/ps1-poster.webp" srcset="assets/img/thumb400/ps1-poster.webp 400w, assets/img/thumb/ps1-poster.webp 640w" sizes="(max-width: 760px) 34vw, 22vw" width="640" height="964" alt="" decoding="async" loading="lazy"><span class="cap"><b>PS-1</b><span>2022</span></span></button>
+      <button class="poster" type="button" data-lb="8" tabindex="-1" aria-hidden="true"><img src="assets/img/thumb/lik-poster.webp" srcset="assets/img/thumb400/lik-poster.webp 400w, assets/img/thumb/lik-poster.webp 640w" sizes="(max-width: 760px) 34vw, 22vw" width="640" height="960" alt="" decoding="async" loading="lazy"><span class="cap"><b>LIK</b><span>2026</span></span></button>
+      <button class="poster" type="button" data-lb="4" tabindex="-1" aria-hidden="true"><img src="assets/img/thumb/oppenheimer-poster.webp" srcset="assets/img/thumb400/oppenheimer-poster.webp 400w, assets/img/thumb/oppenheimer-poster.webp 640w" sizes="(max-width: 760px) 34vw, 22vw" width="640" height="800" alt="" decoding="async" loading="lazy"><span class="cap"><b>Oppenheimer</b><span>2023</span></span></button>
+      <button class="poster" type="button" data-lb="5" tabindex="-1" aria-hidden="true"><img src="assets/img/thumb/indian2-poster.webp" srcset="assets/img/thumb400/indian2-poster.webp 400w, assets/img/thumb/indian2-poster.webp 640w" sizes="(max-width: 760px) 34vw, 22vw" width="640" height="1001" alt="" decoding="async" loading="lazy"><span class="cap"><b>Indian 2</b><span>2024</span></span></button>
     </div>
   </div>
   <div class="ignite-shade" aria-hidden="true"></div>
@@ -343,8 +338,8 @@
   <div class="work-pin">
     <div class="work-track">
       <div class="work-intro">
-        <h2 class="h2" id="work-h">Six projects.<br><span class="gold">Three disciplines.</span></h2>
-        <p class="lede">Posters, brands and product screens from 2022 to 2026. Each one opens into the full process.</p>
+        <h2 class="h2" id="work-h">Six projects.<br><span class="gold">Four disciplines.</span></h2>
+        <p class="lede">Posters, brands, product screens and concept work from 2022 to 2026. Each one opens into the full process.</p>
       </div>
 
       <article class="case" data-cursor-label="Open">
@@ -417,12 +412,53 @@
   </div>
 </section>
 
-<!-- ================= 05 PRACTICE ================= -->
+<!-- ================= 05 DRAW / CAMPAIGNS =================
+     "Drawing out" is the smith's word for stretching one bar into a longer piece: one idea, carried across a whole campaign.
+     Each card opens that campaign's full set in the Foundry. -->
+<section class="sec campaigns" id="campaigns" data-chapter="Draw" aria-labelledby="camp-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="label" data-reveal><b>04</b> Campaigns</span>
+        <h2 class="h2" id="camp-h" data-lines>Four events.<br>Start to finish.</h2>
+      </div>
+      <p class="lede" data-reveal>Event campaigns for the SLIIT Business School Student Community: key art, countdowns, tickets and social posts. 79 pieces across four events.</p>
+    </div>
+    <ul class="camps">
+      <li><a class="camp" href="foundry/#/events/lantharuma-2027" data-cursor-label="Open">
+        <figure data-img-reveal><img src="foundry/img/campaigns/lantharuma-2027/lantharuma-2027-poster-01.webp" srcset="foundry/img/campaigns/lantharuma-2027/thumb/lantharuma-2027-poster-01.webp 400w, foundry/img/campaigns/lantharuma-2027/lantharuma-2027-poster-01.webp 1200w" sizes="(max-width: 900px) 46vw, 23vw" width="1200" height="1600" alt="Lantharuma 2027 official poster: a masked figure holding a lantern before a full moon" loading="lazy" decoding="async"></figure>
+        <span class="camp-meta">2027 <i aria-hidden="true">/</i> 24 pieces</span>
+        <b class="camp-name">Lantharuma 2027&nbsp;<span class="arr" aria-hidden="true">&rarr;</span></b>
+        <span class="camp-role">Event campaign design</span>
+      </a></li>
+      <li><a class="camp" href="foundry/#/events/enchante" data-cursor-label="Open">
+        <figure data-img-reveal><img src="foundry/img/campaigns/enchante/enchante-social-02.webp" srcset="foundry/img/campaigns/enchante/thumb/enchante-social-02.webp 400w, foundry/img/campaigns/enchante/enchante-social-02.webp 1280w" sizes="(max-width: 900px) 46vw, 23vw" width="1280" height="1600" alt="Enchant&eacute; date reveal, 02 September, painted on an old fresco wall" loading="lazy" decoding="async"></figure>
+        <span class="camp-meta">2026 <i aria-hidden="true">/</i> 19 pieces</span>
+        <b class="camp-name">Enchant&eacute;&nbsp;<span class="arr" aria-hidden="true">&rarr;</span></b>
+        <span class="camp-role">Full campaign design, independently</span>
+      </a></li>
+      <li><a class="camp" href="foundry/#/events/down-the-wicket" data-cursor-label="Open">
+        <figure data-img-reveal><img src="foundry/img/campaigns/down-the-wicket/down-the-wicket-social-21.webp" srcset="foundry/img/campaigns/down-the-wicket/thumb/down-the-wicket-social-21.webp 400w, foundry/img/campaigns/down-the-wicket/down-the-wicket-social-21.webp 1280w" sizes="(max-width: 900px) 46vw, 23vw" width="1280" height="1600" alt="Down the Wicket 2026 thank-you poster: players and crew celebrating under falling confetti" loading="lazy" decoding="async"></figure>
+        <span class="camp-meta">2026 <i aria-hidden="true">/</i> 24 pieces</span>
+        <b class="camp-name">Down the Wicket&nbsp;<span class="arr" aria-hidden="true">&rarr;</span></b>
+        <span class="camp-role">Full campaign design, independently</span>
+      </a></li>
+      <li><a class="camp" href="foundry/#/events/admeliora-26" data-cursor-label="Open">
+        <figure data-img-reveal><img src="foundry/img/campaigns/admeliora-26/admeliora-26-social-03.webp" srcset="foundry/img/campaigns/admeliora-26/thumb/admeliora-26-social-03.webp 400w, foundry/img/campaigns/admeliora-26/admeliora-26-social-03.webp 1280w" sizes="(max-width: 900px) 46vw, 23vw" width="1280" height="1600" alt="ADMELIORA 26 title reveal: a panel on a lit stage" loading="lazy" decoding="async"></figure>
+        <span class="camp-meta">2026 <i aria-hidden="true">/</i> 12 pieces</span>
+        <b class="camp-name">ADMELIORA&rsquo;26&nbsp;<span class="arr" aria-hidden="true">&rarr;</span></b>
+        <span class="camp-role">Event campaign design</span>
+      </a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 06 PRACTICE ================= -->
 <section class="sec practice" id="capabilities" data-chapter="Practice" aria-labelledby="prac-h">
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <span class="label" data-reveal><b>04</b> Practice</span>
+        <span class="label" data-reveal><b>05</b> Practice</span>
         <h2 class="h2" id="prac-h" data-lines>Four disciplines.<br>One studio.</h2>
       </div>
     </div>
@@ -441,11 +477,11 @@
   </div>
 </section>
 
-<!-- ================= 06 THE MARK ================= -->
+<!-- ================= 07 THE MARK ================= -->
 <section class="sec mark-sec" data-chapter="Mark" aria-labelledby="mark-h">
   <div class="wrap mark-stage">
     <div class="mark-copy">
-      <span class="label" data-reveal><b>05</b> The mark</span>
+      <span class="label" data-reveal><b>06</b> The mark</span>
       <h2 class="h2" id="mark-h" data-lines>Master Creations<br>became FORGE.</h2>
       <p class="lede" data-reveal>A lightning stroke carrying a hidden F, built on a diagonal construction grid. Three colours, one typeface, and gradients that live only inside the symbol.</p>
       <div class="swatches" data-reveal-group>
@@ -476,7 +512,7 @@
   </div>
 </section>
 
-<!-- ================= 07 TEMPER / ABOUT ================= -->
+<!-- ================= 08 TEMPER / ABOUT ================= -->
 <section class="sec about" id="about" data-chapter="Temper" aria-labelledby="about-h">
   <div class="wrap about-grid">
     <figure class="portrait" data-reveal>
@@ -484,7 +520,7 @@
       <figcaption>Thinura Anjana · FORGE Studio</figcaption>
     </figure>
     <div class="about-copy">
-      <span class="label" data-reveal><b>06</b> About</span>
+      <span class="label" data-reveal><b>07</b> About</span>
       <h2 class="h2" id="about-h" data-lines>I taught myself design in 2019 with free YouTube tutorials and a copy of Photoshop.</h2>
       <p data-reveal>I'm <strong>Thinura Anjana</strong>, Marketing Executive at <strong>Jeewa Education</strong> and the designer behind FORGE Studio. I started designing the year I finished my O/Ls and took on my first client work in 2020.</p>
       <p data-reveal><span data-since="2019">Seven</span> years on, my work has aired on Indian television, placed first out of two hundred entries, and grown into <strong>FORGE Studio</strong>: a practice where cinematic design meets campaigns and digital product thinking.</p>
@@ -538,11 +574,11 @@
   </div>
 </section>
 
-<!-- ================= 08 QUENCH / CONTACT ================= -->
+<!-- ================= 09 QUENCH / CONTACT ================= -->
 <footer class="quench" id="contact" data-chapter="Quench">
   <div class="wrap">
     <div class="quench-head">
-      <span class="label" data-reveal><b>07</b> Contact</span>
+      <span class="label" data-reveal><b>08</b> Contact</span>
       <h2 class="display" data-lines>Let's forge<br>something.</h2>
       <p class="lede" data-reveal>Poster, campaign and identity commissions, creative collaborations, or just a conversation about visual storytelling. The forge is always lit.</p>
       <div class="mail-row" data-reveal>
@@ -629,9 +665,9 @@
 <script src="assets/vendor/gsap.min.js" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
 <script src="assets/vendor/lenis.min.js" defer></script>
-<script src="assets/js/forge-sound.js?v=20261009b" defer></script>
-<script src="assets/js/forge.js?v=20261009b" defer></script>
-<script src="assets/js/forge-fx.js?v=20261009b" defer></script>
-<script src="assets/js/forge-strike.js?v=20261009b" defer></script>
+<script src="assets/js/forge-sound.js?v=20261009h" defer></script>
+<script src="assets/js/forge.js?v=20261009h" defer></script>
+<script src="assets/js/forge-fx.js?v=20261009h" defer></script>
+<script src="assets/js/forge-strike.js?v=20261009h" defer></script>
 </body>
 </html>
