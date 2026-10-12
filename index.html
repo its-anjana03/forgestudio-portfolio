@@ -19,9 +19,9 @@
 <link rel="icon" type="image/svg+xml" href="assets/img/forge-mark.svg">
 <link rel="alternate" type="application/json" href="work.json" title="FORGE Studio catalogue">
 <!-- shared:head-styles home -->
-<link rel="stylesheet" href="assets/css/forge.css?v=20261012a">
-<link rel="stylesheet" href="assets/css/forge-fx.css?v=20261012a">
-<link rel="stylesheet" href="assets/css/forge-strike.css?v=20261012a">
+<link rel="stylesheet" href="assets/css/forge.css?v=20261012b">
+<link rel="stylesheet" href="assets/css/forge-fx.css?v=20261012b">
+<link rel="stylesheet" href="assets/css/forge-strike.css?v=20261012b">
 <script>
   // Motion is opt-in: only hide-then-reveal content when JS runs and the visitor allows motion.
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -36,7 +36,7 @@
 {"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://forgestudio.web.lk/#thinura","name":"Thinura Anjana","jobTitle":"Marketing Executive & Creative Designer","description":"Designer behind FORGE Studio: cinematic posters, brand identity, campaign design and UI/UX.","worksFor":{"@type":"Organization","name":"Jeewa Education"},"url":"https://forgestudio.web.lk/","image":"https://forgestudio.web.lk/assets/img/og/home.jpg","alumniOf":{"@type":"CollegeOrUniversity","name":"SLIIT"},"knowsAbout":["Poster design","Brand identity","Campaign design","UI/UX design","Graphic design"],"award":["Featured on Thanthi TV, 2022","First place of 200, Best Watch Design, Academy of Graphics, 2022"],"sameAs":["https://www.behance.net/thinuraanjana3","https://www.instagram.com/its_anjana03/","https://www.linkedin.com/in/thinura-anjana-7a4060306"]},{"@type":"WebSite","@id":"https://forgestudio.web.lk/#site","name":"FORGE Studio","url":"https://forgestudio.web.lk/","inLanguage":"en","author":{"@id":"https://forgestudio.web.lk/#thinura"}},{"@type":"Organization","@id":"https://forgestudio.web.lk/#studio","name":"FORGE Studio","alternateName":"Master Creations","url":"https://forgestudio.web.lk/","logo":"https://forgestudio.web.lk/assets/img/forge-mark.svg","foundingDate":"2020","founder":{"@id":"https://forgestudio.web.lk/#thinura"},"email":"anjanathinura07@gmail.com"}]}
 </script>
 <!-- shared:head-theme home -->
-<link rel="stylesheet" href="assets/css/forge-mode.css?v=20261012a">
+<link rel="stylesheet" href="assets/css/forge-mode.css?v=20261012b">
 <script>
   // Light or dark, as last chosen, before the first paint.
   try { if (localStorage.getItem('forge-theme') === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
@@ -61,9 +61,9 @@
 <!-- ================= NAV ================= -->
 <!-- shared:nav home -->
 <header class="nav" id="nav">
-  <a class="brand" href="#top" aria-label="FORGE Studio, back to top">
+  <a class="brand" href="#top" aria-label="FORGE Studio. Back to top">
     <svg viewBox="0 0 2962 2488" aria-hidden="true"><use href="#mark-solid"/></svg>
-    <span class="brand-word"><b>FORGE</b><span>Studio.</span></span>
+    <span class="brand-word"><b>FORGE</b> <span>Studio.</span></span>
   </a>
   <nav class="nav-links" aria-label="Primary">
     <a href="#work">Work</a>
@@ -306,7 +306,7 @@
         </div>
         <div class="proof-body has-thumb">
           <a class="proof-thumb" href="vijayism-piece.html" data-cursor-label="Artwork">
-            <img src="assets/img/vijayism/main-poster.webp" width="1201" height="1800" alt="30 Years of Vijayism poster artwork" loading="lazy">
+            <img src="assets/img/vijayism/main-poster.webp" srcset="assets/img/vijayism/main-poster-400.webp 400w, assets/img/vijayism/main-poster.webp 1201w" sizes="200px" width="1201" height="1800" alt="30 Years of Vijayism poster artwork" loading="lazy">
             <span>The artwork</span>
           </a>
           <div class="proof-text">
@@ -319,11 +319,11 @@
       </article>
       <article class="proof-card" data-reveal>
         <div class="proof-media">
-          <img src="assets/img/rolex/rolex-process-board.webp" width="1800" height="1280" alt="Rolex Day-Date 40 process board showing geometry, dial and bracelet builds" loading="lazy" data-parallax>
+          <img src="assets/img/rolex/rolex-process-board.webp" srcset="assets/img/rolex/rolex-process-board-900.webp 900w, assets/img/rolex/rolex-process-board.webp 1800w" sizes="(max-width: 900px) 100vw, 1100px" width="1800" height="1280" alt="Rolex Day-Date 40 process board showing geometry, dial and bracelet builds" loading="lazy" data-parallax>
         </div>
         <div class="proof-body has-thumb">
           <a class="proof-thumb" href="rolex-design.html" data-cursor-label="Artwork">
-            <img src="assets/img/rolex/rolex-final.webp" width="1271" height="1800" alt="Rolex Day-Date 40 final design that won first place" loading="lazy">
+            <img src="assets/img/rolex/rolex-final.webp" srcset="assets/img/rolex/rolex-final-600.webp 600w, assets/img/rolex/rolex-final.webp 1271w" sizes="200px" width="1271" height="1800" alt="Rolex Day-Date 40 final design that won first place" loading="lazy">
             <span>The winning piece</span>
           </a>
           <div class="proof-text">
@@ -353,7 +353,7 @@
       </div>
 
       <article class="case" data-cursor-label="Open">
-        <a href="joey-mobile-case-study.html" class="case-media"><img src="assets/img/joey-thumbnail.webp" width="1600" height="1200" alt="Joey Clothing mobile redesign screens" loading="lazy"></a>
+        <a href="joey-mobile-case-study.html" class="case-media"><img src="assets/img/joey-thumbnail.webp" srcset="assets/img/joey-thumbnail-800.webp 800w, assets/img/joey-thumbnail.webp 1600w" sizes="(max-width: 900px) 110vw, 60vw" width="1600" height="1200" alt="Joey Clothing mobile redesign screens" loading="lazy"></a>
         <div class="case-row">
           <span class="case-n">01</span>
           <h3><a href="joey-mobile-case-study.html">Joey Clothing <span>/ a redesign in trust</span></a></h3>
@@ -474,9 +474,9 @@
     </div>
     <ul class="disc" data-reveal-group>
       <li data-reveal-item><a href="avengers-process.html" data-preview="0"><span class="n">N°01</span><span class="t">Cinematic posters</span><span class="d">Photo-composite key art for film, music and tribute, built with a director's eye for hierarchy, light and silence.</span><img class="thumb" src="assets/img/thumb/leo-poster.webp" width="640" height="972" alt="" loading="lazy"></a></li>
-      <li data-reveal-item><a href="joey-mobile-case-study.html" data-preview="1"><span class="n">N°02</span><span class="t">UI &amp; UX design</span><span class="d">Mobile-first product redesigns. Research, wireframes, prototypes and strategy reports, built in Figma.</span><img class="thumb" src="assets/img/joey-thumbnail.webp" width="1600" height="1200" alt="" loading="lazy"></a></li>
-      <li data-reveal-item><a href="forge-identity.html" data-preview="2"><span class="n">N°03</span><span class="t">Brand identity</span><span class="d">Logo systems, typographic identity and brand presentation, rooted in story rather than trend.</span><img class="thumb" src="assets/img/forge-identity/cover-foil-logo.webp" width="1800" height="1125" alt="" loading="lazy"></a></li>
-      <li data-reveal-item><a href="vijayism-piece.html" data-preview="3"><span class="n">N°04</span><span class="t">Editorial &amp; concept</span><span class="d">Cultural posters, tribute pieces and editorial covers. Visual storytelling inside a single frame.</span><img class="thumb" src="assets/img/vijayism/main-poster.webp" width="1201" height="1800" alt="" loading="lazy"></a></li>
+      <li data-reveal-item><a href="joey-mobile-case-study.html" data-preview="1"><span class="n">N°02</span><span class="t">UI &amp; UX design</span><span class="d">Mobile-first product redesigns. Research, wireframes, prototypes and strategy reports, built in Figma.</span><img class="thumb" src="assets/img/joey-thumbnail.webp" srcset="assets/img/joey-thumbnail-800.webp 800w, assets/img/joey-thumbnail.webp 1600w" sizes="300px" width="1600" height="1200" alt="" loading="lazy"></a></li>
+      <li data-reveal-item><a href="forge-identity.html" data-preview="2"><span class="n">N°03</span><span class="t">Brand identity</span><span class="d">Logo systems, typographic identity and brand presentation, rooted in story rather than trend.</span><img class="thumb" src="assets/img/forge-identity/cover-foil-logo.webp" srcset="assets/img/forge-identity/cover-foil-logo-800.webp 800w, assets/img/forge-identity/cover-foil-logo.webp 1800w" sizes="300px" width="1800" height="1125" alt="" loading="lazy"></a></li>
+      <li data-reveal-item><a href="vijayism-piece.html" data-preview="3"><span class="n">N°04</span><span class="t">Editorial &amp; concept</span><span class="d">Cultural posters, tribute pieces and editorial covers. Visual storytelling inside a single frame.</span><img class="thumb" src="assets/img/vijayism/main-poster.webp" srcset="assets/img/vijayism/main-poster-600.webp 600w, assets/img/vijayism/main-poster.webp 1201w" sizes="300px" width="1201" height="1800" alt="" loading="lazy"></a></li>
     </ul>
   </div>
   <div class="disc-preview" aria-hidden="true">
@@ -631,10 +631,10 @@
 
 <!-- shared:footer-links home -->
     <div class="quench-cols">
-      <div><h4>FORGE Studio</h4><p>The design studio of Thinura Anjana. Cinematic posters, brand identity, campaigns and UI/UX, made in Sri Lanka.</p></div>
-      <div><h4>Pages</h4><ul><li><a href="#work">Selected work</a></li><li><a href="#archive">Archive</a></li><li><a href="#about">About</a></li><li><a href="resume.html">Resume</a></li></ul></div>
-      <div><h4>Elsewhere</h4><ul><li><a href="https://www.behance.net/thinuraanjana3" target="_blank" rel="noopener">Behance ↗</a></li><li><a href="https://www.instagram.com/its_anjana03/" target="_blank" rel="noopener">Instagram ↗</a></li><li><a href="https://www.linkedin.com/in/thinura-anjana-7a4060306" target="_blank" rel="noopener">LinkedIn ↗</a></li></ul></div>
-      <div><h4>Direct</h4><ul><li><a href="mailto:anjanathinura07@gmail.com">Email</a></li><li><a href="tel:+94707771405">+94 70 777 1405</a></li><li>Sri Lanka</li></ul></div>
+      <div><h3>FORGE Studio</h3><p>The design studio of Thinura Anjana. Cinematic posters, brand identity, campaigns and UI/UX, made in Sri Lanka.</p></div>
+      <div><h3>Pages</h3><ul><li><a href="#work">Selected work</a></li><li><a href="#archive">Archive</a></li><li><a href="#about">About</a></li><li><a href="resume.html">Resume</a></li></ul></div>
+      <div><h3>Elsewhere</h3><ul><li><a href="https://www.behance.net/thinuraanjana3" target="_blank" rel="noopener">Behance ↗</a></li><li><a href="https://www.instagram.com/its_anjana03/" target="_blank" rel="noopener">Instagram ↗</a></li><li><a href="https://www.linkedin.com/in/thinura-anjana-7a4060306" target="_blank" rel="noopener">LinkedIn ↗</a></li></ul></div>
+      <div><h3>Direct</h3><ul><li><a href="mailto:anjanathinura07@gmail.com">Email</a></li><li><a href="tel:+94707771405">+94 70 777 1405</a></li><li>Sri Lanka</li></ul></div>
     </div>
 <!-- /shared:footer-links -->
   </div>
@@ -680,10 +680,10 @@
 <script src="assets/vendor/gsap.min.js" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
 <script src="assets/vendor/lenis.min.js" defer></script>
-<script src="assets/js/forge-sound.js?v=20261012a" defer></script>
-<script src="assets/js/forge.js?v=20261012a" defer></script>
-<script src="assets/js/forge-fx.js?v=20261012a" defer></script>
-<script src="assets/js/forge-strike.js?v=20261012a" defer></script>
+<script src="assets/js/forge-sound.js?v=20261012b" defer></script>
+<script src="assets/js/forge.js?v=20261012b" defer></script>
+<script src="assets/js/forge-fx.js?v=20261012b" defer></script>
+<script src="assets/js/forge-strike.js?v=20261012b" defer></script>
 <!-- /shared:scripts -->
 </body>
 </html>

@@ -621,7 +621,7 @@ html:not(.has-motion) .tl-fill { transform: none; }
 }
 @media (hover: hover) and (pointer: fine) { .quench-mail:hover { color: var(--gold); border-color: var(--gold); } }
 .quench-cols { margin-top: var(--s-24); display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; padding: 40px 0; border-top: 1px solid var(--line); }
-.quench-cols h4 { font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); margin-bottom: 14px; }
+.quench-cols h3 { font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); margin-bottom: 14px; }
 .quench-cols li + li { margin-top: 6px; }
 .quench-cols a, .quench-cols li { color: var(--dim); transition: color .3s var(--ease-out); }
 @media (hover: hover) and (pointer: fine) { .quench-cols a:hover { color: var(--gold); } }

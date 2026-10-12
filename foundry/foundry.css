@@ -508,7 +508,9 @@ html:not(.js) .dock, html:not(.js) .hint, html:not(.js) .top-index { display: no
 }
 @media (max-width: 760px) {
   .top { grid-template-columns: auto 1fr auto; gap: 12px; }
-  .top-exit span:last-child { display: none; }
+  /* the words stay for screen readers; only the arrow shows. 44px is the smallest comfortable tap area. */
+  .top-exit span:last-child { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .top-exit { min-width: 44px; min-height: 44px; margin: -8px 0; } /* the margin keeps the header the height it was */
   .top-exit .arr { font-size: 18px; }
   .top-mark { justify-self: center; }
   .dock a { padding: 9px 14px; font-size: 12.5px; }

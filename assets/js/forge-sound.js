@@ -257,7 +257,9 @@
   const label = btn.querySelector('.snd-label'), hint = btn.querySelector('.snd-hint');
   function paint() {
     btn.setAttribute('aria-pressed', String(on));
-    btn.setAttribute('aria-label', on ? 'Sound on. Turn sound off' : 'Sound off. Turn sound on');
+    // The spoken name always starts with the words on screen, hint included while it shows.
+    const hinting = btn.classList.contains('has-hint') && hint.textContent;
+    btn.setAttribute('aria-label', hinting ? `${on ? 'Sound on' : 'Sound off'}. ${hint.textContent}` : on ? 'Sound on. Turn sound off' : 'Sound off. Turn sound on');
     label.textContent = on ? 'Sound on' : 'Sound off';
     btn.classList.toggle('is-waiting', on && waiting);
     document.documentElement.classList.toggle('sound-on', on);
@@ -285,9 +287,10 @@
     store.set('forge-sound-hint', '1');
     hint.textContent = 'Turn on sound for the full experience';
     btn.classList.add('has-hint');
+    paint();
     setTimeout(hideHint, 6500);
   }
-  function hideHint() { btn.classList.remove('has-hint'); }
+  function hideHint() { if (btn.classList.contains('has-hint')) { btn.classList.remove('has-hint'); paint(); } }
 
   /* ---------- leaving, hiding, coming back ---------- */
   document.addEventListener('click', (e) => {
