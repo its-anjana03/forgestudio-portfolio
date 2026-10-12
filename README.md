@@ -25,6 +25,10 @@ A static site (plain HTML, CSS and JavaScript, no build step) hosted on GitHub P
 │   └── <source folders>/              Your original exports (kept out of git and the zip)
 ├── tools/foundry-images.js            Prepares new artwork for the Foundry (local only)
 ├── tools/build-catalogue.js           Rewrites the home poster wall and work.json from the site's own data
+├── tools/shared/                      Nav, menu, footer, head and script tags, written once (see "Working on the site")
+├── tools/shared.js                    Writes the shared parts into every page
+├── tools/check.js                     The check to run before publishing
+├── tools/stamp.js                     Gives stylesheets and scripts a new version stamp
 ├── assets/
 │   ├── css/forge.css                  The whole design system (one stylesheet)
 │   ├── css/forge-mode.css             Light mode, the mode switch and the entry choice
@@ -244,11 +248,52 @@ npx serve .
 2. Repository **Settings → Pages → Build and deployment**: Source *Deploy from a branch*, branch `main`, folder `/ (root)`.
 3. Keep the `CNAME` file so the site stays on `forgestudio.web.lk`. Tick **Enforce HTTPS** once the certificate is issued.
 
+## Working on the site
+
+This folder is the only working copy. Three habits keep the live site safe:
+
+1. **Work on the `preview` branch.** GitHub Pages publishes `main`, and only `main`. Changes on `preview` can be
+   committed and pushed freely without touching the live site.
+2. **Check before publishing:** `node tools/check.js`. It changes nothing. It stops on broken links and images,
+   missing `#sections`, mixed version stamps, Foundry pieces without their images, and shared parts that are out
+   of step.
+3. **Publish by merging `preview` into `main`** and pushing `main`, once the check passes and the change has been
+   looked at locally (see "Run locally").
+
+### Shared parts (nav, menu, footer, head and script tags)
+
+The parts that repeat on every page live once, in `tools/shared/`:
+
+| File | What it is | Pages |
+|---|---|---|
+| `nav.html`, `menu.html` | the top bar and the full-screen menu | all 8 |
+| `footer-links.html`, `footer-end.html` | the footer columns (contact details, social links) and the last line | all 8 |
+| `footer-cta.html`, `lightbox.html` | "Let's forge something." and the image viewer | the 6 case studies |
+| `head-styles.html`, `head-theme.html`, `scripts.html` | stylesheet and script tags, with the version stamp | all 8 |
+| `top.html`, `mark.html` | skip link, grain, cursor; the mark's shape | all 8; all but home |
+
+In a page they sit between two comments, and everything between them is written by a script:
+
+```html
+<!-- shared:nav work -->
+  ...do not edit here: edit tools/shared/nav.html...
+<!-- /shared:nav -->
+```
+
+To change a shared part, edit its file in `tools/shared/` and run `node tools/shared.js`. Every page is updated.
+
+The word after the name (`home`, `work` or `resume`) is the kind of page. Inside a shared file,
+`{{#home}}…{{/home}}` is kept only on the home page and `{{^home}}…{{/home}}` everywhere else; the same works for
+`work` (case studies) and `resume`. That is how the home page keeps its in-page links (`#work`) while the other
+pages link back to it (`index.html#work`).
+
+`404.html` and the Foundry stand alone and have no shared parts.
+
 ## Updating content
 
 - **After changing CSS or JavaScript:** every page links its stylesheet and scripts with a version stamp
-  (`forge.css?v=20261009i`). Change the stamp in all pages (a find-and-replace across the `.html` files and
-  `foundry/index.html`) so visitors' browsers fetch the new files instead of an old cached copy.
+  (`forge.css?v=20261009i`). Give them all a new one with `node tools/stamp.js 20261012a` (the date and a letter),
+  so visitors' browsers fetch the new files instead of an old cached copy.
 
 - **New work in the Foundry:** see "Adding work" above.
 - **Changing a poster in the home archive:** the wall always shows ten. Put a 1200px WebP in `assets/img/` and a

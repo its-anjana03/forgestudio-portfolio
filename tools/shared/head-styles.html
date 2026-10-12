@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="assets/css/forge.css?v=20261009i">
+<link rel="stylesheet" href="assets/css/forge-fx.css?v=20261009i">
+{{#home}}
+<link rel="stylesheet" href="assets/css/forge-strike.css?v=20261009i">
+{{/home}}
+<script>
+{{#home}}
+  // Motion is opt-in: only hide-then-reveal content when JS runs and the visitor allows motion.
+{{/home}}
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('has-motion');
+    try { if (sessionStorage.getItem('forge-pt')) { sessionStorage.removeItem('forge-pt'); document.documentElement.classList.add('pt-in'); } } catch (e) {}
+{{#home}}
+    // Safety net: if the motion script never arrives, show the static page.
+{{/home}}
+    setTimeout(function () { if (!window.__forgeReady) document.documentElement.classList.remove('has-motion', 'pt-in'); }, 4000);
+  }
+</script>

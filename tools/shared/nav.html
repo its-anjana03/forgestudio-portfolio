@@ -1,0 +1,35 @@
+<header class="nav" id="nav">
+  <a class="brand" href="{{#home}}#top{{/home}}{{^home}}index.html{{/home}}" aria-label="{{#home}}FORGE Studio, back to top{{/home}}{{^home}}FORGE Studio home{{/home}}">
+    <svg viewBox="0 0 2962 2488" aria-hidden="true"><use href="#mark-solid"/></svg>
+    <span class="brand-word"><b>FORGE</b><span>Studio.</span></span>
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+{{#home}}
+    <a href="#work">Work</a>
+    <a href="#archive">Archive</a>
+    <a href="#about">About</a>
+    <a href="resume.html">Resume</a>
+{{/home}}
+{{^home}}
+    <a href="index.html">Home</a>
+    <a href="index.html#work"{{#work}} class="is-active"{{/work}}>Work</a>
+    <a href="index.html#about">About</a>
+    <a href="resume.html"{{#resume}} class="is-active" aria-current="page"{{/resume}}>Resume</a>
+{{/home}}
+  </nav>
+  <div class="nav-right">
+  <span class="nav-sound" data-sound-slot></span>
+  <button class="theme-btn" type="button" role="switch" aria-checked="false" aria-label="Light mode">
+    <span class="ts-knob" aria-hidden="true"></span>
+    <svg class="ts-ico ts-flame" viewBox="0 0 16 16" aria-hidden="true"><path d="M8.3 1.2c.4 2.6 3.5 4 3.5 7.6a3.8 3.8 0 0 1-7.6 0c0-1.6.7-2.7 1.6-3.6.1 1.1.6 1.8 1.3 2.1-.2-2.3.2-4.3 1.2-6.1Z"/></svg>
+    <svg class="ts-ico ts-sun" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="2.7"/><path d="M8 1.3v1.9M8 12.8v1.9M1.3 8h1.9M12.8 8h1.9M3.3 3.3l1.3 1.3M11.4 11.4l1.3 1.3M3.300 12.7l1.3-1.3M11.4 4.600l1.3-1.3"/></svg>
+  </button>
+{{#resume}}
+  <a class="nav-status" href="files/Thinura-Anjana-Resume-2026.pdf" download>Download PDF ↓</a>
+{{/resume}}
+{{^resume}}
+  <a class="nav-status" href="{{^home}}index.html{{/home}}#contact"><span class="pulse" aria-hidden="true"></span>Start a project</a>
+{{/resume}}
+  <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span class="mb-bar"></span><span class="mb-bar"></span><span class="mb-spark" aria-hidden="true"></span></button>
+  </div>
+</header>
