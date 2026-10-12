@@ -770,6 +770,7 @@
           // heat shimmer in the air above the fire
           p.x += (noise(p * vec2(9.0, 5.0) + vec2(0.0, -t * 2.6)) - 0.5) * (0.005 + 0.008 * uHeat) * smoothstep(0.7, 0.0, uv.y);
 
+          // @light
           // Light mode, the morning after: the fire is out. Smoke climbs off a bed of dying coals into daylight.
           vec3 lc = vec3(0.0);
           if (uLight > 0.001) {
@@ -806,6 +807,7 @@
             lc += (hash(gl_FragCoord.xy + fract(t) * 100.0) - 0.5) / 255.0;
           }
           if (uLight > 0.999) { gl_FragColor = vec4(lc, 1.0); return; }
+          // @/light
 
           vec3 col = ink;
           // furnace light hanging in the air
@@ -845,36 +847,76 @@
           float copyZone = smoothstep(0.14, 0.34, abs(cx)) * smoothstep(0.4, 0.16, uv.y) * smoothstep(0.0, 0.1, uv.y) * smoothstep(1.0, 1.4, asp);
           col *= 1.0 - 0.38 * copyZone * (1.0 - uHeat);
           col = mix(ink, col, uAmp);
+          // @light
           // daylight arrives unevenly, through the smoke, rather than as a flat fade
           if (uLight > 0.001) {
             float day = (uLight - 0.3) / 0.62 + (fbm3(p * 1.7 + vec2(0.0, -t * 0.06)) - 0.5) * 0.55 * sin(uLight * 3.14159);
             col = mix(col, lc, smoothstep(0.0, 1.0, day));
           }
+          // @/light
           col += (hash(gl_FragCoord.xy + fract(t) * 100.0) - 0.5) / 255.0;
           gl_FragColor = vec4(col, 1.0);
         }`;
-      let gl = null, U = {};
+      /* The shader takes seconds to compile the first time a browser meets it (measured: 9 s for the whole scene,
+         under 4 s for the dark fire alone; nothing on later visits, when the browser has it saved). Asking for
+         the result used to hold the whole page still for that long. So:
+           · the dark fire is its own program, the same shader with the light-mode scene (@light … @/light) cut
+             out. With no daylight it draws exactly what the whole scene draws, and it is ready much sooner;
+           · no program is waited for. Where the browser can compile in the background (KHR_parallel_shader_compile)
+             the page stays free and the fire fades in when it is ready; elsewhere it compiles as it always did;
+           · the whole scene is compiled once the dark fire is burning, ready for a change of mode. */
+      const FS_DARK = FS.replace(/ *\/\/ @light\n[\s\S]*?\/\/ @\/light\n/g, '');
+      let gl = null, U = {}, par = null, dark = null, whole = null, cur = null;
+      const build = (frag) => {
+        const prog = gl.createProgram();
+        [[gl.VERTEX_SHADER, 'attribute vec2 a; void main() { gl_Position = vec4(a, 0.0, 1.0); }'], [gl.FRAGMENT_SHADER, frag]].forEach(([type, src]) => {
+          const sh = gl.createShader(type); gl.shaderSource(sh, src); gl.compileShader(sh); gl.attachShader(prog, sh);
+        });
+        gl.bindAttribLocation(prog, 0, 'a');
+        gl.linkProgram(prog);
+        return { prog, U: null };
+      };
+      // True once a program can be drawn with. Never waits where the browser can say "not yet".
+      const ready = (p) => {
+        if (p.U) return true;
+        if (par && !gl.getProgramParameter(p.prog, par.COMPLETION_STATUS_KHR)) return false;
+        if (!gl.getProgramParameter(p.prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(p.prog));
+        p.U = {};
+        ['uRes', 'uTime', 'uHeat', 'uFlare', 'uAmp', 'uLight', 'uPtr'].forEach((n) => { p.U[n] = gl.getUniformLocation(p.prog, n); });
+        return true;
+      };
       try {
         gl = fireCv.getContext('webgl', { alpha: false, antialias: false, depth: false, stencil: false, powerPreference: 'low-power' });
         if (gl) {
-          const sh = (type, src) => {
-            const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
-            if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s));
-            return s;
-          };
-          const prog = gl.createProgram();
-          gl.attachShader(prog, sh(gl.VERTEX_SHADER, 'attribute vec2 a; void main() { gl_Position = vec4(a, 0.0, 1.0); }'));
-          gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS));
-          gl.linkProgram(prog);
-          if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
-          gl.useProgram(prog);
+          par = gl.getExtension('KHR_parallel_shader_compile');
           gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
           gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
-          const loc = gl.getAttribLocation(prog, 'a');
-          gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-          ['uRes', 'uTime', 'uHeat', 'uFlare', 'uAmp', 'uLight', 'uPtr'].forEach((n) => { U[n] = gl.getUniformLocation(prog, n); });
+          gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+          if (mode.k > 0) whole = build(FS); else dark = build(FS_DARK); // a visit that opens in light mode needs the whole scene at once
         }
       } catch (err) { gl = null; }
+      // The program for this frame, or null while it is still compiling. Any daylight at all needs the whole scene.
+      let warmed = false;
+      const fireProg = () => {
+        if (mode.k > 0 || !dark) {
+          if (!whole) whole = build(FS);
+          return ready(whole) ? whole : null;
+        }
+        if (!ready(dark)) return null;
+        if (par && !warmed) { warmed = true; setTimeout(() => { if (gl && !whole) { try { whole = build(FS); } catch (err) { /* built on demand instead */ } } }, 1200); }
+        return dark;
+      };
+      // The fire layer stays out of sight until it has something to draw. A fire that is ready at once is simply
+      // there; one that had to wait for its compile fades in.
+      let fireUp = false, waitT = performance.now();
+      fireCv.style.opacity = '0';
+      const showFire = (up) => {
+        if (up === fireUp) return;
+        fireUp = up;
+        fireCv.style.transition = up ? (performance.now() - waitT > 250 ? 'opacity 1.4s ease-out' : '') : 'opacity .5s ease-out';
+        fireCv.style.opacity = up ? '' : '0';
+        if (!up) waitT = performance.now();
+      };
       // Screens that can show more colour than standard web colour (most recent phones and laptops) get a richer
       // fire: the same numbers, drawn in the wider Display P3 range. Light mode stays in standard colour so the
       // paper matches the rest of the page exactly.
@@ -1086,7 +1128,11 @@
         const dt = Math.min(0.05, Math.max(0, (now - lastT) / 1000)); lastT = now;
         F.t += dt; F.flare *= Math.exp(-dt * 2.4);
         ptx += (ptrX - ptx) * Math.min(1, dt * 3); pty += (ptrY - pty) * Math.min(1, dt * 3);
-        if (gl) {
+        let P = null;
+        if (gl) { try { P = fireProg(); } catch (err) { noGL(); } }
+        if (gl) showFire(!!P);
+        if (gl && P) {
+          if (P !== cur) { cur = P; U = P.U; gl.useProgram(P.prog); }
           if (wideGamut && (mode.k < 0.5) !== wideOn) { wideOn = !wideOn; try { gl.drawingBufferColorSpace = wideOn ? 'display-p3' : 'srgb'; } catch (err) { /* stays as it was */ } }
           gl.uniform2f(U.uRes, fireCv.width, fireCv.height);
           gl.uniform1f(U.uTime, F.t % 3600); gl.uniform1f(U.uHeat, heat.v);
