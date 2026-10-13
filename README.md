@@ -292,7 +292,7 @@ pages link back to it (`index.html#work`).
 ## Updating content
 
 - **After changing CSS or JavaScript:** every page links its stylesheet and scripts with a version stamp
-  (`forge.css?v=20261012b`). Give them all a new one with `node tools/stamp.js 20261012a` (the date and a letter),
+  (`forge.css?v=20261013a`). Give them all a new one with `node tools/stamp.js 20261012a` (the date and a letter),
   so visitors' browsers fetch the new files instead of an old cached copy.
 
 - **New work in the Foundry:** see "Adding work" above.

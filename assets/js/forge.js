@@ -228,9 +228,17 @@
     if (await copyText(url)) { toast('Link copied. Paste it anywhere.'); track('copy-link', title); }
   };
 
+  /* Contact details. The address and number are not written in the pages, where the bots that harvest them
+     for spam read; they are kept here in a form those bots do not look for, and written in on arrival.
+     To change them: btoa('new@address') in the browser console gives the new string. */
+  const MAIL = atob('YW5qYW5hdGhpbnVyYTA3QGdtYWlsLmNvbQ=='), TEL = atob('Kzk0IDcwIDc3NyAxNDA1');
+  $$('[data-mail]').forEach((a) => { a.href = 'mailto:' + MAIL; });
+  $$('[data-mail-text]').forEach((el) => { el.textContent = MAIL; });
+  $$('[data-tel]').forEach((a) => { a.href = 'tel:' + TEL.replace(/ /g, ''); a.textContent = TEL; });
+
   /* Copy-email buttons */
   $$('[data-copy-email]').forEach((b) => b.addEventListener('click', async () => {
-    if (await copyText(b.dataset.copyEmail)) { toast('Email copied to your clipboard.'); track('copy-email'); }
+    if (await copyText(MAIL)) { toast('Email copied to your clipboard.'); track('copy-email'); }
   }));
 
   /* ---------------- Lightbox ---------------- */
@@ -352,7 +360,7 @@
       e.preventDefault();
       const { subject, body, kinds } = build();
       track('brief-send', kinds.join('+') || 'none');
-      window.location.href = `mailto:${brief.dataset.to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = `mailto:${MAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       setTimeout(() => toast('Opening your email app. Nothing opened? Use “Copy email”.'), 400);
     });
   }

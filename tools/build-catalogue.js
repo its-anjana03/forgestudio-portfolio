@@ -111,7 +111,7 @@ const total = POSTERS.length + count(foundry.film) + count(foundry.events) + cou
 
 const catalogue = {
   about: 'Machine-readable catalogue of FORGE Studio, the design practice of Thinura Anjana. Built from the site by tools/build-catalogue.js. A plain-language summary is at ' + SITE + 'llms.txt',
-  studio: { name: 'FORGE Studio', designer: 'Thinura Anjana', url: SITE, email: 'anjanathinura07@gmail.com' },
+  studio: { name: 'FORGE Studio', designer: 'Thinura Anjana', url: SITE, email: 'anjanathinura07 at gmail dot com' },
   notes: [
     'Movie posters are personal tribute and concept work, not official studio artwork. Film titles and characters belong to their owners.',
     'Campaign and client work is shown with thanks to the organisers and clients named on each collection.',

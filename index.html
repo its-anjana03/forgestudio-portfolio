@@ -19,9 +19,9 @@
 <link rel="icon" type="image/svg+xml" href="assets/img/forge-mark.svg">
 <link rel="alternate" type="application/json" href="work.json" title="FORGE Studio catalogue">
 <!-- shared:head-styles home -->
-<link rel="stylesheet" href="assets/css/forge.css?v=20261012b">
-<link rel="stylesheet" href="assets/css/forge-fx.css?v=20261012b">
-<link rel="stylesheet" href="assets/css/forge-strike.css?v=20261012b">
+<link rel="stylesheet" href="assets/css/forge.css?v=20261013a">
+<link rel="stylesheet" href="assets/css/forge-fx.css?v=20261013a">
+<link rel="stylesheet" href="assets/css/forge-strike.css?v=20261013a">
 <script>
   // Motion is opt-in: only hide-then-reveal content when JS runs and the visitor allows motion.
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -33,10 +33,10 @@
 </script>
 <!-- /shared:head-styles -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://forgestudio.web.lk/#thinura","name":"Thinura Anjana","jobTitle":"Marketing Executive & Creative Designer","description":"Designer behind FORGE Studio: cinematic posters, brand identity, campaign design and UI/UX.","worksFor":{"@type":"Organization","name":"Jeewa Education"},"url":"https://forgestudio.web.lk/","image":"https://forgestudio.web.lk/assets/img/og/home.jpg","alumniOf":{"@type":"CollegeOrUniversity","name":"SLIIT"},"knowsAbout":["Poster design","Brand identity","Campaign design","UI/UX design","Graphic design"],"award":["Featured on Thanthi TV, 2022","First place of 200, Best Watch Design, Academy of Graphics, 2022"],"sameAs":["https://www.behance.net/thinuraanjana3","https://www.instagram.com/its_anjana03/","https://www.linkedin.com/in/thinura-anjana-7a4060306"]},{"@type":"WebSite","@id":"https://forgestudio.web.lk/#site","name":"FORGE Studio","url":"https://forgestudio.web.lk/","inLanguage":"en","author":{"@id":"https://forgestudio.web.lk/#thinura"}},{"@type":"Organization","@id":"https://forgestudio.web.lk/#studio","name":"FORGE Studio","alternateName":"Master Creations","url":"https://forgestudio.web.lk/","logo":"https://forgestudio.web.lk/assets/img/forge-mark.svg","foundingDate":"2020","founder":{"@id":"https://forgestudio.web.lk/#thinura"},"email":"anjanathinura07@gmail.com"}]}
+{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://forgestudio.web.lk/#thinura","name":"Thinura Anjana","jobTitle":"Marketing Executive & Creative Designer","description":"Designer behind FORGE Studio: cinematic posters, brand identity, campaign design and UI/UX.","worksFor":{"@type":"Organization","name":"Jeewa Education"},"url":"https://forgestudio.web.lk/","image":"https://forgestudio.web.lk/assets/img/og/home.jpg","alumniOf":{"@type":"CollegeOrUniversity","name":"SLIIT"},"knowsAbout":["Poster design","Brand identity","Campaign design","UI/UX design","Graphic design"],"award":["Featured on Thanthi TV, 2022","First place of 200, Best Watch Design, Academy of Graphics, 2022"],"sameAs":["https://www.behance.net/thinuraanjana3","https://www.instagram.com/its_anjana03/","https://www.linkedin.com/in/thinura-anjana-7a4060306"]},{"@type":"WebSite","@id":"https://forgestudio.web.lk/#site","name":"FORGE Studio","url":"https://forgestudio.web.lk/","inLanguage":"en","author":{"@id":"https://forgestudio.web.lk/#thinura"}},{"@type":"Organization","@id":"https://forgestudio.web.lk/#studio","name":"FORGE Studio","alternateName":"Master Creations","url":"https://forgestudio.web.lk/","logo":"https://forgestudio.web.lk/assets/img/forge-mark.svg","foundingDate":"2020","founder":{"@id":"https://forgestudio.web.lk/#thinura"}}]}
 </script>
 <!-- shared:head-theme home -->
-<link rel="stylesheet" href="assets/css/forge-mode.css?v=20261012b">
+<link rel="stylesheet" href="assets/css/forge-mode.css?v=20261013a">
 <script>
   // Light or dark, as last chosen, before the first paint.
   try { if (localStorage.getItem('forge-theme') === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
@@ -97,7 +97,7 @@
       <li><a href="#contact"><span>05</span><b>Contact</b></a></li>
     </ul>
     <div class="menu-foot">
-      <a href="mailto:anjanathinura07@gmail.com">anjanathinura07@gmail.com</a>
+      <a data-mail data-mail-text href="#contact">Email</a>
       <span><a href="https://www.behance.net/thinuraanjana3" target="_blank" rel="noopener">Behance</a> · <a href="https://www.instagram.com/its_anjana03/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.linkedin.com/in/thinura-anjana-7a4060306" target="_blank" rel="noopener">LinkedIn</a></span>
     </div>
   </div>
@@ -592,12 +592,12 @@
       <h2 class="display" data-lines>Let's forge<br>something.</h2>
       <p class="lede" data-reveal>Poster, campaign and identity commissions, creative collaborations, or just a conversation about visual storytelling. The forge is always lit.</p>
       <div class="mail-row" data-reveal>
-        <a class="quench-mail" href="mailto:anjanathinura07@gmail.com" data-magnetic="0.12">anjanathinura07@gmail.com <span aria-hidden="true">↗</span></a>
-        <button class="copy-btn" type="button" data-copy-email="anjanathinura07@gmail.com">Copy email</button>
+        <a class="quench-mail" data-mail href="#contact" data-magnetic="0.12"><span data-mail-text>Email me</span> <span aria-hidden="true">↗</span></a>
+        <button class="copy-btn" type="button" data-copy-email>Copy email</button>
       </div>
     </div>
 
-    <form class="brief" data-to="anjanathinura07@gmail.com" data-reveal aria-labelledby="brief-h">
+    <form class="brief" data-reveal aria-labelledby="brief-h">
       <div class="brief-fields">
         <h3 class="h3" id="brief-h">Start a brief in 30 seconds.</h3>
         <fieldset>
@@ -634,7 +634,7 @@
       <div><h3>FORGE Studio</h3><p>The design studio of Thinura Anjana. Cinematic posters, brand identity, campaigns and UI/UX, made in Sri Lanka.</p></div>
       <div><h3>Pages</h3><ul><li><a href="#work">Selected work</a></li><li><a href="#archive">Archive</a></li><li><a href="#about">About</a></li><li><a href="resume.html">Resume</a></li></ul></div>
       <div><h3>Elsewhere</h3><ul><li><a href="https://www.behance.net/thinuraanjana3" target="_blank" rel="noopener">Behance ↗</a></li><li><a href="https://www.instagram.com/its_anjana03/" target="_blank" rel="noopener">Instagram ↗</a></li><li><a href="https://www.linkedin.com/in/thinura-anjana-7a4060306" target="_blank" rel="noopener">LinkedIn ↗</a></li></ul></div>
-      <div><h3>Direct</h3><ul><li><a href="mailto:anjanathinura07@gmail.com">Email</a></li><li><a href="tel:+94707771405">+94 70 777 1405</a></li><li>Sri Lanka</li></ul></div>
+      <div><h3>Direct</h3><ul><li><a data-mail href="#contact">Email</a></li><li><a data-tel href="#contact">Phone on request</a></li><li>Sri Lanka</li></ul></div>
     </div>
 <!-- /shared:footer-links -->
   </div>
@@ -680,10 +680,10 @@
 <script src="assets/vendor/gsap.min.js" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
 <script src="assets/vendor/lenis.min.js" defer></script>
-<script src="assets/js/forge-sound.js?v=20261012b" defer></script>
-<script src="assets/js/forge.js?v=20261012b" defer></script>
-<script src="assets/js/forge-fx.js?v=20261012b" defer></script>
-<script src="assets/js/forge-strike.js?v=20261012b" defer></script>
+<script src="assets/js/forge-sound.js?v=20261013a" defer></script>
+<script src="assets/js/forge.js?v=20261013a" defer></script>
+<script src="assets/js/forge-fx.js?v=20261013a" defer></script>
+<script src="assets/js/forge-strike.js?v=20261013a" defer></script>
 <!-- /shared:scripts -->
 </body>
 </html>
