@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Seylune, luxury fashion frontend · FORGE Studio</title>
-<meta name="description" content="Case study: Seylune, a twelve-page luxury fashion frontend built in HTML, CSS and JavaScript for a university assignment. By Thinura Anjana, FORGE Studio.">
+<meta name="description" content="Case study: Seylune, a luxury fashion frontend built in HTML, CSS and JavaScript for a university assignment, extended with search, filters, cart and checkout. Live demo included. By Thinura Anjana, FORGE Studio.">
 <meta name="theme-color" content="#0A0908">
 <link rel="canonical" href="https://forgestudio.web.lk/seylune-frontend-case-study.html">
 <meta property="og:title" content="Seylune, luxury fashion frontend · FORGE Studio">
-<meta property="og:description" content="Case study: Seylune, a twelve-page luxury fashion frontend built in HTML, CSS and JavaScript for a university assignment. By Thinura Anjana, FORGE Studio.">
+<meta property="og:description" content="Case study: Seylune, a luxury fashion frontend built in HTML, CSS and JavaScript for a university assignment, extended with search, filters, cart and checkout. Live demo included. By Thinura Anjana, FORGE Studio.">
 <meta property="og:image" content="https://forgestudio.web.lk/assets/img/og/seylune.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -29,7 +29,7 @@
 </script>
 <!-- /shared:head-styles -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[{"@type":"CreativeWork","name":"Seylune, luxury fashion frontend","description":"Case study: Seylune, a twelve-page luxury fashion frontend built in HTML, CSS and JavaScript for a university assignment. By Thinura Anjana, FORGE Studio.","genre":"Frontend web design","url":"https://forgestudio.web.lk/seylune-frontend-case-study.html","image":"https://forgestudio.web.lk/assets/img/og/seylune.jpg","inLanguage":"en","creator":{"@type":"Person","@id":"https://forgestudio.web.lk/#thinura","name":"Thinura Anjana","url":"https://forgestudio.web.lk/"},"isPartOf":{"@type":"WebSite","@id":"https://forgestudio.web.lk/#site","name":"FORGE Studio","url":"https://forgestudio.web.lk/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"FORGE Studio","item":"https://forgestudio.web.lk/"},{"@type":"ListItem","position":2,"name":"Work","item":"https://forgestudio.web.lk/#work"},{"@type":"ListItem","position":3,"name":"Seylune, luxury fashion frontend","item":"https://forgestudio.web.lk/seylune-frontend-case-study.html"}]}]}
+{"@context":"https://schema.org","@graph":[{"@type":"CreativeWork","name":"Seylune, luxury fashion frontend","description":"Case study: Seylune, a luxury fashion frontend built in HTML, CSS and JavaScript for a university assignment, extended with search, filters, cart and checkout. Live demo included. By Thinura Anjana, FORGE Studio.","genre":"Frontend web design","url":"https://forgestudio.web.lk/seylune-frontend-case-study.html","image":"https://forgestudio.web.lk/assets/img/og/seylune.jpg","inLanguage":"en","creator":{"@type":"Person","@id":"https://forgestudio.web.lk/#thinura","name":"Thinura Anjana","url":"https://forgestudio.web.lk/"},"isPartOf":{"@type":"WebSite","@id":"https://forgestudio.web.lk/#site","name":"FORGE Studio","url":"https://forgestudio.web.lk/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"FORGE Studio","item":"https://forgestudio.web.lk/"},{"@type":"ListItem","position":2,"name":"Work","item":"https://forgestudio.web.lk/#work"},{"@type":"ListItem","position":3,"name":"Seylune, luxury fashion frontend","item":"https://forgestudio.web.lk/seylune-frontend-case-study.html"}]}]}
 </script>
 <!-- shared:head-theme work -->
 <link rel="stylesheet" href="assets/css/forge-mode.css?v=20261013a">
@@ -117,10 +117,14 @@
       <h1 data-lines>Seylune,<br><span class="gold">luxury fashion frontend.</span></h1>
       <p class="lede" data-reveal>A fictional fashion e-commerce site built for a university web development assignment: Sri Lankan-inspired naming, moonlit luxury, curated browsing and a full HTML, CSS and JavaScript shopping interface.</p>
       <ul class="tags" data-reveal style="margin-top:22px"><li>Frontend</li><li>E-commerce UI</li><li>HTML / CSS / JS</li><li>Academic</li><li>AI-assisted</li></ul>
+      <div class="ignite-actions" data-reveal style="margin-top:28px">
+        <a class="btn" href="https://its-anjana03.github.io/seylune/" target="_blank" rel="noopener" data-magnetic>View the live demo <span class="arr" aria-hidden="true">↗</span></a>
+        <a class="btn ghost" href="https://github.com/its-anjana03/seylune" target="_blank" rel="noopener" data-magnetic>Source on GitHub <span class="arr" aria-hidden="true">↗</span></a>
+      </div>
       <div class="cs-meta" data-reveal-group>
         <div data-reveal-item><span class="label">Type</span><b>Concept brand site</b></div>
         <div data-reveal-item><span class="label">Output</span><b>Frontend only</b></div>
-        <div data-reveal-item><span class="label">Pages</span><b>8 planned, 12 built</b></div>
+        <div data-reveal-item><span class="label">Pages</span><b>8 planned, 11 built</b></div>
         <div data-reveal-item><span class="label">Role</span><b>Direction, build, polish</b></div>
       </div>
     </div>
@@ -192,8 +196,8 @@
 <section class="cs-sec" data-chapter="Structure">
   <div class="wrap">
     <div class="cs-head">
-      <div><span class="label" data-reveal><b>04</b> Website structure</span><h2 class="h2" data-lines>Planned eight pages. Shipped twelve.</h2></div>
-      <p data-reveal>Home, New Arrivals, Dresses, Tops, Bottoms, Cart, Account, About, Search Results and three product detail pages.</p>
+      <div><span class="label" data-reveal><b>04</b> Website structure</span><h2 class="h2" data-lines>Planned eight pages. Shipped eleven.</h2></div>
+      <p data-reveal>Home, New Arrivals, Dresses, Tops, Bottoms, Search Results, Product, Cart, Checkout, Account and About. One product template serves all 24 pieces.</p>
     </div>
     <div class="cs-steps" style="--cols:4" data-reveal-group>
       <span class="tl-fill-x" aria-hidden="true"></span>
@@ -261,7 +265,7 @@
       <div class="cs-card" data-reveal-item><span class="k">01</span><h3>Concept matters</h3><p>Name, colour, categories, imagery and flow all follow one idea.</p></div>
       <div class="cs-card" data-reveal-item><span class="k">02</span><h3>Limited feels premium</h3><p>Fewer categories made shopping feel curated.</p></div>
       <div class="cs-card" data-reveal-item><span class="k">03</span><h3>AI needs direction</h3><p>Tools helped only because the mood and page plan were clear.</p></div>
-      <div class="cs-card" data-reveal-item><span class="k">04</span><h3>Next step</h3><p>Backend cart, checkout, filtering, accessibility testing and a hosted demo.</p></div>
+      <div class="cs-card" data-reveal-item><span class="k">04</span><h3>Next step</h3><p>Checkout, filtering, search, accessibility fixes and a hosted demo are now live. Next: a real backend and payments.</p></div>
     </div>
   </div>
 </section>
