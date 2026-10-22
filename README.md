@@ -13,7 +13,7 @@ A static site (plain HTML, CSS and JavaScript, no build step) hosted on GitHub P
 ├── resume.html                        Web resume
 ├── joey-mobile-case-study.html        Case 01 · Joey Clothing (UX)
 ├── vijayism-piece.html                Case 02 · 30 Years of Vijayism (with the hidden-details hunt)
-├── seylune-frontend-case-study.html   Case 03 · Seylune (frontend)
+├── seylune-frontend-case-study.html   Case 03 · Seylune (full-stack store)
 ├── avengers-process.html              Case 04 · Avengers: Doomsday (with before/after slider)
 ├── rolex-design.html                  Case 05 · Rolex Day-Date 40
 ├── forge-identity.html                Case 06 · FORGE Studio identity

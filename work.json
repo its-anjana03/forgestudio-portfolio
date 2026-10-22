@@ -10,7 +10,7 @@
   "Movie posters are personal tribute and concept work, not official studio artwork. Film titles and characters belong to their owners.",
   "Campaign and client work is shown with thanks to the organisers and clients named on each collection."
  ],
- "updated": "2026-10-18",
+ "updated": "2026-10-22",
  "counts": {
   "caseStudies": 6,
   "homeArchive": 10,
@@ -46,9 +46,9 @@
    "image": "https://forgestudio.web.lk/assets/img/og/rolex.jpg"
   },
   {
-   "title": "Seylune, luxury fashion frontend",
-   "type": "Frontend web design",
-   "summary": "Case study: Seylune, a luxury fashion frontend built in HTML, CSS and JavaScript for a university assignment, extended with search, filters, cart and checkout. Live demo included. By Thinura Anjana, FORGE Studio.",
+   "title": "Seylune, luxury fashion store",
+   "type": "Full-stack web design",
+   "summary": "Case study: Seylune, a luxury fashion store first built as a university frontend, then redesigned with a Supabase backend: real accounts, orders, live stock, an admin dashboard and customer profiles. Live demo included. By Thinura Anjana, FORGE Studio.",
    "url": "https://forgestudio.web.lk/seylune-frontend-case-study.html",
    "image": "https://forgestudio.web.lk/assets/img/og/seylune.jpg"
   },

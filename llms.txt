@@ -28,7 +28,7 @@
 
 - [Joey Clothing, mobile UX redesign](https://forgestudio.web.lk/joey-mobile-case-study.html): a mobile e-commerce redesign focused on trust, product clarity and a simpler checkout
 - [30 Years of Vijayism, tribute portrait](https://forgestudio.web.lk/vijayism-piece.html): a tribute poster built as a room of memory, featured on Thanthi TV
-- [Seylune, luxury fashion frontend](https://forgestudio.web.lk/seylune-frontend-case-study.html): a fashion frontend in HTML, CSS and JavaScript, built for a university assignment and extended with search, filters, cart and checkout (live demo: https://its-anjana03.github.io/seylune/)
+- [Seylune, luxury fashion store](https://forgestudio.web.lk/seylune-frontend-case-study.html): a fashion store in HTML, CSS and JavaScript, first built for a university assignment, then redesigned with a Supabase backend (accounts, orders, live stock, an admin dashboard and customer profiles) and two new collections, Outerwear and Accessories (live demo: https://its-anjana03.github.io/seylune/)
 - [Avengers: Doomsday, poster process](https://forgestudio.web.lk/avengers-process.html): two versions of one poster, from a crowded layout to a controlled hierarchy
 - [Rolex Day-Date 40](https://forgestudio.web.lk/rolex-design.html): the Illustrator watch study that placed first of 200
 - [FORGE Studio identity](https://forgestudio.web.lk/forge-identity.html): the lightning mark with a hidden F, its grid, colour and type
