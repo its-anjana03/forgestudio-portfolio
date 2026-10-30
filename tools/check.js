@@ -73,12 +73,16 @@ const piece = (dir, it) => {
   if (it.motion && !exists(`foundry/img/motion/${it.file}.webp`)) bad('foundry/data.js', `"${it.file}" is marked motion but foundry/img/motion/${it.file}.webp is missing`);
 };
 let count = 0;
-const each = (dir, list) => list.forEach(it => { count++; piece(dir, it); });
+const files = new Set();   // a piece may only be hung once
+const each = (dir, list) => list.forEach(it => {
+  count++; piece(dir, it);
+  if (files.has(it.file)) bad('foundry/data.js', `"${it.file}" is listed twice`);
+  files.add(it.file);
+});
 (D.movies || []).forEach(m => each('movies/' + m.id, m.groups.flatMap(g => g.items)));
 (D.campaigns || []).forEach(c => each('campaigns/' + c.id, c.items));
 each('concepts', D.concepts || []);
-each('vault', D.vault || []);
-if (D.harbour) each('social/saagara', D.harbour.groups.flatMap(g => g.items));
+['social', 'print'].forEach(room => (D[room] || []).forEach(s => each(`${room}/${s.id}`, s.groups.flatMap(g => g.items))));
 
 /* ---------- sitemap ---------- */
 for (const m of read('sitemap.xml').matchAll(/<loc>https:\/\/forgestudio\.web\.lk\/([^<]*)<\/loc>/g)) {

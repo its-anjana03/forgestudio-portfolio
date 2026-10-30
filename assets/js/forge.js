@@ -19,8 +19,10 @@
   // Theme: dark is the forge at night, light is the morning after (ash and smoke). Canvases read this every frame.
   let light = html.dataset.theme === 'light';
 
+  // [title, year, image, in the Foundry?] The fourth value is false when the film has no Foundry collection,
+  // which hides "More in the Foundry" for that poster.
   const POSTERS = [
-    ['Leo', 2023, 'leo-poster'], ['Avengers: Doomsday', 2025, 'avengers-poster'],
+    ['Leo', 2023, 'leo-poster'], ['Avengers: Doomsday', 2025, 'avengers-poster', false],
     ['Jana Nayagan', 2026, 'jana-nayagan-poster'], ['John Wick: Chapter 4', 2024, 'john-wick-poster'],
     ['Oppenheimer', 2023, 'oppenheimer-poster'], ['Indian 2', 2024, 'indian2-poster'],
     ['F1', 2025, 'f1-poster'], ['PS-1', 2022, 'ps1-poster'], ['LIK', 2026, 'lik-poster'],
@@ -251,7 +253,7 @@
     // Home page: the poster archive. Case pages: every [data-zoom] image, in page order.
     const zooms = $$('[data-zoom]');
     const items = isArchive
-      ? POSTERS.map(([t, y, f]) => ({ src: `assets/img/${f}.webp`, alt: `${t} poster design, ${y}`, title: `${t} · ${y}`, slug: f.replace(/-poster$/, '') }))
+      ? POSTERS.map(([t, y, f, inFoundry = true]) => ({ src: `assets/img/${f}.webp`, alt: `${t} poster design, ${y}`, title: `${t} · ${y}`, slug: f.replace(/-poster$/, ''), foundry: inFoundry }))
       : zooms.map((z) => {
         const im = z.tagName === 'IMG' ? z : $('img', z);
         return { src: z.dataset.full || im.currentSrc || im.src, alt: im.alt, title: z.dataset.title || im.alt };
@@ -266,8 +268,8 @@
       // Every archive poster has its own address, so it can be shared directly.
       if (it.slug) history.replaceState(null, '', `#poster-${it.slug}`);
       if (foundryLink) {
-        foundryLink.hidden = !it.slug;
-        if (it.slug) {
+        foundryLink.hidden = !it.slug || !it.foundry;
+        if (it.slug && it.foundry) {
           foundryLink.href = `foundry/#/cinema/${it.slug}`;
           foundryLink.setAttribute('aria-label', `See every ${it.title.split(' · ')[0]} poster in the Foundry`);
         }

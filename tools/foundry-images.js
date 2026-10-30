@@ -27,9 +27,9 @@ try { sharp = require('sharp'); } catch (e) {
   process.exit(1);
 }
 
-// Folder names under foundry/img: movies (Film), campaigns (Events), concepts and vault
-// (Concepts: concept posters and the sketchbook), social/saagara (Social).
-const ROOMS = ['movies', 'concepts', 'social', 'campaigns', 'vault'];
+// Folder names under foundry/img: movies (Film), campaigns (Events), concepts (Concepts),
+// social/<collection> (Social), print/<collection> (Print).
+const ROOMS = ['movies', 'concepts', 'social', 'campaigns', 'print'];
 const [src, target, prefixArg] = process.argv.slice(2);
 if (!src || !target) {
   console.log('\n  Usage: node tools/foundry-images.js <source-folder> <room>/<id> <prefix>\n  Rooms: ' + ROOMS.join(', ') + '\n');
@@ -58,10 +58,17 @@ let n = taken.length ? Math.max(...taken) + 1 : 1;
   for (const f of files) {
     const name = `${prefix}-${String(n++).padStart(2, '0')}`;
     const input = sharp(path.join(src, f), { limitInputPixels: false }).rotate();
-    const full = await input.clone().resize({ width: 1600, height: 1600, fit: 'inside', withoutEnlargement: true })
-      .webp({ quality: 80, effort: 5 }).toFile(path.join(root, `${name}.webp`));
+    // Viewer size: quality 76, stepped down (to 58 at most) until the file is under 280 KB,
+    // so grainy posters don't slow the premiere.
+    let full, q = 76;
+    for (;;) {
+      full = await input.clone().resize({ width: 1600, height: 1600, fit: 'inside', withoutEnlargement: true })
+        .webp({ quality: q, effort: 6 }).toFile(path.join(root, `${name}.webp`));
+      if (full.size <= 280 * 1024 || q <= 60) break;
+      q -= 6;
+    }
     const thumb = await input.clone().resize({ width: 400, withoutEnlargement: true })
-      .webp({ quality: 72, effort: 5 }).toFile(path.join(thumbDir, `${name}.webp`));
+      .webp({ quality: 70, effort: 6 }).toFile(path.join(thumbDir, `${name}.webp`));
     bytes += full.size + thumb.size;
     // The average colour: shown while the image loads, so the wall never flashes empty.
     const { data: px } = await input.clone().resize(1, 1, { fit: 'fill' }).removeAlpha().raw().toBuffer({ resolveWithObject: true });

@@ -93,7 +93,8 @@ The portfolio shows the best work; the Foundry keeps everything, in two views (I
 - **The wall** (`#/`): every piece on one endless wall that drifts slowly and can be dragged in any direction
   (or moved with the scroll wheel, a trackpad or the arrow keys). Film posters, concept posters and each campaign's
   key art are hung in the middle, where visitors look first. Hovering lifts a piece and dims the rest; the filter
-  dock narrows the wall to Film (`#/film`), Events (`#/events`), Concepts (`#/concepts`) or Social (`#/social`).
+  dock narrows the wall to Film (`#/film`), Events (`#/events`), Concepts (`#/concepts`), Social (`#/social`)
+  or Print (`#/print`).
 - **The premiere** (`#/<part>/<collection>`): choosing a piece flies it from the wall to the centre of the screen.
   The whole screen takes on the colours of the work, the collection's name stands behind it in giant outlined
   letters, and a filmstrip, the arrows, a swipe or the scroll wheel step through the collection and on into the
@@ -108,17 +109,18 @@ everything simply fades.
   the line under "The archive." once the archive opens, and "More in the Foundry" in the poster viewer, which
   goes straight to that film.
 - **Shareable:** every collection and piece has its own link, e.g. `/foundry/#/film/leo` or
-  `/foundry/#/film/avengers?p=avengers-alt-02`. Older links (`#/cinema/...`, `#/movies/...`, `#/campaigns/...`,
+  `/foundry/#/film/leo?p=leo-7-days-to-go`. Older links (`#/cinema/...`, `#/movies/...`, `#/campaigns/...`,
   `#/studio`, `#/harbour`, `#/vault`) still land in the right place.
 
-### Waiting to be hung
+### What belongs in the Foundry
 
-More posters for Leo, Jana Nayagan, LIK, Kalki 2898 AD, Indian 2 and PS-1, and more concept posters, are on
-another computer. Their premieres already say "More posters on the way". When the files are back, drop them
-into the matching source folder (`foundry/Leo`, `foundry/Jananayagan`, `foundry/LIK`, `foundry/Kalki 2898 AD`,
-`foundry/Indian 2`, `foundry/PS 1`, `foundry/30 Years of Vijayism` or a new concepts folder), ideally in
-subfolders named after the groups (Main, Character, Alternate, Process), and process them as below.
-Once a series is complete, remove its `more: true` in `foundry/data.js`.
+Finished designs only: no process images, sketches, Figma screenshots, logo grids or logos. Every piece is
+hung once, with a file name and a title of its own (`node tools/check.js` fails if a file is listed twice).
+Films run Leo first, then newest to oldest; inside a film, posters follow the release campaign
+(announcement, first look, main posters, countdown, release, box office).
+
+A film or the concept list can carry `more: true` / `conceptsMore: true` to show "More posters on the way"
+while a series is still being added; none do today.
 
 ### Adding work (one command, one paste)
 
@@ -135,9 +137,10 @@ One-time setup: install [Node.js](https://nodejs.org), then run `npm install` in
    continues the numbering if you add more later, and prints lines to paste (size and colour tone included).
 3. Paste those lines into `foundry/data.js` under the right film and group, and write the `alt` text.
 
-Naming: `<film>-main-NN`, `<film>-character-NN`, `<film>-alt-NN`, `<film>-process-NN`,
-`<campaign>-poster-NN`, `<campaign>-social-NN` and so on. The group name becomes each poster's label
-("Character poster"), and the wall, filters, index and counts update by themselves.
+Naming: the tool numbers files (`<film>-main-NN`, `<campaign>-social-NN`); descriptive names such as
+`leo-7-days-to-go` are better and can be set by renaming the files. Give every piece its own `title`
+("7 days to go"); the group name becomes its label ("Countdown"), and the wall, filters, index and counts
+update by themselves. Images are saved at quality 76 and stepped down until each viewer image is under 280 KB.
 
 ## Heat details
 
@@ -292,7 +295,7 @@ pages link back to it (`index.html#work`).
 ## Updating content
 
 - **After changing CSS or JavaScript:** every page links its stylesheet and scripts with a version stamp
-  (`forge.css?v=20261013a`). Give them all a new one with `node tools/stamp.js 20261012a` (the date and a letter),
+  (`forge.css?v=20261030a`). Give them all a new one with `node tools/stamp.js 20261012a` (the date and a letter),
   so visitors' browsers fetch the new files instead of an old cached copy.
 
 - **New work in the Foundry:** see "Adding work" above.

@@ -10,11 +10,11 @@
   "Movie posters are personal tribute and concept work, not official studio artwork. Film titles and characters belong to their owners.",
   "Campaign and client work is shown with thanks to the organisers and clients named on each collection."
  ],
- "updated": "2026-10-22",
+ "updated": "2026-10-30",
  "counts": {
   "caseStudies": 6,
   "homeArchive": 10,
-  "foundryPieces": 115
+  "foundryPieces": 191
  },
  "caseStudies": [
   {
@@ -148,16 +148,171 @@
    {
     "title": "Leo",
     "year": 2023,
-    "note": "The largest series in the collection: around twenty posters, made over more than a month.",
+    "note": "The largest series in the collection: eighteen posters, from the cast reveal in January 2023 to the first anniversary.",
     "url": "https://forgestudio.web.lk/foundry/#/film/leo",
     "pieces": [
      {
+      "group": "Announcement",
+      "title": "Thalapathy 67 cast reveal",
+      "description": "Thalapathy 67 cast reveal banner: twelve cast and crew portraits in a row, lit in teal and red",
+      "width": 1600,
+      "height": 794,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/leo/leo-thalapathy-67-cast.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/leo/thumb/leo-thalapathy-67-cast.webp"
+     },
+     {
+      "group": "First look",
+      "title": "First look: Bloody Sweet",
+      "description": "Leo first look: Vijay's face over a glowing golden lion, Bloody Sweet",
+      "width": 1096,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/leo/leo-first-look.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/leo/thumb/leo-first-look.webp"
+     },
+     {
+      "group": "Song posters",
+      "title": "Naa Ready, first single",
+      "description": "Leo first single poster: Vijay raising a revolver above a burning crowd, Naa Ready",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/leo/leo-naa-ready.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/leo/thumb/leo-naa-ready.webp"
+     },
+     {
       "group": "Main posters",
-      "description": "Leo tribute poster, main version",
+      "title": "IMAX poster",
+      "description": "Leo IMAX poster: Sanjay Dutt and Arjun above Vijay swinging a hammer through the IMAX logo",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/leo/leo-imax.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/leo/thumb/leo-imax.webp"
+     },
+     {
+      "group": "Main posters",
+      "title": "Face the devil",
+      "description": "Leo poster: Vijay smoking above a fight scene, keep calm and face the devil",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/leo/leo-face-the-devil.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/leo/thumb/leo-face-the-devil.webp"
+     },
+     {
+      "group": "Main posters",
+      "title": "Keep calm and face the devil",
+      "description": "Leo poster: Vijay gripping Sanjay Dutt's face in falling snow, keep calm and face the devil",
+      "width": 1017,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/leo/leo-keep-calm.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/leo/thumb/leo-keep-calm.webp"
+     },
+     {
+      "group": "Main posters",
+      "title": "Mr. Leo Das",
+      "description": "Leo poster in yellow and black: Vijay and Sanjay Dutt head to head, Mr. Leo Das in red script",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/leo/leo-mr-leo-das.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/leo/thumb/leo-mr-leo-das.webp"
+     },
+     {
+      "group": "Main posters",
+      "title": "Trailer from today",
+      "description": "Leo trailer poster: Vijay's face above a snowy valley where a lone figure faces a hyena, trailer from today",
       "width": 1053,
       "height": 1600,
       "image": "https://forgestudio.web.lk/foundry/img/movies/leo/leo-main-01.webp",
       "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/leo/thumb/leo-main-01.webp"
+     },
+     {
+      "group": "Main posters",
+      "title": "47 million views",
+      "description": "Leo trailer milestone poster: a hand raising a revolver over a crowd, 47 million views",
+      "width": 1019,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/leo/leo-47-million-views.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/leo/thumb/leo-47-million-views.webp"
+     },
+     {
+      "group": "Countdown",
+      "title": "7 days to go",
+      "description": "Leo countdown: Trisha and Vijay before a giant 7, seven days to go",
+      "width": 1054,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/leo/leo-7-days-to-go.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/leo/thumb/leo-7-days-to-go.webp"
+     },
+     {
+      "group": "Countdown",
+      "title": "6 days to go",
+      "description": "Leo countdown: a police officer beside a giant 6 in a snowy valley, six days to go",
+      "width": 1054,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/leo/leo-6-days-to-go.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/leo/thumb/leo-6-days-to-go.webp"
+     },
+     {
+      "group": "Countdown",
+      "title": "4 days to go",
+      "description": "Leo countdown: a grinning, bloodied young man, he's notorious, four days to go",
+      "width": 1054,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/leo/leo-4-days-to-go.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/leo/thumb/leo-4-days-to-go.webp"
+     },
+     {
+      "group": "Countdown",
+      "title": "3 days to go",
+      "description": "Leo countdown: a family on a sofa beneath the word three, three days to go",
+      "width": 1263,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/leo/leo-3-days-to-go.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/leo/thumb/leo-3-days-to-go.webp"
+     },
+     {
+      "group": "Countdown",
+      "title": "Release day",
+      "description": "Leo release-day poster: the full cast beneath Today Worldwide Release",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/leo/leo-release-day.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/leo/thumb/leo-release-day.webp"
+     },
+     {
+      "group": "Countdown",
+      "title": "Leo Day",
+      "description": "Square Leo Day post: the Leo seal inside a ring of fire",
+      "width": 1080,
+      "height": 1080,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/leo/leo-day.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/leo/thumb/leo-day.webp"
+     },
+     {
+      "group": "Box office",
+      "title": "Industry hit: 400 crores",
+      "description": "Leo box-office poster on frozen ice: industry hit, 400 crores worldwide on the fourth day",
+      "width": 1091,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/leo/leo-400-crores.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/leo/thumb/leo-400-crores.webp"
+     },
+     {
+      "group": "Box office",
+      "title": "500 crores worldwide",
+      "description": "Leo box-office poster: a revolver rising from the zero of 500, five hundred crores worldwide",
+      "width": 1054,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/leo/leo-500-crores.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/leo/thumb/leo-500-crores.webp"
+     },
+     {
+      "group": "Anniversary",
+      "title": "One year of Leo",
+      "year": 2024,
+      "description": "One year of Leo anniversary poster in burning orange: Vijay and Sanjay Dutt face to face",
+      "width": 1112,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/leo/leo-one-year.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/leo/thumb/leo-one-year.webp"
      }
     ]
    },
@@ -168,11 +323,84 @@
     "pieces": [
      {
       "group": "Main posters",
+      "title": "Face-off",
       "description": "Jana Nayagan tribute poster",
       "width": 908,
       "height": 1600,
       "image": "https://forgestudio.web.lk/foundry/img/movies/jana-nayagan/jana-nayagan-main-01.webp",
       "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/jana-nayagan/thumb/jana-nayagan-main-01.webp"
+     },
+     {
+      "group": "Main posters",
+      "title": "Worldwide release today",
+      "description": "Jana Nayagan release poster: the full cast beneath Worldwide Release Today",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/jana-nayagan/jana-nayagan-release-today.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/jana-nayagan/thumb/jana-nayagan-release-today.webp"
+     },
+     {
+      "group": "Main posters",
+      "title": "Roaring",
+      "description": "Jana Nayagan poster on white: two bloodied, roaring faces either side of the dates 26, 28, 01",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/jana-nayagan/jana-nayagan-roaring.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/jana-nayagan/thumb/jana-nayagan-roaring.webp"
+     },
+     {
+      "group": "Main posters",
+      "title": "Experience it in IMAX",
+      "description": "Jana Nayagan IMAX poster: Vijay with a red laser sight beneath giant IMAX letters",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/jana-nayagan/jana-nayagan-imax.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/jana-nayagan/thumb/jana-nayagan-imax.webp"
+     },
+     {
+      "group": "Main posters",
+      "title": "I am coming",
+      "description": "Jana Nayagan poster: Vijay waving a huge red U/A flag, I am coming",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/jana-nayagan/jana-nayagan-i-am-coming.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/jana-nayagan/thumb/jana-nayagan-i-am-coming.webp"
+     },
+     {
+      "group": "Main posters",
+      "title": "The arrival, tomorrow",
+      "description": "Jana Nayagan poster in black and white: Vijay from behind with a sword on his shoulder, the arrival tomorrow",
+      "width": 987,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/jana-nayagan/jana-nayagan-the-arrival.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/jana-nayagan/thumb/jana-nayagan-the-arrival.webp"
+     },
+     {
+      "group": "Main posters",
+      "title": "When the truth watches",
+      "description": "Jana Nayagan poster: Vijay in sunglasses behind a red curtain, there is no appeal when the truth watches",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/jana-nayagan/jana-nayagan-truth-watches.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/jana-nayagan/thumb/jana-nayagan-truth-watches.webp"
+     },
+     {
+      "group": "Main posters",
+      "title": "Thalapathy Vetri Kondan",
+      "description": "Jana Nayagan poster: Vijay in sunglasses before giant red title letters",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/jana-nayagan/jana-nayagan-vetri-kondan.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/jana-nayagan/thumb/jana-nayagan-vetri-kondan.webp"
+     },
+     {
+      "group": "Main posters",
+      "title": "Jana Nayagan will speak soon",
+      "description": "Jana Nayagan poster: Vijay seated in thought, when the voice is strong, silence is demanded",
+      "width": 1126,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/jana-nayagan/jana-nayagan-will-speak-soon.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/jana-nayagan/thumb/jana-nayagan-will-speak-soon.webp"
      }
     ]
    },
@@ -188,6 +416,123 @@
       "height": 1600,
       "image": "https://forgestudio.web.lk/foundry/img/movies/lik/lik-main-01.webp",
       "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/lik/thumb/lik-main-01.webp"
+     }
+    ]
+   },
+   {
+    "title": "96",
+    "year": 2025,
+    "url": "https://forgestudio.web.lk/foundry/#/film/96",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "title": "Remembered us",
+      "description": "96 tribute poster in faded green: the older couple in profile above their school-days selves",
+      "width": 1066,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/96/96-remembered-us.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/96/thumb/96-remembered-us.webp"
+     }
+    ]
+   },
+   {
+    "title": "F1",
+    "year": 2025,
+    "url": "https://forgestudio.web.lk/foundry/#/film/f1",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "description": "F1 tribute poster",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/f1/f1-main-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/f1/thumb/f1-main-01.webp"
+     }
+    ]
+   },
+   {
+    "title": "Retro",
+    "year": 2025,
+    "url": "https://forgestudio.web.lk/foundry/#/film/retro",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "title": "The one from May one",
+      "description": "Retro poster: Suriya in sunglasses above his younger self, the one from May one",
+      "width": 1137,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/retro/retro-may-one.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/retro/thumb/retro-may-one.webp"
+     },
+     {
+      "group": "Main posters",
+      "title": "Only pure love",
+      "description": "Retro poster in soft blue: a couple resting on stone steps, in my heart there is only pure love",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/retro/retro-pure-love.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/retro/thumb/retro-pure-love.webp"
+     }
+    ]
+   },
+   {
+    "title": "Once More",
+    "year": 2025,
+    "url": "https://forgestudio.web.lk/foundry/#/film/once-more",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "title": "Love and friendship",
+      "description": "Once More poster: torn paper halves of two friends with tulips, I thought love would ruin our friendship",
+      "width": 1094,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/once-more/once-more-friendship.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/once-more/thumb/once-more-friendship.webp"
+     },
+     {
+      "group": "Main posters",
+      "title": "Almost friends, almost lovers",
+      "description": "Once More poster: a couple inside a polaroid frame, almost friends, almost lovers",
+      "width": 1091,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/once-more/once-more-almost-lovers.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/once-more/thumb/once-more-almost-lovers.webp"
+     },
+     {
+      "group": "Main posters",
+      "title": "When love stands quietly",
+      "description": "Once More story poster in blush pink: a couple by a window with carnations",
+      "width": 900,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/once-more/once-more-love-stands-quietly.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/once-more/thumb/once-more-love-stands-quietly.webp"
+     }
+    ]
+   },
+   {
+    "title": "Vidaamuyarchi",
+    "year": 2025,
+    "url": "https://forgestudio.web.lk/foundry/#/film/vidaamuyarchi",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "title": "On his path",
+      "year": 2024,
+      "description": "Vidaamuyarchi poster: Ajith Kumar walking with a bag of cash, on his path",
+      "width": 1113,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/vidaamuyarchi/vidaamuyarchi-on-his-path.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/vidaamuyarchi/thumb/vidaamuyarchi-on-his-path.webp"
+     },
+     {
+      "group": "Main posters",
+      "title": "Efforts never fail",
+      "year": 2025,
+      "description": "Vidaamuyarchi release poster: the cast above a car on a maze, releasing worldwide Feb 06",
+      "width": 1109,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/vidaamuyarchi/vidaamuyarchi-efforts-never-fail.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/vidaamuyarchi/thumb/vidaamuyarchi-efforts-never-fail.webp"
      }
     ]
    },
@@ -213,84 +558,30 @@
     "pieces": [
      {
       "group": "Main posters",
+      "title": "Worldwide release, stamp edition",
       "description": "Indian 2 tribute poster",
       "width": 1023,
       "height": 1600,
       "image": "https://forgestudio.web.lk/foundry/img/movies/indian2/indian2-main-01.webp",
       "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/indian2/thumb/indian2-main-01.webp"
-     }
-    ]
-   },
-   {
-    "title": "PS-1",
-    "year": 2022,
-    "url": "https://forgestudio.web.lk/foundry/#/film/ps1",
-    "pieces": [
-     {
-      "group": "Main posters",
-      "description": "Ponniyin Selvan: Part 1 tribute poster",
-      "width": 1062,
-      "height": 1600,
-      "image": "https://forgestudio.web.lk/foundry/img/movies/ps1/ps1-main-01.webp",
-      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/ps1/thumb/ps1-main-01.webp"
-     }
-    ]
-   },
-   {
-    "title": "Avengers: Doomsday",
-    "year": 2025,
-    "note": "From pencil layout to final key art. The full process lives in the portfolio case study.",
-    "url": "https://forgestudio.web.lk/foundry/#/film/avengers",
-    "pieces": [
-     {
-      "group": "Main posters",
-      "description": "Avengers: Doomsday tribute poster, final version",
-      "width": 1067,
-      "height": 1600,
-      "image": "https://forgestudio.web.lk/foundry/img/movies/avengers/avengers-main-01.webp",
-      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/avengers/thumb/avengers-main-01.webp"
      },
      {
-      "group": "Alternate versions",
-      "title": "Version one",
-      "description": "Avengers: Doomsday poster, first version",
-      "width": 1067,
-      "height": 1600,
-      "image": "https://forgestudio.web.lk/foundry/img/movies/avengers/avengers-alt-01.webp",
-      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/avengers/thumb/avengers-alt-01.webp"
-     },
-     {
-      "group": "Alternate versions",
-      "title": "Version two",
-      "description": "Avengers: Doomsday poster, second version",
-      "width": 1067,
-      "height": 1600,
-      "image": "https://forgestudio.web.lk/foundry/img/movies/avengers/avengers-alt-02.webp",
-      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/avengers/thumb/avengers-alt-02.webp"
-     },
-     {
-      "group": "Process",
-      "title": "Layout sketch",
-      "description": "Pencil layout sketch for the Avengers: Doomsday poster",
-      "width": 1164,
-      "height": 1600,
-      "image": "https://forgestudio.web.lk/foundry/img/movies/avengers/avengers-process-01.webp",
-      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/avengers/thumb/avengers-process-01.webp"
-     }
-    ]
-   },
-   {
-    "title": "F1",
-    "year": 2025,
-    "url": "https://forgestudio.web.lk/foundry/#/film/f1",
-    "pieces": [
-     {
       "group": "Main posters",
-      "description": "F1 tribute poster",
-      "width": 1067,
+      "title": "Worldwide releasing today",
+      "description": "Indian 2 release poster on white: Kamal Haasan in a white coat above a red reflection, worldwide releasing today",
+      "width": 1023,
       "height": 1600,
-      "image": "https://forgestudio.web.lk/foundry/img/movies/f1/f1-main-01.webp",
-      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/f1/thumb/f1-main-01.webp"
+      "image": "https://forgestudio.web.lk/foundry/img/movies/indian2/indian2-release-day.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/indian2/thumb/indian2-release-day.webp"
+     },
+     {
+      "group": "Character posters",
+      "title": "Veerasekaran",
+      "description": "Indian 2 character banner: Veerasekaran with an axe in a golden desert, here comes a one man army",
+      "width": 1600,
+      "height": 901,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/indian2/indian2-veerasekaran.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/indian2/thumb/indian2-veerasekaran.webp"
      }
     ]
    },
@@ -310,6 +601,54 @@
     ]
    },
    {
+    "title": "Raayan",
+    "year": 2024,
+    "url": "https://forgestudio.web.lk/foundry/#/film/raayan",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "title": "Now in cinemas",
+      "description": "Raayan poster in red: Dhanush framed by giant serif title letters, now in cinemas",
+      "width": 1024,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/raayan/raayan-now-in-cinemas.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/raayan/thumb/raayan-now-in-cinemas.webp"
+     }
+    ]
+   },
+   {
+    "title": "Captain Miller",
+    "year": 2024,
+    "url": "https://forgestudio.web.lk/foundry/#/film/captain-miller",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "title": "Now in cinemas",
+      "description": "Captain Miller poster: Dhanush firing a rocket launcher above a burning battlefield",
+      "width": 1054,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/captain-miller/captain-miller-now-in-cinemas.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/captain-miller/thumb/captain-miller-now-in-cinemas.webp"
+     }
+    ]
+   },
+   {
+    "title": "Thug Life",
+    "year": 2023,
+    "url": "https://forgestudio.web.lk/foundry/#/film/thug-life",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "title": "First look",
+      "description": "Thug Life poster: Kamal Haasan with a bandaged hand raised towards the camera",
+      "width": 1054,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/thug-life/thug-life-first-look.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/thug-life/thumb/thug-life-first-look.webp"
+     }
+    ]
+   },
+   {
     "title": "Oppenheimer",
     "year": 2023,
     "url": "https://forgestudio.web.lk/foundry/#/film/oppenheimer",
@@ -321,6 +660,288 @@
       "height": 1350,
       "image": "https://forgestudio.web.lk/foundry/img/movies/oppenheimer/oppenheimer-main-01.webp",
       "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/oppenheimer/thumb/oppenheimer-main-01.webp"
+     }
+    ]
+   },
+   {
+    "title": "Jawan",
+    "year": 2023,
+    "url": "https://forgestudio.web.lk/foundry/#/film/jawan",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "title": "Worldwide release today",
+      "description": "Jawan poster: every look of Shah Rukh Khan in coloured panels above a V of action scenes",
+      "width": 1167,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/jawan/jawan-release-today.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/jawan/thumb/jawan-release-today.webp"
+     }
+    ]
+   },
+   {
+    "title": "Varisu",
+    "year": 2023,
+    "note": "Eleven posters across the whole release, from the first look to the blockbuster run, with the Telugu version, Vaarasudu.",
+    "url": "https://forgestudio.web.lk/foundry/#/film/varisu",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "title": "The boss returns",
+      "year": 2022,
+      "description": "Varisu poster: Vijay with a backpack in the door of a train, the boss returns",
+      "width": 1099,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/varisu/varisu-the-boss-returns.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/varisu/thumb/varisu-the-boss-returns.webp"
+     },
+     {
+      "group": "Main posters",
+      "title": "Grand audio launch",
+      "year": 2022,
+      "description": "Varisu poster in violet: Vijay on stage before a crowd, grand audio launch today at 4 PM",
+      "width": 1096,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/varisu/varisu-audio-launch.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/varisu/thumb/varisu-audio-launch.webp"
+     },
+     {
+      "group": "Main posters",
+      "title": "Happy New Year, blue",
+      "year": 2022,
+      "description": "Varisu New Year poster in blue: Vijay seated on a car, worldwide Pongal release",
+      "width": 1096,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/varisu/varisu-new-year-blue.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/varisu/thumb/varisu-new-year-blue.webp"
+     },
+     {
+      "group": "Main posters",
+      "title": "Happy New Year, gold",
+      "year": 2022,
+      "description": "Varisu New Year poster in gold: Vijay with a finger to his lips, worldwide Pongal release",
+      "width": 1096,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/varisu/varisu-new-year-gold.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/varisu/thumb/varisu-new-year-gold.webp"
+     },
+     {
+      "group": "Main posters",
+      "title": "Trailer from today",
+      "year": 2023,
+      "description": "Varisu poster: a smiling Vijay over a forest road, trailer from today at 5 PM",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/varisu/varisu-trailer-day.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/varisu/thumb/varisu-trailer-day.webp"
+     },
+     {
+      "group": "Song posters",
+      "title": "Ranjithame",
+      "year": 2022,
+      "description": "Varisu song poster in pink: Vijay and Rashmika Mandanna among roses, Ranjithame out now",
+      "width": 1056,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/varisu/varisu-ranjithame.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/varisu/thumb/varisu-ranjithame.webp"
+     },
+     {
+      "group": "Song posters",
+      "title": "Thee Thalapathy",
+      "year": 2022,
+      "description": "Varisu song poster: a silhouette in flames, Thee Thalapathy, second single tomorrow at 4 PM",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/varisu/varisu-thee-thalapathy.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/varisu/thumb/varisu-thee-thalapathy.webp"
+     },
+     {
+      "group": "Song posters",
+      "title": "Soul of Varisu",
+      "year": 2022,
+      "description": "Varisu song poster: Vijay walking with a backpack under a blue sky, it's for you Amma",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/varisu/varisu-soul-of-varisu.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/varisu/thumb/varisu-soul-of-varisu.webp"
+     },
+     {
+      "group": "Release posters",
+      "title": "Worldwide Pongal release",
+      "year": 2022,
+      "description": "Varisu release poster: Vijay on a car above a mirrored city, worldwide Pongal release",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/varisu/varisu-pongal-release.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/varisu/thumb/varisu-pongal-release.webp"
+     },
+     {
+      "group": "Release posters",
+      "title": "Vaarasudu, Sankranthi release",
+      "year": 2022,
+      "description": "Vaarasudu release poster for the Telugu version: Vijay in a suit, worldwide Sankranthi release",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/varisu/varisu-sankranthi-release.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/varisu/thumb/varisu-sankranthi-release.webp"
+     },
+     {
+      "group": "Release posters",
+      "title": "Blockbuster hit",
+      "year": 2023,
+      "description": "Varisu poster in blue: Vijay seated with a finger to his lips, blockbuster hit, book your tickets now",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/varisu/varisu-blockbuster.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/varisu/thumb/varisu-blockbuster.webp"
+     }
+    ]
+   },
+   {
+    "title": "Thunivu",
+    "year": 2022,
+    "url": "https://forgestudio.web.lk/foundry/#/film/thunivu",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "title": "Chilla Chilla, first single",
+      "description": "Thunivu poster: Ajith Kumar in close-up, no guts no glory, first single Chilla Chilla",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/thunivu/thunivu-chilla-chilla.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/thunivu/thumb/thunivu-chilla-chilla.webp"
+     }
+    ]
+   },
+   {
+    "title": "PS-1",
+    "year": 2022,
+    "url": "https://forgestudio.web.lk/foundry/#/film/ps1",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "title": "The Cholas are coming, one",
+      "description": "Ponniyin Selvan: Part 1 tribute poster",
+      "width": 1062,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/ps1/ps1-main-01.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/ps1/thumb/ps1-main-01.webp"
+     },
+     {
+      "group": "Main posters",
+      "title": "The Cholas are coming, two",
+      "description": "Ponniyin Selvan: Part 1 poster in sepia: the cast before a palace, arms spread in the centre",
+      "width": 1062,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/ps1/ps1-cholas-two.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/ps1/thumb/ps1-cholas-two.webp"
+     },
+     {
+      "group": "Main posters",
+      "title": "The Cholas are coming, three",
+      "description": "Ponniyin Selvan: Part 1 poster in sepia: Vikram with a sword above the cast and a palace",
+      "width": 1056,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/ps1/ps1-cholas-three.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/ps1/thumb/ps1-cholas-three.webp"
+     }
+    ]
+   },
+   {
+    "title": "Liger",
+    "year": 2022,
+    "url": "https://forgestudio.web.lk/foundry/#/film/liger",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "title": "Saala crossbreed",
+      "description": "Liger poster: Vijay Deverakonda mid-swing in a dusty ring, worldwide release on Aug 25",
+      "width": 1056,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/liger/liger-saala-crossbreed.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/liger/thumb/liger-saala-crossbreed.webp"
+     }
+    ]
+   },
+   {
+    "title": "Vikram",
+    "year": 2022,
+    "url": "https://forgestudio.web.lk/foundry/#/film/vikram",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "title": "Evil is coming",
+      "description": "Vikram poster on white: Vijay Sethupathi in a striped shirt over a red brush stroke, evil is coming",
+      "width": 1080,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/vikram/vikram-evil-is-coming.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/vikram/thumb/vikram-evil-is-coming.webp"
+     },
+     {
+      "group": "Main posters",
+      "title": "All-time record",
+      "description": "Vikram poster: the four leads in fire above crossed rifles, all-time record",
+      "width": 1056,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/vikram/vikram-all-time-record.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/vikram/thumb/vikram-all-time-record.webp"
+     },
+     {
+      "group": "Main posters",
+      "title": "Streaming from July 8",
+      "description": "Vikram streaming poster: the cast in a ring of rifles, streaming from July 8",
+      "width": 1080,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/vikram/vikram-streaming.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/vikram/thumb/vikram-streaming.webp"
+     }
+    ]
+   },
+   {
+    "title": "Maaveeran",
+    "year": 2022,
+    "url": "https://forgestudio.web.lk/foundry/#/film/maaveeran",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "title": "Shoot begins soon",
+      "description": "Maaveeran poster: Sivakarthikeyan as three hanging portraits, shoot begins soon",
+      "width": 1056,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/maaveeran/maaveeran-shoot-begins.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/maaveeran/thumb/maaveeran-shoot-begins.webp"
+     }
+    ]
+   },
+   {
+    "title": "NTR 30 (Devara)",
+    "year": 2022,
+    "url": "https://forgestudio.web.lk/foundry/#/film/ntr-30",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "title": "Happy birthday NTR",
+      "description": "NTR 30 poster: a lone figure with a blade before giant 30 numerals and a red sea",
+      "width": 1080,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/ntr-30/ntr-30-birthday.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/ntr-30/thumb/ntr-30-birthday.webp"
+     }
+    ]
+   },
+   {
+    "title": "Beast",
+    "year": 2022,
+    "url": "https://forgestudio.web.lk/foundry/#/film/beast",
+    "pieces": [
+     {
+      "group": "Main posters",
+      "title": "Beast hunting began",
+      "description": "Beast poster: Vijay with a rifle in a burning frame, beast hunting began",
+      "width": 1120,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/movies/beast/beast-hunting-began.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/movies/beast/thumb/beast-hunting-began.webp"
      }
     ]
    }
@@ -633,27 +1254,27 @@
       "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/thumb/enchante-social-08.webp"
      },
      {
-      "title": "Guest feature",
+      "title": "Judge: Dharshan Thavaraja",
       "type": "social",
-      "description": "Enchanté guest feature post",
+      "description": "Enchanté guest feature: actor and distinguished judge Dharshan Thavaraja in a painter's studio",
       "width": 1280,
       "height": 1600,
       "image": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/enchante-social-09.webp",
       "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/thumb/enchante-social-09.webp"
      },
      {
-      "title": "Guest feature",
+      "title": "Judge: Duleeka Marapana",
       "type": "social",
-      "description": "Enchanté guest feature post",
+      "description": "Enchanté guest feature: actress and distinguished judge Duleeka Marapana holding a palette",
       "width": 1280,
       "height": 1600,
       "image": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/enchante-social-10.webp",
       "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/thumb/enchante-social-10.webp"
      },
      {
-      "title": "Guest feature",
+      "title": "Performers: Shehan Meshak and Umesh Umayanga",
       "type": "social",
-      "description": "Enchanté guest feature post",
+      "description": "Enchanté guest feature: Shehan Meshak on guitar and Umesh Umayanga singing before a crowd",
       "width": 1280,
       "height": 1600,
       "image": "https://forgestudio.web.lk/foundry/img/campaigns/enchante/enchante-social-11.webp",
@@ -1013,63 +1634,63 @@
       "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/thumb/admeliora-26-social-05.webp"
      },
      {
-      "title": "Guest feature",
+      "title": "Guest: Chethana Ketagoda",
       "type": "social",
-      "description": "ADMELIORA'26 guest feature post",
+      "description": "ADMELIORA'26 guest feature: voice artiste and singer Chethana Ketagoda",
       "width": 1200,
       "height": 1600,
       "image": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/admeliora-26-social-06.webp",
       "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/thumb/admeliora-26-social-06.webp"
      },
      {
-      "title": "Guest feature",
+      "title": "Guest: Dhanika Perera",
       "type": "social",
-      "description": "ADMELIORA'26 guest feature post",
+      "description": "ADMELIORA'26 guest feature: entrepreneur Dhanika Perera",
       "width": 1200,
       "height": 1600,
       "image": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/admeliora-26-social-07.webp",
       "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/thumb/admeliora-26-social-07.webp"
      },
      {
-      "title": "Guest feature",
+      "title": "Guest: Dilantha Malagamuwa",
       "type": "social",
-      "description": "ADMELIORA'26 guest feature post",
+      "description": "ADMELIORA'26 guest feature: racing driver Dilantha Malagamuwa",
       "width": 1200,
       "height": 1600,
       "image": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/admeliora-26-social-08.webp",
       "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/thumb/admeliora-26-social-08.webp"
      },
      {
-      "title": "Guest feature",
+      "title": "Guest: Janith Perera",
       "type": "social",
-      "description": "ADMELIORA'26 guest feature post",
+      "description": "ADMELIORA'26 guest feature: entertainment entrepreneur Janith Perera",
       "width": 1200,
       "height": 1600,
       "image": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/admeliora-26-social-09.webp",
       "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/thumb/admeliora-26-social-09.webp"
      },
      {
-      "title": "Guest feature",
+      "title": "Guest: Kristaleena Wijesinghe",
       "type": "social",
-      "description": "ADMELIORA'26 guest feature post",
+      "description": "ADMELIORA'26 guest feature: educator Kristaleena Wijesinghe",
       "width": 1200,
       "height": 1600,
       "image": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/admeliora-26-social-10.webp",
       "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/thumb/admeliora-26-social-10.webp"
      },
      {
-      "title": "Guest feature",
+      "title": "Guest: Vinuja Rathnayake",
       "type": "social",
-      "description": "ADMELIORA'26 guest feature post",
+      "description": "ADMELIORA'26 guest feature: singer and musician Vinuja Rathnayake",
       "width": 1200,
       "height": 1600,
       "image": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/admeliora-26-social-11.webp",
       "thumbnail": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/thumb/admeliora-26-social-11.webp"
      },
      {
-      "title": "Guest feature",
+      "title": "Guest: Samaakhya Gajanayake",
       "type": "social",
-      "description": "ADMELIORA'26 guest feature post",
+      "description": "ADMELIORA'26 guest feature: fitness coach and former national athlete Samaakhya Gajanayake",
       "width": 1200,
       "height": 1600,
       "image": "https://forgestudio.web.lk/foundry/img/campaigns/admeliora-26/admeliora-26-social-12.webp",
@@ -1080,9 +1701,79 @@
   ],
   "concepts": [
    {
-    "title": "Concept posters",
+    "title": "Concept art",
     "url": "https://forgestudio.web.lk/foundry/#/concepts/posters",
     "pieces": [
+     {
+      "title": "Nanda Malini tribute",
+      "type": "Tribute poster",
+      "year": 2026,
+      "description": "Tribute poster for Nanda Malini, 1943 to 2026: her portrait beside her younger self, a young musician with a sitar below",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/concepts/concept-nanda-malini.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/concepts/thumb/concept-nanda-malini.webp"
+     },
+     {
+      "title": "1948",
+      "type": "Independence Day poster",
+      "year": 2026,
+      "description": "Independence Day poster: an elder in a suit, fist on his heart, above the old parliament and a village, 1948",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/concepts/concept-1948.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/concepts/thumb/concept-1948.webp"
+     },
+     {
+      "title": "The Year After the Fall",
+      "type": "New Year concept poster",
+      "year": 2025,
+      "description": "New Year concept poster: a man in a ruined, overgrown Colombo beneath the Lotus Tower and the numbers 2026",
+      "width": 1073,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/concepts/concept-year-after-the-fall.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/concepts/thumb/concept-year-after-the-fall.webp"
+     },
+     {
+      "title": "Darkensoul",
+      "type": "Concept art",
+      "year": 2025,
+      "description": "Darkensoul concept art: a golden dragon coiled around a portrait under a yellow moon, above a strip of film posters",
+      "width": 1067,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/concepts/concept-darkensoul.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/concepts/thumb/concept-darkensoul.webp"
+     },
+     {
+      "title": "Whale Dance",
+      "type": "Concept poster",
+      "year": 2024,
+      "description": "Whale Dance concept poster: a humpback whale beneath a split ocean surface, gulls and islands above",
+      "width": 1030,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/concepts/concept-whale-dance.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/concepts/thumb/concept-whale-dance.webp"
+     },
+     {
+      "title": "The tools bar",
+      "type": "Studio artwork",
+      "year": 2023,
+      "description": "Studio artwork: a chameleon in a rainforest grown around a Photoshop tools bar and a laptop",
+      "width": 1200,
+      "height": 1200,
+      "image": "https://forgestudio.web.lk/foundry/img/concepts/concept-tools-bar.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/concepts/thumb/concept-tools-bar.webp"
+     },
+     {
+      "title": "Rockstar Anirudh",
+      "type": "Concert poster",
+      "year": 2023,
+      "description": "Concert poster: Anirudh with a raised fist and a guitar before a blazing crowd, streaming live on Oct 21",
+      "width": 1056,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/concepts/concept-rockstar.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/concepts/thumb/concept-rockstar.webp"
+     },
      {
       "title": "30 Years of Vijayism",
       "type": "Tribute poster",
@@ -1093,82 +1784,27 @@
       "height": 1600,
       "image": "https://forgestudio.web.lk/foundry/img/concepts/vijayism-01.webp",
       "thumbnail": "https://forgestudio.web.lk/foundry/img/concepts/thumb/vijayism-01.webp"
-     }
-    ]
-   },
-   {
-    "title": "From the sketchbook",
-    "url": "https://forgestudio.web.lk/foundry/#/concepts/sketchbook",
-    "pieces": [
+     },
      {
-      "title": "Pencil layout",
-      "year": 2025,
-      "description": "Pencil layout sketch for the Avengers: Doomsday poster, with handwritten notes",
-      "note": "Avengers: Doomsday, before a single pixel.",
-      "width": 1164,
+      "title": "30 Years of Vijayism, the walk",
+      "type": "Tribute poster",
+      "year": 2022,
+      "description": "Second 30 Years of Vijayism poster in warm gold: Vijay walking out of a tunnel with characters from his films",
+      "width": 1067,
       "height": 1600,
-      "image": "https://forgestudio.web.lk/foundry/img/vault/vault-01.webp",
-      "thumbnail": "https://forgestudio.web.lk/foundry/img/vault/thumb/vault-01.webp"
+      "image": "https://forgestudio.web.lk/foundry/img/concepts/vijayism-02.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/concepts/thumb/vijayism-02.webp"
      },
      {
-      "title": "Outline wireframe",
+      "title": "Rolex Day-Date 40",
+      "type": "Product poster",
       "year": 2022,
-      "description": "Wireframe outline of the Rolex Day-Date watch",
-      "note": "Rolex Day-Date 40, drawn line by line.",
-      "width": 864,
+      "description": "Rolex Day-Date 40 poster: a hand-drawn gold watch on warm bokeh, Hand Made",
+      "note": "First place out of 200 entries.",
+      "width": 1130,
       "height": 1600,
-      "image": "https://forgestudio.web.lk/foundry/img/vault/vault-02.webp",
-      "thumbnail": "https://forgestudio.web.lk/foundry/img/vault/thumb/vault-02.webp"
-     },
-     {
-      "title": "Base geometry",
-      "year": 2022,
-      "description": "Rolex watch base geometry in flat gold",
-      "note": "The first gold before the details.",
-      "width": 1120,
-      "height": 1355,
-      "image": "https://forgestudio.web.lk/foundry/img/vault/vault-03.webp",
-      "thumbnail": "https://forgestudio.web.lk/foundry/img/vault/thumb/vault-03.webp"
-     },
-     {
-      "title": "Dial build",
-      "year": 2022,
-      "description": "Rolex dial build with Roman numerals and the day window",
-      "note": "Hands, indices and the day window.",
-      "width": 1180,
-      "height": 1040,
-      "image": "https://forgestudio.web.lk/foundry/img/vault/vault-04.webp",
-      "thumbnail": "https://forgestudio.web.lk/foundry/img/vault/thumb/vault-04.webp"
-     },
-     {
-      "title": "Metal gradients",
-      "year": 2022,
-      "description": "Swatches of gold and steel gradients for the Rolex study",
-      "note": "Every gold and steel tone, tested first.",
-      "width": 1400,
-      "height": 723,
-      "image": "https://forgestudio.web.lk/foundry/img/vault/vault-05.webp",
-      "thumbnail": "https://forgestudio.web.lk/foundry/img/vault/thumb/vault-05.webp"
-     },
-     {
-      "title": "Construction grid",
-      "year": 2025,
-      "description": "The FORGE logo construction grid on black",
-      "note": "How the FORGE mark was drawn.",
-      "width": 1600,
-      "height": 1000,
-      "image": "https://forgestudio.web.lk/foundry/img/vault/vault-06.webp",
-      "thumbnail": "https://forgestudio.web.lk/foundry/img/vault/thumb/vault-06.webp"
-     },
-     {
-      "title": "Every screen at once",
-      "year": 2025,
-      "description": "Board showing every screen of the Joey mobile app design",
-      "note": "The whole Joey app, laid out flat.",
-      "width": 1600,
-      "height": 1196,
-      "image": "https://forgestudio.web.lk/foundry/img/vault/vault-07.webp",
-      "thumbnail": "https://forgestudio.web.lk/foundry/img/vault/thumb/vault-07.webp"
+      "image": "https://forgestudio.web.lk/foundry/img/concepts/concept-rolex-day-date.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/concepts/thumb/concept-rolex-day-date.webp"
      }
     ]
    }
@@ -1178,20 +1814,11 @@
     "title": "Saagara Seafoods",
     "year": 2026,
     "client": "Saagara Seafoods (Pvt) Ltd",
-    "note": "Social media for a seafood market: the brand, a grand opening, everyday market posts and a year of festive greetings.",
+    "note": "Social media for a seafood market: the page cover, a grand opening, everyday market posts and a year of festive greetings.",
     "url": "https://forgestudio.web.lk/foundry/#/social/saagara",
     "pieces": [
      {
-      "group": "The brand",
-      "title": "Brand logo",
-      "description": "Saagara Seafoods logo: a leaping tuna in navy and magenta with a splash of blue water",
-      "width": 1600,
-      "height": 873,
-      "image": "https://forgestudio.web.lk/foundry/img/social/saagara/saagara-logo-01.webp",
-      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/saagara/thumb/saagara-logo-01.webp"
-     },
-     {
-      "group": "The brand",
+      "group": "The page",
       "title": "Page cover",
       "description": "Saagara Seafoods page cover: fresh fish, prawns and squid beside the brand name",
       "width": 851,
@@ -1315,6 +1942,203 @@
       "height": 1500,
       "image": "https://forgestudio.web.lk/foundry/img/social/saagara/saagara-social-13.webp",
       "thumbnail": "https://forgestudio.web.lk/foundry/img/social/saagara/thumb/saagara-social-13.webp"
+     }
+    ]
+   },
+   {
+    "title": "Tuition classes",
+    "year": 2023,
+    "note": "Class launches, new units and free seminars for two commerce teachers, mostly in Sinhala.",
+    "url": "https://forgestudio.web.lk/foundry/#/social/tuition-classes",
+    "pieces": [
+     {
+      "group": "Lahiru Silva",
+      "title": "Business and Accounting Studies",
+      "description": "Sinhala class post: Lahiru Silva reading a book on a green field, O/L Business and Accounting Studies",
+      "width": 720,
+      "height": 864,
+      "image": "https://forgestudio.web.lk/foundry/img/social/tuition-classes/lahiru-silva-business-accounting.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/tuition-classes/thumb/lahiru-silva-business-accounting.webp"
+     },
+     {
+      "group": "Lahiru Silva",
+      "title": "New unit: introduction to accounting",
+      "description": "Sinhala class post in blue: Lahiru Silva at a laptop, a new unit on the introduction to accounting",
+      "width": 864,
+      "height": 806,
+      "image": "https://forgestudio.web.lk/foundry/img/social/tuition-classes/lahiru-silva-accounting-intro.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/tuition-classes/thumb/lahiru-silva-accounting-intro.webp"
+     },
+     {
+      "group": "Lahiru Silva",
+      "title": "New unit: double entry",
+      "description": "Sinhala class post on cream: Lahiru Silva with a book, a new unit on double entry",
+      "width": 1080,
+      "height": 1080,
+      "image": "https://forgestudio.web.lk/foundry/img/social/tuition-classes/lahiru-silva-double-entry.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/tuition-classes/thumb/lahiru-silva-double-entry.webp"
+     },
+     {
+      "group": "Lahiru Silva",
+      "title": "Free seminar: the cash book, light",
+      "description": "Sinhala seminar post in cream: the cash book covered in five hours, free, 29 October",
+      "width": 720,
+      "height": 984,
+      "image": "https://forgestudio.web.lk/foundry/img/social/tuition-classes/lahiru-silva-cash-book-light.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/tuition-classes/thumb/lahiru-silva-cash-book-light.webp"
+     },
+     {
+      "group": "Lahiru Silva",
+      "title": "Free seminar: the cash book, dark",
+      "description": "Sinhala seminar post in dark brown: the cash book covered in five hours, free, 29 October",
+      "width": 720,
+      "height": 984,
+      "image": "https://forgestudio.web.lk/foundry/img/social/tuition-classes/lahiru-silva-cash-book-dark.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/tuition-classes/thumb/lahiru-silva-cash-book-dark.webp"
+     },
+     {
+      "group": "Lahiru Silva",
+      "title": "Third term: bank reconciliation",
+      "description": "Sinhala class post in purple and gold: the third term begins with bank reconciliation, 26 November",
+      "width": 1080,
+      "height": 1080,
+      "image": "https://forgestudio.web.lk/foundry/img/social/tuition-classes/lahiru-silva-third-term.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/tuition-classes/thumb/lahiru-silva-third-term.webp"
+     },
+     {
+      "group": "Lahiru Silva",
+      "title": "Grade 10 class, 2024, red",
+      "description": "Sinhala class post in red: new grade 10 class for 2024, starting 06 January",
+      "width": 918,
+      "height": 1080,
+      "image": "https://forgestudio.web.lk/foundry/img/social/tuition-classes/lahiru-silva-grade-10-red.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/tuition-classes/thumb/lahiru-silva-grade-10-red.webp"
+     },
+     {
+      "group": "Lahiru Silva",
+      "title": "Grade 10 class, 2024, chess",
+      "description": "Sinhala class post with chess pieces: new grade 10 commerce class for 2024",
+      "width": 1352,
+      "height": 1144,
+      "image": "https://forgestudio.web.lk/foundry/img/social/tuition-classes/lahiru-silva-grade-10-chess.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/tuition-classes/thumb/lahiru-silva-grade-10-chess.webp"
+     },
+     {
+      "group": "Chathura Silva",
+      "title": "A/L Business Studies, 2024 theory",
+      "description": "Class post in blue: Chathura Silva with arms crossed, 2024 A/L Business Studies theory",
+      "width": 1200,
+      "height": 1080,
+      "image": "https://forgestudio.web.lk/foundry/img/social/tuition-classes/chathura-silva-2024-theory.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/tuition-classes/thumb/chathura-silva-2024-theory.webp"
+     },
+     {
+      "group": "Chathura Silva",
+      "title": "A/L Business Studies, 2025 theory",
+      "description": "Class post in blue: Chathura Silva beside the details of a new 2025 A/L Business Studies theory class",
+      "width": 1500,
+      "height": 1080,
+      "image": "https://forgestudio.web.lk/foundry/img/social/tuition-classes/chathura-silva-2025-theory.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/tuition-classes/thumb/chathura-silva-2025-theory.webp"
+     }
+    ]
+   },
+   {
+    "title": "Local businesses",
+    "year": 2023,
+    "note": "Service and product posts for small local businesses.",
+    "url": "https://forgestudio.web.lk/foundry/#/social/local-businesses",
+    "pieces": [
+     {
+      "group": "RS Travel & Tour",
+      "title": "Airport drop or pick-up",
+      "description": "RS Travel & Tour post in red and yellow: two vans and a plane, airport drop or pick-up service",
+      "width": 1600,
+      "height": 1600,
+      "image": "https://forgestudio.web.lk/foundry/img/social/local-businesses/rs-travel-airport-service.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/local-businesses/thumb/rs-travel-airport-service.webp"
+     },
+     {
+      "group": "Black Teak",
+      "title": "Board and teak pantry cupboard",
+      "description": "Black Teak post: pantry cupboard doors and a five-year warranty seal, now in Batticaloa",
+      "width": 720,
+      "height": 720,
+      "image": "https://forgestudio.web.lk/foundry/img/social/local-businesses/black-teak-pantry-cupboard.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/social/local-businesses/thumb/black-teak-pantry-cupboard.webp"
+     }
+    ]
+   }
+  ],
+  "print": [
+   {
+    "title": "Tuition book covers",
+    "year": 2023,
+    "note": "Wraparound covers, back and front, for tutors' O/L and A/L class books.",
+    "url": "https://forgestudio.web.lk/foundry/#/print/tuition-covers",
+    "pieces": [
+     {
+      "group": "Science",
+      "title": "A/L Biology",
+      "description": "Wraparound A/L Biology book cover for Dhanushka Thilakarathna: DNA, a microscope and a cell in deep blue",
+      "width": 1600,
+      "height": 1138,
+      "image": "https://forgestudio.web.lk/foundry/img/print/tuition-covers/cover-biology-a-level.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/print/tuition-covers/thumb/cover-biology-a-level.webp"
+     },
+     {
+      "group": "Science",
+      "title": "Biology, grade 12",
+      "description": "Wraparound grade 12 Biology cover: the evolution of early humans on cream with a hexagon pattern",
+      "width": 1600,
+      "height": 1138,
+      "image": "https://forgestudio.web.lk/foundry/img/print/tuition-covers/cover-biology-grade-12.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/print/tuition-covers/thumb/cover-biology-grade-12.webp"
+     },
+     {
+      "group": "Science",
+      "title": "Science, grade 11",
+      "description": "Wraparound grade 11 Science cover in red: a magnifying glass over a brain, a microscope and the human body",
+      "width": 1600,
+      "height": 1138,
+      "image": "https://forgestudio.web.lk/foundry/img/print/tuition-covers/cover-science-grade-11.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/print/tuition-covers/thumb/cover-science-grade-11.webp"
+     },
+     {
+      "group": "Science",
+      "title": "Agriculture Science, grade 13",
+      "description": "Wraparound grade 13 Agriculture Science cover in green: fields, a farmer and a giant numeral 2",
+      "width": 1600,
+      "height": 1138,
+      "image": "https://forgestudio.web.lk/foundry/img/print/tuition-covers/cover-agriculture-grade-13.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/print/tuition-covers/thumb/cover-agriculture-grade-13.webp"
+     },
+     {
+      "group": "Business Studies",
+      "title": "A/L Business Studies, coffee",
+      "description": "Wraparound A/L Business Studies cover for Maleesha Silva, built from coffee beans and cups",
+      "width": 1600,
+      "height": 1138,
+      "image": "https://forgestudio.web.lk/foundry/img/print/tuition-covers/cover-business-studies-coffee.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/print/tuition-covers/thumb/cover-business-studies-coffee.webp"
+     },
+     {
+      "group": "Business Studies",
+      "title": "A/L Business Studies, the journey",
+      "description": "Wraparound A/L Business Studies cover for Kasun Fernando in yellow and black: success is a journey, not a destination",
+      "width": 1600,
+      "height": 1138,
+      "image": "https://forgestudio.web.lk/foundry/img/print/tuition-covers/cover-business-studies-journey.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/print/tuition-covers/thumb/cover-business-studies-journey.webp"
+     },
+     {
+      "group": "Maths",
+      "title": "Super maths class, grades 6 to 11",
+      "description": "Wraparound Sinhala maths cover for Avishka J. Abeysekara in teal and purple: two children with flowers",
+      "width": 1600,
+      "height": 1138,
+      "image": "https://forgestudio.web.lk/foundry/img/print/tuition-covers/cover-maths-grades-6-11.webp",
+      "thumbnail": "https://forgestudio.web.lk/foundry/img/print/tuition-covers/thumb/cover-maths-grades-6-11.webp"
      }
     ]
    }

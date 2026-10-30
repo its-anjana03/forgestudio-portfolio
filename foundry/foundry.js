@@ -2,7 +2,7 @@
    THE FOUNDRY · v3
    Everything comes from data.js. Routes live in the address hash, so it runs on any static host:
      #/                                   the endless wall, everything
-     #/film  #/events  #/concepts  #/social     the wall, one part of the collection
+     #/film  #/events  #/concepts  #/social  #/print     the wall, one part of the collection
      #/<part>/<collection>[?p=<file>]     the premiere: one collection, one piece at a time
    Old links (#/cinema/leo, #/movies, #/campaigns, #/studio, #/harbour, #/vault) still land in the right place.
    ===================================================================== */
@@ -44,8 +44,9 @@
   const ROOMS = [
     { id: 'film', name: 'Film', title: 'Film posters' },
     { id: 'events', name: 'Events', title: 'Event campaigns' },
-    { id: 'concepts', name: 'Concepts', title: 'Concepts and process' },
+    { id: 'concepts', name: 'Concepts', title: 'Concept work' },
     { id: 'social', name: 'Social', title: 'Social media' },
+    { id: 'print', name: 'Print', title: 'Print design' },
   ];
   const TYPE = { logo: 'Logo', poster: 'Poster', banner: 'Banner', invitation: 'Invitation', social: 'Social post', ticket: 'Ticket', certificate: 'Certificate', sticker: 'Sticker' };
   const COLLS = [], ITEMS = [], BYKEY = {};
@@ -77,13 +78,12 @@
   (D.campaigns || []).forEach(c => addColl('events',
     { id: c.id, title: c.title, year: c.year, note: c.note || '', client: c.client, cover: c.cover },
     c.items.map(it => ({ ...it, label: TYPE[it.type] || 'Design' })), 'campaigns/' + c.id));
-  addColl('concepts', { id: 'posters', title: 'Concept posters', byItem: true, more: !!D.conceptsMore, note: '' },
+  addColl('concepts', { id: 'posters', title: 'Concept art', byItem: true, more: !!D.conceptsMore, note: '' },
     (D.concepts || []).map(it => ({ ...it, label: it.medium || 'Concept poster' })), 'concepts');
-  addColl('concepts', { id: 'sketchbook', title: 'From the sketchbook', byItem: true, note: 'Sketches, drafts and builds from behind the finished work.' },
-    (D.vault || []).map(it => ({ ...it, label: 'Process' })), 'vault');
-  if (D.harbour) addColl('social',
-    { id: 'saagara', title: D.harbour.title, year: D.harbour.year, note: D.harbour.note || '', client: D.harbour.client },
-    D.harbour.groups.flatMap(g => g.items.map(it => ({ ...it, label: g.name }))), 'social/saagara');
+  // Social and Print: one collection each, grouped; the group name labels each piece.
+  ['social', 'print'].forEach(room => (D[room] || []).forEach(s => addColl(room,
+    { id: s.id, title: s.title, year: s.year, note: s.note || '', client: s.client, cover: s.cover },
+    s.groups.flatMap(g => g.items.map(it => ({ ...it, label: g.name }))), `${room}/${s.id}`)));
 
   const roomOf = id => ROOMS.find(r => r.id === id);
   const roomCount = id => COLLS.filter(c => c.room === id).reduce((s, c) => s + c.items.length, 0);
@@ -98,10 +98,10 @@
   const roomList = id => spread(COLLS.filter(c => c.room === id).map(c => c.items));
   const listFor = f => f ? roomList(f) : spread(ROOMS.map(r => roomList(r.id)).filter(l => l.length));
 
-  // How a piece is named: films by film, everything else by the piece itself.
+  // How a piece is named: films by film (with the poster's own title under it), everything else by the piece itself.
   function names(item) {
     const c = item.coll;
-    if (c.room === 'film') return { main: c.title, sub: item.label };
+    if (c.room === 'film') return { main: c.title, sub: item.title };
     if (c.byItem) return { main: item.title, sub: item.label };
     return { main: item.title, sub: c.title };
   }
@@ -263,6 +263,9 @@
     if (C.filter === key && C.tiles.length) return;
     C.filter = key;
     dock.querySelectorAll('a').forEach(a => a.setAttribute('aria-current', a.dataset.f === key ? 'true' : 'false'));
+    // On narrow screens the dock scrolls: keep the chosen part in view.
+    const on = dock.querySelector(`a[data-f="${key}"]`);
+    if (on && dock.scrollWidth > dock.clientWidth) dock.scrollTo({ left: on.offsetLeft - (dock.clientWidth - on.offsetWidth) / 2, behavior: motion ? 'smooth' : 'auto' });
     const list = listFor(f);
     if (!C.tiles.length || !motion) { C.px = C.py = 0; build(list, arrive && motion); return; }
     C.tiles.forEach(t => t.el.classList.add('is-out'));
@@ -829,7 +832,7 @@
     const p = new URLSearchParams(qs).get('p');
     let [a = '', b = ''] = path.split('/').filter(Boolean);
     let legacy = false;
-    if (a === 'vault') { a = 'concepts'; b = 'sketchbook'; legacy = true; }
+    if (a === 'vault') { a = 'concepts'; b = ''; legacy = true; }   // the sketchbook was retired: process work is no longer shown
     if (ALIAS[a]) { a = ALIAS[a]; legacy = true; }
     let coll = b ? COLLS.find(c => c.room === a && c.id === b) || null : null;
     let i = 0;

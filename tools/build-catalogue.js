@@ -98,16 +98,18 @@ const foundry = {
     pieces: c.items.map(piece(`campaigns/${c.id}`)),
   })),
   concepts: [
-    { title: 'Concept posters', url: `${SITE}foundry/#/concepts/posters`, pieces: D.concepts.map(piece('concepts')) },
-    { title: 'From the sketchbook', url: `${SITE}foundry/#/concepts/sketchbook`, pieces: D.vault.map(piece('vault')) },
+    { title: 'Concept art', url: `${SITE}foundry/#/concepts/posters`, pieces: D.concepts.map(piece('concepts')) },
   ],
-  social: [{
-    title: D.harbour.title, year: D.harbour.year, client: D.harbour.client, note: D.harbour.note || undefined, url: `${SITE}foundry/#/social/saagara`,
-    pieces: D.harbour.groups.flatMap((g) => g.items.map((it) => ({ group: g.name, ...piece('social/saagara')(it) }))),
-  }],
 };
+// Social and Print: one collection per client or kind of work, in groups.
+['social', 'print'].forEach((room) => {
+  foundry[room] = (D[room] || []).map((s) => ({
+    title: s.title, year: s.year, client: s.client, note: s.note || undefined, url: `${SITE}foundry/#/${room}/${s.id}`,
+    pieces: s.groups.flatMap((g) => g.items.map((it) => ({ group: g.name, ...piece(`${room}/${s.id}`)(it) }))),
+  }));
+});
 const count = (list) => list.reduce((n, c) => n + c.pieces.length, 0);
-const total = POSTERS.length + count(foundry.film) + count(foundry.events) + count(foundry.concepts) + count(foundry.social);
+const total = POSTERS.length + ['film', 'events', 'concepts', 'social', 'print'].reduce((n, k) => n + count(foundry[k]), 0);
 
 const catalogue = {
   about: 'Machine-readable catalogue of FORGE Studio, the design practice of Thinura Anjana. Built from the site by tools/build-catalogue.js. A plain-language summary is at ' + SITE + 'llms.txt',
