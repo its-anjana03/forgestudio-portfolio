@@ -1,7 +1,7 @@
-<link rel="stylesheet" href="assets/css/forge.css?v=20261030a">
-<link rel="stylesheet" href="assets/css/forge-fx.css?v=20261030a">
+<link rel="stylesheet" href="assets/css/forge.css?v=20261031a">
+<link rel="stylesheet" href="assets/css/forge-fx.css?v=20261031a">
 {{#home}}
-<link rel="stylesheet" href="assets/css/forge-strike.css?v=20261030a">
+<link rel="stylesheet" href="assets/css/forge-strike.css?v=20261031a">
 {{/home}}
 <script>
 {{#home}}
@@ -11,8 +11,11 @@
     document.documentElement.classList.add('has-motion');
     try { if (sessionStorage.getItem('forge-pt')) { sessionStorage.removeItem('forge-pt'); document.documentElement.classList.add('pt-in'); } } catch (e) {}
 {{#home}}
-    // Safety net: if the motion script never arrives, show the static page.
+    // Safety net: if the motion script fails to load, show the static page. Deferred scripts always run before
+    // DOMContentLoaded, so a slow first visit only waits for them; the 15s timer is the last resort.
 {{/home}}
-    setTimeout(function () { if (!window.__forgeReady) document.documentElement.classList.remove('has-motion', 'pt-in'); }, 4000);
+    var off = function () { if (!window.__forgeReady) document.documentElement.classList.remove('has-motion', 'pt-in'); };
+    document.addEventListener('DOMContentLoaded', off);
+    setTimeout(off, 15000);
   }
 </script>

@@ -409,6 +409,9 @@ html:not(.has-motion) .wall-col:nth-child(even) { margin-top: 0; }
 html:not(.has-motion) .archive-cap { position: relative; visibility: visible; padding: 64px 0 0; left: auto; right: auto; bottom: auto; margin: 0 var(--pad); }
 html:not(.has-motion) .ignite-mark .whole { opacity: 1; }
 html:not(.has-motion) .scroll-cue { display: none; }
+/* Wide monitors: keep the static archive at a readable size instead of five giant posters edge to edge */
+html:not(.has-motion) .ignite-wall { width: 100%; max-width: 1600px; margin-inline: auto; }
+html:not(.has-motion) .archive-cap { width: calc(min(100%, 1600px) - 2 * var(--pad)); margin-inline: auto; }
 
 /* =========================================================
    02 HEAT · manifesto + numbers
