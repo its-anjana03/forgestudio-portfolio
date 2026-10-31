@@ -324,7 +324,8 @@ void main() {
       if (frames < 120 && dt) { frames++; if (dt > 0.024) slow++; if (frames === 60 && slow > 30 && steps > 8) { steps -= 4; scale *= 0.8; size(); } }
 
       const amt = (() => { const x = Math.min(1, ramp / RAMP); return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; })();
-      px += (tx - px) * 0.05; py += (ty - py) * 0.05;
+      const kp = 1 - Math.pow(0.95, dt * 60);   // same pointer follow speed on any refresh rate
+      px += (tx - px) * kp; py += (ty - py) * kp;
       const ph = time / LOOP * Math.PI * 2;
       const push = 0.5 - 0.5 * Math.cos(ph);
       const camX = (Math.sin(ph) * 0.6 + px * 0.55) * cfg.strength * amt;

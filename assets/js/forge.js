@@ -663,13 +663,16 @@
       }
     };
     const ring = (x, y, max, w = 2) => rings.push({ x, y, r: 6, max, w, life: 1 });
-    const tick = () => {
+    // f = how many 60 fps frames have passed, so sparks move at the same speed on 60, 144 or 240 Hz screens.
+    let lastTick = 0;
+    const tick = (t = performance.now()) => {
+      const f = lastTick ? Math.min(4, Math.max(0.25, (t - lastTick) / 16.667)) : 1; lastTick = t;
       ctx.clearRect(0, 0, L.W, L.H);
       ctx.globalCompositeOperation = light ? 'source-over' : 'lighter'; // light adds nothing to pale paper
       const h = heat.v * Math.max(0, 1 - zoom.p * 4);
       // While the mark heats, it sheds sparks from its edges and pulls the embers in.
       if (h > 0.02) {
-        shed += h * (small ? 1.2 : 2.6);
+        shed += h * (small ? 1.2 : 2.6) * f;
         while (shed >= 1) {
           shed -= 1;
           const [x, y] = edgePoint();
@@ -680,9 +683,9 @@
       for (let i = parts.length - 1; i >= 0; i--) {
         const p = parts[i];
         if (p.ember) {
-          p.f += 0.05;
-          if (h > 0.02) { p.vx += (pcx - p.x) * 0.00003 * h; p.vy += (pcy - p.y) * 0.00003 * h; p.vx *= 0.985; }
-          p.x += p.vx + Math.sin(p.f) * 0.2; p.y += p.vy;
+          p.f += 0.05 * f;
+          if (h > 0.02) { p.vx += (pcx - p.x) * 0.00003 * h * f; p.vy += (pcy - p.y) * 0.00003 * h * f; p.vx *= Math.pow(0.985, f); }
+          p.x += (p.vx + Math.sin(p.f) * 0.2) * f; p.y += p.vy * f;
           if (p.y < (light ? -L.H * 0.5 : -10) || p.y > L.H + (light ? 10 : L.H * 0.5)) Object.assign(p, ember());
           const a = 0.35 + Math.sin(p.f * 1.7) * 0.2 + h * 0.35;
           // Ash is grey until the mark heats again, then it catches.
@@ -691,7 +694,8 @@
           ctx.beginPath(); ctx.arc(p.x, p.y, Math.max(0.1, p.r * (1 + h * 0.6)), 0, 6.283); ctx.fill();
           continue;
         }
-        p.vx *= 0.96; p.vy = p.vy * 0.96 + 0.18; p.x += p.vx; p.y += p.vy; p.life -= p.decay;
+        const drag = Math.pow(0.96, f);
+        p.vx *= drag; p.vy = p.vy * drag + 0.18 * f; p.x += p.vx * f; p.y += p.vy * f; p.life -= p.decay * f;
         if (p.life <= 0) { parts.splice(i, 1); continue; }
         const g = Math.round(140 + 115 * p.life), b = Math.round(60 + 180 * Math.max(0, p.life - 0.6));
         ctx.strokeStyle = light ? `rgba(${150 + Math.round(80 * p.life)}, ${Math.round(40 + 70 * p.life)}, 0, ${Math.min(1, p.life * 1.4)})`
@@ -701,7 +705,7 @@
       }
       for (let i = rings.length - 1; i >= 0; i--) {
         const r = rings[i];
-        r.r += (r.max - r.r) * 0.09; r.life -= 0.028;
+        r.r += (r.max - r.r) * (1 - Math.pow(0.91, f)); r.life -= 0.028 * f;
         if (r.life <= 0) { rings.splice(i, 1); continue; }
         ctx.strokeStyle = light ? `rgba(70, 62, 54, ${r.life * 0.45})` : `rgba(255, ${200 - Math.round((1 - r.life) * 80)}, 90, ${r.life * 0.8})`;
         ctx.lineWidth = r.w * r.life;
@@ -710,7 +714,7 @@
       ctx.globalCompositeOperation = 'source-over';
       rafId = sparksOn ? requestAnimationFrame(tick) : 0;
     };
-    const setSparks = (on) => { if (on === sparksOn) return; sparksOn = on; if (on && !rafId) rafId = requestAnimationFrame(tick); };
+    const setSparks = (on) => { if (on === sparksOn) return; sparksOn = on; if (on && !rafId) { lastTick = 0; rafId = requestAnimationFrame(tick); } };
     rafId = requestAnimationFrame(tick);
     document.addEventListener('visibilitychange', () => setSparks(!document.hidden && zoom.p < 0.45));
 

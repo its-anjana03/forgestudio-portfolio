@@ -121,7 +121,10 @@
     const vw = innerWidth;
     if (vw < 600) return { cw: 124, gx: 20, gy: 44 };
     if (vw < 1100) return { cw: 172, gx: 36, gy: 62 };
-    return { cw: 206, gx: 52, gy: 76 };
+    // Laptops and 1080p keep 206px tiles; larger monitors (1440p, ultrawide, 4K) get bigger ones, up to 330px,
+    // so the wall looks the same instead of turning into a sea of small posters.
+    const cw = Math.round(Math.min(330, Math.max(206, vw * .107)));
+    return { cw, gx: Math.round(cw * .252), gy: Math.round(cw * .369) };
   }
 
   function hang(list, cw, gx, gy, K, minH) {
@@ -230,13 +233,13 @@
     const t = now();
     if (!C.drag) {
       const idle = motion && t - C.idleAt > 2400 && !plane.contains(document.activeElement);
-      const k = .94;
-      if (idle) { C.vx = DRIFT.x + (C.vx - DRIFT.x) * .985; C.vy = DRIFT.y + (C.vy - DRIFT.y) * .985; }
-      else { C.vx *= k; C.vy *= k; }
-      C.px += C.vx; C.py += C.vy;
+      // Speeds are in pixels per 60 fps frame; FR keeps them true on faster screens.
+      if (idle) { const k = Math.pow(.985, FR); C.vx = DRIFT.x + (C.vx - DRIFT.x) * k; C.vy = DRIFT.y + (C.vy - DRIFT.y) * k; }
+      else { const k = Math.pow(.94, FR); C.vx *= k; C.vy *= k; }
+      C.px += C.vx * FR; C.py += C.vy * FR;
     }
     const target = motion ? 1 - Math.min(.07, Math.hypot(C.vx, C.vy) * .0032) : 1;
-    C.s += (target - C.s) * .08;
+    C.s += (target - C.s) * ease(.08);
     plane.style.transform = `scale(${C.s.toFixed(4)})`;
     place();
     // Tiles drift under a still mouse: keep the hover honest.
@@ -771,7 +774,8 @@
     if (mo) mo.pointer(P.zoom ? 0 : (M.x / innerWidth - .5) * 2, P.zoom ? 0 : (M.y / innerHeight - .5) * 2);
     const k = mo ? .5 : 1;
     const tx = P.zoom ? 0 : (M.x / innerWidth - .5) * 7 * k, ty = P.zoom ? 0 : -(M.y / innerHeight - .5) * 5 * k;
-    P.ry += (tx - P.ry) * .06; P.rx += (ty - P.rx) * .06;
+    const kt = ease(.06);
+    P.ry += (tx - P.ry) * kt; P.rx += (ty - P.rx) * kt;
     const tilt = P.piece.firstElementChild;
     tilt.style.setProperty('--ry', P.ry.toFixed(2) + 'deg');
     tilt.style.setProperty('--rx', P.rx.toFixed(2) + 'deg');
@@ -780,13 +784,22 @@
     tilt.style.setProperty('--gy', ((M.y - r.top) / r.height * 100).toFixed(1) + '%');
   }
 
-  function tick() {
+  // FR = how many 60 fps frames passed since the last one. Every step below scales by it, so the wall drifts,
+  // glides and tilts at the same speed on 60, 144 and 240 Hz monitors.
+  let FR = 1, lastFrame = 0;
+  const ease = r => 1 - Math.pow(1 - r, FR);   // a per-frame easing amount, made frame-rate independent
+
+  function tick(t) {
     requestAnimationFrame(tick);
+    FR = lastFrame && t ? Math.min(4, Math.max(.25, (t - lastFrame) / 16.667)) : 1;
+    lastFrame = t || 0;
     if (fine) {
-      M.cx += (M.x - M.cx) * .35; M.cy += (M.y - M.cy) * .35;
+      const kc = ease(.35);
+      M.cx += (M.x - M.cx) * kc; M.cy += (M.y - M.cy) * kc;
       cur.style.transform = `translate3d(${M.cx.toFixed(1)}px,${M.cy.toFixed(1)}px,0)`;
       if (ixOpen) {
-        M.px += (M.x + 28 - M.px) * .14; M.py += (M.y - 150 - M.py) * .14;
+        const kp = ease(.14);
+        M.px += (M.x + 28 - M.px) * kp; M.py += (M.y - 150 - M.py) * kp;
         peek.style.transform = `translate3d(${M.px.toFixed(1)}px,${M.py.toFixed(1)}px,0) rotate(${((M.x - M.px) * .04).toFixed(2)}deg)`;
       }
     }
