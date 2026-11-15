@@ -36,6 +36,7 @@ A static site (plain HTML, CSS and JavaScript, no build step) hosted on GitHub P
 │   ├── vendor/                        GSAP, ScrollTrigger and Lenis
 │   ├── fonts/                         General Sans, Instrument Sans, Instrument Serif
 │   ├── css/forge-fx.css, js/forge-fx.js  Heat details layered over every page (see "Heat details")
+│   ├── js/forge-motion.js             The motion switch for computers that ask for less motion
 │   ├── img/                           Optimised WebP images, grouped by project
 │   │   ├── thumb/                     640px poster thumbnails for the archive wall
 │   │   ├── og/                        1200x630 social share cards
@@ -71,9 +72,18 @@ Nothing is loaded from another company's server, so the site keeps working whate
 Everything degrades gracefully: with JavaScript off, a blocked CDN, or "reduce motion" turned on,
 every page shows its full content as a static layout.
 
+**The motion switch.** Many desktop PCs have Windows "Animation effects" switched off (Settings, Accessibility,
+Visual effects), which asks every website for less motion, so those visitors get the static layout. They are
+offered the animation back: a small prompt ("Animation is off on this computer. Turn it on") and a footer link
+on every page and in the Foundry. The choice is remembered (`forge-motion` in localStorage) and can be turned off
+again from the same footer link. It is all in `assets/js/forge-motion.js`, with the first check in each page's
+`<head>` script. Computers that allow motion never see any of it.
+
 ## Features
 
 - Forge hero: the mark welds itself, heats, takes three hammer strikes and opens onto the poster archive
+- The archive keeps rolling: once it is open, each column of posters drifts on its own in a seamless loop (one
+  full turn in about 100 seconds, `LOOP` in `forge.js`), and rests while a poster is under the mouse
 - Live furnace backdrop behind the mark: real-time WebGL fire and lit smoke, rising embers, and the mark's own
   30° construction grid with gold energy pulses. It flares on every strike and dies down as the mark breaks open
   (falls back to a still glow without WebGL, and to a static gradient with reduced motion)
@@ -295,7 +305,7 @@ pages link back to it (`index.html#work`).
 ## Updating content
 
 - **After changing CSS or JavaScript:** every page links its stylesheet and scripts with a version stamp
-  (`forge.css?v=20261031b`). Give them all a new one with `node tools/stamp.js 20261012a` (the date and a letter),
+  (`forge.css?v=20261115a`). Give them all a new one with `node tools/stamp.js 20261012a` (the date and a letter),
   so visitors' browsers fetch the new files instead of an old cached copy.
 
 - **New work in the Foundry:** see "Adding work" above.

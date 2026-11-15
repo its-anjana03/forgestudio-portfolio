@@ -108,7 +108,7 @@ img { display: block; }
 }
 .snd.has-hint .snd-hint { opacity: 1; transform: none; }
 @media (max-width: 760px) { .snd-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); } .top-right { gap: 16px; } }
-@media (prefers-reduced-motion: reduce) { .snd[aria-pressed="true"] .snd-bars i { animation: none; height: 8px; } }
+@media (prefers-reduced-motion: reduce) { html:not(.motion-forced) .snd[aria-pressed="true"] .snd-bars i { animation: none; height: 8px; } }
 .top-index {
   justify-self: end; display: inline-flex; align-items: flex-start; gap: 4px;
   font-size: 13px; letter-spacing: .04em; color: var(--mute); transition: color .25s;
@@ -537,6 +537,6 @@ html:not(.js) .dock, html:not(.js) .hint, html:not(.js) .top-index { display: no
 
 /* Reduced motion: everything still works, nothing travels */
 @media (prefers-reduced-motion: reduce) {
-  .pm-piece, .pm-tilt, .pm-amb, .tile img { transition-duration: .01ms !important; }
-  .pm-piece.is-entering .pm-tilt { clip-path: none !important; }
+  html:not(.motion-forced) .pm-piece, html:not(.motion-forced) .pm-tilt, html:not(.motion-forced) .pm-amb, html:not(.motion-forced) .tile img { transition-duration: .01ms !important; }
+  html:not(.motion-forced) .pm-piece.is-entering .pm-tilt { clip-path: none !important; }
 }

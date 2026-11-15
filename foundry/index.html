@@ -17,10 +17,14 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://forgestudio.web.lk/assets/img/og/foundry.jpg">
 <link rel="icon" type="image/svg+xml" href="../assets/img/forge-mark.svg">
-<link rel="stylesheet" href="foundry.css?v=20261031b">
+<link rel="stylesheet" href="foundry.css?v=20261115a">
 <script>
   document.documentElement.classList.add('js');
-  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('has-motion');
+  // A computer that asks for less motion gets the still page, unless the visitor chose "Turn it on" (forge-motion.js).
+  var calm = matchMedia('(prefers-reduced-motion: reduce)').matches, forced = false;
+  try { forced = calm && localStorage.getItem('forge-motion') === 'on'; } catch (e) {}
+  if (calm) document.documentElement.classList.add(forced ? 'motion-forced' : 'motion-ask');
+  if (!calm || forced) document.documentElement.classList.add('has-motion');
 </script>
 </head>
 <body>
@@ -101,8 +105,9 @@
 
 <div class="cur" aria-hidden="true"><span class="cur-ring"></span><span class="cur-label"></span></div>
 
-<script src="../assets/js/forge-sound.js?v=20261031b" defer></script>
-<script src="data.js?v=20261031b"></script>
-<script src="foundry.js?v=20261031b"></script>
+<script src="../assets/js/forge-sound.js?v=20261115a" defer></script>
+<script src="../assets/js/forge-motion.js?v=20261115a" defer></script>
+<script src="data.js?v=20261115a"></script>
+<script src="foundry.js?v=20261115a"></script>
 </body>
 </html>

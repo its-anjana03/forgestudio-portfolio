@@ -1312,6 +1312,73 @@
       .fromTo(cap, { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 0.1, ease: 'power3.out' }, P.capIn);
 
     archiveY = () => (tl.scrollTrigger ? tl.scrollTrigger.start + (tl.scrollTrigger.end - tl.scrollTrigger.start) * 0.8 : 0);
+
+    /* --- The archive keeps rolling: once it is open, every column drifts on its own, like film through a gate.
+       Columns move the way the scroll already moves them (first up, second down, and so on), a little out of step
+       with each other. Each column's posters sit in a .wall-run, with repeats below them in .wall-more, so the run
+       loops without a seam. The scroll moves the column; the drift moves the run inside it, so neither disturbs
+       the other. It rests while a poster is under the mouse or has keyboard focus, while the full-size view is
+       open, and while the hero is off screen or the tab is hidden. Only built when motion is on. --- */
+    const LOOP = 100;   // seconds for a column to roll through all of its posters once
+    const reel = cols.map((col, i) => {
+      const run = document.createElement('div'), more = document.createElement('div');
+      run.className = 'wall-run'; more.className = 'wall-more';
+      more.setAttribute('aria-hidden', 'true');
+      while (col.firstChild) run.appendChild(col.firstChild);
+      const own = $$('.poster', run);
+      run.appendChild(more); col.appendChild(run);
+      return { col, run, more, own, up: i % 2 === 0, rate: [1, 0.84, 1.1, 0.9, 1.04][i % 5], o: 0, len: 0, sets: 0, y: gsap.quickSetter(run, 'y', 'px') };
+    });
+    const repeat = (r) => {
+      r.own.forEach((p) => {
+        const c = p.cloneNode(true), im = $('img', c);
+        c.tabIndex = -1; c.setAttribute('aria-hidden', 'true'); c.removeAttribute('aria-label');
+        if (im) { im.alt = ''; im.loading = 'lazy'; im.removeAttribute('fetchpriority'); }
+        c.addEventListener('click', () => p.click());   // a repeat opens the same poster as the one it copies
+        r.more.appendChild(c);
+      });
+      r.sets++;
+    };
+    const measureReel = () => {
+      reel.forEach((r) => {
+        if (!r.col.offsetParent) { r.len = 0; return; }   // a column hidden on small screens
+        const gap = parseFloat(getComputedStyle(r.col).rowGap) || 0, h = r.run.offsetHeight;
+        r.len = h + gap;
+        r.more.style.paddingTop = `${gap}px`;
+        // enough repeats to keep the screen covered at any point of the loop, on any screen shape
+        const need = Math.min(6, Math.ceil((window.innerHeight * 1.6 + h * 0.14) / r.len));
+        while (r.sets < need) repeat(r);
+        r.o %= r.len;
+      });
+    };
+    measureReel();
+    ScrollTrigger.addEventListener('refreshInit', measureReel);
+    let heroSeen = true, reelHold = false, reelV = 0;
+    if ('IntersectionObserver' in window) new IntersectionObserver((en) => { heroSeen = en[0].isIntersecting; }).observe(hero);
+    if (fine) {
+      wall.addEventListener('pointerover', (e) => { reelHold = !!e.target.closest('.poster'); });
+      wall.addEventListener('pointerleave', () => { reelHold = false; });
+    }
+    gsap.ticker.add((time, delta) => {
+      const focused = wall.contains(document.activeElement);
+      const on = tl.progress() > P.breach && heroSeen && !document.hidden && !reelHold && !focused && !(lb && lb.open);
+      if (!on && !reelV && !focused) return;
+      const dt = Math.min(delta, 50) / 1000;   // time-based, so the pace is the same on 60, 144 and 240 Hz screens
+      reelV += ((on ? 1 : 0) - reelV) * (1 - Math.pow(0.04, dt));   // eases in and out, never snaps
+      if (reelV < 0.002 && !on) reelV = 0;
+      reel.forEach((r) => {
+        if (!r.len) return;
+        if (focused) {
+          // keyboard: bring the real posters back to where they started, so the focused one is where it should be
+          const home = r.o > r.len / 2 ? r.len : 0;
+          r.o += (home - r.o) * (1 - Math.pow(0.002, dt));
+          if (Math.abs(home - r.o) < 0.5) r.o = 0;
+        } else {
+          r.o = (r.o + (r.len / LOOP) * r.rate * reelV * dt) % r.len;
+        }
+        r.y(r.up ? -r.o : r.o - r.len);
+      });
+    });
   }
 
   /* =====================================================

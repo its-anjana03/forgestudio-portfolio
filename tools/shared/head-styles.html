@@ -1,13 +1,17 @@
-<link rel="stylesheet" href="assets/css/forge.css?v=20261031b">
-<link rel="stylesheet" href="assets/css/forge-fx.css?v=20261031b">
+<link rel="stylesheet" href="assets/css/forge.css?v=20261115a">
+<link rel="stylesheet" href="assets/css/forge-fx.css?v=20261115a">
 {{#home}}
-<link rel="stylesheet" href="assets/css/forge-strike.css?v=20261031b">
+<link rel="stylesheet" href="assets/css/forge-strike.css?v=20261115a">
 {{/home}}
 <script>
 {{#home}}
   // Motion is opt-in: only hide-then-reveal content when JS runs and the visitor allows motion.
 {{/home}}
-  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  // A computer that asks for less motion gets the still page, unless the visitor chose "Turn it on" (forge-motion.js).
+  var calm = matchMedia('(prefers-reduced-motion: reduce)').matches, forced = false;
+  try { forced = calm && localStorage.getItem('forge-motion') === 'on'; } catch (e) {}
+  if (calm) document.documentElement.classList.add(forced ? 'motion-forced' : 'motion-ask');
+  if (!calm || forced) {
     document.documentElement.classList.add('has-motion');
     try { if (sessionStorage.getItem('forge-pt')) { sessionStorage.removeItem('forge-pt'); document.documentElement.classList.add('pt-in'); } } catch (e) {}
 {{#home}}

@@ -308,6 +308,10 @@ ul { list-style: none; }
 .ignite-wall.is-live { pointer-events: auto; }
 .wall-col { display: flex; flex-direction: column; gap: 14px; will-change: transform; }
 .wall-col:nth-child(even) { margin-top: -18vh; }
+/* The rolling archive (forge.js, motion only): a column's posters sit in .wall-run and drift; the repeats in
+   .wall-more hang below them, outside the column's own height, so the scroll movement keeps its measure. */
+.wall-run { position: relative; display: flex; flex-direction: column; gap: inherit; will-change: transform; }
+.wall-more { position: absolute; left: 0; right: 0; top: 100%; display: flex; flex-direction: column; gap: inherit; }
 .poster {
   position: relative; display: block; width: 100%; border-radius: 6px; overflow: hidden;
   background: var(--steel); aspect-ratio: 2 / 3;
@@ -791,8 +795,9 @@ html:not(.has-motion) .work-track { flex-direction: column; gap: var(--s-16); }
 html:not(.has-motion) .work-intro, html:not(.has-motion) .case { flex: none; width: 100%; }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-  .grain { animation: none; }
+  /* "html:not(.motion-forced)": these rules stand down when the visitor has chosen to turn motion on (forge-motion.js). */
+  html:not(.motion-forced) *, html:not(.motion-forced) *::before, html:not(.motion-forced) *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  html:not(.motion-forced) .grain { animation: none; }
 }
 
 /* ---------- Print (resume) ---------- */
@@ -1134,8 +1139,8 @@ html.pt-in::before { content: ''; position: fixed; inset: 0; z-index: 499; backg
   .snd-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .snd[aria-pressed="true"] .snd-bars i { animation: none; height: 9px; }
-  .snd.is-waiting { animation: none; box-shadow: 0 0 0 2px rgba(255, 194, 71, .3); }
+  html:not(.motion-forced) .snd[aria-pressed="true"] .snd-bars i { animation: none; height: 9px; }
+  html:not(.motion-forced) .snd.is-waiting { animation: none; box-shadow: 0 0 0 2px rgba(255, 194, 71, .3); }
 }
 
 /* Lightbox share */

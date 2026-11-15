@@ -6,7 +6,7 @@
   'use strict';
   const chapter = document.querySelector('.strike-chapter');
   if (!chapter) return;
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  if (!document.documentElement.classList.contains('has-motion') || !('IntersectionObserver' in window)) return;
 
   const word = chapter.querySelector('.strike-word') || chapter;
   const haze = chapter.querySelector('.strike-haze');

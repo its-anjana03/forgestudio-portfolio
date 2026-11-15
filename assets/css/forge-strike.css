@@ -62,5 +62,5 @@ body:not(.work-horizontal) .sec.work { padding-top: 32px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .strike-hot, .strike-word .strike-haze { display: none; }
+  html:not(.motion-forced) .strike-hot, html:not(.motion-forced) .strike-word .strike-haze { display: none; }
 }
